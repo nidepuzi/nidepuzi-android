@@ -1,27 +1,150 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'AndResGuard'
+
+static def releaseTime() {
+    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
+}
+
+def keyStore = file('../app/nidepuzi.jks')
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    keepRoot = false
+    whiteList = [
+            "R.mipmap.ic_launcher"
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.1.9'
+    }
+}
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     defaultConfig {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
+        versionCode 20170419
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled = true
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java/']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+            res.srcDirs = ['src/main/res', 'src/main/res/']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    lintOptions {
+        disable 'LongLogTag'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    //签名配置
+    signingConfigs {
+        debug {
+            storeFile file('../app/nidepuzi.jks')
+            storePassword 'nidepuzi'
+            keyAlias 'nidepuzi'
+            keyPassword 'nidepuzi'
+            println("====== signingConfigs.debug ======")
+        }
+        release {
+            storeFile file("../app/nidepuzi.jks")
+            storePassword 'nidepuzi'
+            keyAlias 'nidepuzi'
+            keyPassword 'nidepuzi'
+            println("====== signingConfigs.release ======")
+            println("properties.getProperty(\"storePassword\") = " + properties.getProperty(
+                    "storePassword"))
+            println(
+                    "properties.getProperty(\"keyAlias\") = " + properties.getProperty("keyAlias"))
+            println("properties.getProperty(\"keyPassword\") = " + properties.getProperty(
+                    "keyPassword"))
+        }
     }
     buildTypes {
+        debug {
+            println("====== buildTypes.debug ======")
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            println("====== buildTypes.release ======")
+            proguardFiles file('proguard-rules.pro')
+            if (keyStore.exists()) {
+                println("nidepuzi -> buildTypes -> release: using jks key")
+                signingConfig signingConfigs.release
+            } else {
+                println("nidepuzi -> buildTypes -> release: using default key")
+            }
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // nidepuzi_版本_yyyy_MM_dd.apk
+                        def fileName = "Ndpz_v${defaultConfig.versionName.replace(".", "")}_${releaseTime()}.apk"
+                        println("====== buildTypes.output ======")
+                        println("AppName: " + fileName)
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile project(':library')
+    compile 'com.google.dagger:dagger:2.0.2'
+    provided 'com.google.dagger:dagger-compiler:2.0.2'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
