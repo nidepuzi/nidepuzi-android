@@ -108,6 +108,12 @@
         <activity
             android:name=".ui.activity.product.SearchActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.product.CategoryProductActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.SettingActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service
             android:name=".service.UpdateService"

@@ -82,10 +82,7 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
                 @Override
                 public void onError(Throwable e) {
                     e.printStackTrace();
-                    mVaryViewHelperController.showNetworkError(view -> {
-                        refreshView();
-                        showNetworkError();
-                    });
+                    initDataError();
                     hideIndeterminateProgressDialog();
                 }
             });

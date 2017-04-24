@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:textColorPrimary">@color/color_22</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
     <style name="wisdomDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item><!--边框-->
         <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->

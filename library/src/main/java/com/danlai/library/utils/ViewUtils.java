@@ -266,8 +266,8 @@ public final class ViewUtils {
         float rawWidth = bitmap.getWidth();
         float rawHeight = bitmap.getHeight();
 
-        float width = 0;
-        float height = 0;
+        float width;
+        float height;
 
         if (rawWidth > screenWidth) {
             height = (rawHeight / rawWidth) * screenWidth;

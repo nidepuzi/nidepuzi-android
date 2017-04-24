@@ -1,5 +1,7 @@
 package com.danlai.nidepuzi.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.CategoryBean;
+import com.danlai.nidepuzi.ui.activity.product.CategoryProductActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -90,21 +93,21 @@ public class CategoryAdapter extends XRecyclerView.Adapter<CategoryAdapter.ViewH
             }
         }
         holder.item.setOnClickListener(v -> {
-//            Intent intent = new Intent(mActivity, CategoryProductActivity.class);
-//            Bundle bundle = new Bundle();
-//            ArrayList<String> nameList = new ArrayList<>();
-//            ArrayList<String> cidList = new ArrayList<>();
-//            nameList.add(name);
-//            cidList.add(bean.getParent_cid());
-//            for (int i = 0; i < mData.size(); i++) {
-//                nameList.add(mData.get(i).getName());
-//                cidList.add(mData.get(i).getCid());
-//            }
-//            bundle.putStringArrayList("name", nameList);
-//            bundle.putStringArrayList("cid", cidList);
-//            bundle.putInt("position", position + 1);
-//            intent.putExtras(bundle);
-//            mActivity.startActivity(intent);
+            Intent intent = new Intent(mActivity, CategoryProductActivity.class);
+            Bundle bundle = new Bundle();
+            ArrayList<String> nameList = new ArrayList<>();
+            ArrayList<String> cidList = new ArrayList<>();
+            nameList.add(name);
+            cidList.add(bean.getParent_cid());
+            for (int i = 0; i < mData.size(); i++) {
+                nameList.add(mData.get(i).getName());
+                cidList.add(mData.get(i).getCid());
+            }
+            bundle.putStringArrayList("name", nameList);
+            bundle.putStringArrayList("cid", cidList);
+            bundle.putInt("position", position + 1);
+            intent.putExtras(bundle);
+            mActivity.startActivity(intent);
         });
     }
 

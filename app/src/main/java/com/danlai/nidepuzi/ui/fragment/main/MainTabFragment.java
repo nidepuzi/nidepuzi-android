@@ -75,10 +75,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
                 @Override
                 public void onError(Throwable e) {
                     e.printStackTrace();
-                    mVaryViewHelperController.showNetworkError(view -> {
-                        refreshView();
-                        showNetworkError();
-                    });
+                    initDataError();
                     hideIndeterminateProgressDialog();
                 }
             });

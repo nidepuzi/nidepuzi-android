@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="设置"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/common_interval"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_user"
+                    app:preference_title="个人资料"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_safe"
+                    app:preference_title="账户与安全"/>
+
+                <include layout="@layout/common_interval"/>
+
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_clear"
+                    app:preference_title="清除缓存"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_stop"
+                    app:preference_title="广告拦截模式"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_mode"
+                    app:preference_title="兼容模式"/>
+
+                <include layout="@layout/common_interval"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_service"
+                    app:preference_title="店主服务"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_about"
+                    app:preference_title="关于你的铺子"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_test"
+                    app:preference_title="在线测试"/>
+
+                <include layout="@layout/preference_line"/>
+
+                <com.danlai.library.widget.PreferenceView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_version"
+                    app:preference_title="当前版本"/>
+
+                <include layout="@layout/common_gap"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

@@ -1,5 +1,7 @@
 package com.danlai.nidepuzi.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.CategoryBean;
+import com.danlai.nidepuzi.ui.activity.product.CategoryProductActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -59,21 +62,21 @@ public class CategoryItemAdapter extends XRecyclerView.Adapter<CategoryItemAdapt
         CategoryBean bean = mData.get(position);
         holder.name.setText(bean.getName());
         holder.name.setOnClickListener(view -> {
-//            Intent intent = new Intent(mContext, CategoryProductActivity.class);
-//            Bundle bundle = new Bundle();
-//            ArrayList<String> nameList = new ArrayList<>();
-//            ArrayList<String> cidList = new ArrayList<>();
-//            nameList.add(bean.getName());
-//            cidList.add(bean.getCid());
-//            for (int i = 0; i < bean.getChilds().size(); i++) {
-//                nameList.add(bean.getChilds().get(i).getName());
-//                cidList.add(bean.getChilds().get(i).getCid());
-//            }
-//            bundle.putStringArrayList("name", nameList);
-//            bundle.putStringArrayList("cid", cidList);
-//            bundle.putInt("position", 0);
-//            intent.putExtras(bundle);
-//            mContext.startActivity(intent);
+            Intent intent = new Intent(mContext, CategoryProductActivity.class);
+            Bundle bundle = new Bundle();
+            ArrayList<String> nameList = new ArrayList<>();
+            ArrayList<String> cidList = new ArrayList<>();
+            nameList.add(bean.getName());
+            cidList.add(bean.getCid());
+            for (int i = 0; i < bean.getChilds().size(); i++) {
+                nameList.add(bean.getChilds().get(i).getName());
+                cidList.add(bean.getChilds().get(i).getCid());
+            }
+            bundle.putStringArrayList("name", nameList);
+            bundle.putStringArrayList("cid", cidList);
+            bundle.putInt("position", 0);
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         });
         GridLayoutManager manager = new GridLayoutManager(mContext, 3);
         holder.xrv.setLayoutManager(manager);

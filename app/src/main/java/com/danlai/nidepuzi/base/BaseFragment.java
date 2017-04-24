@@ -207,4 +207,12 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
         }
         mVaryViewHelperController.restore();
     }
+
+    public void initDataError(){
+        mVaryViewHelperController.showNetworkError(view -> {
+            refreshView();
+            showNetworkError();
+        });
+    }
+
 }

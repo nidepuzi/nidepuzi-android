@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#FF5000</color>
     <color name="colorAccent">#FF5000</color>
     <color name="colorAccentDark">#FF4000</color>
+
+    <color name="shop_top">#22AAAA</color>
+    <color name="shop_top_center">#44CCCC</color>
+    <color name="shop_top_end">#66EEEE</color>
 </resources>

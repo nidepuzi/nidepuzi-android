@@ -28,4 +28,18 @@
         <attr name="message_time" format="string"/>
         <attr name="message_icon" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="PreferenceView">
+        <attr name="preference_icon" format="reference"/>
+        <attr name="preference_title" format="string"/>
+        <attr name="preference_show_switch" format="boolean"/>
+    </declare-styleable>
+
 </resources>

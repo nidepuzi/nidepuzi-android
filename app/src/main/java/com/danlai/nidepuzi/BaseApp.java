@@ -36,7 +36,7 @@ public class BaseApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(new MyUnCaughtExceptionHandler());
+//        Thread.setDefaultUncaughtExceptionHandler(new MyUnCaughtExceptionHandler());
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
         JUtils.initialize(this);

@@ -23,6 +23,7 @@ import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
 import com.danlai.nidepuzi.ui.fragment.main.MainTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.VersionManager;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -82,9 +83,9 @@ public class TabActivity extends BaseActivity {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(MainTabFragment.newInstance());
         fragments.add(MainTabFragment.newInstance());
+        fragments.add(ShopTabFragment.newInstance());
         fragments.add(MainTabFragment.newInstance());
-        fragments.add(MainTabFragment.newInstance());
-        new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments,R.id.container);
+        new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
     }
 
     @Override
