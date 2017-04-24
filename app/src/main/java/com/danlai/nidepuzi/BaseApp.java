@@ -8,8 +8,15 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.danlai.library.utils.JUtils;
+import com.danlai.nidepuzi.module.ActivityInteractor;
+import com.danlai.nidepuzi.module.AddressInteractor;
+import com.danlai.nidepuzi.module.CartsInteractor;
+import com.danlai.nidepuzi.module.MainInteractor;
+import com.danlai.nidepuzi.module.ProductInteractor;
+import com.danlai.nidepuzi.module.TradeInteractor;
+import com.danlai.nidepuzi.module.UserInteractor;
+import com.danlai.nidepuzi.module.VipInteractor;
 import com.facebook.stetho.Stetho;
-import com.zhy.autolayout.config.AutoLayoutConifg;
 
 import java.util.List;
 
@@ -20,6 +27,7 @@ import java.util.List;
 
 public class BaseApp extends MultiDexApplication {
     private static Context mContext;
+    private AppComponent component;
 
     public static Context getInstance() {
         return mContext;
@@ -33,7 +41,7 @@ public class BaseApp extends MultiDexApplication {
         Stetho.initializeWithDefaults(this);
         JUtils.initialize(this);
         JUtils.setDebug(BuildConfig.DEBUG, "nidepuzi");
-        AutoLayoutConifg.getInstance().useDeviceSize();
+        component = DaggerAppComponent.builder().appModule(new AppModule()).build();
     }
 
     @Override
@@ -66,5 +74,45 @@ public class BaseApp extends MultiDexApplication {
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
+    }
+
+    private AppComponent component() {
+        return component;
+    }
+
+    private static BaseApp get(Context context) {
+        return (BaseApp) context.getApplicationContext();
+    }
+
+    public static ActivityInteractor getActivityInteractor(Context context) {
+        return BaseApp.get(context).component().getActivityInteractor();
+    }
+
+    public static MainInteractor getMainInteractor(Context context) {
+        return BaseApp.get(context).component().getMainInteractor();
+    }
+
+    public static ProductInteractor getProductInteractor(Context context) {
+        return BaseApp.get(context).component().getProductInteractor();
+    }
+
+    public static AddressInteractor getAddressInteractor(Context context) {
+        return BaseApp.get(context).component().getAddressInteractor();
+    }
+
+    public static CartsInteractor getCartsInteractor(Context context) {
+        return BaseApp.get(context).component().getCartsInteractor();
+    }
+
+    public static UserInteractor getUserInteractor(Context context) {
+        return BaseApp.get(context).component().getUserInteractor();
+    }
+
+    public static VipInteractor getVipInteractor(Context context) {
+        return BaseApp.get(context).component().getVipInteractor();
+    }
+
+    public static TradeInteractor getTradeInteractor(Context context) {
+        return BaseApp.get(context).component().getTradeInteractor();
     }
 }

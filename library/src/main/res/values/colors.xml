@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FD4F00</color>
-    <color name="colorPrimaryDark">#FD2000</color>
-    <color name="colorAccent">#FD4F00</color>
-    <color name="colorAccentDark">#FD2000</color>
+    <color name="colorPrimary">#FF5000</color>
+    <color name="colorPrimaryDark">#FF5000</color>
+    <color name="colorAccent">#FF5000</color>
+    <color name="colorAccentDark">#FF4000</color>
+    <color name="colorAccentLight">#FF8866</color>
 
     <color name="red">#FF0000</color>
-    <color name="deepskyblue">#05E2FA</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="blue_light">#05E2FA</color>
     <color name="purple">#8E02F9</color>
+
     <color name="transparent">#00000000</color>
-    <color name="text_color_4A">#4A4A4A</color>
+    <color name="transparent_4c">#4C000000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_10">#E5FFFFFF</color>
+    <color name="bg_grey">#F3F3F3</color>
+    <color name="bg_grey3">#33DADADA</color>
+
+    <color name="color_11">#111111</color>
+    <color name="color_22">#222222</color>
+    <color name="color_33">#333333</color>
+    <color name="color_44">#444444</color>
+    <color name="color_55">#555555</color>
+    <color name="color_66">#666666</color>
+    <color name="color_77">#777777</color>
+    <color name="color_88">#888888</color>
+    <color name="color_99">#999999</color>
+    <color name="color_AA">#AAAAAA</color>
+    <color name="color_BB">#BBBBBB</color>
+    <color name="color_CC">#CCCCCC</color>
+    <color name="color_DD">#DDDDDD</color>
+
 </resources>

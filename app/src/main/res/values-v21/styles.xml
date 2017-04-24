@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="actionBarStyle">@style/GANKActionBarStyle</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
+        <item name="android:colorControlNormal">@color/colorAccent</item>
+        <item name="android:colorControlActivated">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <item name="android:textColorPrimary">@color/color_22</item>
+        <item name="android:textColorSecondary">@color/color_66</item>
+    </style>
+
+
+</resources>

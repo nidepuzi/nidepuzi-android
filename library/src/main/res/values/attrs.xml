@@ -14,4 +14,18 @@
         <attr name="shadow_right" format="reference"/>
         <attr name="shadow_bottom" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="BaseTitleView">
+        <attr name="title" format="string"/>
+        <attr name="show_finish" format="boolean"/>
+        <attr name="alpha" format="float"/>
+        <attr name="back_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="MessageItemView">
+        <attr name="message_title" format="string"/>
+        <attr name="message_desc" format="string"/>
+        <attr name="message_time" format="string"/>
+        <attr name="message_icon" format="reference"/>
+    </declare-styleable>
 </resources>

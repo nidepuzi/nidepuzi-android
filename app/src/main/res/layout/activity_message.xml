@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="消息盒子"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.danlai.library.widget.message.MessageItemView
+                android:id="@+id/message_view_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
+                app:message_icon="@drawable/icon_msg_msg"
+                app:message_time="2017年11月11号 11:11:11"
+                app:message_title="云集公告"/>
+
+            <com.danlai.library.widget.message.MessageItemView
+                android:id="@+id/message_view_edu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
+                app:message_icon="@drawable/icon_msg_edu"
+                app:message_time="2017年11月11号 11:11:11"
+                app:message_title="培训消息"/>
+
+            <com.danlai.library.widget.message.MessageItemView
+                android:id="@+id/message_view_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
+                app:message_icon="@drawable/icon_msg_order"
+                app:message_time="2017年11月11号 11:11:11"
+                app:message_title="订单助手"/>
+
+            <com.danlai.library.widget.message.MessageItemView
+                android:id="@+id/message_view_assistant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
+                app:message_icon="@drawable/icon_msg_assistant"
+                app:message_time="2017年11月11号 11:11:11"
+                app:message_title="铺子助手"/>
+
+            <com.danlai.library.widget.message.MessageItemView
+                android:id="@+id/message_view_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
+                app:message_icon="@drawable/icon_msg_notice"
+                app:message_time="2017年11月11号 11:11:11"
+                app:message_title="活动消息"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

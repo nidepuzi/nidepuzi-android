@@ -94,7 +94,7 @@ public class WisdomView extends View {
                     mPaint.setColor(getResources().getColor(R.color.red));
                     break;
                 case 2:
-                    mPaint.setColor(getResources().getColor(R.color.deepskyblue));
+                    mPaint.setColor(getResources().getColor(R.color.blue_light));
                     break;
                 case 3:
                     mPaint.setColor(getResources().getColor(R.color.purple));

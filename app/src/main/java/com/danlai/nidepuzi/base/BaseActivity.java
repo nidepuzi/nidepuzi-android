@@ -14,7 +14,6 @@ import com.danlai.library.widget.loading.VaryViewHelperController;
 import com.danlai.library.widget.loading.WisdomLoading;
 import com.danlai.library.widget.swipeback.SwipeBackActivityHelper;
 import com.danlai.nidepuzi.R;
-import com.umeng.analytics.MobclickAgent;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -100,15 +99,6 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseSub
     protected void onResume() {
         super.onResume();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-        MobclickAgent.onPause(this);
     }
 
     @Override

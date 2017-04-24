@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.widget.loading.VaryViewHelperController;
 import com.danlai.library.widget.loading.WisdomLoading;
-import com.umeng.analytics.MobclickAgent;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -207,17 +206,5 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
             throw new IllegalStateException("no ViewHelperController");
         }
         mVaryViewHelperController.restore();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

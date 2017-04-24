@@ -12,7 +12,7 @@ import com.danlai.nidepuzi.BaseApp;
  */
 
 public class BaseApi {
-    public static final String APP_BASE_URL = "https://m.nidepuzi.com";
+    public static final String APP_BASE_URL = "https://m.xiaolumeimei.com";
 
     public static String getAppUrl() {
         SharedPreferences preferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);

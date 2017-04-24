@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.danlai.library.widget.scrolllayout.ScrollableLayout
+            android:id="@+id/scroll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="280px"
+                    app:indicator_drawable_selected="@drawable/banner_select"
+                    app:indicator_drawable_unselected="@drawable/banner_unselect"
+                    app:indicator_height="2dp"
+                    app:indicator_margin="2dp"
+                    app:indicator_width="8dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.danlai.library.widget.scrollrecycler.ScrollRecycler
+                    android:id="@+id/recycler_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"/>
+
+                <View
+                    android:id="@+id/bottom_view"
+                    android:layout_width="80dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorAccent"
+                    android:visibility="invisible"/>
+
+                <include layout="@layout/common_gap"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+
+        </com.danlai.library.widget.scrolllayout.ScrollableLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>
