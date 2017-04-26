@@ -1,7 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.main;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +15,8 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseSubscriberContext;
 import com.danlai.nidepuzi.entity.StartBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
+import com.danlai.nidepuzi.util.LoginUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -36,9 +37,6 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ViewUtils.setWindowStatus(this);
-        PackageManager pm = getPackageManager();
-        boolean permission = (PackageManager.PERMISSION_GRANTED ==
-            pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", getPackageName()));
         BaseApp.getActivityInteractor(this)
             .getStartAds(new ServiceResponse<StartBean>(SplashActivity.this) {
                 @Override
@@ -50,7 +48,7 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
                     }
                 }
             });
-        if (permission) {
+        if (JUtils.isPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE")) {
             RxCountDown.countdown(2).subscribe(integer -> {
                 if (integer == 0) {
                     jumpToAds();
@@ -77,7 +75,11 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
             intent.putExtra("link", mPicture);
             startActivity(intent);
         } else {
-            startActivity(new Intent(SplashActivity.this, TabActivity.class));
+            if (LoginUtils.checkLoginState(this)) {
+                startActivity(new Intent(SplashActivity.this, TabActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            }
         }
         finish();
     }

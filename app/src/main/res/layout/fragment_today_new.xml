@@ -48,7 +48,10 @@
                     android:background="@color/colorAccent"
                     android:visibility="invisible"/>
 
-                <include layout="@layout/common_gap"/>
+                <include
+                    android:id="@+id/bottom_line"
+                    layout="@layout/common_gap"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 

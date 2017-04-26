@@ -73,7 +73,7 @@
                 <data
                     android:host="app"
                     android:path="/v1/products/promote_today"
-                    android:scheme="com.danlai.nidepuzi"/>
+                    android:scheme="com.danlai.ndpz"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -83,7 +83,7 @@
                 <data
                     android:host="app"
                     android:path="/v1/products/promote_previous"
-                    android:scheme="com.danlai.nidepuzi"/>
+                    android:scheme="com.danlai.ndpz"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -93,7 +93,7 @@
                 <data
                     android:host="app"
                     android:path="/v1/home"
-                    android:scheme="com.danlai.nidepuzi"/>
+                    android:scheme="com.danlai.ndpz"/>
             </intent-filter>
         </activity>
         <activity
@@ -113,6 +113,164 @@
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.user.SettingActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.ImagePagerActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.product.ProductDetailActivity"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/products/modellist"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/products/modelist"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/products"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.shop.NinePicActivity"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/vip_0day"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.trade.CartActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/shopping_cart"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.trade.PayInfoActivity"
+            android:theme="@style/AppTheme.TransparentActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/trades/purchase"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <data android:scheme="tencent100371282"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".util.pay.PayActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.TransparentActivity.NoTitle"/>
+        <!-- 支付宝 sdk -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity
+            android:name=".base.BaseWebViewActivity"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/webview"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.user.LoginActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.BaseActivity"/>
+        <activity
+            android:name=".ui.activity.user.PhoneLoginActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.SmsLoginActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.PhoneForgetActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.EditPasswordActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service

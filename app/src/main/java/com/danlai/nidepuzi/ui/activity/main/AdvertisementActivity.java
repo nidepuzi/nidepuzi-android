@@ -11,6 +11,8 @@ import com.danlai.library.rx.RxCountDown;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
+import com.danlai.nidepuzi.util.LoginUtils;
 
 public class AdvertisementActivity extends BaseActivity implements View.OnClickListener {
 
@@ -88,11 +90,11 @@ public class AdvertisementActivity extends BaseActivity implements View.OnClickL
 
     private void jumpAndFinish() {
         isDestroy = true;
-//        if (LoginUtils.checkLoginState(this)) {
-        startActivity(new Intent(AdvertisementActivity.this, TabActivity.class));
-//        } else {
-//            startActivity(new Intent(AdvertisementActivity.this, LoginActivity.class));
-//        }
+        if (LoginUtils.checkLoginState(this)) {
+            startActivity(new Intent(AdvertisementActivity.this, TabActivity.class));
+        } else {
+            startActivity(new Intent(AdvertisementActivity.this, LoginActivity.class));
+        }
         finish();
     }
 

@@ -46,16 +46,10 @@ public class BaseConst {
     public static final String TYPE_CHILD = "1";
     public static final String TYPE_LADY = "2";
 
-    //小米推送
-    public static final String XIAOMI_APP_ID = "2882303761517434918";
-    public static final String XIAOMI_APP_KEY = "5551743422918";
-
-    //Udesk客服
-    public static final String UDESK_URL = "xiaolumeimei.udesk.cn";
-    public static final String UDESK_KEY = "e7bfd4447bf206d17fb536240a9f4fbb";
-
     //微信
-    public static final String WX_APP_ID = "wx25fcb32689872499";
+    public static final String WX_APP_ID = "wxda1c561964d173cc";
+    //支付宝
+    public static final String ALIPAY_APP_ID = "2017042206893641";
 
     public static final String BASE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()
         + "/nidepuzi/";

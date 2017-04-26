@@ -53,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_stop"
+                    app:preference_show_switch="true"
                     app:preference_title="广告拦截模式"/>
 
                 <include layout="@layout/preference_line"/>
@@ -61,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_mode"
+                    app:preference_show_switch="true"
                     app:preference_title="兼容模式"/>
 
                 <include layout="@layout/common_interval"/>

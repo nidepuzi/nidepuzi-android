@@ -28,12 +28,12 @@ import java.util.Calendar;
 
 /**
  * @author wisdom
- * @date 2016年04月19日 下午5:24
+ * @date 2016年08月19日 下午5:24
  */
 
 public class CameraUtils {
 
-    public static String XLMM_IMG_PATH = "/xlmm/xiaolumeimei";
+    public static String NIDEPUZI_IMG_PATH = "/nidepuzi";
     public static File Copy_sourceLocation;
     public static File Paste_Target_Location;
     public static File MY_IMG_DIR, Default_DIR;
@@ -45,7 +45,6 @@ public class CameraUtils {
     public static final int SELECT_CAMERA = 1;
 
     public static Bitmap imageZoom(Bitmap bm, int size) {
-//        try {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
@@ -57,21 +56,6 @@ public class CameraUtils {
                 bm.getHeight() / Math.sqrt(i));
         }
         return bm;
-//        } catch (Exception e) {
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            int options = 50;
-//            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-//            while (baos.toByteArray().length / 1024 > size) { // 循环判断如果压缩后图片是否大于50kb,大于继续压缩
-//                baos.reset();// 重置baos即清空baos
-//                bm.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
-//                options -= 5;// 每次都减少5
-//                if (options < 0) {
-//                    break;
-//                }
-//            }
-//            ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-//            return BitmapFactory.decodeStream(isBm, null, null);
-//        }
     }
 
     private static Bitmap zoomImage(Bitmap bgimage, double newWidth,
@@ -237,7 +221,7 @@ public class CameraUtils {
         try {
             // Get SD Card path & your folder name
             MY_IMG_DIR = new File(Environment.getExternalStorageDirectory(),
-                XLMM_IMG_PATH);
+                NIDEPUZI_IMG_PATH);
 
             // check if exist
             if (!MY_IMG_DIR.exists()) {

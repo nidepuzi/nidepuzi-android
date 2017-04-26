@@ -4,7 +4,6 @@ import android.os.Environment;
 
 import com.danlai.library.entities.FilePara;
 import com.danlai.library.utils.CameraUtils;
-import com.danlai.library.utils.JUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.File;
@@ -18,15 +17,13 @@ import okhttp3.Response;
  */
 public abstract class FileParaCallback extends Callback<FilePara> {
 
-
     @Override
     public FilePara parseNetworkResponse(Response response, int id) throws Exception {
         File Target_Location = null;
         try {
             CameraUtils.Create_MY_IMAGES_DIR();
             Target_Location = new File("" + Environment.getExternalStorageDirectory() +
-                "/xlmm/xiaolumeimei" + "/" + CameraUtils.Get_Random_File_Name() + ".jpg");
-            JUtils.Log("FileParaCallback", "Target_Location= " + Target_Location.getAbsolutePath());
+                "/nidepuzi" + "/" + CameraUtils.Get_Random_File_Name() + ".jpg");
             Target_Location.createNewFile();
             OutputStream os = new FileOutputStream(Target_Location);
             int bytesRead;

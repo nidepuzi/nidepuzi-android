@@ -31,7 +31,7 @@ public class SharedPrefsCookiePersistor implements CookiePersistor {
 
     public SharedPrefsCookiePersistor(Context context) {
         final String SHARED_PREFERENCES_NAME = "CookiePersistence";
-        cookiePrefs1 = context.getSharedPreferences("xlmmCookiesAxiba", Context.MODE_PRIVATE);
+        cookiePrefs1 = context.getSharedPreferences("CookiesAxiba", Context.MODE_PRIVATE);
         sharedPreferences =
                 context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }

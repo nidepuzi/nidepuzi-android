@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.danlai.library.widget.ActivityImageView;
 import com.danlai.nidepuzi.R;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.entity.PortalBean;
+import com.danlai.nidepuzi.util.JumpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         PortalBean.ActivitysBean bean = data.get(position);
         Glide.with(context).load(bean.getAct_img()).into(holder.img);
+        holder.img.setOnClickListener(v -> {
+            String actLink = bean.getAct_link();
+            JumpUtils.jumpToWebViewWithCookies(context, actLink, bean.getId(), BaseWebViewActivity.class,
+                bean.getTitle());
+        });
     }
 
     @Override

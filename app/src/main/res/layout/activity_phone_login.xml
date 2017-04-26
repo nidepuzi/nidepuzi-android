@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="手机号登录"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <include layout="@layout/common_gap"/>
+
+            <com.danlai.library.widget.ClearEditText
+                android:id="@+id/set_login_name"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:iconClear="@drawable/clear_text"/>
+
+            <include layout="@layout/common_gap"/>
+
+            <com.danlai.library.widget.PasswordEditText
+                android:id="@+id/set_login_password"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:background="@null"
+                android:hint="请输入登录密码"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+            <include layout="@layout/common_gap"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:padding="8dp">
+
+                <CheckBox
+                    android:id="@+id/cb_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50px"
+                    android:buttonTint="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="记住密码"
+                    android:textColor="@color/color_99"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:id="@+id/forget_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50px"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right|center_vertical"
+                    android:gravity="center"
+                    android:text="忘记密码"
+                    android:textColor="@color/blue_light"
+                    android:textSize="14dp"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/set_login_button"
+                android:layout_width="656px"
+                android:layout_height="90px"
+                android:background="@drawable/btn_common_default"
+                android:clickable="true"
+                android:text="登录"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="如何注册你的铺子?"
+                android:textColor="@color/color_88"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

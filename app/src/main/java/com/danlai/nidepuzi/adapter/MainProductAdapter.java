@@ -1,5 +1,7 @@
 package com.danlai.nidepuzi.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.MainTodayBean;
+import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -64,6 +67,17 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
             max = "0";
         }
         holder.profit.setText("利润: ¥" + min + " ~ ¥" + max);
+        holder.productLayout.setOnClickListener(v -> {
+            try {
+                int modelId = bean.getModel_id();
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("model_id", modelId);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            } catch (Exception ignored) {
+            }
+        });
     }
 
 
@@ -76,7 +90,7 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView name, price, profit;
-        LinearLayout textLayout, shareLayout, productLayout, shareAllLayout;
+        LinearLayout productLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -85,9 +99,6 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
             name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById(R.id.price);
             profit = (TextView) itemView.findViewById(R.id.profit);
-            textLayout = (LinearLayout) itemView.findViewById(R.id.text_layout);
-            shareLayout = (LinearLayout) itemView.findViewById(R.id.share_layout);
-            shareAllLayout = (LinearLayout) itemView.findViewById(R.id.share_all_layout);
         }
     }
 

@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="450px"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/sale_status"
@@ -22,7 +22,7 @@
             android:background="@drawable/shape_sale_flag"
             android:gravity="center"
             android:textColor="@color/white"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:textColor="#4a4a4a"
-            android:textSize="14dp" />
+            android:textSize="14dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -57,14 +57,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_33"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/product_list_stdsale_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_AA"
-            android:textSize="24px" />
+            android:textSize="24px"/>
     </LinearLayout>
 
 </LinearLayout>

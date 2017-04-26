@@ -23,6 +23,8 @@ import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
 import com.danlai.nidepuzi.ui.fragment.main.MainTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.ShareTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.VersionManager;
@@ -65,7 +67,8 @@ public class TabActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        downLoadAddress();
+        // TODO: 17/4/25 暂时隐藏
+//        downLoadAddress();
 //        checkVersion();
     }
 
@@ -82,9 +85,9 @@ public class TabActivity extends BaseActivity {
         setSwipeBackEnable(false);
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(MainTabFragment.newInstance());
-        fragments.add(MainTabFragment.newInstance());
+        fragments.add(ShareTabFragment.newInstance());
         fragments.add(ShopTabFragment.newInstance());
-        fragments.add(MainTabFragment.newInstance());
+        fragments.add(ServiceTabFragment.newInstance());
         new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
     }
 

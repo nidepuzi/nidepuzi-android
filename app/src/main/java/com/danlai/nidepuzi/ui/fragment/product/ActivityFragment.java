@@ -16,6 +16,7 @@ import com.danlai.nidepuzi.base.BaseImageLoader;
 import com.danlai.nidepuzi.databinding.FragmentActivityBinding;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
@@ -78,12 +79,12 @@ public class ActivityFragment extends BaseFragment<FragmentActivityBinding>
         for (int i = 0; i < posters.size(); i++) {
             imageUrls.add(posters.get(i).getPic_link());
         }
+        b.banner.setOnBannerListener(position -> JumpUtils.push_jump_proc(mActivity, posters.get(position).getApp_link()));
         b.banner.setImageLoader(new BaseImageLoader());
         b.banner.setImages(imageUrls);
         b.banner.setIndicatorGravity(BannerConfig.CIRCLE_INDICATOR);
         b.banner.start();
         b.banner.setDelayTime(3000);
-//        b.banner.setOnBannerListener(position -> JumpUtils.push_jump_proc(mActivity, posters.get(position).getApp_link()));
     }
 
     @Override

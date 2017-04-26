@@ -42,4 +42,12 @@
         <attr name="preference_show_switch" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="ClearEditText">
+        <attr name="iconClear" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="iconShow" format="integer" />
+        <attr name="iconHide" format="integer" />
+    </declare-styleable>
 </resources>

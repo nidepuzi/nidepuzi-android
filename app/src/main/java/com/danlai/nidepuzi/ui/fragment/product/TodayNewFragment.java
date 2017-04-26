@@ -22,6 +22,7 @@ import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         data.addAll(list);
         mainTabAdapter.updateWithClear(list);
         b.bottomView.setVisibility(View.VISIBLE);
+        b.bottomLine.setVisibility(View.VISIBLE);
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         b.recyclerTab.scrollBy(-scrollCount * width, 0);
         scrollCount = 0;
@@ -103,7 +105,11 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         }
         mainTabAdapter.setCurrentPosition(scrollCount + 2);
         b.recyclerTab.scrollBy(scrollCount * width, 0);
-        mainProductAdapter.updateWithClear(list.get(scrollCount).getItems());
+        if (list.size() > scrollCount) {
+            mainProductAdapter.updateWithClear(list.get(scrollCount).getItems());
+        } else {
+            b.recyclerTab.setEnabled(false);
+        }
         hideIndeterminateProgressDialog();
     }
 
@@ -147,12 +153,12 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         for (int i = 0; i < posters.size(); i++) {
             imageUrls.add(posters.get(i).getPic_link());
         }
+        b.banner.setOnBannerListener(position -> JumpUtils.push_jump_proc(mActivity, posters.get(position).getApp_link()));
         b.banner.setImageLoader(new BaseImageLoader());
         b.banner.setImages(imageUrls);
         b.banner.setIndicatorGravity(BannerConfig.CIRCLE_INDICATOR);
         b.banner.start();
         b.banner.setDelayTime(3000);
-//        b.banner.setOnBannerListener(position -> JumpUtils.push_jump_proc(mActivity, posters.get(position).getApp_link()));
     }
 
     @Override
@@ -205,7 +211,9 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
                 scrollCount = data.size() - 1;
             }
             mainTabAdapter.setCurrentPosition(scrollCount + 2);
-            mainProductAdapter.updateWithClear(data.get(scrollCount).getItems());
+            if (scrollCount >= 0 && data.size() > scrollCount) {
+                mainProductAdapter.updateWithClear(data.get(scrollCount).getItems());
+            }
             b.recyclerProduct.scrollToPosition(0);
         }
         JUtils.Log("State:::" + state);

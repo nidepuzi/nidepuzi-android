@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="240px"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:padding="15px">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:background="@drawable/choose_img_bg"
+        android:gravity="center">
+
+        <com.danlai.library.widget.RoundCornerImageView
+            android:id="@+id/cart_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/place_holder"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="210px"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_44"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/sku_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_99"
+            android:textSize="12dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/price1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/price2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_99"
+                android:textSize="12dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/rebuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重新购买"
+                android:textColor="@color/colorAccent"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14dp"
+                android:background="@drawable/btn_common_white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

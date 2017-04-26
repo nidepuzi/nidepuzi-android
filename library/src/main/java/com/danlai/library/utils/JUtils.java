@@ -332,21 +332,6 @@ public class JUtils {
         return Base64.encodeToString(m, Base64.DEFAULT);
     }
 
-//    public static String getStringFromAssets(String fileName) {
-//        try {
-//            InputStreamReader inputReader = new InputStreamReader(mApplicationContent.getResources().getAssets().open(fileName));
-//            BufferedReader bufReader = new BufferedReader(inputReader);
-//            String line = "";
-//            String Result = "";
-//            while ((line = bufReader.readLine()) != null)
-//                Result += line;
-//            return Result;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "";
-//    }
-
     public static Uri getUriFromRes(int id) {
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
             + mApplicationContent.getResources().getResourcePackageName(id) + "/"
@@ -389,6 +374,12 @@ public class JUtils {
             }
         }
         return result;
+    }
+
+    public static boolean isPermission(Context context, String permissionStr) {
+        PackageManager pm = context.getPackageManager();
+        return (PackageManager.PERMISSION_GRANTED ==
+            pm.checkPermission(permissionStr, context.getPackageName()));
     }
 }
 

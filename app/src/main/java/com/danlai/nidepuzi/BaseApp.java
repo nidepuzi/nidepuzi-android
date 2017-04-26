@@ -20,6 +20,8 @@ import com.facebook.stetho.Stetho;
 
 import java.util.List;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * @author wisdom
  * @date 2017年04月20日 上午11:44
@@ -36,6 +38,7 @@ public class BaseApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        ShareSDK.initSDK(this);
 //        Thread.setDefaultUncaughtExceptionHandler(new MyUnCaughtExceptionHandler());
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);

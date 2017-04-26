@@ -1,6 +1,8 @@
 package com.danlai.nidepuzi.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.ProductListBean;
+import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.text.DecimalFormat;
@@ -75,6 +78,14 @@ public class ProductListAdapter extends XRecyclerView.Adapter<ProductListAdapter
         holder.name.setText(resultsBean.getName());
         holder.agentPrice.setText("¥" + new DecimalFormat("0.00").format(resultsBean.getLowest_agent_price()));
         holder.stdSalePrice.setText("/¥" + new DecimalFormat("0.00").format(resultsBean.getLowest_std_sale_price()));
+        holder.card.setOnClickListener(v -> {
+            int modelId = resultsBean.getId();
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("model_id", modelId);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -94,7 +105,6 @@ public class ProductListAdapter extends XRecyclerView.Adapter<ProductListAdapter
         TextView stdSalePrice;
         @Bind(R.id.sale_status)
         TextView saleStatus;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
