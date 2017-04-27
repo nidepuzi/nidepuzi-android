@@ -38,6 +38,11 @@ public class FragmentTabUtils implements RadioGroup.OnCheckedChangeListener {
         for (int i = 0; i < group.getChildCount(); i++) {
             BaseFragment fragment = fragments.get(i);
             if (group.getChildAt(i).getId() == checkedId) {
+                if (!fragment.isAdded()) {
+                    getFragmentTransaction().add(containerId, fragment).commitAllowingStateLoss();
+                    fragment.setUserVisibleHint(true);
+                }
+                getFragmentTransaction().show(fragment).commitAllowingStateLoss();
                 if (i == 2) {
                     StatusBarUtil.setColorNoTranslucent(mActivity,
                         mActivity.getResources().getColor(R.color.shop_top));
@@ -45,11 +50,6 @@ public class FragmentTabUtils implements RadioGroup.OnCheckedChangeListener {
                     StatusBarUtil.setColorNoTranslucent(mActivity,
                         mActivity.getResources().getColor(R.color.colorAccent));
                 }
-                if (!fragment.isAdded()) {
-                    getFragmentTransaction().add(containerId, fragment).commitAllowingStateLoss();
-                    fragment.setUserVisibleHint(true);
-                }
-                getFragmentTransaction().show(fragment).commitAllowingStateLoss();
             } else {
                 getFragmentTransaction().hide(fragment).commitAllowingStateLoss();
             }

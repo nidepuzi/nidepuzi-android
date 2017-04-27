@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="填写物流信息"/>
+
+        <ScrollView
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_grey">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="40px">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:elevation="10dp"
+                        android:orientation="vertical"
+                        android:padding="40px">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="退货地址"
+                            android:textColor="@color/color_22"
+                            android:textSize="19dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30px"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="收件人:"
+                                android:textColor="@color/color_66"
+                                android:textSize="14dp"/>
+
+
+                            <TextView
+                                android:id="@+id/tv_phone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:text="联系电话:"
+                                android:textColor="@color/color_66"
+                                android:textSize="14dp"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10px"
+                            android:textColor="@color/color_99"
+                            android:textSize="14dp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="为了提高你的退货退款效率,请注意以下事项"
+                            android:textColor="@color/color_66"
+                            android:textSize="14dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10px"
+                            android:text="1.填写退货单or小纸条一并寄回写明您的微信昵称,联系电话,退换货原因,请务必在退货申请里填写退货物流信息，以方便我们最快给您退款"
+                            android:textColor="@color/color_66"
+                            android:textSize="14dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10px"
+                            android:text="2.勿发顺丰或EMS等高邮费快递"
+                            android:textColor="@color/color_66"
+                            android:textSize="14dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10px"
+                            android:text="3.质量问题退货请事先拍照并联系在线客服，客服审核通过后会包邮退，但请您先支付邮费，仓库拒收到付件，到货验收后，货款和邮费将分开退还至您相应的账户"
+                            android:textColor="@color/color_66"
+                            android:textSize="14dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10px"
+                            android:text="4.请保持衣服吊牌完整,不影响商品后续处理"
+                            android:textColor="@color/color_66"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/write_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <include layout="@layout/common_gap"/>
+
+                        <EditText
+                            android:id="@+id/et_logistics_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="110px"
+                            android:background="@color/white"
+                            android:focusable="false"
+                            android:hint="请输入物流公司"
+                            android:maxLines="1"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="10dp"
+                            android:textCursorDrawable="@drawable/color_cursor"/>
+
+                        <include layout="@layout/common_gap"/>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="110px"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/et_logistics_number"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@color/white"
+                                android:hint="请输入快递单号"
+                                android:maxLines="1"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="10dp"
+                                android:textCursorDrawable="@drawable/color_cursor"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rl_scan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/icon_scan_code"/>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <include layout="@layout/common_gap"/>
+
+                        <Button
+                            android:id="@+id/btn_commit"
+                            style="@style/CommonButton"
+                            android:layout_marginBottom="40dp"
+                            android:layout_marginTop="40dp"
+                            android:background="@drawable/btn_common_default"
+                            android:text="提交"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/logistic_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="120px"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                android:id="@+id/logistic_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40px"
+                                android:textColor="@color/color_66"
+                                android:textSize="14dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                android:id="@+id/logistic_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40px"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="@color/color_BB"
+                                android:textSize="13dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/msg_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp">
+
+                            <LinearLayout
+                                android:id="@+id/log_image_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <View
+                                    android:layout_width="10px"
+                                    android:layout_height="10px"
+                                    android:layout_marginTop="10px"
+                                    android:background="@drawable/state_on_bg"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/log_msg_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120px"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tv_order_last_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="12px"
+                                        android:textColor="@color/color_BB"
+                                        android:textSize="12dp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_order_last_state"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="12px"
+                                        android:layout_marginTop="4dp"
+                                        android:textColor="@color/color_66"
+                                        android:textSize="14dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+                    </LinearLayout>
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

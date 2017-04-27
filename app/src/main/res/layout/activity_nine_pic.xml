@@ -10,7 +10,7 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="发布产品"/>
+            app:title="查看文案"/>
 
         <FrameLayout
             android:id="@+id/layout"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="该类别暂无推送哦!"
+                    android:text="暂时没有文案哦!"
                     android:textColor="@color/color_44"
                     android:textSize="16dp"/>
 

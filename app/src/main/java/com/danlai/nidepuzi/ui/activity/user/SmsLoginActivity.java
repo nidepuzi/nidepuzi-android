@@ -117,7 +117,7 @@ public class SmsLoginActivity extends BaseMVVMActivity<ActivitySmsLoginBinding>
                 }
                 break;
             case R.id.tv_vip:
-                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.xiaolumeimei.com/mall/boutiqueinvite",
+                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.nidepuzi.com/mall/boutiqueinvite",
                     -1, BaseWebViewActivity.class, false, false);
                 break;
         }

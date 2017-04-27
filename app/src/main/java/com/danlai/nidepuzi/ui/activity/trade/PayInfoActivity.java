@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +32,20 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CartPayInfoAdapter;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityPayInfoBinding;
 import com.danlai.nidepuzi.entity.AddressBean;
 import com.danlai.nidepuzi.entity.AddressResultBean;
 import com.danlai.nidepuzi.entity.CartsPayInfoBean;
 import com.danlai.nidepuzi.entity.IdCardBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
+import com.danlai.nidepuzi.entity.TeamBuyBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
+import com.danlai.nidepuzi.ui.activity.user.AddAddressActivity;
+import com.danlai.nidepuzi.ui.activity.user.AddressSelectActivity;
+import com.danlai.nidepuzi.ui.activity.user.SelectCouponActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
 
@@ -72,7 +80,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
         isWx, isAlipay, payFlag, isDefault;
     private CartPayInfoAdapter mCartPayInfoAdapter;
     private AlertDialog mRuleDialog;
-    private int goodNum, needLevel, personalInfoLevel, order_id;
+    private int needLevel, personalInfoLevel, order_id;
     private List<CartsPayInfoBean.LogisticsCompanys> mLogisticCompanys = new ArrayList<>();
     private List<String> mLogisticCompanyNames = new ArrayList<>();
 
@@ -231,7 +239,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                         mCartIds = bean.getCartIds();
                         List<CartsPayInfoBean.CartListEntity> cartList = bean.getCartList();
                         mCartPayInfoAdapter.updateWithClear(cartList);
-                        goodNum = cartList.get(0).getNum();
                         mLogisticCompanyNames.clear();
                         mLogisticCompanys.clear();
                         mLogisticCompanys.addAll(bean.getLogisticsCompanyses());
@@ -364,31 +371,27 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
             case R.id.tv_rule:
                 mRuleDialog.show();
                 break;
-            // TODO: 17/4/25  
-//            case R.id.address_layout:
-//                Bundle addressBundle = new Bundle();
-//                addressBundle.putString("addressId", addressId);
-//                addressBundle.putInt("needLevel", needLevel);
-//                if (isHaveAddress) {
-//                    readyGoForResult(AddressSelectActivity.class, REQUEST_CODE_ADDRESS, addressBundle);
-//                } else {
-//                    readyGo(AddAddressActivity.class, addressBundle);
-//                }
-//                break;
-//            case R.id.coupon_layout:
-//                Intent intent = new Intent(PayInfoActivity.this, SelectCouponActivity.class);
-//                Bundle bundle = new Bundle();
-//                if ((coupon_id != null) && (!coupon_id.isEmpty())) {
-//                    bundle.putString("coupon_id", coupon_id);
-//                }
-//                if (goodNum > 1) {
-//                    bundle.putInt("goodNum", goodNum);
-//                }
-//                bundle.putBoolean("couponFlag", mCouponFlag);
-//                bundle.putString("cart_ids", mCartIds);
-//                intent.putExtras(bundle);
-//                startActivityForResult(intent, REQUEST_CODE_COUPON);
-//                break;
+            case R.id.address_layout:
+                Bundle addressBundle = new Bundle();
+                addressBundle.putString("addressId", addressId);
+                addressBundle.putInt("needLevel", needLevel);
+                if (isHaveAddress) {
+                    readyGoForResult(AddressSelectActivity.class, REQUEST_CODE_ADDRESS, addressBundle);
+                } else {
+                    readyGo(AddAddressActivity.class, addressBundle);
+                }
+                break;
+            case R.id.coupon_layout:
+                Intent intent = new Intent(PayInfoActivity.this, SelectCouponActivity.class);
+                Bundle bundle = new Bundle();
+                if ((coupon_id != null) && (!coupon_id.isEmpty())) {
+                    bundle.putString("coupon_id", coupon_id);
+                }
+                bundle.putBoolean("couponFlag", mCouponFlag);
+                bundle.putString("cart_ids", mCartIds);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, REQUEST_CODE_COUPON);
+                break;
             case R.id.confirm:
                 if (personalInfoLevel < needLevel) {
                     checkIdNo();
@@ -456,43 +459,37 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO: 17/4/25  
-//        if (requestCode == PayUtils.REQUEST_CODE_PAYMENT) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                String result = data.getExtras().getString("pay_result");
-//                String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
-//                String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
-//                if (result == null) {
-//                    return;
-//                }
-//                if (result.equals("cancel")) {
-//                    JUtils.Toast("你已取消支付!");
-//                    if (order_id != -1) {
-//                        Intent intent = new Intent(this, OrderDetailActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putInt("orderinfo", order_id);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                    }
-//                    finish();
-//                } else if (result.equals("success")) {
-//                    JUtils.Toast("支付成功！");
-//                    successJump();
-//                } else {
-//                    showMsgAndFinish(result, errorMsg, extraMsg, true);
-//                }
-//            }
-//        }
+        if (requestCode == PayUtils.REQUEST_CODE_PAYMENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getExtras().getString("pay_result");
+                String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
+                String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
+                if (result == null) {
+                    return;
+                }
+                if (result.equals("cancel")) {
+                    JUtils.Toast("你已取消支付!");
+                    if (order_id != -1) {
+                        Intent intent = new Intent(this, OrderDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("orderinfo", order_id);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    finish();
+                } else if (result.equals("success")) {
+                    JUtils.Toast("支付成功！");
+                    successJump();
+                } else {
+                    showMsgAndFinish(result, errorMsg, extraMsg, true);
+                }
+            }
+        }
         if (requestCode == REQUEST_CODE_COUPON) {
             if (resultCode == Activity.RESULT_OK) {
                 coupon_id = data.getStringExtra("coupon_id");
                 coupon_price = data.getDoubleExtra("coupon_price", 0);
-                int coupon_num = data.getIntExtra("coupon_num", 1);
-                if (coupon_num > 1) {
-                    b.tvCoupon.setText(coupon_price / coupon_num + "元优惠券x" + coupon_num);
-                } else {
-                    b.tvCoupon.setText(coupon_price + "元优惠券");
-                }
+                b.tvCoupon.setText(coupon_price + "元优惠券");
                 if (coupon_id == null || coupon_id.isEmpty() || coupon_price == 0) {
                     loadData(false);
                     isCoupon = false;
@@ -624,43 +621,42 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
     }
 
     private void successJump() {
-        // TODO: 17/4/25  
-//        if (mGroupFlag) {
-//            BaseApp.getTradeInteractor(this)
-//                .getTeamBuyBean(order_no, new ServiceResponse<TeamBuyBean>(mBaseActivity) {
-//                    @Override
-//                    public void onNext(TeamBuyBean teamBuyBean) {
-//                        int id = teamBuyBean.getId();
-//                        SharedPreferences preferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);
-//                        String baseUrl = "http://m.nidepuzi.com/mall/order/spell/group/" + id + "?from_page=order_commit";
-//                        if (!TextUtils.isEmpty(preferences.getString("BASE_URL", ""))) {
-//                            baseUrl = "http://" + preferences.getString("BASE_URL", "") + "/mall/order/spell/group/" + id + "?from_page=order_commit";
-//                        }
-//                        JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
-//                            baseUrl, -1, BaseWebViewActivity.class, "查看拼团详情", false);
-//                        finish();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        if (order_id != -1) {
-//                            Intent intent = new Intent(PayInfoActivity.this, OrderDetailActivity.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putInt("orderinfo", order_id);
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                        }
-//                        finish();
-//                    }
-//                });
-//        } else {
-//            Intent intent = new Intent(this, AllOrderActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("fragment", 3);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//            finish();
-//        }
+        if (mGroupFlag) {
+            BaseApp.getTradeInteractor(this)
+                .getTeamBuyBean(order_no, new ServiceResponse<TeamBuyBean>(mBaseActivity) {
+                    @Override
+                    public void onNext(TeamBuyBean teamBuyBean) {
+                        int id = teamBuyBean.getId();
+                        SharedPreferences preferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);
+                        String baseUrl = "http://m.nidepuzi.com/mall/order/spell/group/" + id + "?from_page=order_commit";
+                        if (!TextUtils.isEmpty(preferences.getString("BASE_URL", ""))) {
+                            baseUrl = "http://" + preferences.getString("BASE_URL", "") + "/mall/order/spell/group/" + id + "?from_page=order_commit";
+                        }
+                        JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
+                            baseUrl, -1, BaseWebViewActivity.class, "查看拼团详情", false);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (order_id != -1) {
+                            Intent intent = new Intent(PayInfoActivity.this, OrderDetailActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("orderinfo", order_id);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                        finish();
+                    }
+                });
+        } else {
+            Intent intent = new Intent(this, AllOrderActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("fragment", 3);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -716,8 +712,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                         JUtils.Toast("请完善收货地址信息");
                     }
                 } else {
-                    // TODO: 17/4/25  
-//                    readyGo(AddAddressActivity.class, addressBundle);
+                    readyGo(AddAddressActivity.class, addressBundle);
                 }
             })
             .setCancelable(false)
@@ -823,8 +818,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                                 JUtils.Toast("上传成功");
                                 if ("face".equals(side)) {
                                     card_facepath = idCardBean.getCard_infos().getCard_imgpath();
-                                    JUtils.Log("-----------------------", idCardBean.getCard_infos().getName());
-                                    JUtils.Log("-----------------------", idCardBean.getCard_infos().getNum());
                                 } else {
                                     card_backpath = idCardBean.getCard_infos().getCard_imgpath();
                                 }

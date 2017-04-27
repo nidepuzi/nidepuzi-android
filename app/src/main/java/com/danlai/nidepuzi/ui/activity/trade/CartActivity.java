@@ -1,8 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 
 import com.danlai.library.utils.JUtils;
@@ -32,25 +30,10 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
     private List<CartsInfoBean> cartHisList = new ArrayList<>();
     private CartListAdapter cartListAdapter;
     private CartHistoryAdapter cartHisAdapter;
-    private boolean isNormal;
-    private int type;
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_cart;
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-        isNormal = extras.getBoolean("isNormal", false);
-    }
-
-    @Override
-    public void getIntentUrl(Uri uri) {
-        String ptype = uri.getQueryParameter("type");
-        if (ptype != null && "0".equals(ptype)) {
-            isNormal = true;
-        }
     }
 
     @Override
@@ -81,12 +64,6 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
 
     @Override
     protected void initData() {
-        if (isNormal) {
-            type = 0;
-            cartHisAdapter.setType(0);
-        } else {
-            type = 5;
-        }
         refreshCartList();
         refreshHisCartList();
     }
@@ -140,7 +117,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
 
     private void refreshHisCartList() {
         BaseApp.getCartsInteractor(this)
-            .getCartsHisList(type, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
+            .getCartsHisList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<CartsInfoBean> cartsInfoBeen) {
                     cartHisList.clear();
@@ -168,7 +145,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
 
     private void refreshIds() {
         BaseApp.getCartsInteractor(this)
-            .getCartsList(type, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
+            .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<CartsInfoBean> cartsInfoBeen) {
                     if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
@@ -199,7 +176,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
     public void refreshCartList() {
         showIndeterminateProgressDialog(false);
         BaseApp.getCartsInteractor(this)
-            .getCartsList(type, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
+            .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<CartsInfoBean> cartsInfoBeen) {
                     cartList.clear();

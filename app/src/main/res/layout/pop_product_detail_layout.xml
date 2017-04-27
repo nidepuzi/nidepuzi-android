@@ -173,15 +173,8 @@
 
         <TextView
             android:id="@+id/commit"
-            android:layout_width="match_parent"
-            android:layout_height="76px"
-            android:layout_marginLeft="32px"
-            android:layout_marginRight="32px"
-            android:background="@drawable/btn_common_default"
-            android:gravity="center"
-            android:text="确定"
-            android:textColor="@color/white"
-            android:textSize="15dp"/>
+            style="@style/CommonButton"
+            android:text="确定"/>
 
     </RelativeLayout>
 

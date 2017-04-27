@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:background="@color/white"
+              android:orientation="horizontal"
+              android:padding="8dp">
+
+    <RelativeLayout
+        android:id="@+id/img_layout"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/choose_img_bg"
+        android:gravity="center">
+
+        <com.danlai.library.widget.RoundCornerImageView
+            android:id="@+id/img_good"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/place_holder"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:layout_marginLeft="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tx_good_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/color_66"
+            android:textSize="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="尺寸:"
+                android:textColor="@color/color_AA"
+                android:textSize="12dp"/>
+
+            <TextView
+                android:id="@+id/tx_good_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_AA"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tx_good_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_66"
+                android:textSize="12dp"/>
+
+            <TextView
+                android:id="@+id/tx_good_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/color_99"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

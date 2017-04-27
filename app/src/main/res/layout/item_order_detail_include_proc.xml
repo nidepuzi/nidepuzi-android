@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/bg_grey"/>
+
+        <include layout="@layout/common_gap"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/logistics_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4px"
+                android:layout_marginRight="4px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20px">
+
+                <TextView
+                    android:id="@+id/tv_order_package"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_66"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:id="@+id/tv_order_log"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/color_66"
+                    android:textSize="13dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tx_order_crtstate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text=""
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:id="@+id/text_logistic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/btn_common_white"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:text="查看物流"
+                    android:textColor="@color/color_66"
+                    android:textSize="12dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/common_gap"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rlayout_order_lefttime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <include layout="@layout/one_order_item"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_info"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp">
+
+                <Button
+                    android:id="@+id/btn_order_proc"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_common_black"
+                    android:elevation="0dp"
+                    android:gravity="center"
+                    android:text="申请退款"
+                    android:textColor="@color/color_66"
+                    android:textSize="10dp"/>
+
+                <Button
+                    android:id="@+id/tv_order_state"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_common_white"
+                    android:elevation="0dp"
+                    android:gravity="center"
+                    android:text="处理中"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="10dp"
+                    android:visibility="invisible"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

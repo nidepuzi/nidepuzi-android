@@ -25,6 +25,7 @@
                 <include layout="@layout/common_interval"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_user"
@@ -33,6 +34,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/safe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_safe"
@@ -42,6 +44,7 @@
 
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/clear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_clear"
@@ -50,6 +53,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/stop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_stop"
@@ -59,6 +63,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/mode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_mode"
@@ -68,6 +73,7 @@
                 <include layout="@layout/common_interval"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/service"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_service"
@@ -76,6 +82,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_about"
@@ -84,6 +91,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_test"
@@ -92,6 +100,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/version"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_version"

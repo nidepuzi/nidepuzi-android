@@ -10,23 +10,23 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/msg_network"/>
+            android:layout_width="150dip"
+            android:layout_height="130dip"
+            android:src="@mipmap/msg_ic_data"/>
 
         <TextView
-            android:textColor="#666666"
-            android:textSize="14dp"
-            android:layout_marginTop="15dip"
-            android:text="当前网络不太顺畅"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:text="数据加载失败"
+            android:textColor="#666666"
+            android:textSize="14dp"/>
 
         <Button
             android:id="@+id/pager_error_loadingAgain"
-            android:layout_marginTop="13dip"
-            android:background="@drawable/net_error_loading_selector"
             android:layout_width="112dip"
-            android:layout_height="32dip"/>
+            android:layout_height="32dip"
+            android:layout_marginTop="13dip"
+            android:background="@drawable/net_error_loading_selector"/>
     </LinearLayout>
 </FrameLayout>

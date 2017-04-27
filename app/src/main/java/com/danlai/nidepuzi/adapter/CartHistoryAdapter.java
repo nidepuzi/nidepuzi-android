@@ -31,12 +31,10 @@ import butterknife.ButterKnife;
 public class CartHistoryAdapter extends RecyclerView.Adapter<CartHistoryAdapter.ViewHolder> {
     private List<CartsInfoBean> mList;
     private CartActivity mActivity;
-    private int type;
 
     public CartHistoryAdapter(CartActivity mActivity, List<CartsInfoBean> mList) {
         this.mList = mList;
         this.mActivity = mActivity;
-        type = 5;
     }
 
     @Override
@@ -63,7 +61,7 @@ public class CartHistoryAdapter extends RecyclerView.Adapter<CartHistoryAdapter.
         holder.rebuy.setOnClickListener(v -> {
             mActivity.showIndeterminateProgressDialog(false);
             BaseApp.getCartsInteractor(mActivity)
-                .rebuy(type, cartsInfoBean.getItem_id(), cartsInfoBean.getSku_id(),
+                .rebuy(0, cartsInfoBean.getItem_id(), cartsInfoBean.getSku_id(),
                     cartsInfoBean.getId() + "", new ServiceResponse<CartsHisBean>(mActivity) {
                         @Override
                         public void onNext(CartsHisBean cartsHisBean) {
@@ -91,10 +89,6 @@ public class CartHistoryAdapter extends RecyclerView.Adapter<CartHistoryAdapter.
     @Override
     public int getItemCount() {
         return mList.size();
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

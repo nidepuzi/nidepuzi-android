@@ -9,4 +9,6 @@
     <color name="shop_top_center">#44CCCC</color>
     <color name="shop_top_end">#66EEEE</color>
     <color name="coupon_red">#FF3840</color>
+
+    <color name="scan_bg">#7f000000</color>
 </resources>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.danlai.library.utils.FileUtils;
+import com.danlai.library.utils.JUtils;
 import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
@@ -84,20 +85,25 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
                             if (FileUtils.isFolderExist(BaseConst.CATEGORY_JSON)) {
                                 FileUtils.deleteFile(BaseConst.CATEGORY_JSON);
                             }
-                            OkHttpUtils.get().url(downloadUrl).build()
-                                .execute(new FileCallBack(BaseConst.BASE_DIR, "category.json") {
-                                    @Override
-                                    public void onError(Call call, Exception e, int id) {
-                                        hideIndeterminateProgressDialog();
-                                    }
+                            if (downloadUrl != null) {
+                                OkHttpUtils.get().url(downloadUrl).build()
+                                    .execute(new FileCallBack(BaseConst.BASE_DIR, "category.json") {
+                                        @Override
+                                        public void onError(Call call, Exception e, int id) {
+                                            hideIndeterminateProgressDialog();
+                                        }
 
-                                    @Override
-                                    public void onResponse(File response, int id) {
-                                        FileUtils.saveCategoryFile(mBaseActivity, sha1);
-                                        new CategoryListTask(mCategoryNameListAdapter, cid).execute();
-                                        new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute(cid);
-                                    }
-                                });
+                                        @Override
+                                        public void onResponse(File response, int id) {
+                                            FileUtils.saveCategoryFile(mBaseActivity, sha1);
+                                            new CategoryListTask(mCategoryNameListAdapter, cid).execute();
+                                            new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute(cid);
+                                        }
+                                    });
+                            } else {
+                                JUtils.Toast("暂无分类类目!");
+                                hideIndeterminateProgressDialog();
+                            }
                         } else {
                             new CategoryListTask(mCategoryNameListAdapter, "").execute();
                             new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute("");
@@ -125,7 +131,7 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-       showIndeterminateProgressDialog(false);
+        showIndeterminateProgressDialog(false);
         b.emptyLayout.setVisibility(View.GONE);
         String cid = ((CategoryBean) mCategoryNameListAdapter.getItem(position)).getCid();
         mCategoryNameListAdapter.setCid(cid);

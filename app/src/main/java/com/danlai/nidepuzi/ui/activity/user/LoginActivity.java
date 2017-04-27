@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,8 +7,6 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.SHA1Utils;
@@ -26,7 +23,6 @@ import com.mob.tools.utils.UIHandler;
 import java.util.HashMap;
 import java.util.Random;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -40,12 +36,6 @@ public class LoginActivity extends BaseActivity
     private static final int MSG_AUTH_CANCEL = 3;
     private static final int MSG_AUTH_ERROR = 4;
     private static final int MSG_AUTH_COMPLETE = 5;
-    @Bind(R.id.wx_login)
-    ImageView wx;
-    @Bind(R.id.sms_login)
-    TextView sms;
-    @Bind(R.id.login_button)
-    TextView loginBtn;
     private String timestamp;
     private String noncestr;
     private String sign_params;
@@ -56,6 +46,17 @@ public class LoginActivity extends BaseActivity
     private String unionid;
     private Wechat wechat;
     private long firstTime = 0;
+
+    @Override
+    public boolean isAllWindow() {
+        return true;
+    }
+
+    @Override
+    protected void setListener() {
+        findViewById(R.id.wx_login).setOnClickListener(this);
+        findViewById(R.id.phone_login).setOnClickListener(this);
+    }
 
     public static String getRandomString(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -94,13 +95,6 @@ public class LoginActivity extends BaseActivity
     @Override
     protected void initViews() {
         setSwipeBackEnable(false);
-    }
-
-    @Override
-    protected void setListener() {
-        loginBtn.setOnClickListener(this);
-        wx.setOnClickListener(this);
-        sms.setOnClickListener(this);
     }
 
     @Override
@@ -147,19 +141,15 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_button:
-                Intent intent1 = new Intent(mBaseActivity, PhoneLoginActivity.class);
-                startActivity(intent1);
-                break;
             case R.id.wx_login:
                 sha1();
                 sign = SHA1Utils.hex_sha1(sign_params);
                 wechat = new Wechat(this);
                 authorize(wechat);
                 break;
-            case R.id.sms_login:
-                Intent intent = new Intent(LoginActivity.this, SmsLoginActivity.class);
-                startActivity(intent);
+            case R.id.phone_login:
+                removeWX(wechat);
+                readyGo(PhoneLoginActivity.class);
                 break;
         }
     }

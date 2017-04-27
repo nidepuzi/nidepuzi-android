@@ -1,13 +1,9 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Paint;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import com.danlai.library.rx.RxCountDown;
 import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
@@ -20,20 +16,16 @@ import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
 
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.wechat.friends.Wechat;
-
 public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBinding>
-    implements View.OnClickListener, TextWatcher {
-    String login_name_value;//登录名
-    String login_pass_value;//登录密码
+    implements View.OnClickListener {
+    private String phone;
 
     @Override
     protected void setListener() {
-        b.setLoginButton.setOnClickListener(this);
-        b.forgetTextView.setOnClickListener(this);
-        b.setLoginName.addTextChangedListener(this);
+        b.tvCode.setOnClickListener(this);
         b.tvVip.setOnClickListener(this);
+        b.serviceLayout.setOnClickListener(this);
+        b.btnLogin.setOnClickListener(this);
     }
 
     @Override
@@ -42,20 +34,8 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
     }
 
     @Override
-    protected void initData() {
-        if (!LoginUtils.checkLoginState(getApplicationContext())) {
-            removeWX(new Wechat(this));
-        }
-        String[] loginInfo = LoginUtils.getLoginInfo(getApplicationContext());
-        b.setLoginName.setText(loginInfo[0]);
-        b.setLoginPassword.setText(loginInfo[1]);
-    }
-
-    public void removeWX(Platform platform) {
-        if (platform != null) {
-            platform.removeAccount(true);
-            platform.removeAccount();
-        }
+    public boolean isNeedShow() {
+        return false;
     }
 
     @Override
@@ -63,31 +43,59 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
         return R.layout.activity_phone_login;
     }
 
-    @Override
-    protected void initViews() {
-        b.forgetTextView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        b.tvVip.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.set_login_button:
-                login_name_value = b.setLoginName.getText().toString().trim();
-                login_pass_value = b.setLoginPassword.getText().toString().trim();
-                if (checkInput(login_name_value, login_pass_value)) {
-                    showIndeterminateProgressDialog(false);
-                    SharedPreferences sharedPreferences =
-                        getSharedPreferences("password", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    if (b.cbPwd.isChecked()) {
-                        editor.putString(login_name_value, login_pass_value);
-                    } else {
-                        editor.remove(login_name_value);
-                    }
-                    editor.apply();
+            case R.id.tv_vip:
+                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.nidepuzi.com/mall/boutiqueinvite",
+                    -1, BaseWebViewActivity.class, false, false);
+                break;
+            case R.id.service_layout:
+                new AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setTitle("你的铺子微店用户服务协议")
+                    .setMessage("协议内容")
+                    .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
+                    .show();
+                break;
+            case R.id.tv_code:
+                phone = b.etPhone.getText().toString();
+                if (checkMobileInput(phone)) {
+                    RxCountDown.countdown(60).doOnSubscribe(disposable -> {
+                        addDisposable(disposable);
+                        b.tvCode.setClickable(false);
+                        BaseApp.getUserInteractor(mBaseActivity)
+                            .getCodeBean(phone, "sms_login", new ServiceResponse<CodeBean>(mBaseActivity) {
+                                @Override
+                                public void onNext(CodeBean codeBean) {
+                                    JUtils.Toast(codeBean.getMsg());
+                                }
+                            });
+                    }).subscribe(new ServiceResponse<Integer>(mBaseActivity) {
+                        @Override
+                        public void onComplete() {
+                            if (b.tvCode != null) {
+                                b.tvCode.setText("获取验证码");
+                                b.tvCode.setClickable(true);
+                            }
+                        }
+
+                        @Override
+                        public void onNext(Integer integer) {
+                            if (b.tvCode != null) {
+                                b.tvCode.setText(integer + "S");
+                            }
+                        }
+                    });
+                }
+                break;
+            case R.id.btn_login:
+                phone = b.etPhone.getText().toString();
+                String code = b.etCode.getText().toString();
+                if (checkInput(phone, code)) {
                     BaseApp.getUserInteractor(this)
-                        .passwordLogin(login_name_value, login_pass_value, null, new ServiceResponse<CodeBean>(mBaseActivity) {
+                        .verifyCode(phone, "sms_login", code, new ServiceResponse<CodeBean>(mBaseActivity) {
                             @Override
                             public void onNext(CodeBean codeBean) {
                                 hideIndeterminateProgressDialog();
@@ -108,25 +116,15 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
                         });
                 }
                 break;
-            case R.id.forget_text_view:
-                startActivity(new Intent(this, PhoneForgetActivity.class));
-                finish();
-                break;
-            case R.id.tv_vip:
-                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.xiaolumeimei.com/mall/boutiqueinvite",
-                    -1, BaseWebViewActivity.class, false, false);
-                break;
         }
     }
 
-    public boolean checkInput(String mobile, String password) {
+    public boolean checkMobileInput(String mobile) {
         if (mobile == null || mobile.trim().trim().equals("")) {
             JUtils.Toast("请输入手机号");
         } else {
             if (mobile.length() != 11) {
                 JUtils.Toast("请输入正确的手机号");
-            } else if (password == null || password.trim().trim().equals("")) {
-                JUtils.Toast("密码不能为空");
             } else {
                 return true;
             }
@@ -134,28 +132,14 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
         return false;
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String phone = s.toString();
-        SharedPreferences sharedPreferences =
-            getSharedPreferences("password", Context.MODE_PRIVATE);
-        String password = sharedPreferences.getString(phone, "");
-        if (!password.equals("")) {
-            b.setLoginPassword.setText(password);
-            b.cbPwd.setChecked(true);
-        } else {
-            b.setLoginPassword.setText("");
-            b.cbPwd.setChecked(false);
+    public boolean checkInput(String mobile, String code) {
+        if (checkMobileInput(mobile)) {
+            if (code == null || code.trim().equals("")) {
+                JUtils.Toast("验证码不能为空");
+            } else {
+                return true;
+            }
         }
+        return false;
     }
 }

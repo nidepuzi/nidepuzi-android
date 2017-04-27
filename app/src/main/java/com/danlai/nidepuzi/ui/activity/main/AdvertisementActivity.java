@@ -45,13 +45,18 @@ public class AdvertisementActivity extends BaseActivity implements View.OnClickL
     protected void initData() {
         ViewUtils.setWindowStatus(this);
         String link = getIntent().getExtras().getString("link");
+        int id = getIntent().getExtras().getInt("resId", -1);
         isDestroy = false;
         ImageView img = (ImageView) findViewById(R.id.img);
         text = (TextView) findViewById(R.id.text);
         assert text != null;
         text.setOnClickListener(this);
         assert img != null;
-        Glide.with(this).load(link).into(img);
+        if (link != null) {
+            Glide.with(this).load(link).into(img);
+        } else if (id != -1) {
+            Glide.with(this).load(id).into(img);
+        }
         readyToJump();
     }
 

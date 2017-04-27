@@ -160,6 +160,7 @@ public class ProductFragment extends BaseFragment<FragmentProductBinding> {
                     b.xrv.loadMoreComplete();
                     b.xrv.refreshComplete();
                     JUtils.Toast("数据加载有误!");
+                    initDataError();
                 }
             });
     }

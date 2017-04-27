@@ -10,11 +10,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
+import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.MainTodayBean;
+import com.danlai.nidepuzi.entity.ShareModelBean;
+import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
+import com.danlai.nidepuzi.util.ShareUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -78,6 +83,23 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
             } catch (Exception ignored) {
             }
         });
+        holder.share.setOnClickListener(v -> {
+            context.showIndeterminateProgressDialog(false);
+            BaseApp.getProductInteractor(context)
+                .getShareModel(bean.getModel_id(), new ServiceResponse<ShareModelBean>(context) {
+                    @Override
+                    public void onNext(ShareModelBean shareModel) {
+                        context.hideIndeterminateProgressDialog();
+                        ShareUtils.shareWithModel(shareModel, context);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        context.hideIndeterminateProgressDialog();
+                        JUtils.Toast("分享失败,请点击重试!");
+                    }
+                });
+        });
     }
 
 
@@ -88,7 +110,7 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
+        ImageView image, share;
         TextView name, price, profit;
         LinearLayout productLayout;
 
@@ -96,6 +118,7 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
             super(itemView);
             productLayout = (LinearLayout) itemView.findViewById(R.id.product_layout);
             image = (ImageView) itemView.findViewById(R.id.img);
+            share = (ImageView) itemView.findViewById(R.id.share);
             name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById(R.id.price);
             profit = (TextView) itemView.findViewById(R.id.profit);

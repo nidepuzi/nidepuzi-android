@@ -264,13 +264,75 @@
             android:name=".ui.activity.user.PhoneLoginActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
-            android:name=".ui.activity.user.SmsLoginActivity"
-            android:theme="@style/AppTheme.TransparentActivity"/>
-        <activity
             android:name=".ui.activity.user.PhoneForgetActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.user.EditPasswordActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AllCouponActivity"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/usercoupons/method"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.user.SelectCouponActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.ChangeAddressActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AddressActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AddAddressActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AddressSelectActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.AllOrderActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.CommonScanActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.LogisticsCompanyActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.WriteLogisticsInfoActivity"
+            android:theme="@style/AppTheme.TransparentActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ui.activity.trade.LogisticsActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.OrderDetailActivity"
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/trades/details"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.trade.RefundDetailActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.WaitSendAddressActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service

@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.danlai.library.rx.RxCountDown;
@@ -26,10 +29,13 @@ import io.reactivex.disposables.Disposable;
  * <p>
  * Copyright 2015年 上海己美. All rights reserved.
  */
-public class SplashActivity extends AppCompatActivity implements BaseSubscriberContext {
+public class SplashActivity extends AppCompatActivity implements BaseSubscriberContext, View.OnClickListener {
 
     private String mPicture;
     private CompositeDisposable mCompositeDisposable;
+    private TextView textView;
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,9 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ViewUtils.setWindowStatus(this);
+        textView = (TextView) findViewById(R.id.text);
+        imageView = ((ImageView) findViewById(R.id.img));
+        textView.setOnClickListener(this);
         BaseApp.getActivityInteractor(this)
             .getStartAds(new ServiceResponse<StartBean>(SplashActivity.this) {
                 @Override
@@ -48,6 +57,10 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
                     }
                 }
             });
+        checkPermissionAndJump();
+    }
+
+    private void checkPermissionAndJump() {
         if (JUtils.isPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE")) {
             RxCountDown.countdown(2).subscribe(integer -> {
                 if (integer == 0) {
@@ -71,18 +84,33 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
 
     private void jumpToAds() {
         if (JUtils.isNetWorkAvilable() && mPicture != null && !mPicture.equals("")) {
-            Intent intent = new Intent(SplashActivity.this, AdvertisementActivity.class);
-            intent.putExtra("link", mPicture);
-            startActivity(intent);
+            Glide.with(this).load(mPicture).into(imageView);
         } else {
-            if (LoginUtils.checkLoginState(this)) {
-                startActivity(new Intent(SplashActivity.this, TabActivity.class));
-            } else {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            }
+            Glide.with(this).load(R.drawable.img_desc).into(imageView);
+        }
+        RxCountDown.countdown(4).subscribe(
+            integer -> {
+                if (integer == 0) {
+                    jumpAndFinish();
+                }
+                runOnUiThread(() -> {
+                    if (textView != null) {
+                        textView.setText("跳过  " + integer);
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                });
+            }, e -> jumpAndFinish());
+    }
+
+    private void jumpAndFinish() {
+        if (LoginUtils.checkLoginState(this)) {
+            startActivity(new Intent(this, TabActivity.class));
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
         }
         finish();
     }
+
 
     @Override
     protected void onStop() {
@@ -114,5 +142,14 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(d);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.text:
+                jumpAndFinish();
+                break;
+        }
     }
 }

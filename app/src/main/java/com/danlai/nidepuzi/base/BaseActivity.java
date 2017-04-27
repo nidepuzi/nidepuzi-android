@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.StatusBarUtil;
+import com.danlai.library.utils.ViewUtils;
 import com.danlai.library.widget.loading.VaryViewHelperController;
 import com.danlai.library.widget.loading.WisdomLoading;
 import com.danlai.library.widget.swipeback.SwipeBackActivityHelper;
@@ -113,7 +114,12 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseSub
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent), 0);
+        if (isAllWindow()){
+            ViewUtils.setWindowStatus(this);
+        }else {
+            StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent), 0);
+        }
+
     }
 
     protected void getBundleExtras(Bundle extras) {
@@ -157,6 +163,10 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseSub
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
         startActivityForResult(intent, requestCode);
+    }
+
+    public boolean isAllWindow(){
+        return false;
     }
 
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {

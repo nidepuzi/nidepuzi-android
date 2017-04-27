@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.ui.fragment.main;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
@@ -115,13 +114,13 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_message:
-                startActivity(new Intent(mActivity, MessageActivity.class));
+                readyGo( MessageActivity.class);
                 break;
             case R.id.img_invite:
-                startActivity(new Intent(mActivity, InviteActivity.class));
+                readyGo(InviteActivity.class);
                 break;
             case R.id.img_search:
-                startActivity(new Intent(mActivity, CategoryActivity.class));
+                readyGo(CategoryActivity.class);
                 break;
         }
     }

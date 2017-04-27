@@ -42,7 +42,6 @@ public class AddressInteractorImpl implements AddressInteractor {
                                      String name, String mobile, String defaulta,
                                      String identification_no, String face, String back,
                                      ServiceResponse<AddressResultBean> response) {
-
         if (face == null || back == null || "".equals(face) || "".equals(back)) {
             service.create_addressWithId(state, city, district, address, name, mobile,
                 defaulta, identification_no)

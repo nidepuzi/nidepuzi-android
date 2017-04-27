@@ -92,23 +92,25 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
     private void initTodayList(List<MainTodayBean> list) {
         data.clear();
         data.addAll(list);
-        mainTabAdapter.updateWithClear(list);
-        b.bottomView.setVisibility(View.VISIBLE);
-        b.bottomLine.setVisibility(View.VISIBLE);
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        b.recyclerTab.scrollBy(-scrollCount * width, 0);
-        scrollCount = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getHour() <= hour) {
-                scrollCount = i;
+        if (list.size() > 0) {
+            mainTabAdapter.updateWithClear(list);
+            b.bottomView.setVisibility(View.VISIBLE);
+            b.bottomLine.setVisibility(View.VISIBLE);
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            b.recyclerTab.scrollBy(-scrollCount * width, 0);
+            scrollCount = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getHour() <= hour) {
+                    scrollCount = i;
+                }
             }
-        }
-        mainTabAdapter.setCurrentPosition(scrollCount + 2);
-        b.recyclerTab.scrollBy(scrollCount * width, 0);
-        if (list.size() > scrollCount) {
-            mainProductAdapter.updateWithClear(list.get(scrollCount).getItems());
-        } else {
-            b.recyclerTab.setEnabled(false);
+            mainTabAdapter.setCurrentPosition(scrollCount + 2);
+            b.recyclerTab.scrollBy(scrollCount * width, 0);
+            if (list.size() > scrollCount) {
+                mainProductAdapter.updateWithClear(list.get(scrollCount).getItems());
+            } else {
+                b.recyclerTab.setEnabled(false);
+            }
         }
         hideIndeterminateProgressDialog();
     }

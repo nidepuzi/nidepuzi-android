@@ -14,6 +14,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.ProductListBean;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -109,6 +110,7 @@ public class ProductListAdapter extends XRecyclerView.Adapter<ProductListAdapter
         public ViewHolder(View itemView) {
             super(itemView);
             card = itemView;
+            AutoUtils.auto(itemView);
             ButterKnife.bind(this, itemView);
         }
     }

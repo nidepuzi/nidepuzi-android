@@ -25,7 +25,7 @@
                 app:message_desc="亲爱的你的铺子用户，你预约的客服马上上线，请耐心等候"
                 app:message_icon="@drawable/icon_msg_msg"
                 app:message_time="2017年11月11号 11:11:11"
-                app:message_title="云集公告"/>
+                app:message_title="铺子公告"/>
 
             <com.danlai.library.widget.message.MessageItemView
                 android:id="@+id/message_view_edu"

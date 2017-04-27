@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.NetUtil;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.BuildConfig;
@@ -19,7 +18,6 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.CacheControl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -79,34 +77,34 @@ public class RetrofitClient {
                         .cache(cache)
                         .addInterceptor(chain -> {
                             Request request = chain.request();
-                            if (JUtils.isNetWorkAvilable()) {
-                                request = request.newBuilder()
-                                    .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " App/"
-                                        + String.valueOf(BuildConfig.VERSION_CODE) + " Mobile/"
-                                        + Build.MODEL + " NetType/" + NetUtil.getNetType(BaseApp.getInstance()))
-                                    .build();
-                            } else {
-                                request = request.newBuilder()
-                                    .cacheControl(CacheControl.FORCE_CACHE)
-                                    .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " App/"
-                                        + String.valueOf(BuildConfig.VERSION_CODE) + " Mobile/"
-                                        + Build.MODEL + " NetType/" + NetUtil.getNetType(BaseApp.getInstance()))
-                                    .build();
-                            }
-                            okhttp3.Response response = chain.proceed(request);
-                            if (JUtils.isNetWorkAvilable()) {
-                                int maxAge = 60 * 60;
-                                response.newBuilder()
-                                    .removeHeader("Pragma")
-                                    .header("Cache-Control", "public, max-age=" + maxAge)
-                                    .build();
-                            } else {
-                                int maxStale = 60 * 60 * 24 * 28;
-                                response.newBuilder()
-                                    .removeHeader("Pragma")
-                                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                                    .build();
-                            }
+//                            if (JUtils.isNetWorkAvilable()) {
+                            request = request.newBuilder()
+                                .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " App/"
+                                    + String.valueOf(BuildConfig.VERSION_CODE) + " Mobile/"
+                                    + Build.MODEL + " NetType/" + NetUtil.getNetType(BaseApp.getInstance()))
+                                .build();
+//                            } else {
+//                                request = request.newBuilder()
+//                                    .cacheControl(CacheControl.FORCE_CACHE)
+//                                    .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " App/"
+//                                        + String.valueOf(BuildConfig.VERSION_CODE) + " Mobile/"
+//                                        + Build.MODEL + " NetType/" + NetUtil.getNetType(BaseApp.getInstance()))
+//                                    .build();
+//                            }
+//                            okhttp3.Response response = chain.proceed(request);
+//                            if (JUtils.isNetWorkAvilable()) {
+//                                int maxAge = 60 * 60;
+//                                response.newBuilder()
+//                                    .removeHeader("Pragma")
+//                                    .header("Cache-Control", "public, max-age=" + maxAge)
+//                                    .build();
+//                            } else {
+//                                int maxStale = 60 * 60 * 24 * 28;
+//                                response.newBuilder()
+//                                    .removeHeader("Pragma")
+//                                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+//                                    .build();
+//                            }
                             return chain.proceed(request);
                         })
                         .cookieJar(new PersistentCookieJar(new SetCookieCache(),

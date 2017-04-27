@@ -50,6 +50,7 @@ import com.danlai.nidepuzi.entity.CartsNumResultBean;
 import com.danlai.nidepuzi.entity.ProductDetailBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.ShareModelBean;
+import com.danlai.nidepuzi.htmlJsBridge.AndroidJsBridge;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.ui.activity.shop.NinePicActivity;
@@ -117,6 +118,8 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             }
+            settings.setJavaScriptEnabled(true);
+            b.webView.addJavascriptInterface(new AndroidJsBridge(this), "AndroidBridge");
             settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             b.webView.setWebChromeClient(new WebChromeClient());
             b.webView.setWebViewClient(new WebViewClient() {
@@ -238,12 +241,8 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
     }
 
     private void showCartNum() {
-        int type = 5;
-        if (!productDetail.getDetail_content().is_boutique()) {
-            type = 0;
-        }
         BaseApp.getMainInteractor(this)
-            .getCartsNum(type, new ServiceResponse<CartsNumResultBean>(mBaseActivity) {
+            .getCartsNum(0, new ServiceResponse<CartsNumResultBean>(mBaseActivity) {
                 @Override
                 public void onNext(CartsNumResultBean cartsNumResultBean) {
                     cart_num = cartsNumResultBean.getResult();
@@ -522,11 +521,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                 if (!LoginUtils.checkLoginState(getApplicationContext())) {
                     jumpToLogin();
                 } else {
-                    int productType = 5;
-                    if (!productDetail.getDetail_content().is_boutique()) {
-                        productType = 0;
-                    }
-                    addToCart(false, productType);
+                    addToCart(false);
                 }
                 break;
             case R.id.plus:
@@ -540,19 +535,14 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                 }
                 break;
             case R.id.commit:
-                int productType = 5;
-                if (!productDetail.getDetail_content().is_boutique()) {
-                    productType = 0;
-                }
-                final int type = productType;
                 if (isBoutique) {
                     BaseApp.getCartsInteractor(this)
-                        .addToCart(item_id, sku_id, num, type, new ServiceResponse<ResultEntity>(mBaseActivity) {
+                        .addToCart(item_id, sku_id, num, 0, new ServiceResponse<ResultEntity>(mBaseActivity) {
                             @Override
                             public void onNext(ResultEntity resultEntity) {
                                 if (resultEntity.getCode() == 0) {
                                     BaseApp.getCartsInteractor(ProductDetailActivity.this)
-                                        .getCartsList(type, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
+                                        .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                                             @Override
                                             public void onNext(List<CartsInfoBean> cartsInfoBeen) {
                                                 if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
@@ -575,7 +565,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                             }
                         });
                 } else {
-                    addToCart(true, type);
+                    addToCart(true);
                 }
                 break;
             default:
@@ -589,9 +579,9 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         readyGoThenKill(LoginActivity.class);
     }
 
-    private void addToCart(boolean dismiss, int type) {
+    private void addToCart(boolean dismiss) {
         BaseApp.getCartsInteractor(this)
-            .addToCart(item_id, sku_id, num, type, new ServiceResponse<ResultEntity>(mBaseActivity) {
+            .addToCart(item_id, sku_id, num, 0, new ServiceResponse<ResultEntity>(mBaseActivity) {
                 @Override
                 public void onNext(ResultEntity resultEntity) {
                     JUtils.Toast(resultEntity.getInfo());

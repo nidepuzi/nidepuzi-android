@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -215,4 +216,29 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
         });
     }
 
+    protected void readyGo(Class<?> clazz) {
+        Intent intent = new Intent(mActivity, clazz);
+        startActivity(intent);
+    }
+
+    protected void readyGo(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(mActivity, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    protected void readyGoForResult(Class<?> clazz, int requestCode) {
+        Intent intent = new Intent(mActivity, clazz);
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(mActivity, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
 }
