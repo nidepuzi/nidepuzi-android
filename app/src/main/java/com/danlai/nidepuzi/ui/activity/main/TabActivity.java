@@ -18,7 +18,6 @@ import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.ActivityTabBinding;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
 import com.danlai.nidepuzi.entity.VersionBean;
-import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
@@ -30,10 +29,6 @@ import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.VersionManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -69,19 +64,17 @@ public class TabActivity extends BaseActivity {
     protected void initData() {
         // TODO: 17/4/25 暂时隐藏
 //        downLoadAddress();
-//        checkVersion();
+        checkVersion();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void initViews() {
-        EventBus.getDefault().register(this);
         setSwipeBackEnable(false);
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(MainTabFragment.newInstance());
@@ -116,11 +109,6 @@ public class TabActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void initLogOutInfo(LogoutEvent event) {
-        b.radioGroup.check(R.id.rb_main);
     }
 
     private void checkVersion() {

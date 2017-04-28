@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.danlai.library.utils.JUtils;
+import com.danlai.nidepuzi.base.BaseImageLoader;
 import com.danlai.nidepuzi.module.ActivityInteractor;
 import com.danlai.nidepuzi.module.AddressInteractor;
 import com.danlai.nidepuzi.module.CartsInteractor;
@@ -17,6 +18,10 @@ import com.danlai.nidepuzi.module.TradeInteractor;
 import com.danlai.nidepuzi.module.UserInteractor;
 import com.danlai.nidepuzi.module.VipInteractor;
 import com.facebook.stetho.Stetho;
+import com.qiyukf.unicorn.api.SavePowerConfig;
+import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
+import com.qiyukf.unicorn.api.Unicorn;
+import com.qiyukf.unicorn.api.YSFOptions;
 
 import java.util.List;
 
@@ -43,6 +48,7 @@ public class BaseApp extends MultiDexApplication {
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
         JUtils.initialize(this);
+        Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(), new BaseImageLoader(getInstance()));
         JUtils.setDebug(BuildConfig.DEBUG, "nidepuzi");
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
     }
@@ -51,6 +57,13 @@ public class BaseApp extends MultiDexApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    private YSFOptions options() {
+        YSFOptions options = new YSFOptions();
+        options.statusBarNotificationConfig = new StatusBarNotificationConfig();
+        options.savePowerConfig = new SavePowerConfig();
+        return options;
     }
 
     private boolean shouldInit() {

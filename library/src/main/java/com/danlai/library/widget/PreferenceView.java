@@ -51,20 +51,27 @@ public class PreferenceView extends RelativeLayout implements View.OnClickListen
     private void init(Context context, AttributeSet attrs) {
         this.context = context;
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.PreferenceView);
-        View view = LayoutInflater.from(context).inflate(R.layout.preference_list_item, this, true);
-        TextView titleText = ((TextView) view.findViewById(R.id.title));
-        ImageView icon = (ImageView) view.findViewById(R.id.icon);
-        summaryText = ((TextView) view.findViewById(R.id.summary));
-        imageView = (ImageView) view.findViewById(R.id.img);
-        mSwitchCompat = ((SwitchCompat) view.findViewById(R.id.check_switch));
-        setOnClickListener(this);
-        Drawable drawable = array.getDrawable(R.styleable.PreferenceView_preference_icon);
-        icon.setImageDrawable(drawable);
-        titleText.setText(array.getString(R.styleable.PreferenceView_preference_title));
-        if (array.getBoolean(R.styleable.PreferenceView_preference_show_switch, false)) {
-            hideImg();
-            mSwitchCompat.setVisibility(VISIBLE);
+        View view;
+        if (array.getBoolean(R.styleable.PreferenceView_preference_hide_icon, false)) {
+            view = LayoutInflater.from(context).inflate(R.layout.preference_list_text, this, true);
+            imageView = (ImageView) view.findViewById(R.id.img);
+        } else {
+            view = LayoutInflater.from(context).inflate(R.layout.preference_list_item, this, true);
+            mSwitchCompat = ((SwitchCompat) view.findViewById(R.id.check_switch));
+            imageView = (ImageView) view.findViewById(R.id.img);
+            ImageView icon = (ImageView) view.findViewById(R.id.icon);
+            Drawable drawable = array.getDrawable(R.styleable.PreferenceView_preference_icon);
+            icon.setImageDrawable(drawable);
+            if (array.getBoolean(R.styleable.PreferenceView_preference_show_switch, false)) {
+                hideImg();
+                mSwitchCompat.setVisibility(VISIBLE);
+            }
         }
+        TextView titleText = ((TextView) view.findViewById(R.id.title));
+        summaryText = ((TextView) view.findViewById(R.id.summary));
+        setOnClickListener(this);
+        titleText.setText(array.getString(R.styleable.PreferenceView_preference_title));
+        summaryText.setText(array.getString(R.styleable.PreferenceView_preference_desc));
     }
 
     public void hideImg() {

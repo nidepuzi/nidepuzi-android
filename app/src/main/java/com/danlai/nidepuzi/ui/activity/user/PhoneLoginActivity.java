@@ -11,10 +11,13 @@ import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityPhoneLoginBinding;
 import com.danlai.nidepuzi.entity.CodeBean;
+import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBinding>
     implements View.OnClickListener {
@@ -101,6 +104,7 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
                                 hideIndeterminateProgressDialog();
                                 JUtils.Toast(codeBean.getMsg());
                                 if (codeBean.getRcode() == 0) {
+                                    EventBus.getDefault().post(new LoginEvent());
                                     LoginUtils.saveLoginSuccess(true, mBaseActivity);
                                     readyGoThenKill(TabActivity.class);
                                 } else {

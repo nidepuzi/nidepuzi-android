@@ -78,7 +78,7 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
         b.xrv.setLayoutManager(new CustomLinearLayoutManager(mActivity));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
-        b.xrv.addItemDecoration(new SpaceItemDecoration(0, 0, 0, 12));
+        b.xrv.addItemDecoration(new SpaceItemDecoration(0, 0, 0, 20));
         adapter = new AllOrdersAdapter(mActivity);
         b.xrv.setAdapter(adapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {

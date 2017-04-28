@@ -47,6 +47,8 @@ public class SettingActivity extends BaseMVVMActivity<ActivitySettingBinding> im
     protected void initViews() {
         updateCache();
         b.version.setSummary(JUtils.getAppVersionName());
+        b.user.bindActivity(mBaseActivity, InformationActivity.class, null);
+        b.safe.bindActivity(mBaseActivity, SafeActivity.class, null);
     }
 
     @Override

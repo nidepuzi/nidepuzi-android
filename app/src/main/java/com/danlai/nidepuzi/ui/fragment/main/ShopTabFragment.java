@@ -9,15 +9,23 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
+import com.danlai.nidepuzi.entity.ShareModelBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
+import com.danlai.nidepuzi.entity.event.LoginEvent;
+import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
-import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
+import com.danlai.nidepuzi.ui.activity.user.InformationActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.activity.user.SettingActivity;
+import com.danlai.nidepuzi.util.ShareUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author wisdom
@@ -39,6 +47,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.imgSet.setOnClickListener(this);
         b.imgCart.setOnClickListener(this);
         b.imgMessage.setOnClickListener(this);
+        b.userHead.setOnClickListener(this);
+        b.userName.setOnClickListener(this);
         b.layoutCoupon.setOnClickListener(this);
         b.layoutWallet.setOnClickListener(this);
         b.layoutAddress.setOnClickListener(this);
@@ -72,7 +82,25 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     @Override
     protected void initViews() {
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshLogin(LoginEvent event) {
+        initData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshLogout(LogoutEvent event) {
+        b.userName.setText("铺子用户");
+        b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  5201314");
+        Glide.with(mFragment).load(R.drawable.img_user_head).into(b.userHead);
     }
 
     @Override
@@ -93,6 +121,10 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
             case R.id.img_cart:
                 readyGo(CartActivity.class);
                 break;
+            case R.id.user_head:
+            case R.id.user_name:
+                readyGo(InformationActivity.class );
+                break;
             case R.id.layout_coupon:
                 readyGo(AllCouponActivity.class);
                 break;
@@ -103,7 +135,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AddressActivity.class);
                 break;
             case R.id.invite_friend:
-                readyGo(InviteActivity.class);
+                ShareUtils.shareShop(new ShareModelBean(), mActivity);
                 break;
             case R.id.layout_all_order:
                 bundle.putInt("fragment", 1);

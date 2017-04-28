@@ -15,10 +15,13 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseAppManager;
 import com.danlai.nidepuzi.entity.CodeBean;
+import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.util.LoginUtils;
 import com.mob.tools.utils.UIHandler;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -200,6 +203,7 @@ public class LoginActivity extends BaseActivity
                                     hideIndeterminateProgressDialog();
                                     JUtils.Toast(codeBean.getMsg());
                                     if (0 == codeBean.getRcode()) {
+                                        EventBus.getDefault().post(new LoginEvent());
                                         LoginUtils.saveLoginSuccess(true, mBaseActivity);
                                         readyGoThenKill(TabActivity.class);
                                     } else {

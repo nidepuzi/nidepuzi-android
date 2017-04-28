@@ -39,6 +39,8 @@
     <declare-styleable name="PreferenceView">
         <attr name="preference_icon" format="reference"/>
         <attr name="preference_title" format="string"/>
+        <attr name="preference_desc" format="string"/>
+        <attr name="preference_hide_icon" format="boolean"/>
         <attr name="preference_show_switch" format="boolean"/>
     </declare-styleable>
 
@@ -47,7 +49,7 @@
     </declare-styleable>
 
     <declare-styleable name="PasswordEditText">
-        <attr name="iconShow" format="integer" />
-        <attr name="iconHide" format="integer" />
+        <attr name="iconShow" format="integer"/>
+        <attr name="iconHide" format="integer"/>
     </declare-styleable>
 </resources>

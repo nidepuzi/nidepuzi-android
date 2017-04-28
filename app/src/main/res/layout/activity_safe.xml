@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="账户与安全"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_grey"
+            android:orientation="vertical">
+
+            <include layout="@layout/common_interval"/>
+
+            <com.danlai.library.widget.PreferenceView
+                android:id="@+id/pv_wx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:preference_hide_icon="true"
+                app:preference_title="关联微信"/>
+
+            <include layout="@layout/common_interval"/>
+
+            <com.danlai.library.widget.PreferenceView
+                android:id="@+id/pv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:preference_hide_icon="true"
+                app:preference_title="Title"/>
+
+            <include layout="@layout/preference_line"/>
+
+            <com.danlai.library.widget.PreferenceView
+                android:id="@+id/pv_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:preference_hide_icon="true"
+                app:preference_title="支付密码"/>
+
+            <include layout="@layout/common_interval"/>
+
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="match_parent"
+                android:layout_height="?android:listPreferredItemHeightSmall"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
