@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'AndResGuard'
 
-static def releaseTime() {
-    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
-}
+//static def releaseTime() {
+//    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
+//}
 
 def keyStore = file('../app/nidepuzi.jks')
 
@@ -47,7 +47,7 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170427
+        versionCode 20170503
         versionName "1.0"
 
         multiDexEnabled = true
@@ -128,7 +128,7 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // nidepuzi_版本_yyyy_MM_dd.apk
-                        def fileName = "Ndpz_v${defaultConfig.versionName.replace(".", "")}_${releaseTime()}.apk"
+                        def fileName = "Ndpz_v${defaultConfig.versionName.replace(".", "")}_${defaultConfig.versionCode}.apk"
                         println("====== buildTypes.output ======")
                         println("AppName: " + fileName)
                         output.outputFile = new File(outputFile.parent, fileName)

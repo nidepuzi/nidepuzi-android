@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.danlai.library.utils.StatusBarUtil;
-import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
 
 import java.util.List;
@@ -43,13 +41,6 @@ public class FragmentTabUtils implements RadioGroup.OnCheckedChangeListener {
                     fragment.setUserVisibleHint(true);
                 }
                 getFragmentTransaction().show(fragment).commitAllowingStateLoss();
-                if (i == 2) {
-                    StatusBarUtil.setColorNoTranslucent(mActivity,
-                        mActivity.getResources().getColor(R.color.shop_top));
-                }else {
-                    StatusBarUtil.setColorNoTranslucent(mActivity,
-                        mActivity.getResources().getColor(R.color.colorAccent));
-                }
             } else {
                 getFragmentTransaction().hide(fragment).commitAllowingStateLoss();
             }

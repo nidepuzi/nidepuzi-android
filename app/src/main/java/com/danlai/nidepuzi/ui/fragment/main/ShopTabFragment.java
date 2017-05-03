@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.danlai.library.utils.JUtils;
+import com.danlai.library.utils.StatusBarUtil;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
@@ -59,6 +60,18 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            StatusBarUtil.setColorNoTranslucent(mActivity,
+                mActivity.getResources().getColor(R.color.colorAccent));
+        } else {
+            StatusBarUtil.setColorNoTranslucent(mActivity,
+                mActivity.getResources().getColor(R.color.shop_top));
+        }
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
     public void initData() {
         BaseApp.getMainInteractor(mActivity)
             .getProfile(new ServiceResponse<UserInfoBean>(mFragment) {
@@ -66,6 +79,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 public void onNext(UserInfoBean userInfoBean) {
                     b.userName.setText(userInfoBean.getNick());
                     b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  " + userInfoBean.getUser_id());
+                    if (userInfoBean.getUser_budget() != null) {
+                        b.tvWallet.setText(userInfoBean.getUser_budget().getBudget_cash() + "");
+                    }
                     String thumbnail = userInfoBean.getThumbnail();
                     Glide.with(mFragment).load(thumbnail).into(b.userHead);
                     hideIndeterminateProgressDialog();
@@ -123,7 +139,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.user_head:
             case R.id.user_name:
-                readyGo(InformationActivity.class );
+                readyGo(InformationActivity.class);
                 break;
             case R.id.layout_coupon:
                 readyGo(AllCouponActivity.class);

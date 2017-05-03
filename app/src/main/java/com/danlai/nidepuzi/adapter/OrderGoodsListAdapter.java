@@ -33,6 +33,8 @@ import com.danlai.nidepuzi.entity.OrderDetailBean;
 import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
+import com.danlai.nidepuzi.ui.activity.trade.ApplyRefundActivity;
+import com.danlai.nidepuzi.ui.activity.trade.ApplyReturnGoodsActivity;
 import com.danlai.nidepuzi.ui.activity.trade.LogisticsActivity;
 import com.danlai.nidepuzi.ui.activity.trade.RefundDetailActivity;
 
@@ -255,35 +257,31 @@ public class OrderGoodsListAdapter extends BaseAdapter {
                                     if (adapter.getSelect() == -1) {
                                         JUtils.Toast("请选择退款方式");
                                     } else {
-                                        // TODO: 17/4/27
-//                                        Intent intent = new Intent(context, ApplyRefundActivity.class);
-//                                        Bundle bundle = new Bundle();
-//                                        bundle.putInt("id", orderDetailEntity.getId());
-//                                        bundle.putInt("position", position);
-//                                        bundle.putString("refund_channel", adapter.getItem(adapter.getSelect()).getRefund_channel());
-//                                        bundle.putString("name", adapter.getItem(adapter.getSelect()).getName());
-//                                        bundle.putString("desc", adapter.getItem(adapter.getSelect()).getDesc());
-//                                        intent.putExtras(bundle);
-//                                        Log.d(TAG, "transfer good  " + goods_info.getId() + " to " + "ApplyRefundActivity");
-//                                        context.startActivity(intent);
-//                                        dialog.dismiss();
-//                                        context.finish();
+                                        Intent intent = new Intent(context, ApplyRefundActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("id", orderDetailEntity.getId());
+                                        bundle.putInt("position", position);
+                                        bundle.putString("refund_channel", adapter.getItem(adapter.getSelect()).getRefund_channel());
+                                        bundle.putString("name", adapter.getItem(adapter.getSelect()).getName());
+                                        bundle.putString("desc", adapter.getItem(adapter.getSelect()).getDesc());
+                                        intent.putExtras(bundle);
+                                        context.startActivity(intent);
+                                        dialog.dismiss();
+                                        context.finish();
                                     }
                                 });
                                 dialog.show();
                             } else if (choices.size() == 1) {
-                                // TODO: 17/4/27
-//                                Intent intent = new Intent(context, ApplyRefundActivity.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putInt("id", orderDetailEntity.getId());
-//                                bundle.putInt("position", position);
-//                                bundle.putString("refund_channel", choices.get(0).getRefund_channel());
-//                                bundle.putString("name", choices.get(0).getName());
-//                                bundle.putString("desc", choices.get(0).getDesc());
-//                                intent.putExtras(bundle);
-//                                Log.d(TAG, "transfer good  " + goods_info.getId() + " to " + "ApplyRefundActivity");
-//                                context.startActivity(intent);
-//                                context.finish();
+                                Intent intent = new Intent(context, ApplyRefundActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("id", orderDetailEntity.getId());
+                                bundle.putInt("position", position);
+                                bundle.putString("refund_channel", choices.get(0).getRefund_channel());
+                                bundle.putString("name", choices.get(0).getName());
+                                bundle.putString("desc", choices.get(0).getDesc());
+                                intent.putExtras(bundle);
+                                context.startActivity(intent);
+                                context.finish();
                             }
                         });
                         break;
@@ -309,14 +307,13 @@ public class OrderGoodsListAdapter extends BaseAdapter {
                 switch (refund_state) {
                     case BaseConst.REFUND_STATE_NO_REFUND: {
                         btn.setOnClickListener(v -> {
-                            // TODO: 17/4/27
-//                            Intent intent = new Intent(context, ApplyReturnGoodsActivity.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putInt("id", orderDetailEntity.getId());
-//                            bundle.putInt("position", position);
-//                            intent.putExtras(bundle);
-//                            context.startActivity(intent);
-//                            context.finish();
+                            Intent intent = new Intent(context, ApplyReturnGoodsActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", orderDetailEntity.getId());
+                            bundle.putInt("position", position);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                            context.finish();
                         });
                         break;
                     }

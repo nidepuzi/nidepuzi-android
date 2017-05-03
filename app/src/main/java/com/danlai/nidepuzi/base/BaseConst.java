@@ -48,6 +48,7 @@ public class BaseConst {
 
     //微信
     public static final String WX_APP_ID = "wxda1c561964d173cc";
+    public static final String WX_APP_PAY_ID = "wxa6e8010fa0b31eb3";
     //支付宝
     public static final String ALIPAY_APP_ID = "2017042206893641";
 

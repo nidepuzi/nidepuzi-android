@@ -9,12 +9,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--status bar color-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+        <item name="alertDialogTheme">@style/BaseDialogColor</item>
     </style>
 
-    <style name="Theme.AppCompat.Light.Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
-        <!--修改AlertDialog按钮的颜色-->
+    <style name="BaseDialogColor" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <!-- Normal application theme. -->

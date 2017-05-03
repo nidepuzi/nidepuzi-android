@@ -73,7 +73,7 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img:
-                String title = "找人聊天";
+                String title = "铺子客服";
                 YSFUserInfo ysfUserInfo = new YSFUserInfo();
                 ysfUserInfo.userId = userId;
                 ysfUserInfo.data = "[ " +
@@ -82,7 +82,7 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
                     "{\"key\":\"email\", \"value\":\"" + email + "\"}, " +
                     "{\"key\":\"avatar\", \"value\": \"" + avatar + "\"}]";
                 Unicorn.setUserInfo(ysfUserInfo);
-                ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "你的铺子Android", "Android客户端");
+                ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "Android客户端", "Android客户端");
                 Unicorn.openServiceActivity(mActivity, title, source);
                 break;
         }

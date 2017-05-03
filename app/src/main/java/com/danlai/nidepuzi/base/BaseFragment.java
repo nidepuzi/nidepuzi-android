@@ -104,6 +104,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
         super.setUserVisibleHint(isVisibleToUser);
     }
 
+
     public boolean isSupportHidden() {
         return mIsHidden;
     }

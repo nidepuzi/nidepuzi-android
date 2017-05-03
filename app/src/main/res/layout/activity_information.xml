@@ -199,6 +199,7 @@
                 <include layout="@layout/preference_line"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/birthday_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_desc="1995-10-10"

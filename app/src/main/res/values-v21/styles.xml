@@ -9,10 +9,28 @@
         <item name="android:colorControlActivated">@color/colorAccent</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
         <item name="android:textColorPrimary">@color/color_22</item>
         <item name="android:textColorSecondary">@color/color_66</item>
     </style>
 
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <!--no actionbar and title-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--action bar color-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--status bar color-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="alertDialogTheme">@style/BaseDialogColor</item>
+        <item name="android:datePickerDialogTheme">@style/BaseDialogColor</item>
+    </style>
+
+
+    <style name="BaseDialogColor" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
 
 </resources>

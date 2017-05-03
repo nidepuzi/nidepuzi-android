@@ -8,7 +8,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.danlai.library.utils.JUtils;
-import com.danlai.nidepuzi.base.BaseImageLoader;
+import com.danlai.nidepuzi.base.BaseUnicornImageLoader;
 import com.danlai.nidepuzi.module.ActivityInteractor;
 import com.danlai.nidepuzi.module.AddressInteractor;
 import com.danlai.nidepuzi.module.CartsInteractor;
@@ -48,7 +48,7 @@ public class BaseApp extends MultiDexApplication {
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
         JUtils.initialize(this);
-        Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(), new BaseImageLoader(getInstance()));
+        Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(), new BaseUnicornImageLoader(getInstance()));
         JUtils.setDebug(BuildConfig.DEBUG, "nidepuzi");
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
     }

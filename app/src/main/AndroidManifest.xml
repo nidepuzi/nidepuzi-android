@@ -59,9 +59,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.main.AdvertisementActivity"
-            android:theme="@style/AppTheme.BaseActivity"/>
-        <activity
             android:name=".ui.activity.main.TabActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.BaseActivity">
@@ -221,7 +218,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.NoDisplay"/>
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"/>-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -340,6 +338,14 @@
         <activity
             android:name=".ui.activity.trade.WaitSendAddressActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.trade.ApplyRefundActivity"
+            android:theme="@style/AppTheme.TransparentActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity
+            android:name=".ui.activity.trade.ApplyReturnGoodsActivity"
+            android:theme="@style/AppTheme.TransparentActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <service
             android:name=".service.UpdateService"

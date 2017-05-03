@@ -62,8 +62,7 @@ public class TabActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        // TODO: 17/4/25 暂时隐藏
-//        downLoadAddress();
+        downLoadAddress();
         checkVersion();
     }
 

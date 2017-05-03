@@ -7,17 +7,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.danlai.library.rx.RxCountDown;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
-import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseSubscriberContext;
-import com.danlai.nidepuzi.entity.StartBean;
-import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.util.LoginUtils;
 
@@ -31,11 +27,9 @@ import io.reactivex.disposables.Disposable;
  */
 public class SplashActivity extends AppCompatActivity implements BaseSubscriberContext, View.OnClickListener {
 
-    private String mPicture;
     private CompositeDisposable mCompositeDisposable;
-    private TextView textView;
     private ImageView imageView;
-
+    private View mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +37,9 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ViewUtils.setWindowStatus(this);
-        textView = (TextView) findViewById(R.id.text);
         imageView = ((ImageView) findViewById(R.id.img));
-        textView.setOnClickListener(this);
-        BaseApp.getActivityInteractor(this)
-            .getStartAds(new ServiceResponse<StartBean>(SplashActivity.this) {
-                @Override
-                public void onNext(StartBean startBean) {
-                    mPicture = startBean.getPicture();
-                    if (mPicture != null && !"".equals(mPicture)) {
-                        Glide.with(SplashActivity.this).load(mPicture).downloadOnly(
-                            JUtils.getScreenWidth(), JUtils.getScreenHeightWithStatusBar());
-                    }
-                }
-            });
+        mView = findViewById(R.id.jump);
+        mView.setOnClickListener(this);
         checkPermissionAndJump();
     }
 
@@ -83,23 +66,8 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
     }
 
     private void jumpToAds() {
-        if (JUtils.isNetWorkAvilable() && mPicture != null && !mPicture.equals("")) {
-            Glide.with(this).load(mPicture).into(imageView);
-        } else {
-            Glide.with(this).load(R.drawable.img_desc).into(imageView);
-        }
-        RxCountDown.countdown(4).subscribe(
-            integer -> {
-                if (integer == 0) {
-                    jumpAndFinish();
-                }
-                runOnUiThread(() -> {
-                    if (textView != null) {
-                        textView.setText("跳过  " + integer);
-                        textView.setVisibility(View.VISIBLE);
-                    }
-                });
-            }, e -> jumpAndFinish());
+        Glide.with(this).load(R.drawable.img_desc).into(imageView);
+        mView.setVisibility(View.VISIBLE);
     }
 
     private void jumpAndFinish() {
@@ -147,7 +115,7 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.text:
+            case R.id.jump:
                 jumpAndFinish();
                 break;
         }
