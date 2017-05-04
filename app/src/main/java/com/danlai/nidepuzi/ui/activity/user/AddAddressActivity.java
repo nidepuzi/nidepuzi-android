@@ -64,12 +64,8 @@ public class AddAddressActivity extends BaseMVVMActivity<ActivityAddAddressBindi
 
     @Override
     protected void initViews() {
-        if (needLevel == 2) {
-            b.idLayout.setVisibility(View.VISIBLE);
+        if (needLevel == 3) {
             b.idLine.setVisibility(View.VISIBLE);
-        } else if (needLevel == 3) {
-            b.idLine.setVisibility(View.VISIBLE);
-            b.idLayout.setVisibility(View.VISIBLE);
             b.idCardLayout.setVisibility(View.VISIBLE);
         }
     }

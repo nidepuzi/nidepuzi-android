@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.danlai.library.widget.DividerItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.AddressAdapter;
@@ -41,7 +40,6 @@ public class AddressActivity extends BaseMVVMActivity<ActivityAddressBinding>
             .getAddressList(new ServiceResponse<List<AddressBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<AddressBean> list) {
-                    super.onNext(list);
                     if (list != null) {
                         adapter.updateWithClear(list);
                     }
@@ -58,7 +56,6 @@ public class AddressActivity extends BaseMVVMActivity<ActivityAddressBinding>
     protected void initViews() {
         EventBus.getDefault().register(this);
         b.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        b.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         adapter = new AddressAdapter(this);
         b.recyclerView.setAdapter(adapter);
     }

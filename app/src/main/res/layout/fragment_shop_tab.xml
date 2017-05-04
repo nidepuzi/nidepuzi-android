@@ -583,6 +583,7 @@
                     <include layout="@layout/shop_line"/>
 
                     <LinearLayout
+                        android:id="@+id/layout_all_refund"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -598,7 +599,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="已完成"
+                            android:text="退换货"
                             android:textColor="@color/color_44"
                             android:textSize="14sp"/>
 

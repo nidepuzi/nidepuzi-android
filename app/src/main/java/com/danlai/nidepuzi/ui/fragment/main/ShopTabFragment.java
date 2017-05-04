@@ -16,6 +16,7 @@ import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
+import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
@@ -57,6 +58,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutAllOrder.setOnClickListener(this);
         b.layoutWaitPay.setOnClickListener(this);
         b.layoutWaitSend.setOnClickListener(this);
+        b.layoutAllRefund.setOnClickListener(this);
     }
 
     @Override
@@ -128,6 +130,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     public void onClick(View v) {
         Bundle bundle = new Bundle();
         switch (v.getId()) {
+            case R.id.layout_all_refund:
+                readyGo(AllRefundActivity.class);
+                break;
             case R.id.img_message:
                 readyGo(MessageActivity.class);
                 break;

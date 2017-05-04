@@ -38,7 +38,6 @@ public class AllCouponActivity extends BaseMVVMActivity<ActivityAllCouponBinding
     protected void initData() {
         ArrayList<BaseFragment> fragments = new ArrayList<>();
         fragments.add(UserCouponFragment.newInstance(BaseConst.UNUSED_COUPON,"未使用"));
-        fragments.add(UserCouponFragment.newInstance(BaseConst.GOOD_COUPON,"精品券"));
         fragments.add(UserCouponFragment.newInstance(BaseConst.PAST_COUPON,"已过期"));
         fragments.add(UserCouponFragment.newInstance(BaseConst.USED_COUPON,"已使用"));
         BaseTabAdapter mAdapter = new BaseTabAdapter(getSupportFragmentManager(), fragments);

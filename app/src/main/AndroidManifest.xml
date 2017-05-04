@@ -339,6 +339,9 @@
             android:name=".ui.activity.trade.WaitSendAddressActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
+            android:name=".ui.activity.trade.AllRefundActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
             android:name=".ui.activity.trade.ApplyRefundActivity"
             android:theme="@style/AppTheme.TransparentActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
@@ -358,6 +361,16 @@
                 <action android:name="action.retry.download"/>
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.danlai.nidepuzi.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
 
     </application>
 

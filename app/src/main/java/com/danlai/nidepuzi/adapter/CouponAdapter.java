@@ -63,7 +63,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CouponEntity bean = mList.get(position);
-        if (mCouponTyp == BaseConst.UNUSED_COUPON || mCouponTyp == BaseConst.GOOD_COUPON) {
+        if (mCouponTyp == BaseConst.UNUSED_COUPON) {
             holder.mCouponValue.setTextColor(Color.parseColor("#F05050"));
             holder.rl.setBackgroundResource(R.drawable.bg_img_coupon);
         } else if (mCouponTyp == BaseConst.PAST_COUPON) {

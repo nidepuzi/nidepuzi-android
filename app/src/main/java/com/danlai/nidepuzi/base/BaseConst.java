@@ -29,9 +29,8 @@ public class BaseConst {
 
     //优惠券状态
     public static final int UNUSED_COUPON = 0;
-    public static final int GOOD_COUPON = 1;
-    public static final int PAST_COUPON = 2;
-    public static final int USED_COUPON = 3;
+    public static final int PAST_COUPON = 1;
+    public static final int USED_COUPON = 2;
 
     //优惠券是否可用
     public static final int COUPON_USABLE = 0;
@@ -41,10 +40,6 @@ public class BaseConst {
     public static final int ALL_ORDER = 0;
     public static final int WAIT_PAY = 1;
     public static final int WAIT_SEND = 2;
-
-    //分类cid
-    public static final String TYPE_CHILD = "1";
-    public static final String TYPE_LADY = "2";
 
     //微信
     public static final String WX_APP_ID = "wxda1c561964d173cc";

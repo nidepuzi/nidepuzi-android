@@ -34,7 +34,6 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
     private String next;
     private CouponAdapter mCouponAdapter;
     private int status;
-    private int couponType;
     private int type;
 
     public static UserCouponFragment newInstance(int type, String title) {
@@ -66,9 +65,6 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
             status = 3;
         } else if (type == BaseConst.USED_COUPON) {
             status = 1;
-        } else if (type == BaseConst.GOOD_COUPON) {
-            status = 0;
-            couponType = 8;
         }
         b.recyclerView.setLayoutManager(new CustomLinearLayoutManager(mActivity));
         mCouponAdapter = new CouponAdapter(mActivity, type);
@@ -102,7 +98,7 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
     public void refreshData(boolean clear) {
         b.emptyLayout.setVisibility(View.GONE);
         BaseApp.getUserInteractor(mActivity)
-            .getCouponPaging(status, couponType, page)
+            .getCouponPaging(status, page)
             .subscribe(new ServiceResponse<CouponPagingBean>(mActivity) {
                 @Override
                 public void onNext(CouponPagingBean bean) {

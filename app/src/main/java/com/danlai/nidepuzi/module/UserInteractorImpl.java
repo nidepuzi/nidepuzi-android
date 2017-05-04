@@ -65,12 +65,8 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public Observable<CouponPagingBean> getCouponPaging(int status, int coupon_type, int page) {
-        if (coupon_type == 0) {
-            return service.getCouponPaging(status, 1, page)
-                .compose(new DefaultTransform<>());
-        }
-        return service.getCouponPaging(status, coupon_type, 1, page)
+    public Observable<CouponPagingBean> getCouponPaging(int status, int page) {
+        return service.getCouponPaging(status, 1, page)
             .compose(new DefaultTransform<>());
     }
 

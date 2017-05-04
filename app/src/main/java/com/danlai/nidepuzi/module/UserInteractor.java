@@ -33,7 +33,7 @@ public interface UserInteractor {
 
     void getCoinHisList(int page, ServiceResponse<CoinHistoryListBean> response);
 
-    Observable<CouponPagingBean> getCouponPaging(int status, int coupon_type, int page);
+    Observable<CouponPagingBean> getCouponPaging(int status, int page);
 
     void getCouponSelectEntity(String cart_ids, String type, int page, ServiceResponse<CouponPagingBean> response);
 

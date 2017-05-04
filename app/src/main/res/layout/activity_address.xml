@@ -10,13 +10,12 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="地址管理"/>
+            app:title="收货地址管理"/>
 
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -24,14 +23,13 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@color/bg_grey"/>
 
             <Button
                 android:id="@+id/btn"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                style="@style/CommonButton"
-                android:text="添加地址"/>
+                style="@style/BottomButton"
+                android:text="添加新地址"/>
         </LinearLayout>
 
     </LinearLayout>

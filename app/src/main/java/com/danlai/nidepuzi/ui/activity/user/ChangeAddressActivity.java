@@ -85,10 +85,8 @@ public class ChangeAddressActivity extends BaseMVVMActivity<ActivityChangeAddres
 
     @Override
     protected void initViews() {
-        if (needLevel == 2) {
-            b.idLayout.setVisibility(View.VISIBLE);
-        } else if (needLevel == 3) {
-            b.idLayout.setVisibility(View.VISIBLE);
+        if (needLevel == 3) {
+            b.idLine.setVisibility(View.VISIBLE);
             b.idCardLayout.setVisibility(View.VISIBLE);
         }
         if (isDefaultX) {
