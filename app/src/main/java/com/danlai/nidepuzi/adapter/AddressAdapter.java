@@ -93,26 +93,33 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
             .show());
         if (bean.isDefaultX()) {
-            holder.ivDeafult.setImageResource(R.drawable.icon_address_select);
-            holder.ivDeafult.setOnClickListener(null);
+            holder.ivDefault.setImageResource(R.drawable.icon_address_select);
+            holder.layoutDefault.setOnClickListener(null);
         } else {
-            holder.ivDeafult.setImageResource(R.drawable.icon_address_un);
-            holder.ivDeafult.setOnClickListener(v ->
-                BaseApp.getAddressInteractor(context)
-                    .update_addressWithId(bean.getId() + "", bean.getReceiver_state(), bean.getReceiver_city(),
-                        bean.getReceiver_district(), bean.getReceiver_address(), bean.getReceiver_name(),
-                        bean.getReceiver_mobile(), "true", bean.getIdentification_no(), bean.getIdcard().getFace(),
-                        bean.getIdcard().getBack(), new ServiceResponse<AddressResultBean>(context) {
-                            @Override
-                            public void onNext(AddressResultBean addressResultBean) {
-                                EventBus.getDefault().post(new AddressChangeEvent());
-                                if (addressResultBean != null) {
-                                    if (addressResultBean.getCode() == 0) {
-                                        JUtils.Toast("设置成功");
+            holder.ivDefault.setImageResource(R.drawable.icon_address_un);
+            holder.layoutDefault.setOnClickListener(v -> new AlertDialog.Builder(context)
+                .setTitle("提示")
+                .setMessage("是否设置为默认地址?")
+                .setPositiveButton("确定", (dialog, which) -> {
+                    BaseApp.getAddressInteractor(context)
+                        .update_addressWithId(bean.getId() + "", bean.getReceiver_state(), bean.getReceiver_city(),
+                            bean.getReceiver_district(), bean.getReceiver_address(), bean.getReceiver_name(),
+                            bean.getReceiver_mobile(), "true", bean.getIdentification_no(), bean.getIdcard().getFace(),
+                            bean.getIdcard().getBack(), new ServiceResponse<AddressResultBean>(context) {
+                                @Override
+                                public void onNext(AddressResultBean addressResultBean) {
+                                    EventBus.getDefault().post(new AddressChangeEvent());
+                                    if (addressResultBean != null) {
+                                        if (addressResultBean.getCode() == 0) {
+                                            JUtils.Toast("设置成功");
+                                        }
                                     }
                                 }
-                            }
-                        }));
+                            });
+                    dialog.dismiss();
+                })
+                .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                .show());
         }
     }
 
@@ -162,7 +169,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         @Bind(R.id.layout_delete)
         LinearLayout layoutDelete;
         @Bind(R.id.iv_default)
-        ImageView ivDeafult;
+        ImageView ivDefault;
 
         public ViewHolder(View itemView) {
             super(itemView);

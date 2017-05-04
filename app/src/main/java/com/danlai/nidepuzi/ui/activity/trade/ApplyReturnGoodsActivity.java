@@ -119,7 +119,7 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
     }
 
     @Override
-    protected void initViews() {
+    protected void initData() {
         BaseApp.getTradeInteractor(this)
             .getOrderDetail(id, new ServiceResponse<OrderDetailBean>(mBaseActivity) {
                 @Override
@@ -133,8 +133,6 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
                     JUtils.Toast("加载失败");
                 }
             });
-
-
     }
 
     private void fillDataIntoView() {
@@ -218,18 +216,12 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
                 apply_fee, desc, proof_pic, new ServiceResponse<RefundMsgBean>(mBaseActivity) {
                     @Override
                     public void onNext(RefundMsgBean resp) {
-                        JUtils.Toast(resp.getInfo());
-                        if (resp.getCode() == 0) {
-                            AlertDialog dialog = new AlertDialog.Builder(ApplyReturnGoodsActivity.this)
-                                .setMessage("退货请求提交成功，客服会在24小时完成审核，您可以通过退换货订单详情页面查询进展，" +
-                                    "审核通过后您需要在退换货界面填写退货快递单号，方便我们为你快速处理退款")
-                                .setCancelable(false)
-                                .setPositiveButton("确认", (dialog1, which) -> ApplyReturnGoodsActivity.this.finish())
-                                .create();
-                            dialog.show();
-                        } else {
-                            finish();
-                        }
+                        new AlertDialog.Builder(ApplyReturnGoodsActivity.this)
+                            .setMessage(resp.getInfo())
+                            .setCancelable(false)
+                            .setPositiveButton("确认", (dialog1, which) -> ApplyReturnGoodsActivity.this.finish())
+                            .create()
+                            .show();
                     }
                 });
     }

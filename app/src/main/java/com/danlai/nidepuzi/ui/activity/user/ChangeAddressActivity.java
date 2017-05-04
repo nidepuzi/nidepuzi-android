@@ -130,16 +130,24 @@ public class ChangeAddressActivity extends BaseMVVMActivity<ActivityChangeAddres
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_delete:
-                BaseApp.getAddressInteractor(this)
-                    .delete_address(id, new ServiceResponse<AddressResultBean>(mBaseActivity) {
-                        @Override
-                        public void onNext(AddressResultBean addressResultBean) {
-                            EventBus.getDefault().post(new AddressChangeEvent());
-                            if (addressResultBean != null && addressResultBean.isRet()) {
-                                finish();
-                            }
-                        }
-                    });
+                new AlertDialog.Builder(mBaseActivity)
+                    .setTitle("删除地址")
+                    .setMessage("您确定要删除吗?")
+                    .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton("确认", (dialog, which) -> {
+                        dialog.dismiss();
+                        BaseApp.getAddressInteractor(mBaseActivity)
+                            .delete_address(id, new ServiceResponse<AddressResultBean>(mBaseActivity) {
+                                @Override
+                                public void onNext(AddressResultBean addressResultBean) {
+                                    EventBus.getDefault().post(new AddressChangeEvent());
+                                    if (addressResultBean != null && addressResultBean.isRet()) {
+                                        finish();
+                                    }
+                                }
+                            });
+                    })
+                    .show();
                 break;
             case R.id.address:
                 InputMethodManager imm =

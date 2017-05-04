@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
@@ -69,7 +68,7 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
     }
 
     @Override
-    protected void initViews() {
+    protected void initData() {
         showIndeterminateProgressDialog(false);
         BaseApp.getTradeInteractor(this)
             .getOrderDetail(id, new ServiceResponse<OrderDetailBean>(mBaseActivity) {
@@ -81,6 +80,7 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
 
                 @Override
                 public void onError(Throwable e) {
+                    hideIndeterminateProgressDialog();
                     JUtils.Toast("加载失败");
                 }
             });
@@ -90,11 +90,10 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
         if (goods_info != null) {
             fillDataToView(goods_info);
         } else {
-            Intent intent = new Intent(ApplyRefundActivity.this, AllOrderActivity.class);
+            hideIndeterminateProgressDialog();
             Bundle bundle = new Bundle();
             bundle.putInt("fragment", 1);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            readyGo(AllOrderActivity.class, bundle);
         }
     }
 
@@ -173,9 +172,11 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
                 apply_fee, desc, proof_pic, refund_channel, new ServiceResponse<RefundMsgBean>(mBaseActivity) {
                     @Override
                     public void onNext(RefundMsgBean resp) {
-                        JUtils.Toast(resp.getInfo());
+                        new AlertDialog.Builder(mBaseActivity)
+                            .setMessage(resp.getInfo())
+                            .setPositiveButton("确定", (dialog, which) -> dialog.dismiss())
+                            .show();
                         hideIndeterminateProgressDialog();
-                        finish();
                     }
 
                     @Override

@@ -10,20 +10,7 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="编辑地址">
-
-            <TextView
-                android:id="@+id/tv_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:text="删除"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
-
-        </com.danlai.library.widget.titleview.BaseTitleView>
+            app:title="编辑地址"/>
 
         <LinearLayout
             android:id="@+id/layout"
@@ -280,6 +267,21 @@
                     android:shadowColor="@color/colorAccent"/>
 
             </LinearLayout>
+
+            <include layout="@layout/common_interval"/>
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="删除"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"/>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
