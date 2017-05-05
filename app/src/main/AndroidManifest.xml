@@ -349,6 +349,9 @@
             android:name=".ui.activity.trade.ApplyReturnGoodsActivity"
             android:theme="@style/AppTheme.TransparentActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity
+            android:name=".ui.activity.shop.FansActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service
             android:name=".service.UpdateService"

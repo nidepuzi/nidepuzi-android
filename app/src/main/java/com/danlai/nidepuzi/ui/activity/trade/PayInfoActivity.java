@@ -50,10 +50,8 @@ import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author wisdom
@@ -260,9 +258,9 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                             code = mLogisticCompanys.get(0).getId();
                         }
                         post_fee = bean.getPostFee();
-                        b.tvWallet.setText("¥" + new DecimalFormat("0.00").format(bean.getBudget_cash()));
-                        b.tvPost.setText("¥" + new DecimalFormat("0.00").format(post_fee));
-                        b.tvPrice.setText("¥" + new DecimalFormat("0.00").format(bean.getTotalFee()));
+                        b.tvWallet.setText("¥" + JUtils.formatDouble(bean.getBudget_cash()));
+                        b.tvPost.setText("¥" + JUtils.formatDouble(post_fee));
+                        b.tvPrice.setText("¥" + JUtils.formatDouble(bean.getTotalFee()));
                         payment = bean.getTotalFee() + bean.getPostFee() - bean.getDiscountFee();
                         total_fee = bean.getTotalFee();
                         discount_fee = bean.getDiscountFee();
@@ -281,7 +279,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                                 switch (payExtras.get(i).getPid()) {
                                     case 1:
                                         appCut = payExtras.get(i).getValue();
-                                        b.tvAppDiscount.setText("¥" + new DecimalFormat("0.00").format(appCut));
+                                        b.tvAppDiscount.setText("¥" + JUtils.formatDouble(appCut));
                                         break;
                                     case 2:
                                         if (payExtras.get(i).getUseCouponAllowed() == 1) {
@@ -382,15 +380,13 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                 }
                 break;
             case R.id.coupon_layout:
-                Intent intent = new Intent(PayInfoActivity.this, SelectCouponActivity.class);
                 Bundle bundle = new Bundle();
                 if ((coupon_id != null) && (!coupon_id.isEmpty())) {
                     bundle.putString("coupon_id", coupon_id);
                 }
                 bundle.putBoolean("couponFlag", mCouponFlag);
                 bundle.putString("cart_ids", mCartIds);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, REQUEST_CODE_COUPON);
+                readyGoForResult(SelectCouponActivity.class, REQUEST_CODE_COUPON, bundle);
                 break;
             case R.id.confirm:
                 if (personalInfoLevel < needLevel) {
@@ -470,11 +466,9 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                 if (result.equals("cancel")) {
                     JUtils.Toast("你已取消支付!");
                     if (order_id != -1) {
-                        Intent intent = new Intent(this, OrderDetailActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putInt("orderinfo", order_id);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        bundle.putInt("order_id", order_id);
+                        readyGo(OrderDetailActivity.class,bundle);
                     }
                     finish();
                 } else if (result.equals("success")) {
@@ -640,22 +634,17 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                     @Override
                     public void onError(Throwable e) {
                         if (order_id != -1) {
-                            Intent intent = new Intent(PayInfoActivity.this, OrderDetailActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putInt("orderinfo", order_id);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
+                            bundle.putInt("order_id", order_id);
+                            readyGo(OrderDetailActivity.class, bundle);
                         }
                         finish();
                     }
                 });
         } else {
-            Intent intent = new Intent(this, AllOrderActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt("fragment", 3);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            finish();
+            readyGoThenKill(AllOrderActivity.class, bundle);
         }
     }
 

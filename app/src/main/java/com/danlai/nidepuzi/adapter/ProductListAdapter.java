@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.ProductListBean;
@@ -16,7 +17,6 @@ import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhy.autolayout.utils.AutoUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,8 +77,8 @@ public class ProductListAdapter extends XRecyclerView.Adapter<ProductListAdapter
         }
         ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.image, resultsBean.getHead_img());
         holder.name.setText(resultsBean.getName());
-        holder.agentPrice.setText("¥" + new DecimalFormat("0.00").format(resultsBean.getLowest_agent_price()));
-        holder.stdSalePrice.setText("/¥" + new DecimalFormat("0.00").format(resultsBean.getLowest_std_sale_price()));
+        holder.agentPrice.setText("¥" + JUtils.formatDouble(resultsBean.getLowest_agent_price()));
+        holder.stdSalePrice.setText("/¥" + JUtils.formatDouble(resultsBean.getLowest_std_sale_price()));
         holder.card.setOnClickListener(v -> {
             int modelId = resultsBean.getId();
             Intent intent = new Intent(context, ProductDetailActivity.class);

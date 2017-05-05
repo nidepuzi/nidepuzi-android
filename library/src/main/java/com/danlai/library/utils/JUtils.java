@@ -32,6 +32,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -391,6 +392,7 @@ public class JUtils {
 
     /**
      * 获取当前进程名
+     *
      * @param context
      * @return 进程名
      */
@@ -420,6 +422,10 @@ public class JUtils {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static String formatDouble(double d) {
+        return new DecimalFormat("0.00").format(d);
     }
 
 }

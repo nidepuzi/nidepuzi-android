@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.CouponEntity;
 import com.zhy.autolayout.utils.AutoUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,8 +81,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             holder.rl.setBackgroundResource(R.drawable.bg_img_dcoupon);
         }
         double coupon_value = bean.getCoupon_value();
-        DecimalFormat df = new DecimalFormat("0.00");
-        double format = Double.parseDouble(df.format(coupon_value));
+        double format = Double.parseDouble(JUtils.formatDouble(coupon_value));
         if (Math.round(format * 100) % 100 == 0) {
             holder.mCouponValue.setText("￥" + Math.round(format * 100) / 100);
         } else {

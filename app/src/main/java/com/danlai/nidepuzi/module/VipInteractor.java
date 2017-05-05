@@ -5,7 +5,7 @@ import com.danlai.nidepuzi.entity.ChooseListBean;
 import com.danlai.nidepuzi.entity.MMCarryBean;
 import com.danlai.nidepuzi.entity.MMShoppingBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
-import com.danlai.nidepuzi.entity.MamaFansBean;
+import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.MamaSelfListBean;
 import com.danlai.nidepuzi.entity.MamaUrl;
@@ -28,7 +28,7 @@ import io.reactivex.Observable;
 
 public interface VipInteractor {
 
-    void getMamaFans(int page, ServiceResponse<MamaFansBean> response);
+    void getFans(int page, ServiceResponse<FansBean> response);
 
     void getMamaVisitor(int page, ServiceResponse<MMVisitorsBean> response);
 

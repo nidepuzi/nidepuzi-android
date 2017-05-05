@@ -15,6 +15,7 @@ import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
@@ -59,6 +60,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutWaitPay.setOnClickListener(this);
         b.layoutWaitSend.setOnClickListener(this);
         b.layoutAllRefund.setOnClickListener(this);
+        b.layoutFans.setOnClickListener(this);
     }
 
     @Override
@@ -169,6 +171,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
             case R.id.layout_wait_send:
                 bundle.putInt("fragment", 3);
                 readyGo(AllOrderActivity.class, bundle);
+                break;
+            case R.id.layout_fans:
+                readyGo(FansActivity.class);
                 break;
         }
 

@@ -6,16 +6,17 @@ import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
 import com.danlai.library.utils.JUtils;
-import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.adapter.AllOrdersAdapter;
+import com.danlai.nidepuzi.adapter.AllOrderAdapter;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.FragmentOrderListBinding;
 import com.danlai.nidepuzi.entity.AllOrdersBean;
+import com.danlai.nidepuzi.entity.event.OrderShowEvent;
 import com.danlai.nidepuzi.entity.event.RefreshOrderListEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
+import com.danlai.nidepuzi.util.OrderHelper;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -29,7 +30,7 @@ import java.util.List;
 public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> implements View.OnClickListener {
 
     private int type;
-    private AllOrdersAdapter adapter;
+    private AllOrderAdapter adapter;
     private int page;
     private String next;
 
@@ -76,10 +77,10 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
     protected void initViews() {
         EventBus.getDefault().register(this);
         b.xrv.setLayoutManager(new CustomLinearLayoutManager(mActivity));
+        b.xrv.setPullRefreshEnabled(true);
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
-        b.xrv.addItemDecoration(new SpaceItemDecoration(0, 0, 0, 20));
-        adapter = new AllOrdersAdapter(mActivity);
+        adapter = new AllOrderAdapter(mActivity);
         b.xrv.setAdapter(adapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -92,7 +93,6 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
             @Override
             public void onLoadMore() {
                 if (next != null && !"".equals(next)) {
-                    page++;
                     loadMoreData(false);
                 } else {
                     JUtils.Toast("没有更多了!");
@@ -121,10 +121,11 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
                 public void onNext(AllOrdersBean allOrdersBean) {
                     List<AllOrdersBean.ResultsEntity> results = allOrdersBean.getResults();
                     if (results != null && results.size() > 0) {
+                        List<Object> objects = OrderHelper.translateOrderBean(results);
                         if (clear) {
-                            adapter.updateWithClear(results);
+                            adapter.updateWithClear(objects);
                         } else {
-                            adapter.update(results);
+                            adapter.update(objects);
                         }
                     } else {
                         b.emptyLayout.setVisibility(View.VISIBLE);
@@ -156,6 +157,11 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
     public void reLoadData(RefreshOrderListEvent event) {
         b.xrv.setLoadingMoreEnabled(true);
         initData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setOrderShow(OrderShowEvent event) {
+        adapter.setShow(event.isShow());
     }
 
     @Override

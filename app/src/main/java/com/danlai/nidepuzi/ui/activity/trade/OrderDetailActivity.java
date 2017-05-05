@@ -43,7 +43,6 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -78,7 +77,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
 
     @Override
     protected void getBundleExtras(Bundle extras) {
-        order_id = extras.getInt("orderinfo");
+        order_id = extras.getInt("order_id");
     }
 
     @Override
@@ -226,7 +225,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         b.txOrderDiscountfee.setText("-¥" + orderDetailBean.getDiscount_fee());
         b.txOrderPostfee.setText("¥" + orderDetailBean.getPost_fee());
         b.txOrderPayment.setText("¥" + orderDetailBean.getPay_cash());
-        String format = new DecimalFormat("0.00").format(orderDetailBean.getPayment() - orderDetailBean.getPay_cash());
+        String format = JUtils.formatDouble(orderDetailBean.getPayment() - orderDetailBean.getPay_cash());
         if (format.startsWith(".")) {
             b.txOrderPayment2.setText("¥0" + format);
         } else {
@@ -511,17 +510,14 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         if (listAdapter == null) {
             return;
         }
-
         int totalHeight = 0;
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
         }
-
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight
-            + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
 

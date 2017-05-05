@@ -19,8 +19,6 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
 
-import java.text.DecimalFormat;
-
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -41,7 +39,7 @@ public class ShareUtils {
         dialog.setCancelable(true);
         TextView price = (TextView) view.findViewById(R.id.price);
         TextView desc = (TextView) view.findViewById(R.id.desc);
-        String min = new DecimalFormat("0.00").format(shareModel.getProfit().getMin());
+        String min = JUtils.formatDouble(shareModel.getProfit().getMin());
         String priceStr = "赚" + min;
         price.setText(priceStr);
         String descStr = "只要你的好友通过你的链接购买此商品,你就能赚到至少" + min + "元的利润哦~";

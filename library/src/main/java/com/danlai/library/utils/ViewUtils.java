@@ -47,8 +47,6 @@ import com.danlai.library.widget.glidemoudle.GlideRoundTransform;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -217,7 +215,6 @@ public final class ViewUtils {
         if (null == picPath || "".equals(picPath)) return;
         Glide.with(context)
             .load(picPath)
-            .thumbnail(0.1f)
             .diskCacheStrategy(DiskCacheStrategy.RESULT)
             .centerCrop()
             .into(img);
@@ -228,7 +225,6 @@ public final class ViewUtils {
         if (null == picPath || "".equals(picPath)) return;
         Glide.with(context)
             .load(picPath)
-            .thumbnail(0.1f)
             .diskCacheStrategy(DiskCacheStrategy.RESULT)
             .centerCrop()
             .transform(new GlideRoundTransform(context, radius))
@@ -249,36 +245,16 @@ public final class ViewUtils {
         if (null == picPath || "".equals(picPath)) {
             Glide.with(context)
                 .load(R.drawable.place_holder)
-                .thumbnail(0.1f)
                 .centerCrop()
                 .into(img);
             return;
         }
-        String head_img;
-        Pattern p = Pattern.compile("(?<=//|)((\\w)+\\.)+\\w+");
-        Matcher m = p.matcher(picPath);
-        if (m.find()) {
-            String group = m.group();
-            String[] temp = picPath.split(group + "/");
-            if (temp.length > 1) {
-                head_img = "http://" + group + "/" + temp[1] +
-                    "?imageMogr2/format/jpg/size-limit/30k/thumbnail/289/quality/80";
-                Glide.with(context)
-                    .load(head_img)
-                    .thumbnail(0.1f)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .centerCrop()
-                    .placeholder(R.drawable.place_holder)
-                    .into(img);
-            }
-        } else {
-            Glide.with(context)
-                .load(picPath)
-                .thumbnail(0.1f)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .centerCrop()
-                .into(img);
-        }
+        Glide.with(context)
+            .load(picPath + "?imageMogr2/format/jpg/size-limit/30k/thumbnail/289/quality/80")
+            .diskCacheStrategy(DiskCacheStrategy.RESULT)
+            .centerCrop()
+            .placeholder(R.drawable.place_holder)
+            .into(img);
     }
 
     public static LayoutParams getLayoutParams(Bitmap bitmap, int screenWidth) {

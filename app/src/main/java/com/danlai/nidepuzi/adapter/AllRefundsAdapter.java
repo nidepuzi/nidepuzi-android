@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.AllRefundsBean;
 import com.danlai.nidepuzi.ui.activity.trade.RefundDetailActivity;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,9 +80,9 @@ public class AllRefundsAdapter extends RecyclerView.Adapter<AllRefundsAdapter.Vi
         ViewUtils.loadImgToImgViewWithPlaceholder(context,holder.good,entity.getPic_path());
         holder.name.setText(entity.getTitle());
         holder.size.setText("尺寸:" + entity.getSku_name());
-        holder.payment.setText("交易金额:" + new DecimalFormat("0.00").format(entity.getPayment()) +
+        holder.payment.setText("交易金额:" + JUtils.formatDouble(entity.getPayment()) +
             "x" + entity.getRefund_num());
-        holder.refund.setText("退款金额:" + new DecimalFormat("0.00").format(entity.getRefund_fee()) +
+        holder.refund.setText("退款金额:" + JUtils.formatDouble(entity.getRefund_fee()) +
             "x" + entity.getRefund_num());
         holder.layout.setOnClickListener(v -> {
             Intent intent = new Intent(context, RefundDetailActivity.class);

@@ -6,7 +6,7 @@ import com.danlai.nidepuzi.entity.ChooseListBean;
 import com.danlai.nidepuzi.entity.MMCarryBean;
 import com.danlai.nidepuzi.entity.MMShoppingBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
-import com.danlai.nidepuzi.entity.MamaFansBean;
+import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.MamaSelfListBean;
 import com.danlai.nidepuzi.entity.MamaUrl;
@@ -39,8 +39,8 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
-    public void getMamaFans(int page, ServiceResponse<MamaFansBean> response) {
-        service.getMamaFans(page)
+    public void getFans(int page, ServiceResponse<FansBean> response) {
+        service.getFans(page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

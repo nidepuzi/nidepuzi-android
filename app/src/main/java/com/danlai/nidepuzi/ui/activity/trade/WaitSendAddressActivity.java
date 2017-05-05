@@ -45,7 +45,6 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
     private String receiver_name;
     private String receiver_mobile;
     private String referal_trade_id;
-    private String idNo;
     private County county;
     private City city;
     private Province province;
@@ -71,7 +70,6 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
         b.mobile.setText(receiver_mobile);
         b.address.setText(city_string);
         b.clearAddress.setText(clearaddressa);
-        b.idNum.setText(idNo);
     }
 
     @Override
@@ -90,17 +88,11 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
         receiver_district = extras.getString("receiver_district");
         id = extras.getString("address_id");
         referal_trade_id = extras.getString("referal_trade_id");
-        idNo = extras.getString("idNo");
     }
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_change_address;
-    }
-
-    @Override
-    protected void initViews() {
-        b.rlDefault.setVisibility(View.GONE);
     }
 
     @Override
@@ -121,7 +113,6 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
                 receiver_name = b.name.getText().toString().trim();
                 receiver_mobile = b.mobile.getText().toString().trim();
                 clearaddressa = b.clearAddress.getText().toString().trim();
-                idNo = b.idNum.getText().toString().trim().toUpperCase();
                 if (b.addressLayout.getVisibility() == View.VISIBLE) {
                     receiver_state = b.etAddress1.getText().toString().trim();
                     receiver_city = b.etAddress2.getText().toString().trim();

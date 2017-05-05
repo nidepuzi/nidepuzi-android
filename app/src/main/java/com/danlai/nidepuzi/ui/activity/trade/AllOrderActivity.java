@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
 import android.support.design.widget.TabLayout;
+import android.view.View;
 
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.BaseTabAdapter;
@@ -8,7 +9,10 @@ import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityAllOrderBinding;
+import com.danlai.nidepuzi.entity.event.OrderShowEvent;
 import com.danlai.nidepuzi.ui.fragment.trade.OrderListFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +21,18 @@ import java.util.List;
  * @author wisdom
  * @date 17/4/7
  */
-public class AllOrderActivity extends BaseMVVMActivity<ActivityAllOrderBinding> {
+public class AllOrderActivity extends BaseMVVMActivity<ActivityAllOrderBinding> implements View.OnClickListener {
     List<BaseFragment> fragments;
+    private boolean isShow = false;
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_all_order;
+    }
+
+    @Override
+    protected void setListener() {
+        b.layoutEye.setOnClickListener(this);
     }
 
     @Override
@@ -32,6 +42,7 @@ public class AllOrderActivity extends BaseMVVMActivity<ActivityAllOrderBinding> 
 
     @Override
     protected void initData() {
+        isShow = false;
         initFragment();
         initTabLayout();
         switch_fragment();
@@ -47,7 +58,7 @@ public class AllOrderActivity extends BaseMVVMActivity<ActivityAllOrderBinding> 
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        fragments.add(OrderListFragment.newInstance(BaseConst.ALL_ORDER, "所有订单"));
+        fragments.add(OrderListFragment.newInstance(BaseConst.ALL_ORDER, "全部订单"));
         fragments.add(OrderListFragment.newInstance(BaseConst.WAIT_PAY, "待付款"));
         fragments.add(OrderListFragment.newInstance(BaseConst.WAIT_SEND, "待收货"));
     }
@@ -63,6 +74,23 @@ public class AllOrderActivity extends BaseMVVMActivity<ActivityAllOrderBinding> 
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.layout_eye:
+                if (isShow) {
+                    EventBus.getDefault().post(new OrderShowEvent(false));
+                    isShow = false;
+                    b.ivEye.setImageResource(R.drawable.icon_eye_close);
+                } else {
+                    EventBus.getDefault().post(new OrderShowEvent(true));
+                    isShow = true;
+                    b.ivEye.setImageResource(R.drawable.icon_eye_open);
+                }
+                break;
         }
     }
 }

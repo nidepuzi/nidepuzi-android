@@ -6,7 +6,7 @@ import com.danlai.nidepuzi.entity.ChooseListBean;
 import com.danlai.nidepuzi.entity.MMCarryBean;
 import com.danlai.nidepuzi.entity.MMShoppingBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
-import com.danlai.nidepuzi.entity.MamaFansBean;
+import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.MamaSelfListBean;
 import com.danlai.nidepuzi.entity.MamaUrl;
@@ -35,7 +35,7 @@ public interface MamaService {
 
     //获取粉丝列表
     @GET("/rest/v2/mama/fans")
-    Observable<MamaFansBean> getMamaFans(
+    Observable<FansBean> getFans(
         @Query("page") int page);
 
     //获取访客列表

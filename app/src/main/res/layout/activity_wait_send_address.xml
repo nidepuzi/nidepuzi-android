@@ -10,20 +10,7 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="修改地址">
-
-            <TextView
-                android:id="@+id/tv_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:text="删除"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
-
-        </com.danlai.library.widget.titleview.BaseTitleView>
+            app:title="修改地址"/>
 
         <LinearLayout
             android:id="@+id/layout"
@@ -31,100 +18,74 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/common_interval"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
+                android:layout_height="45dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/white"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="12"
-                    android:padding="8dp"
-                    android:text="收货人"
-                    android:textSize="14dp"/>
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
                     android:background="@null"
-                    android:hint="请输入收货人姓名"
+                    android:hint="收件人姓名"
                     android:maxLength="20"
-                    android:padding="8dp"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="14dp"/>
 
             </LinearLayout>
 
-            <include layout="@layout/common_gap"/>
+            <include layout="@layout/preference_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
+                android:layout_height="45dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="手机号"
-                    android:textSize="14dp"/>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <EditText
                     android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
                     android:background="@null"
-                    android:hint="请输入收货人手机号"
+                    android:hint="手机号"
                     android:inputType="phone"
                     android:maxLength="11"
-                    android:padding="8dp"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="14dp"/>
 
             </LinearLayout>
 
-            <include layout="@layout/common_interval"/>
+            <include layout="@layout/preference_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:minHeight="90px"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="所在地区"
-                    android:textSize="14dp"/>
+                android:minHeight="45dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="13dp"
-                    android:layout_toRightOf="@id/tv_1"
-                    android:hint="请选择收货人地址"
-                    android:padding="8dp"
+                    android:hint="省  市  区(县)"
                     android:textSize="14dp"/>
 
                 <LinearLayout
                     android:id="@+id/address_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="13dp"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
@@ -168,164 +129,48 @@
 
             </LinearLayout>
 
-            <include layout="@layout/common_gap"/>
+            <include layout="@layout/preference_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:minHeight="90px"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="详细地址"
-                    android:textSize="14dp"/>
+                android:minHeight="45dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <EditText
                     android:id="@+id/clear_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="13dp"
                     android:background="@null"
                     android:hint="请输入详细地址"
                     android:maxLength="40"
-                    android:padding="8dp"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="14dp"/>
 
             </LinearLayout>
 
-            <include layout="@layout/common_gap"/>
+            <include layout="@layout/common_interval"/>
 
-            <LinearLayout
-                android:id="@+id/id_layout"
+            <TextView
+                android:id="@+id/tv_delete"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:minHeight="90px"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="身份证号"
-                        android:textSize="14dp"/>
-
-                    <EditText
-                        android:id="@+id/id_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="13dp"
-                        android:background="@null"
-                        android:hint="请输入身份证号"
-                        android:maxLength="18"
-                        android:padding="8dp"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:textSize="14dp"/>
-
-                </LinearLayout>
-
-                <include layout="@layout/common_gap"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/id_card_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/image_id_before"
-                        android:layout_width="77dp"
-                        android:layout_height="48dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/icon_id_before"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="身份证正面照"
-                        android:textColor="@color/color_66"
-                        android:textSize="14dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/image_id_after"
-                        android:layout_width="77dp"
-                        android:layout_height="48dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/icon_id_after"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="身份证反面照"
-                        android:textColor="@color/color_66"
-                        android:textSize="14dp"/>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_default"
-                android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="16dp"
+                android:layout_height="45dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:minHeight="90px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="是否设为常用地址"
-                    android:textSize="14dp"/>
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:buttonTint="@color/colorAccent"
-                    android:padding="8dp"
-                    android:shadowColor="@color/colorAccent"/>
-
-            </RelativeLayout>
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="删除"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/bg_grey">
 
                 <Button
                     android:id="@+id/save"

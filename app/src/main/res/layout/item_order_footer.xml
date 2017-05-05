@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实付款:"
+            android:textColor="@color/color_44"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_99"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/footer_line"
+        layout="@layout/preference_line"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:background="@drawable/btn_common_black"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/color_44"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/btn_detail"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_common_black"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="@color/color_44"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/common_interval"/>
+</LinearLayout>

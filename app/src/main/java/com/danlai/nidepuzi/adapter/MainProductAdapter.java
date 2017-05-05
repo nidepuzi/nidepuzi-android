@@ -21,7 +21,6 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,10 +60,10 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
         MainTodayBean.ItemsBean bean = data.get(position);
         ViewUtils.loadImgToImgView(context, holder.image, bean.getPic());
         holder.name.setText(bean.getName());
-        String price = new DecimalFormat("0.0").format(bean.getPrice());
+        String price = JUtils.formatDouble(bean.getPrice());
         holder.price.setText("售价: ¥" + price);
-        String min = new DecimalFormat("0.0").format(bean.getProfit().getMin());
-        String max = new DecimalFormat("0.0").format(bean.getProfit().getMax());
+        String min = JUtils.formatDouble(bean.getProfit().getMin());
+        String max = JUtils.formatDouble(bean.getProfit().getMax());
         if (bean.getProfit().getMin() == 0) {
             min = "0";
         }

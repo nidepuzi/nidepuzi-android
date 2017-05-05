@@ -176,6 +176,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/layout_visit"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -185,9 +186,10 @@
                             android:paddingTop="12dp">
 
                             <TextView
+                                android:id="@+id/tv_visit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="11"
+                                android:text="0"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"/>
 
@@ -202,6 +204,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/layout_fans"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -211,9 +214,10 @@
                             android:paddingTop="12dp">
 
                             <TextView
+                                android:id="@+id/tv_fans"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="11"
+                                android:text="0"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"/>
 
@@ -308,7 +312,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="代收收益"
+                            android:text="待收收益"
                             android:textColor="@color/color_44"
                             android:textSize="14sp"/>
 

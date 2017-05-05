@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.entity.CartsPayInfoBean;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -102,7 +102,7 @@ public class CartPayInfoAdapter extends BaseAdapter {
         holder.title.setText(cartListEntity.getTitle());
         holder.goodSize.setText("尺码:" + cartListEntity.getSkuName());
         holder.num.setText("x" + cartListEntity.getNum());
-        holder.price.setText("¥" + new DecimalFormat("0.00").format(cartListEntity.getPrice()));
+        holder.price.setText("¥" + JUtils.formatDouble(cartListEntity.getPrice()));
         return convertView;
     }
 

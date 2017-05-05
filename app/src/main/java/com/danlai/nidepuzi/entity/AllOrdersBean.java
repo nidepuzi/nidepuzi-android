@@ -15,17 +15,6 @@ import java.util.List;
  */
 public class AllOrdersBean {
 
-    @Override
-    public String toString() {
-        return "AllOrdersBean{" +
-                "mCount=" + mCount +
-                ", mNext='" + mNext + '\'' +
-                ", mPrevious=" + mPrevious +
-                ", mResults=" + mResults +
-                '}';
-    }
-
-
     @SerializedName("count")
     private int mCount;
     @SerializedName("next")
@@ -74,35 +63,35 @@ public class AllOrdersBean {
         @Override
         public String toString() {
             return "ResultsEntity{" +
-                    "mId=" + mId +
-                    ", mUrl='" + mUrl + '\'' +
-                    ", mTid='" + mTid + '\'' +
-                    ", mBuyerNick='" + mBuyerNick + '\'' +
-                    ", mBuyerId=" + mBuyerId +
-                    ", mChannel='" + mChannel + '\'' +
-                    ", mPayment=" + mPayment +
-                    ", mPostFee=" + mPostFee +
-                    ", mTotalFee=" + mTotalFee +
-                    ", mDiscountFee=" + mDiscountFee +
-                    ", mStatus=" + mStatus +
-                    ", mStatusDisplay='" + mStatusDisplay + '\'' +
-                    ", mOrderPic='" + mOrderPic + '\'' +
-                    ", mBuyerMessage='" + mBuyerMessage + '\'' +
-                    ", mTradeType=" + mTradeType +
-                    ", mCreated='" + mCreated + '\'' +
-                    ", mPayTime=" + mPayTime +
-                    ", mConsignTime=" + mConsignTime +
-                    ", mOutSid='" + mOutSid + '\'' +
-                    ", mLogisticsCompany=" + mLogisticsCompany +
-                    ", mReceiverName='" + mReceiverName + '\'' +
-                    ", mReceiverState='" + mReceiverState + '\'' +
-                    ", mReceiverCity='" + mReceiverCity + '\'' +
-                    ", mReceiverDistrict='" + mReceiverDistrict + '\'' +
-                    ", mReceiverAddress='" + mReceiverAddress + '\'' +
-                    ", mReceiverMobile='" + mReceiverMobile + '\'' +
-                    ", mReceiverPhone='" + mReceiverPhone + '\'' +
-                    ", mOrders=" + mOrders +
-                    '}';
+                "mId=" + mId +
+                ", mUrl='" + mUrl + '\'' +
+                ", mTid='" + mTid + '\'' +
+                ", mBuyerNick='" + mBuyerNick + '\'' +
+                ", mBuyerId=" + mBuyerId +
+                ", mChannel='" + mChannel + '\'' +
+                ", mPayment=" + mPayment +
+                ", mPostFee=" + mPostFee +
+                ", mTotalFee=" + mTotalFee +
+                ", mDiscountFee=" + mDiscountFee +
+                ", mStatus=" + mStatus +
+                ", mStatusDisplay='" + mStatusDisplay + '\'' +
+                ", mOrderPic='" + mOrderPic + '\'' +
+                ", mBuyerMessage='" + mBuyerMessage + '\'' +
+                ", mTradeType=" + mTradeType +
+                ", mCreated='" + mCreated + '\'' +
+                ", mPayTime=" + mPayTime +
+                ", mConsignTime=" + mConsignTime +
+                ", mOutSid='" + mOutSid + '\'' +
+                ", mLogisticsCompany=" + mLogisticsCompany +
+                ", mReceiverName='" + mReceiverName + '\'' +
+                ", mReceiverState='" + mReceiverState + '\'' +
+                ", mReceiverCity='" + mReceiverCity + '\'' +
+                ", mReceiverDistrict='" + mReceiverDistrict + '\'' +
+                ", mReceiverAddress='" + mReceiverAddress + '\'' +
+                ", mReceiverMobile='" + mReceiverMobile + '\'' +
+                ", mReceiverPhone='" + mReceiverPhone + '\'' +
+                ", mOrders=" + mOrders +
+                '}';
         }
 
         @SerializedName("id")

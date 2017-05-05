@@ -132,35 +132,35 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseSub
 
     }
 
-    protected void readyGo(Class<?> clazz) {
+    public void readyGo(Class<?> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
-    protected void readyGo(Class<?> clazz, Bundle bundle) {
-        Intent intent = new Intent(this, clazz);
-        if (null != bundle) {
-            intent.putExtras(bundle);
-        }
-        startActivity(intent);
-    }
-
-    protected void readyGoThenKill(Class<?> clazz) {
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-        finish();
-    }
-
-    protected void readyGoThenKill(Class<?> clazz, Bundle bundle) {
+    public void readyGo(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) {
             intent.putExtras(bundle);
         }
         startActivity(intent);
+    }
+
+    public void readyGoThenKill(Class<?> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
         finish();
     }
 
-    protected void readyGoForResult(Class<?> clazz, int requestCode) {
+    public void readyGoThenKill(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+        finish();
+    }
+
+    public void readyGoForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
         startActivityForResult(intent, requestCode);
     }
@@ -169,7 +169,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseSub
         return false;
     }
 
-    protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+    public void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) {
             intent.putExtras(bundle);
