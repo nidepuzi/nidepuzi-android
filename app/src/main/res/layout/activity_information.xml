@@ -29,7 +29,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="店铺信息"
-                    android:textColor="@color/color_66"
+                    android:textColor="@color/color_33"
                     android:textSize="14sp"/>
 
                 <com.danlai.library.widget.PreferenceView
@@ -64,7 +64,7 @@
                         android:layout_centerVertical="true"
                         android:maxLines="1"
                         android:text="头像"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <LinearLayout
@@ -108,7 +108,7 @@
                         android:layout_centerVertical="true"
                         android:maxLines="1"
                         android:text="店招图"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <LinearLayout
@@ -152,7 +152,7 @@
                         android:layout_centerVertical="true"
                         android:maxLines="1"
                         android:text="店主名片"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <LinearLayout
@@ -186,7 +186,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="个人信息"
-                    android:textColor="@color/color_66"
+                    android:textColor="@color/color_33"
                     android:textSize="14sp"/>
 
                 <com.danlai.library.widget.PreferenceView

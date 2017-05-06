@@ -49,14 +49,14 @@ public class WriteLogisticsInfoActivity extends BaseMVVMActivity<ActivityWriteLo
     @Override
     protected void initData() {
         if (address == null || "".equals(address)) {
-            JUtils.Toast("未查询到退货地址，请联系小鹿客服查询");
+            JUtils.Toast("未查询到退货地址，请联系客服查询");
         } else if (address.contains("，")) {
             String[] split = address.split("，");
             for (String s : split) {
                 if (s.contains("市")) {
                     b.tvAddress.setText("收货地址:" + s);
-                } else if (s.contains("小鹿")) {
-                    b.tvName.setText("收件人:小鹿售后");
+                } else if (s.contains("铺子")) {
+                    b.tvName.setText("收件人:铺子售后");
                 } else {
                     b.tvPhone.setText("联系电话:" + s);
                 }
@@ -66,8 +66,8 @@ public class WriteLogisticsInfoActivity extends BaseMVVMActivity<ActivityWriteLo
             for (String s : split) {
                 if (s.contains("市")) {
                     b.tvAddress.setText("收货地址:" + s);
-                } else if (s.contains("小鹿")) {
-                    b.tvName.setText("收件人:小鹿售后");
+                } else if (s.contains("铺子")) {
+                    b.tvName.setText("收件人:铺子售后");
                 } else {
                     b.tvPhone.setText("联系电话:" + s);
                 }

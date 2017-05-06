@@ -38,7 +38,7 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
 
     private ArrayList<Province> provinces = new ArrayList<>();
     private String city_string;
-    private String clearaddressa;
+    private String receiver_address;
     private String receiver_state;
     private String receiver_city;
     private String receiver_district;
@@ -69,7 +69,7 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
         }
         b.mobile.setText(receiver_mobile);
         b.address.setText(city_string);
-        b.clearAddress.setText(clearaddressa);
+        b.clearAddress.setText(receiver_address);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
         receiver_name = extras.getString("receiver_name");
         receiver_mobile = extras.getString("mobile");
         city_string = extras.getString("address1");
-        clearaddressa = extras.getString("address2");
+        receiver_address = extras.getString("receiver_address");
         receiver_state = extras.getString("receiver_state");
         receiver_city = extras.getString("receiver_city");
         receiver_district = extras.getString("receiver_district");
@@ -112,7 +112,7 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
             case R.id.save:
                 receiver_name = b.name.getText().toString().trim();
                 receiver_mobile = b.mobile.getText().toString().trim();
-                clearaddressa = b.clearAddress.getText().toString().trim();
+                receiver_address = b.clearAddress.getText().toString().trim();
                 if (b.addressLayout.getVisibility() == View.VISIBLE) {
                     receiver_state = b.etAddress1.getText().toString().trim();
                     receiver_city = b.etAddress2.getText().toString().trim();
@@ -121,10 +121,10 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
                         receiver_state = receiver_city;
                     }
                 }
-                if (checkInput(receiver_name, receiver_mobile, city_string, clearaddressa)) {
+                if (checkInput(receiver_name, receiver_mobile, city_string, receiver_address)) {
                     BaseApp.getAddressInteractor(this)
                         .update_address(id, receiver_state, receiver_city, receiver_district,
-                            clearaddressa, receiver_name, receiver_mobile, null, referal_trade_id,
+                            receiver_address, receiver_name, receiver_mobile, null, referal_trade_id,
                             new ServiceResponse<AddressResultBean>(mBaseActivity) {
                                 @Override
                                 public void onNext(AddressResultBean addressResultBean) {

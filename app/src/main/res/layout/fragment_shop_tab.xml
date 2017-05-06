@@ -264,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="可用余额"
-                            android:textColor="@color/color_88"
+                            android:textColor="@color/color_99"
                             android:textSize="14sp"/>
                     </LinearLayout>
 
@@ -277,7 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="提现"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <ImageView
@@ -313,7 +313,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="待收收益"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -337,7 +337,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="累计收益"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -362,7 +362,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="优惠券"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -394,7 +394,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="客户管理"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -402,6 +402,7 @@
                     <include layout="@layout/shop_line"/>
 
                     <LinearLayout
+                        android:id="@+id/layout_achievement"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -418,7 +419,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="业绩管理"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -442,7 +443,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="销售管理"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -475,7 +476,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="收货地址"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -506,7 +507,7 @@
                         android:layout_height="wrap_content"
                         android:text="订单管理"
 
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <View
@@ -518,7 +519,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="全部订单"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16sp"/>
 
                     <ImageView
@@ -554,7 +555,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="待付款"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -579,7 +580,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="待发货"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>
@@ -604,7 +605,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="退换货"
-                            android:textColor="@color/color_44"
+                            android:textColor="@color/color_33"
                             android:textSize="14sp"/>
 
                     </LinearLayout>

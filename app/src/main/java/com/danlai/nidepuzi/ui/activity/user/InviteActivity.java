@@ -2,10 +2,12 @@ package com.danlai.nidepuzi.ui.activity.user;
 
 import android.view.View;
 
+import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityInviteBinding;
-import com.danlai.nidepuzi.entity.ShareModelBean;
+import com.danlai.nidepuzi.entity.ActivityBean;
+import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.util.ShareUtils;
 
 /**
@@ -34,7 +36,13 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn:
-                ShareUtils.shareShop(new ShareModelBean(), mBaseActivity);
+                BaseApp.getActivityInteractor(mBaseActivity)
+                    .get_party_share_content("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
+                        @Override
+                        public void onNext(ActivityBean activityBean) {
+                            ShareUtils.shareShop(activityBean, mBaseActivity);
+                        }
+                    });
                 break;
         }
     }

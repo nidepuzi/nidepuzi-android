@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/color_44"
+            android:textColor="@color/color_33"
             android:textSize="14sp"/>
 
         <View
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/color_44"
+            android:textColor="@color/color_33"
             android:textSize="14sp"/>
 
     </LinearLayout>
@@ -87,7 +87,7 @@
                 android:layout_marginLeft="8dp"
                 android:gravity="center"
                 android:text="设为默认"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="8dp"
                 android:gravity="center"
                 android:text="编辑"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -139,7 +139,7 @@
                 android:layout_marginLeft="8dp"
                 android:gravity="center"
                 android:text="删除"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="14sp"/>
 
         </LinearLayout>

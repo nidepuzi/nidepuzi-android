@@ -42,7 +42,6 @@ import com.danlai.nidepuzi.adapter.MyPagerAdapter;
 import com.danlai.nidepuzi.adapter.SkuColorAdapter;
 import com.danlai.nidepuzi.adapter.SkuSizeAdapter;
 import com.danlai.nidepuzi.base.BaseApi;
-import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityProductDetailBinding;
 import com.danlai.nidepuzi.entity.CartsInfoBean;
@@ -193,8 +192,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         b.rlCart.setOnClickListener(this);
         b.tvAdd.setOnClickListener(this);
         b.tvBuy.setOnClickListener(this);
-        b.tvAddTeam.setOnClickListener(this);
-        b.tvAddOne.setOnClickListener(this);
         b.textLayout.setOnClickListener(this);
         plusIv.setOnClickListener(this);
         minusIv.setOnClickListener(this);
@@ -260,7 +257,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         }
         b.webView.loadUrl(BaseApi.getAppUrl() + "/mall/product/details/app/" + model_id);
         ProductDetailBean.DetailContentBean detailContent = productDetailBean.getDetail_content();
-        ProductDetailBean.TeamBuyInfo teamBuyInfo = productDetailBean.getTeambuy_info();
         List<ProductDetailBean.SkuInfoBean> skuInfo = productDetailBean.getSku_info();
         if ("will".equals(detailContent.getSale_state())) {
             b.tvAdd.setClickable(false);
@@ -277,16 +273,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
             b.tvBuy.setClickable(false);
             b.tvAdd.setText("已抢光");
             b.tvBuy.setText("已抢光");
-        } else if (teamBuyInfo != null && teamBuyInfo.isTeambuy()) {
-            item_id = skuInfo.get(0).getProduct_id();
-            sku_id = skuInfo.get(0).getSku_items().get(0).getSku_id();
-            b.tvAdd.setVisibility(View.GONE);
-            b.tvBuy.setVisibility(View.GONE);
-            b.tvAddOne.setVisibility(View.VISIBLE);
-            b.tvAddTeam.setVisibility(View.VISIBLE);
-            b.tvAddOne.setText("单人购  ¥" + skuInfo.get(0).getSku_items().get(0).getAgent_price());
-            b.tvAddTeam.setText(BaseConst.numberToWord(teamBuyInfo.getTeambuy_person_num()) +
-                "人团  ¥" + teamBuyInfo.getTeambuy_price());
         } else {
             try {
                 if (skuInfo.size() > 0) {
@@ -394,7 +380,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                 }
             }).start();
         }
-
     }
 
     private void setStatusBar() {
@@ -482,46 +467,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                 } else {
                     isBoutique = true;
                     dialog.show();
-                }
-                break;
-            case R.id.tv_add_team:
-                if (!LoginUtils.checkLoginState(getApplicationContext())) {
-                    jumpToLogin();
-                } else {
-                    BaseApp.getCartsInteractor(this)
-                        .addToCart(item_id, sku_id, num, 3, new ServiceResponse<ResultEntity>(mBaseActivity) {
-                            @Override
-                            public void onNext(ResultEntity resultEntity) {
-                                if (resultEntity.getCode() == 0) {
-                                    BaseApp.getCartsInteractor(ProductDetailActivity.this)
-                                        .getCartsList(3, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
-                                            @Override
-                                            public void onNext(List<CartsInfoBean> cartsinfoBeen) {
-                                                if (cartsinfoBeen != null && cartsinfoBeen.size() > 0) {
-                                                    String ids = cartsinfoBeen.get(0).getId() + "";
-                                                    Bundle bundle = new Bundle();
-                                                    bundle.putString("ids", ids);
-                                                    bundle.putBoolean("flag", true);
-                                                    Intent intent = new Intent(ProductDetailActivity.this, PayInfoActivity.class);
-                                                    intent.putExtras(bundle);
-                                                    startActivity(intent);
-                                                } else {
-                                                    JUtils.Toast("购买失败!");
-                                                }
-                                            }
-                                        });
-                                } else {
-                                    JUtils.Toast(resultEntity.getInfo());
-                                }
-                            }
-                        });
-                }
-                break;
-            case R.id.tv_add_one:
-                if (!LoginUtils.checkLoginState(getApplicationContext())) {
-                    jumpToLogin();
-                } else {
-                    addToCart(false);
                 }
                 break;
             case R.id.plus:

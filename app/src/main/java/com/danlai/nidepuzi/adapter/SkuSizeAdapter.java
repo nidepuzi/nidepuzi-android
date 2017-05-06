@@ -57,7 +57,7 @@ public class SkuSizeAdapter extends RecyclerView.Adapter<SkuSizeAdapter.SkuSizeV
         holder.name.setText(skuItemsBean.getName());
         if (skuItemsBean.getFree_num() == 0) {
             holder.rl.setBackgroundResource(R.drawable.sku_item_bg_unselect);
-            holder.name.setTextColor(activity.getResources().getColor(R.color.color_88));
+            holder.name.setTextColor(activity.getResources().getColor(R.color.color_99));
             if (num == position) {
 //                num++;
                 activity.refreshSkuId(skuItemsBean);
@@ -69,7 +69,7 @@ public class SkuSizeAdapter extends RecyclerView.Adapter<SkuSizeAdapter.SkuSizeV
                 activity.refreshSkuId(skuItemsBean);
             } else {
                 holder.rl.setBackgroundResource(R.drawable.sku_item_bg_unselect);
-                holder.name.setTextColor(activity.getResources().getColor(R.color.color_44));
+                holder.name.setTextColor(activity.getResources().getColor(R.color.color_33));
             }
             holder.view.setOnClickListener(v -> {
                 num = position;

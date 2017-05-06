@@ -91,7 +91,7 @@
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:text="向右滑动验证"
-                    android:textColor="@color/color_88"
+                    android:textColor="@color/color_99"
                     android:textSize="14dp"/>
 
                 <View
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="如何注册你的铺子?"
-                android:textColor="@color/color_88"/>
+                android:textColor="@color/color_99"/>
 
         </LinearLayout>
 

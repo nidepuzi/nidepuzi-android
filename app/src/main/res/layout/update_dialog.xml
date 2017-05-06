@@ -39,7 +39,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
             android:paddingBottom="3dp"
-            android:textColor="@color/color_66"
+            android:textColor="@color/color_33"
             android:textSize="15dp" />
 
         <View
@@ -62,7 +62,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="稍后再说"
-                android:textColor="@color/color_66"
+                android:textColor="@color/color_33"
                 android:textSize="17dp" />
 
             <View

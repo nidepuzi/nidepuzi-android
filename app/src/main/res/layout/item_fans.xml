@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLength="16"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="16dp"/>
 
             <TextView

@@ -3,8 +3,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/F3F3F4">
+        android:layout_height="match_parent">
 
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/recycler_view"
@@ -15,6 +14,7 @@
             android:id="@+id/empty_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/F3F3F4"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="55px"
                 android:text="您暂时还没有优惠券哦～"
-                android:textColor="@color/color_66"
+                android:textColor="@color/color_33"
                 android:textSize="14dp"/>
         </LinearLayout>
 

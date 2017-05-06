@@ -32,7 +32,7 @@
                     android:layout_weight="1"
                     app:tabIndicatorColor="@color/colorPrimary"
                     app:tabSelectedTextColor="@color/colorPrimaryDark"
-                    app:tabTextColor="@color/color_44"/>
+                    app:tabTextColor="@color/color_33"/>
 
                 <include layout="@layout/common_line"/>
 

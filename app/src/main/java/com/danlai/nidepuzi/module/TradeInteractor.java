@@ -30,7 +30,7 @@ public interface TradeInteractor {
     void shoppingCartCreateV2(String cart_ids, String addr_id, String channel,
                               String payment, String post_fee, String discount_fee,
                               String total_fee, String uuid, String pay_extras, String code,
-                              boolean isteam, ServiceResponse<PayInfoBean> response);
+                              ServiceResponse<PayInfoBean> response);
 
     void orderPayWithChannel(int order_id, String channel, ServiceResponse<PayInfoBean> response);
 

@@ -31,10 +31,7 @@ public class BaseConst {
     public static final int UNUSED_COUPON = 0;
     public static final int PAST_COUPON = 1;
     public static final int USED_COUPON = 2;
-
-    //优惠券是否可用
-    public static final int COUPON_USABLE = 0;
-    public static final int COUPON_DISABLE = 1;
+    public static final int DISABLE_COUPON = 3;
 
     //订单类型
     public static final int ALL_ORDER = 0;
@@ -46,6 +43,12 @@ public class BaseConst {
     public static final String WX_APP_PAY_ID = "wxa6e8010fa0b31eb3";
     //支付宝
     public static final String ALIPAY_APP_ID = "2017042206893641";
+
+
+    //成交订单类别
+    public static final int ORDER_SHARE = 0;
+    public static final int ORDER_SELF = 1;
+
 
     public static final String BASE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()
         + "/nidepuzi/";

@@ -106,7 +106,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
-                                        android:textColor="@color/color_66"
+                                        android:textColor="@color/color_33"
                                         android:textSize="14dp"/>
 
                                     <TextView
@@ -115,7 +115,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
                                         android:gravity="center_vertical"
-                                        android:textColor="@color/color_66"
+                                        android:textColor="@color/color_33"
                                         android:textSize="14dp"/>
                                 </LinearLayout>
 
@@ -227,7 +227,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:text="身份证正面照"
-                                    android:textColor="@color/color_66"
+                                    android:textColor="@color/color_33"
                                     android:textSize="14dp"/>
 
                             </LinearLayout>
@@ -251,7 +251,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
                                     android:text="身份证反面照"
-                                    android:textColor="@color/color_66"
+                                    android:textColor="@color/color_33"
                                     android:textSize="14dp"/>
 
                             </LinearLayout>
@@ -323,7 +323,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:text="优惠券"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <TextView
@@ -361,7 +361,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的钱包"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <View
@@ -374,7 +374,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <CheckBox
@@ -401,7 +401,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="铺子币"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <View
@@ -414,7 +414,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <CheckBox
@@ -442,7 +442,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:text="APP支付优惠"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <TextView
@@ -452,7 +452,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:text="-¥0"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
                     </RelativeLayout>
 
@@ -516,7 +516,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="商品金额"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <TextView
@@ -541,7 +541,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="运费"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                         <TextView
@@ -550,7 +550,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:gravity="center_vertical"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="14dp"/>
 
                     </RelativeLayout>

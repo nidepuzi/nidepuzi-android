@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="业绩管理"/>
+
+        <include layout="@layout/common_interval"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <com.danlai.library.widget.CircleImageView
+                android:id="@+id/iv_head"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/img_user_head"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_33"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="铺子掌柜"
+                    android:textColor="@color/color_99"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/common_interval"/>
+
+        <com.danlai.library.widget.PreferenceView
+            android:id="@+id/share_wx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:preference_desc="铺子微信免费送"
+            app:preference_desc_color="@color/colorAccent"
+            app:preference_hide_icon="true"
+            app:preference_title="分享好礼"/>
+
+        <include layout="@layout/preference_line"/>
+
+        <com.danlai.library.widget.PreferenceView
+            android:id="@+id/share_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:preference_hide_icon="true"
+            app:preference_title="分享记录"/>
+
+        <include layout="@layout/preference_line"/>
+
+        <com.danlai.library.widget.PreferenceView
+            android:id="@+id/custom_income"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:preference_desc="￥0.00"
+            app:preference_desc_color="@color/color_33"
+            app:preference_hide_icon="true"
+            app:preference_title="客户总收入"/>
+
+        <include layout="@layout/preference_line"/>
+
+        <com.danlai.library.widget.PreferenceView
+            android:id="@+id/order_self"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:preference_hide_icon="true"
+            app:preference_title="自购成功订单"/>
+
+        <include layout="@layout/preference_line"/>
+
+        <com.danlai.library.widget.PreferenceView
+            android:id="@+id/order_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:preference_hide_icon="true"
+            app:preference_title="分享成功订单"/>
+
+        <include layout="@layout/common_gap"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+</layout>

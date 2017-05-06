@@ -50,7 +50,7 @@ public class SkuColorAdapter extends RecyclerView.Adapter<SkuColorAdapter.SkuCol
         }
         if (flag) {
             holder.rl.setBackgroundResource(R.drawable.sku_item_bg_unselect);
-            holder.name.setTextColor(activity.getResources().getColor(R.color.color_88));
+            holder.name.setTextColor(activity.getResources().getColor(R.color.color_99));
             if (num == position) {
                 num++;
             }
@@ -60,7 +60,7 @@ public class SkuColorAdapter extends RecyclerView.Adapter<SkuColorAdapter.SkuCol
                 holder.name.setTextColor(activity.getResources().getColor(R.color.colorAccent));
             } else {
                 holder.rl.setBackgroundResource(R.drawable.sku_item_bg_unselect);
-                holder.name.setTextColor(activity.getResources().getColor(R.color.color_44));
+                holder.name.setTextColor(activity.getResources().getColor(R.color.color_33));
             }
             holder.view.setOnClickListener(v -> {
                 activity.refreshSku(position);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -72,6 +73,8 @@ public class PreferenceView extends RelativeLayout implements View.OnClickListen
         setOnClickListener(this);
         titleText.setText(array.getString(R.styleable.PreferenceView_preference_title));
         summaryText.setText(array.getString(R.styleable.PreferenceView_preference_desc));
+        int color = array.getColor(R.styleable.PreferenceView_preference_desc_color, Color.parseColor("#999999"));
+        summaryText.setTextColor(color);
     }
 
     public void hideImg() {

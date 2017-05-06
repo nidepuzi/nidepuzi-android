@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,20 +30,17 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CartPayInfoAdapter;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
-import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityPayInfoBinding;
 import com.danlai.nidepuzi.entity.AddressBean;
 import com.danlai.nidepuzi.entity.AddressResultBean;
 import com.danlai.nidepuzi.entity.CartsPayInfoBean;
 import com.danlai.nidepuzi.entity.IdCardBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
-import com.danlai.nidepuzi.entity.TeamBuyBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddAddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressSelectActivity;
 import com.danlai.nidepuzi.ui.activity.user.SelectCouponActivity;
-import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
 
@@ -74,7 +69,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
         state, city, district, address, name, mobile, face, back, side, card_facepath, card_backpath;
     private double payment, post_fee, total_fee, discount_fee, coupon_price, appCut, walletCash,
         coinCash, reallyPayment, realUseWallet, realUseCoin, totalDiscount;
-    private boolean mGroupFlag, mCouponFlag, isCoupon, isBudget, isCoin, isHaveAddress,
+    private boolean isCoupon, isBudget, isCoin, isHaveAddress,
         isWx, isAlipay, payFlag, isDefault;
     private CartPayInfoAdapter mCartPayInfoAdapter;
     private AlertDialog mRuleDialog;
@@ -85,21 +80,11 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
     @Override
     public void getIntentUrl(Uri uri) {
         mCartIds = uri.getQueryParameter("cart_id");
-        String type = uri.getQueryParameter("type");
-        if (type != null) {
-            if (type.equals("3")) {
-                mGroupFlag = true;
-            } else if (type.equals("5")) {
-                mCouponFlag = true;
-            }
-        }
     }
 
     @Override
     protected void getBundleExtras(Bundle extras) {
         mCartIds = extras.getString("ids");
-        mGroupFlag = extras.getBoolean("flag", false);
-        mCouponFlag = extras.getBoolean("couponFlag", false);
     }
 
     @Override
@@ -384,7 +369,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                 if ((coupon_id != null) && (!coupon_id.isEmpty())) {
                     bundle.putString("coupon_id", coupon_id);
                 }
-                bundle.putBoolean("couponFlag", mCouponFlag);
                 bundle.putString("cart_ids", mCartIds);
                 readyGoForResult(SelectCouponActivity.class, REQUEST_CODE_COUPON, bundle);
                 break;
@@ -468,7 +452,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                     if (order_id != -1) {
                         Bundle bundle = new Bundle();
                         bundle.putInt("order_id", order_id);
-                        readyGo(OrderDetailActivity.class,bundle);
+                        readyGo(OrderDetailActivity.class, bundle);
                     }
                     finish();
                 } else if (result.equals("success")) {
@@ -574,7 +558,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
             BaseApp.getTradeInteractor(this)
                 .shoppingCartCreateV2(mCartIds, addressId, channel,
                     (reallyPayment + realUseCoin + realUseWallet) + "", post_fee + "",
-                    totalDiscount + "", total_fee + "", uuid, pay_extras, code, mGroupFlag,
+                    totalDiscount + "", total_fee + "", uuid, pay_extras, code,
                     new ServiceResponse<PayInfoBean>(mBaseActivity) {
 
                         @Override
@@ -615,37 +599,9 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
     }
 
     private void successJump() {
-        if (mGroupFlag) {
-            BaseApp.getTradeInteractor(this)
-                .getTeamBuyBean(order_no, new ServiceResponse<TeamBuyBean>(mBaseActivity) {
-                    @Override
-                    public void onNext(TeamBuyBean teamBuyBean) {
-                        int id = teamBuyBean.getId();
-                        SharedPreferences preferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);
-                        String baseUrl = "http://m.nidepuzi.com/mall/order/spell/group/" + id + "?from_page=order_commit";
-                        if (!TextUtils.isEmpty(preferences.getString("BASE_URL", ""))) {
-                            baseUrl = "http://" + preferences.getString("BASE_URL", "") + "/mall/order/spell/group/" + id + "?from_page=order_commit";
-                        }
-                        JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
-                            baseUrl, -1, BaseWebViewActivity.class, "查看拼团详情", false);
-                        finish();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (order_id != -1) {
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("order_id", order_id);
-                            readyGo(OrderDetailActivity.class, bundle);
-                        }
-                        finish();
-                    }
-                });
-        } else {
-            Bundle bundle = new Bundle();
-            bundle.putInt("fragment", 3);
-            readyGoThenKill(AllOrderActivity.class, bundle);
-        }
+        Bundle bundle = new Bundle();
+        bundle.putInt("fragment", 3);
+        readyGoThenKill(AllOrderActivity.class, bundle);
     }
 
     @Override

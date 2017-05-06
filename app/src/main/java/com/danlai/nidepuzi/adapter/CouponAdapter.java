@@ -2,7 +2,6 @@ package com.danlai.nidepuzi.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,41 +63,28 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         CouponEntity bean = mList.get(position);
         if (mCouponTyp == BaseConst.UNUSED_COUPON) {
-            holder.mCouponValue.setTextColor(Color.parseColor("#F05050"));
-            holder.rl.setBackgroundResource(R.drawable.bg_img_coupon);
+            holder.mCouponValue.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.tvMoney.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
+            holder.rl.setBackgroundResource(R.drawable.img_coupon_unused);
+            holder.imgFlag.setImageResource(R.drawable.icon_coupon_use);
         } else if (mCouponTyp == BaseConst.PAST_COUPON) {
-            holder.mCouponValue.setTextColor(Color.parseColor("#B4B4B4"));
-            holder.mTitle.setTextColor(Color.parseColor("#D2D2D2"));
-            holder.mTime.setTextColor(Color.parseColor("#D2D2D2"));
-            holder.mDesc.setTextColor(Color.parseColor("#D2D2D2"));
-            holder.mUseFee.setTextColor(Color.parseColor("#D2D2D2"));
-            holder.rl.setBackgroundResource(R.drawable.bg_img_pastcoupon);
+            holder.imgFlag.setImageResource(R.drawable.icon_coupon_past);
         } else if (mCouponTyp == BaseConst.USED_COUPON) {
-            holder.mCouponValue.setTextColor(Color.parseColor("#646464"));
-            holder.rl.setBackgroundResource(R.drawable.bg_img_usedcoupon);
-        } else {
-            holder.mCouponValue.setTextColor(Color.parseColor("#646464"));
-            holder.rl.setBackgroundResource(R.drawable.bg_img_dcoupon);
+            holder.imgFlag.setImageResource(R.drawable.icon_coupon_used);
+        } else if (mCouponTyp == BaseConst.DISABLE_COUPON) {
+            holder.imgFlag.setImageResource(R.drawable.icon_coupon_normal);
         }
         double coupon_value = bean.getCoupon_value();
         double format = Double.parseDouble(JUtils.formatDouble(coupon_value));
         if (Math.round(format * 100) % 100 == 0) {
-            holder.mCouponValue.setText("￥" + Math.round(format * 100) / 100);
+            holder.mCouponValue.setText("" + Math.round(format * 100) / 100);
         } else {
-            holder.mCouponValue.setText("￥" + format);
+            holder.mCouponValue.setText("" + format);
         }
-        holder.mTitle.setText(bean.getTitle());
         holder.mDesc.setText(bean.getPros_desc());
-        String start_time = bean.getStart_time();
         String deadline = bean.getDeadline();
-        String created = bean.getCreated();
-        if (start_time != null) {
-            holder.mTime.setText("期限  " + start_time.replaceAll("T", " ")
-                + "  至  " + deadline.replaceAll("T", " "));
-        } else {
-            holder.mTime.setText("期限  " + created.replaceAll("T", " ")
-                + "  至  " + deadline.replaceAll("T", " "));
-        }
+        holder.mTime.setText("有效期至:  " + deadline.substring(0, 10));
         holder.mUseFee.setText(bean.getUse_fee_des());
         if ((mSelectCouponId != null) && (!mSelectCouponId.isEmpty())
             && mSelectCouponId.equals(Integer.toString(bean.getId()))) {
@@ -143,10 +129,14 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         TextView mUseFee;
         @Bind(R.id.img_selected)
         ImageView mImageSelect;
-        @Bind(R.id.tv_coupon_info)
-        TextView mTitle;
-        @Bind(R.id.tv_coupon_crttime)
+        @Bind(R.id.tv_coupon_time)
         TextView mTime;
+        @Bind(R.id.name)
+        TextView tvName;
+        @Bind(R.id.tv_coupon_money)
+        TextView tvMoney;
+        @Bind(R.id.img_flag)
+        ImageView imgFlag;
 
         public ViewHolder(View itemView) {
             super(itemView);

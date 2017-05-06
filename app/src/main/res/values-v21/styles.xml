@@ -10,7 +10,7 @@
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/color_22</item>
-        <item name="android:textColorSecondary">@color/color_66</item>
+        <item name="android:textColorSecondary">@color/color_33</item>
     </style>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light">

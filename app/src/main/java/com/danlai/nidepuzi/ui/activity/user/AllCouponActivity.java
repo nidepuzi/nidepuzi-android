@@ -37,9 +37,9 @@ public class AllCouponActivity extends BaseMVVMActivity<ActivityAllCouponBinding
     @Override
     protected void initData() {
         ArrayList<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(UserCouponFragment.newInstance(BaseConst.UNUSED_COUPON,"未使用"));
-        fragments.add(UserCouponFragment.newInstance(BaseConst.PAST_COUPON,"已过期"));
-        fragments.add(UserCouponFragment.newInstance(BaseConst.USED_COUPON,"已使用"));
+        fragments.add(UserCouponFragment.newInstance(BaseConst.UNUSED_COUPON, "未使用"));
+        fragments.add(UserCouponFragment.newInstance(BaseConst.PAST_COUPON, "已过期"));
+        fragments.add(UserCouponFragment.newInstance(BaseConst.USED_COUPON, "已使用"));
         BaseTabAdapter mAdapter = new BaseTabAdapter(getSupportFragmentManager(), fragments);
         b.viewPager.setAdapter(mAdapter);
         b.viewPager.setOffscreenPageLimit(3);
@@ -49,15 +49,15 @@ public class AllCouponActivity extends BaseMVVMActivity<ActivityAllCouponBinding
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshTitle(CouponEvent event) {
         if (event != null) {
             TabLayout.Tab tabAt = b.tabLayout.getTabAt(event.getPosition());
-            if (tabAt!=null) {
+            if (tabAt != null) {
                 tabAt.setText(event.getTitle());
             }
         }

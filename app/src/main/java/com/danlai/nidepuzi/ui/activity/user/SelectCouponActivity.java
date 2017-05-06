@@ -33,8 +33,8 @@ public class SelectCouponActivity extends BaseMVVMActivity<ActivitySelectCouponB
     @Override
     protected void initData() {
         BaseTabAdapter mAdapter = new BaseTabAdapter(getSupportFragmentManager(), fragments);
-        fragments.add(ChooseCouponFragment.newInstance(BaseConst.COUPON_USABLE, "可用优惠券", selected_coupon_id, cart_ids));
-        fragments.add(ChooseCouponFragment.newInstance(BaseConst.COUPON_DISABLE, "不可用优惠券", selected_coupon_id, cart_ids));
+        fragments.add(ChooseCouponFragment.newInstance(BaseConst.UNUSED_COUPON, "可用优惠券", selected_coupon_id, cart_ids));
+        fragments.add(ChooseCouponFragment.newInstance(BaseConst.DISABLE_COUPON, "不可用优惠券", selected_coupon_id, cart_ids));
         b.viewPager.setAdapter(mAdapter);
         b.viewPager.setOffscreenPageLimit(2);
         b.tabLayout.setupWithViewPager(b.viewPager);
@@ -68,7 +68,11 @@ public class SelectCouponActivity extends BaseMVVMActivity<ActivitySelectCouponB
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshTitle(CouponEvent event) {
         if (event != null) {
-            TabLayout.Tab tabAt = b.tabLayout.getTabAt(event.getPosition());
+            int position = event.getPosition();
+            if (position == 3) {
+                position = 1;
+            }
+            TabLayout.Tab tabAt = b.tabLayout.getTabAt(position);
             if (tabAt != null) {
                 tabAt.setText(event.getTitle());
             }

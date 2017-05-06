@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.danlai.library.utils.JUtils;
+import com.danlai.library.utils.ViewUtils;
 import com.danlai.library.widget.LogImageView;
 import com.danlai.library.widget.LogMsgView;
 import com.danlai.nidepuzi.BaseApp;
@@ -60,7 +61,7 @@ public class LogisticsActivity extends BaseMVVMActivity<ActivityLogisticsBinding
                 fillDataToView(null);
             }
         } else {
-            b.tvCompany.setText("小鹿推荐");
+            b.tvCompany.setText("铺子推荐");
             b.tvOrder.setText("未揽件");
             fillDataToView(null);
         }
@@ -83,7 +84,7 @@ public class LogisticsActivity extends BaseMVVMActivity<ActivityLogisticsBinding
                         }
                     }
                     b.lv.setAdapter(new GoodsListAdapter(data, LogisticsActivity.this));
-                    OrderDetailActivity.setListViewHeightBasedOnChildren(b.lv);
+                    ViewUtils.setListViewHeightBasedOnChildren(b.lv);
                     hideIndeterminateProgressDialog();
                 }
             });

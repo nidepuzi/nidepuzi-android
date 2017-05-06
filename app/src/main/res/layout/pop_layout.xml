@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:padding="10dp"
-            android:textColor="@color/color_66"
+            android:textColor="@color/color_33"
             android:textSize="18sp"/>
     </RelativeLayout>
 

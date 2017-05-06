@@ -69,8 +69,8 @@ public abstract class MainTabAdapter extends RecyclerView.Adapter<MainTabAdapter
             holder.time.setTextColor(context.getResources().getColor(R.color.colorAccent));
             holder.textView.setTextColor(context.getResources().getColor(R.color.colorAccent));
         } else {
-            holder.time.setTextColor(context.getResources().getColor(R.color.color_66));
-            holder.textView.setTextColor(context.getResources().getColor(R.color.color_66));
+            holder.time.setTextColor(context.getResources().getColor(R.color.color_33));
+            holder.textView.setTextColor(context.getResources().getColor(R.color.color_33));
         }
         if (position >= 2 && position < (data.size() + 2)) {
             MainTodayBean bean = data.get(position - 2);

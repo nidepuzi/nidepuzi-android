@@ -1,6 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.danlai.library.utils.JUtils;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by wisdom on 16/12/2.
  */
 
-public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implements View.OnClickListener{
+public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implements View.OnClickListener {
     private List<Integer> ids = new ArrayList<>();
     private List<CartsInfoBean> cartList = new ArrayList<>();
     private List<CartsInfoBean> cartHisList = new ArrayList<>();
@@ -82,10 +82,9 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
                 break;
             case R.id.confirm:
                 if (ids.size() > 0) {
-                    Intent intent = new Intent(this, PayInfoActivity.class);
-                    intent.putExtra("ids", getIds());
-                    startActivity(intent);
-                    finish();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ids", getIds());
+                    readyGoThenKill(PayInfoActivity.class,bundle);
                 } else {
                     JUtils.Toast("请至少选择一件商品哦!");
                 }

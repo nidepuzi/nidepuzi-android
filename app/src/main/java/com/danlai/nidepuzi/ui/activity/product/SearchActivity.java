@@ -58,7 +58,7 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
                                 ViewGroup.LayoutParams.WRAP_CONTENT);
                             layoutParams.setMargins(12, 12, 12, 12);
                             textView.setLayoutParams(layoutParams);
-                            textView.setTextColor(getResources().getColor(R.color.color_66));
+                            textView.setTextColor(getResources().getColor(R.color.color_33));
                             textView.setTextSize(COMPLEX_UNIT_DIP, 14);
                             textView.setBackgroundResource(R.drawable.search_tag_bg);
                             textView.setOnClickListener(v -> {

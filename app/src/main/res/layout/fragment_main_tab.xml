@@ -65,7 +65,7 @@
                 android:layout_gravity="bottom"
                 app:tabIndicatorColor="@color/colorPrimary"
                 app:tabSelectedTextColor="@color/colorPrimaryDark"
-                app:tabTextColor="@color/color_66"/>
+                app:tabTextColor="@color/color_33"/>
 
             <com.danlai.library.widget.MainViewPager
                 android:id="@+id/view_pager"

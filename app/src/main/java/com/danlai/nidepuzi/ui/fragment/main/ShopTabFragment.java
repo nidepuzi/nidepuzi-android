@@ -10,11 +10,12 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
-import com.danlai.nidepuzi.entity.ShareModelBean;
+import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
 import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
@@ -61,6 +62,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutWaitSend.setOnClickListener(this);
         b.layoutAllRefund.setOnClickListener(this);
         b.layoutFans.setOnClickListener(this);
+        b.layoutAchievement.setOnClickListener(this);
     }
 
     @Override
@@ -158,7 +160,13 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AddressActivity.class);
                 break;
             case R.id.invite_friend:
-                ShareUtils.shareShop(new ShareModelBean(), mActivity);
+                BaseApp.getActivityInteractor(mActivity)
+                    .get_party_share_content("8", new ServiceResponse<ActivityBean>(mActivity) {
+                        @Override
+                        public void onNext(ActivityBean activityBean) {
+                            ShareUtils.shareShop(activityBean, mActivity);
+                        }
+                    });
                 break;
             case R.id.layout_all_order:
                 bundle.putInt("fragment", 1);
@@ -174,6 +182,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.layout_fans:
                 readyGo(FansActivity.class);
+                break;
+            case R.id.layout_achievement:
+                readyGo(AchievementActivity.class);
                 break;
         }
 

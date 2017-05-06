@@ -58,23 +58,23 @@ public class AddressInteractorImpl implements AddressInteractor {
 
     @Override
     public void update_addressWithId(String id, String state, String city, String district,
-                                     String address, String name, String mobile, String defalut,
+                                     String address, String name, String mobile, String defaulta,
                                      String identification_no, String face, String back,
                                      ServiceResponse<AddressResultBean> response) {
         if ("".equals(identification_no) || identification_no == null) {
             service.update_address(id, state, city, district,
-                address, name, mobile, defalut)
+                address, name, mobile, defaulta)
                 .compose(new DefaultTransform<>())
                 .subscribe(response);
         } else {
             if (face == null || back == null || "".equals(face) || "".equals(back)) {
                 service.update_addressWithId(id, state, city, district,
-                    address, name, mobile, defalut, identification_no)
+                    address, name, mobile, defaulta, identification_no)
                     .compose(new DefaultTransform<>())
                     .subscribe(response);
             } else {
                 service.update_addressWithId(id, state, city, district,
-                    address, name, mobile, defalut, identification_no, face, back)
+                    address, name, mobile, defaulta, identification_no, face, back)
                     .compose(new DefaultTransform<>())
                     .subscribe(response);
             }

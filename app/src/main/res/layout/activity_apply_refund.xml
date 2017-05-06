@@ -55,7 +55,7 @@
                                 android:id="@+id/refund_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_66"
+                                android:textColor="@color/color_33"
                                 android:textSize="15dp"/>
 
                             <TextView
@@ -106,7 +106,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="2"
-                                android:textColor="@color/color_66"
+                                android:textColor="@color/color_33"
                                 android:textSize="12dp"/>
 
                             <LinearLayout
@@ -119,14 +119,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="尺寸:"
-                                    android:textColor="@color/color_AA"
+                                    android:textColor="@color/color_99"
                                     android:textSize="12dp"/>
 
                                 <TextView
                                     android:id="@+id/tx_good_size"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_AA"
+                                    android:textColor="@color/color_99"
                                     android:textSize="12dp"/>
 
                             </LinearLayout>
@@ -147,7 +147,7 @@
                                     android:id="@+id/tx_good_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_66"
+                                    android:textColor="@color/color_33"
                                     android:textSize="12dp"/>
 
                                 <TextView
@@ -179,7 +179,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="申请数量："
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="15dp"/>
 
                         <View
@@ -200,7 +200,7 @@
                             android:layout_marginLeft="10px"
                             android:gravity="center"
                             android:text="1"
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="16dp"/>
 
                         <TextView
@@ -229,7 +229,7 @@
                             android:layout_alignParentTop="true"
                             android:gravity="center"
                             android:text="可退金额："
-                            android:textColor="@color/color_66"
+                            android:textColor="@color/color_33"
                             android:textSize="15dp"/>
 
                         <TextView

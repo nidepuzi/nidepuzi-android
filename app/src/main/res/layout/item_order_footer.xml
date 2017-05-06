@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="实付款:"
-            android:textColor="@color/color_44"
+            android:textColor="@color/color_33"
             android:textSize="16sp"/>
 
         <TextView
@@ -63,7 +63,7 @@
             android:background="@drawable/btn_common_black"
             android:gravity="center"
             android:text="删除"
-            android:textColor="@color/color_44"
+            android:textColor="@color/color_33"
             android:textSize="14sp"/>
 
         <TextView
@@ -74,7 +74,7 @@
             android:background="@drawable/btn_common_black"
             android:gravity="center"
             android:text="详情"
-            android:textColor="@color/color_44"
+            android:textColor="@color/color_33"
             android:textSize="14sp"/>
 
     </LinearLayout>

@@ -206,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="身份证正面照"
-                        android:textColor="@color/color_66"
+                        android:textColor="@color/color_33"
                         android:textSize="14dp"/>
 
                 </LinearLayout>
@@ -230,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="身份证反面照"
-                        android:textColor="@color/color_66"
+                        android:textColor="@color/color_33"
                         android:textSize="14dp"/>
 
                 </LinearLayout>

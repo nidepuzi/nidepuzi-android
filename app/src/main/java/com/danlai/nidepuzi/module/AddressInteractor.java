@@ -26,7 +26,7 @@ public interface AddressInteractor {
     void update_addressWithId(String id, String receiver_state, String receiver_city,
                               String receiver_district, String receiver_address,
                               String receiver_name, String receiver_mobile,
-                              String defalut, String identification_no,
+                              String defaulta, String identification_no,
                               String card_facepath, String card_backpath,
                               ServiceResponse<AddressResultBean> response);
 

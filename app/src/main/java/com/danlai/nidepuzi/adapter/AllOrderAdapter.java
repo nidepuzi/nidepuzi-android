@@ -37,11 +37,15 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private BaseActivity mActivity;
     private List<Object> data;
     private boolean isShow;
+    private boolean isAchievement;
+    private boolean isShare;
 
     public AllOrderAdapter(BaseActivity activity) {
         mActivity = activity;
         data = new ArrayList<>();
         isShow = false;
+        isShare = false;
+        isAchievement = false;
     }
 
     public void updateWithClear(List<Object> list) {
@@ -91,6 +95,11 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.ivSave.setVisibility(View.GONE);
             holder.tvSave.setVisibility(View.GONE);
         }
+        if (isShare) {
+            holder.ivSave.setImageResource(R.drawable.icon_earn);
+        } else {
+            holder.ivSave.setImageResource(R.drawable.icon_save);
+        }
         holder.tvName.setText(bean.getName());
         holder.tvSize.setText("规格:" + bean.getSize());
         holder.tvPrice.setText("单价:" + bean.getPrice() + "  x" + bean.getNum());
@@ -103,7 +112,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initFooter(FooterHolder holder, OrderFooter bean) {
-        if (isShow) {
+        if (isShow && !isAchievement) {
             holder.layoutFooter.setVisibility(View.VISIBLE);
             holder.footerLine.setVisibility(View.VISIBLE);
             holder.btnDetail.setOnClickListener(v -> {
@@ -121,7 +130,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initHead(HeadHolder holder, OrderHead bean) {
-        holder.tvTime.setText(bean.getTime().replaceAll("T", " ").substring(0,19));
+        holder.tvTime.setText(bean.getTime().replaceAll("T", " ").substring(0, 19));
         holder.tvStatus.setText(bean.getStatus());
     }
 
@@ -146,6 +155,16 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void setShow(boolean show) {
         isShow = show;
+        notifyDataSetChanged();
+    }
+
+    public void setShare(boolean share) {
+        isShare = share;
+        notifyDataSetChanged();
+    }
+
+    public void setAchievement(boolean achievement) {
+        isAchievement = achievement;
         notifyDataSetChanged();
     }
 

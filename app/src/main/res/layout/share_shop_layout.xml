@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="微信"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="QQ"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
         </LinearLayout>
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="微博"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
         </LinearLayout>

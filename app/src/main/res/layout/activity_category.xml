@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="该类别暂无商品哦!"
-                        android:textColor="@color/color_44"
+                        android:textColor="@color/color_33"
                         android:textSize="16dp"/>
 
                 </LinearLayout>

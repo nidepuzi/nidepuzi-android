@@ -12,11 +12,14 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CouponAdapter;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseFragment;
+import com.danlai.nidepuzi.base.TestData;
 import com.danlai.nidepuzi.databinding.FragmentChooseCouponBinding;
 import com.danlai.nidepuzi.entity.CouponEntity;
 import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.event.CouponEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -63,7 +66,7 @@ public class ChooseCouponFragment extends BaseFragment<FragmentChooseCouponBindi
     @Override
     protected void initViews() {
         int type = getArguments().getInt(TYPE);
-        if (type == BaseConst.COUPON_USABLE) {
+        if (type == BaseConst.UNUSED_COUPON) {
             typeStr = "usable";
         } else {
             typeStr = "disable";
@@ -72,7 +75,7 @@ public class ChooseCouponFragment extends BaseFragment<FragmentChooseCouponBindi
         String selectId = getArguments().getString("select_id");
         b.recyclerView.setLayoutManager(new CustomLinearLayoutManager(mActivity));
         mCouponAdapter = new CouponAdapter(mActivity, type);
-        if (type == BaseConst.COUPON_USABLE) {
+        if (type == BaseConst.UNUSED_COUPON) {
             mCouponAdapter.setInfo(true);
             b.btn.setVisibility(View.VISIBLE);
         } else {
@@ -115,6 +118,8 @@ public class ChooseCouponFragment extends BaseFragment<FragmentChooseCouponBindi
                 @Override
                 public void onNext(CouponPagingBean bean) {
                     List<CouponEntity> results = bean.getResults();
+                    results = new Gson().fromJson(TestData.COUPON, new TypeToken<List<CouponEntity>>() {
+                    }.getType());
                     if (results != null && results.size() > 0) {
                         if (clear) {
                             mCouponAdapter.updateWithClear(results);

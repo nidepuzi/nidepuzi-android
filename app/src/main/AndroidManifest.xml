@@ -352,6 +352,15 @@
         <activity
             android:name=".ui.activity.shop.FansActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.AchievementActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.CustomIncomeActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.OrderAchieveActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service
             android:name=".service.UpdateService"

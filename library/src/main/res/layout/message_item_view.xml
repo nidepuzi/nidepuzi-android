@@ -43,7 +43,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="订单助手"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="16sp"/>
 
             <TextView

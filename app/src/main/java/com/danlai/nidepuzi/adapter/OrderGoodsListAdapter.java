@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderGoodsListAdapter extends BaseAdapter {
-    private final String[] NUM = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
     private BaseActivity context;
     private List<AllOrdersBean.ResultsEntity.OrdersEntity> data;
 
@@ -104,14 +103,14 @@ public class OrderGoodsListAdapter extends BaseAdapter {
             divider.setVisibility(View.VISIBLE);
             if (!"".equals(data.get(position).getPackage_order_id())) {
                 logisticsLayout.setVisibility(View.VISIBLE);
-                ((TextView) convertView.findViewById(R.id.tv_order_package)).setText("包裹" + NUM[count++] + ":");
+                ((TextView) convertView.findViewById(R.id.tv_order_package)).setText("包裹" + BaseConst.numberToWord(++count) + ":");
             } else {
                 logisticsLayout.setVisibility(View.GONE);
             }
         } else if (!data.get(position).getPackage_order_id().equals(data.get(position - 1).getPackage_order_id())) {
             divider.setVisibility(View.VISIBLE);
             logisticsLayout.setVisibility(View.VISIBLE);
-            ((TextView) convertView.findViewById(R.id.tv_order_package)).setText("包裹" + NUM[count++] + ":");
+            ((TextView) convertView.findViewById(R.id.tv_order_package)).setText("包裹" + BaseConst.numberToWord(++count) + ":");
         } else {
             divider.setVisibility(View.GONE);
             logisticsLayout.setVisibility(View.GONE);
@@ -134,7 +133,7 @@ public class OrderGoodsListAdapter extends BaseAdapter {
                     Button btn = (Button) convertView.findViewById(R.id.btn_order_proc);
                     btn.setOnClickListener(v -> new AlertDialog.Builder(context)
                         .setCancelable(true)
-                        .setMessage("您的订单已经向工厂订货，暂不支持退款，请您耐心等待，在收货确认签收后申请退货，如有疑问请咨询小鹿美美公众号或客服4008235355。")
+                        .setMessage("您的订单已经向工厂订货，暂不支持退款，请您耐心等待，在收货确认签收后申请退货，如有疑问请咨询铺子客服。")
                         .setPositiveButton("确认", (dialog, which) -> dialog.dismiss())
                         .show());
                 }

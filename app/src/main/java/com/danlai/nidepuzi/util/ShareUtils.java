@@ -73,7 +73,7 @@ public class ShareUtils {
     }
 
 
-    public static void shareShop(ShareModelBean shareModel, Activity activity) {
+    public static void shareShop(ActivityBean bean, Activity activity) {
         View view = activity.getLayoutInflater().inflate(R.layout.share_shop_layout, null);
         Dialog dialog = new Dialog(activity, R.style.CustomDialog);
         dialog.setContentView(view);
@@ -81,17 +81,17 @@ public class ShareUtils {
         view.findViewById(R.id.layout_wx).setOnClickListener(v -> {
             dialog.dismiss();
             Platform plat = ShareSDK.getPlatform(Wechat.NAME);
-            showShare(plat.getName(), activity, shareModel);
+            showShare(plat.getName(), activity, bean);
         });
         view.findViewById(R.id.layout_qq).setOnClickListener(v -> {
             dialog.dismiss();
             Platform plat = ShareSDK.getPlatform(QQ.NAME);
-            showShare(plat.getName(), activity, shareModel);
+            showShare(plat.getName(), activity, bean);
         });
         view.findViewById(R.id.layout_sina).setOnClickListener(v -> {
             dialog.dismiss();
             Platform plat = ShareSDK.getPlatform(SinaWeibo.NAME);
-            showShare(plat.getName(), activity, shareModel);
+            showShare(plat.getName(), activity, bean);
         });
         view.findViewById(R.id.layout_cancel).setOnClickListener(v -> dialog.dismiss());
         Window window = dialog.getWindow();
@@ -104,15 +104,29 @@ public class ShareUtils {
         dialog.show();
     }
 
-    private static void showShare(String platform, Context context, ShareModelBean shareModel) {
+    public static void showShare(String platform, Context context, ActivityBean bean) {
         OnekeyShare oks = new OnekeyShare();
         oks.setPlatform(platform);
         oks.disableSSOWhenAuthorize();
-        oks.setTitle(shareModel.getTitle());
-        oks.setTitleUrl(shareModel.getShare_link());
-        oks.setText(shareModel.getDesc());
-        oks.setImageUrl(shareModel.getShare_img());
-        oks.setUrl(shareModel.getShare_link());
+        oks.setTitle(bean.getTitle());
+        oks.setTitleUrl(bean.getShareLink());
+        oks.setText(bean.getActiveDec());
+        oks.setImageUrl(bean.getShareIcon());
+        oks.setUrl(bean.getShareLink());
+        oks.setSite("你的铺子");
+        oks.setSiteUrl("http://m.nidepuzi.com/mall/");
+        oks.show(context);
+    }
+
+    private static void showShare(String platform, Context context, ShareModelBean bean) {
+        OnekeyShare oks = new OnekeyShare();
+        oks.setPlatform(platform);
+        oks.disableSSOWhenAuthorize();
+        oks.setTitle(bean.getTitle());
+        oks.setTitleUrl(bean.getShare_link());
+        oks.setText(bean.getDesc());
+        oks.setImageUrl(bean.getShare_img());
+        oks.setUrl(bean.getShare_link());
         oks.setSite("你的铺子");
         oks.setSiteUrl("http://m.nidepuzi.com/mall/");
         oks.show(context);

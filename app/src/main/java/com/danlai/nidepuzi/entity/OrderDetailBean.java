@@ -81,7 +81,7 @@ public class OrderDetailBean implements Serializable {
      * id : 113994
      */
 
-    private UserAdressBean user_adress;
+    private UserAddressBean user_adress;
     private ExtrasBean extras;
     /**
      * id : 369952
@@ -274,11 +274,11 @@ public class OrderDetailBean implements Serializable {
         this.logistics_company = logistics_company;
     }
 
-    public UserAdressBean getUser_adress() {
+    public UserAddressBean getUser_adress() {
         return user_adress;
     }
 
-    public void setUser_adress(UserAdressBean user_adress) {
+    public void setUser_adress(UserAddressBean user_adress) {
         this.user_adress = user_adress;
     }
 
@@ -366,7 +366,7 @@ public class OrderDetailBean implements Serializable {
         }
     }
 
-    public static class UserAdressBean {
+    public static class UserAddressBean {
         private String receiver_address;
         private String receiver_district;
         private String receiver_city;

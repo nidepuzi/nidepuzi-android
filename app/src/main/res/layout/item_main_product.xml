@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/color_44"
+                android:textColor="@color/color_33"
                 android:textSize="14dp"/>
 
             <View
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/color_66"
+                android:textColor="@color/color_33"
                 android:textSize="12dp"/>
 
             <View

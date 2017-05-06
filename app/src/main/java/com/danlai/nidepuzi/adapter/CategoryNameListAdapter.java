@@ -81,7 +81,7 @@ public class CategoryNameListAdapter extends BaseAdapter {
                 holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
                 holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.bg_grey));
             } else {
-                holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_66));
+                holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_33));
                 holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
                 holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
             }
@@ -90,7 +90,7 @@ public class CategoryNameListAdapter extends BaseAdapter {
             holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
             holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.bg_grey));
         } else {
-            holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_66));
+            holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_33));
             holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
             holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }

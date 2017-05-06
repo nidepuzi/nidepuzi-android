@@ -14,7 +14,7 @@
         android:layout_height="36dp"
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical"
-        android:textColor="@color/color_44"
+        android:textColor="@color/color_33"
         android:textSize="14sp"/>
 
     <View

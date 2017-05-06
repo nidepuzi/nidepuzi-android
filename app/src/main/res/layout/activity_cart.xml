@@ -61,7 +61,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="18dp"
                                 android:text="您的购物车空空如也~快去装满它吧"
-                                android:textColor="@color/color_66"/>
+                                android:textColor="@color/color_33"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
