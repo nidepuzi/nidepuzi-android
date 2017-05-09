@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.ui.fragment.user;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
@@ -10,14 +11,11 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CouponAdapter;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseFragment;
-import com.danlai.nidepuzi.base.TestData;
 import com.danlai.nidepuzi.databinding.FragmentUserCouponBinding;
 import com.danlai.nidepuzi.entity.CouponEntity;
 import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.event.CouponEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -30,7 +28,7 @@ import java.util.List;
  * @date 2017年04月14日 下午6:33
  */
 
-public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> {
+public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> implements View.OnClickListener {
     private static final String TYPE = "type";
     private static final String TITLE = "title";
     private int page;
@@ -38,6 +36,7 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
     private CouponAdapter mCouponAdapter;
     private int status;
     private int type;
+    private AlertDialog mRuleDialog;
 
     public static UserCouponFragment newInstance(int type, String title) {
         Bundle args = new Bundle();
@@ -49,8 +48,13 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
     }
 
     @Override
+    public void setListener() {
+        b.layoutProblem.setOnClickListener(this);
+    }
+
+    @Override
     public View getLoadingView() {
-        return b.recyclerView;
+        return b.layout;
     }
 
     @Override
@@ -96,6 +100,11 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
                 }
             }
         });
+        mRuleDialog = new AlertDialog.Builder(mActivity)
+            .setTitle("优惠说明")
+            .setMessage(getResources().getString(R.string.coupon_rule))
+            .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
+            .create();
     }
 
     public void refreshData(boolean clear) {
@@ -106,8 +115,6 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
                 @Override
                 public void onNext(CouponPagingBean bean) {
                     List<CouponEntity> results = bean.getResults();
-                    results = new Gson().fromJson(TestData.COUPON, new TypeToken<List<CouponEntity>>() {
-                    }.getType());
                     if (results != null && results.size() > 0) {
                         if (clear) {
                             mCouponAdapter.updateWithClear(results);
@@ -149,5 +156,14 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_user_coupon;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.layout_problem:
+                mRuleDialog.show();
+                break;
+        }
     }
 }

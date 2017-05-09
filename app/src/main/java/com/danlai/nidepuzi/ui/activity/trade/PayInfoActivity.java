@@ -95,7 +95,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
         mCartPayInfoAdapter = new CartPayInfoAdapter(this);
         b.lvGoods.setAdapter(mCartPayInfoAdapter);
         mRuleDialog = new AlertDialog.Builder(this)
-            .setTitle("购买条款")
+            .setTitle("购买须知")
             .setMessage(getResources().getString(R.string.buy_rule))
             .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
             .create();

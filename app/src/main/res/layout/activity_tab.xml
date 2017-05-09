@@ -30,13 +30,13 @@
                     android:id="@+id/rb_main"
                     style="@style/TabRadioButtonStyle"
                     android:drawableTop="@drawable/tab_main"
-                    android:text="选品"/>
+                    android:text="热卖"/>
 
                 <RadioButton
-                    android:id="@+id/rb_share"
+                    android:id="@+id/rb_edu"
                     style="@style/TabRadioButtonStyle"
-                    android:drawableTop="@drawable/tab_share"
-                    android:text="分享"/>
+                    android:drawableTop="@drawable/tab_edu"
+                    android:text="培训"/>
 
                 <RadioButton
                     android:id="@+id/rb_shop"

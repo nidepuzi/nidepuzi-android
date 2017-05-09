@@ -9,12 +9,21 @@
 package com.danlai.nidepuzi.wxapi;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Toast;
+
+import com.danlai.nidepuzi.entity.event.WxLoginEvent;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+
+import org.greenrobot.eventbus.EventBus;
+
 import cn.sharesdk.wechat.utils.WXAppExtendObject;
 import cn.sharesdk.wechat.utils.WXMediaMessage;
 import cn.sharesdk.wechat.utils.WechatHandlerActivity;
 
-/** 微信客户端回调activity示例 */
+/**
+ * 微信客户端回调activity示例
+ */
 public class WXEntryActivity extends WechatHandlerActivity {
 
     /**
@@ -49,4 +58,20 @@ public class WXEntryActivity extends WechatHandlerActivity {
         }
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        handleIntent(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        SendAuth.Resp resp = new SendAuth.Resp(intent.getExtras());
+        EventBus.getDefault().post(new WxLoginEvent(resp.code, resp.errCode));
+    }
 }

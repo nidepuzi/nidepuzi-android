@@ -39,11 +39,11 @@ public class BaseConst {
     public static final int WAIT_SEND = 2;
 
     //微信
-    public static final String WX_APP_ID = "wxda1c561964d173cc";
-    public static final String WX_APP_PAY_ID = "wxa6e8010fa0b31eb3";
+    public static final String WX_APP_ID = "wxa6e8010fa0b31eb3";
+    public static final String WX_APP_SECRET = "a894a72567440fa7317843d76dd7bf03";
+
     //支付宝
     public static final String ALIPAY_APP_ID = "2017042206893641";
-
 
     //成交订单类别
     public static final int ORDER_SHARE = 0;

@@ -22,6 +22,7 @@ import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
+import com.danlai.nidepuzi.ui.activity.user.DrawCashActivity;
 import com.danlai.nidepuzi.ui.activity.user.InformationActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.activity.user.SettingActivity;
@@ -154,7 +155,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllCouponActivity.class);
                 break;
             case R.id.layout_wallet:
-                JUtils.Toast("暂未开通提现功能");
+                readyGo(DrawCashActivity.class);
                 break;
             case R.id.layout_address:
                 readyGo(AddressActivity.class);

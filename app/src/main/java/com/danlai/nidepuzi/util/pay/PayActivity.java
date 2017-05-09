@@ -61,8 +61,7 @@ public class PayActivity extends AppCompatActivity {
         if (!"".equals(channel)) {
             try {
                 if ("wx".equals(channel)) {
-                    IWXAPI api = WXAPIFactory.createWXAPI(this, null);
-                    api.registerApp(BaseConst.WX_APP_ID);
+                    IWXAPI api = WXAPIFactory.createWXAPI(this, BaseConst.WX_APP_ID);
                     if (isWXAppInstalledAndSupported(api)) {
                         String wx = extras.getString("wx");
                         JSONObject wxObj = new JSONObject(wx);

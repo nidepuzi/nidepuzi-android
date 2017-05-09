@@ -4,17 +4,17 @@ import android.view.View;
 
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
-import com.danlai.nidepuzi.databinding.FragmentShareTabBinding;
+import com.danlai.nidepuzi.databinding.FragmentEduTabBinding;
 
 /**
  * @author wisdom
  * @date 2017年04月25日 下午4:59
  */
 
-public class ShareTabFragment extends BaseFragment<FragmentShareTabBinding> {
+public class EduTabFragment extends BaseFragment<FragmentEduTabBinding> {
 
-    public static ShareTabFragment newInstance() {
-        return new ShareTabFragment();
+    public static EduTabFragment newInstance() {
+        return new EduTabFragment();
     }
 
     @Override
@@ -34,6 +34,6 @@ public class ShareTabFragment extends BaseFragment<FragmentShareTabBinding> {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.fragment_share_tab;
+        return R.layout.fragment_edu_tab;
     }
 }

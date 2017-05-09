@@ -2,68 +2,121 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.danlai.library.widget.scrolllayout.ScrollableLayout
-            android:id="@+id/scroll_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="45dp"
+            android:background="@color/colorAccent">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="280px"
-                    app:indicator_drawable_selected="@drawable/banner_select"
-                    app:indicator_drawable_unselected="@drawable/banner_unselect"
-                    app:indicator_height="2dp"
-                    app:indicator_margin="2dp"
-                    app:indicator_width="8dp"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/img_message"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:visibility="gone"
+                android:src="@drawable/icon_message"/>
 
-                <com.danlai.library.widget.scrollrecycler.ScrollRecycler
-                    android:id="@+id/recycler_tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
 
-                <View
-                    android:id="@+id/bottom_view"
-                    android:layout_width="80dp"
-                    android:layout_height="2dp"
-                    android:background="@color/colorAccent"
-                    android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_search"/>
 
-                <include
-                    android:id="@+id/bottom_line"
-                    layout="@layout/common_gap"
-                    android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/img_invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/img_search"
+                android:src="@drawable/icon_invite"/>
 
-            </LinearLayout>
+        </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_product"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.danlai.library.widget.scrolllayout.ScrollableLayout
+                android:id="@+id/scroll_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"/>
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="280px"
+                        app:indicator_drawable_selected="@drawable/banner_select"
+                        app:indicator_drawable_unselected="@drawable/banner_unselect"
+                        app:indicator_height="2dp"
+                        app:indicator_margin="2dp"
+                        app:indicator_width="8dp"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.danlai.library.widget.scrollrecycler.ScrollRecycler
+                        android:id="@+id/recycler_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"/>
+
+                    <View
+                        android:id="@+id/bottom_view"
+                        android:layout_width="80dp"
+                        android:layout_height="2dp"
+                        android:background="@color/colorAccent"
+                        android:visibility="invisible"/>
+
+                    <include
+                        android:id="@+id/bottom_line"
+                        layout="@layout/common_gap"
+                        android:visibility="invisible"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
 
 
-        </com.danlai.library.widget.scrolllayout.ScrollableLayout>
+            </com.danlai.library.widget.scrolllayout.ScrollableLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 </layout>

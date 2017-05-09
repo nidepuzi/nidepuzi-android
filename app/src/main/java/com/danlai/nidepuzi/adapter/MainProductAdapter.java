@@ -19,6 +19,7 @@ import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
+import com.danlai.nidepuzi.ui.activity.shop.NinePicActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
 
 import java.util.ArrayList;
@@ -82,7 +83,14 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
             } catch (Exception ignored) {
             }
         });
-        holder.share.setOnClickListener(v -> {
+        holder.productDescLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(context, NinePicActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("model_id", bean.getModel_id());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
+        holder.shareProductLayout.setOnClickListener(v -> {
             context.showIndeterminateProgressDialog(false);
             BaseApp.getProductInteractor(context)
                 .getShareModel(bean.getModel_id(), new ServiceResponse<ShareModelBean>(context) {
@@ -109,15 +117,17 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image, share;
+        ImageView image;
         TextView name, price, profit;
-        LinearLayout productLayout;
+        LinearLayout productLayout, productDescLayout, shareProductLayout, shareShopLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             productLayout = (LinearLayout) itemView.findViewById(R.id.product_layout);
+            productDescLayout = (LinearLayout) itemView.findViewById(R.id.layout_product_desc);
+            shareProductLayout = (LinearLayout) itemView.findViewById(R.id.layout_share_product);
+            shareShopLayout = (LinearLayout) itemView.findViewById(R.id.layout_share_shop);
             image = (ImageView) itemView.findViewById(R.id.img);
-            share = (ImageView) itemView.findViewById(R.id.share);
             name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById(R.id.price);
             profit = (TextView) itemView.findViewById(R.id.profit);

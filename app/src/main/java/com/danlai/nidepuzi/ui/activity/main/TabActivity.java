@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 
 import com.danlai.library.utils.FileUtils;
@@ -17,14 +17,16 @@ import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.ActivityTabBinding;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
+import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
-import com.danlai.nidepuzi.ui.fragment.main.MainTabFragment;
+import com.danlai.nidepuzi.ui.activity.user.LoginBindPhoneActivity;
 import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
-import com.danlai.nidepuzi.ui.fragment.main.ShareTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.EduTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
+import com.danlai.nidepuzi.ui.fragment.product.TodayNewFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.VersionManager;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,12 +44,40 @@ public class TabActivity extends BaseActivity {
     protected ActivityTabBinding b;
     private long firstTime = 0;
     private UpdateBroadReceiver mUpdateBroadReceiver;
-    public Handler mHandler;
+    private FragmentTabUtils mFragmentTabUtils;
+//    public Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.main_in, R.anim.main_out);
         super.onCreate(savedInstanceState);
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        bindPhone();
+    }
+
+    private void bindPhone() {
+        BaseApp.getMainInteractor(mBaseActivity)
+            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                @Override
+                public void onNext(UserInfoBean userInfoBean) {
+                    hideIndeterminateProgressDialog();
+                    String mobile = userInfoBean.getMobile();
+                    if (TextUtils.isEmpty(mobile)) {
+                        readyGo(LoginBindPhoneActivity.class);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    hideIndeterminateProgressDialog();
+                    readyGoThenKill(TabActivity.class);
+                }
+            });
     }
 
     @Override
@@ -62,8 +92,20 @@ public class TabActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        bindPhone();
         downLoadAddress();
         checkVersion();
+        BaseApp.getMainInteractor(mBaseActivity)
+            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                @Override
+                public void onNext(UserInfoBean userInfoBean) {
+                    String data = "[ " +
+                        "{\"key\":\"real_name\", \"value\":\"" + userInfoBean.getNick() + "\"}, " +
+                        "{\"key\":\"mobile_phone\", \"value\":\"" + userInfoBean.getMobile() + "\"}, " +
+                        "{\"key\":\"avatar\", \"value\": \"" + userInfoBean.getThumbnail() + "\"}]";
+                    mFragmentTabUtils.setUserInfo(data, userInfoBean.getUser_id());
+                }
+            });
     }
 
     @Override
@@ -76,11 +118,12 @@ public class TabActivity extends BaseActivity {
     protected void initViews() {
         setSwipeBackEnable(false);
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(MainTabFragment.newInstance());
-        fragments.add(ShareTabFragment.newInstance());
+        fragments.add(TodayNewFragment.newInstance("每日焦点"));
+//        fragments.add(MainTabFragment.newInstance());
+        fragments.add(EduTabFragment.newInstance());
         fragments.add(ShopTabFragment.newInstance());
         fragments.add(ServiceTabFragment.newInstance());
-        new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
+        mFragmentTabUtils = new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
     }
 
     @Override

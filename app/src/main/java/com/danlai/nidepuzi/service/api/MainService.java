@@ -48,4 +48,5 @@ public interface MainService {
 
     @GET("/rest/v1/pmt/ninepic/today")
     Observable<List<MainTodayBean>> getMainTodayList();
+
 }

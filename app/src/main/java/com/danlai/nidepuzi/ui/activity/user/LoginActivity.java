@@ -1,11 +1,7 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.danlai.library.utils.JUtils;
@@ -14,31 +10,29 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseAppManager;
+import com.danlai.nidepuzi.base.BaseConst;
+import com.danlai.nidepuzi.entity.AccessToken;
 import com.danlai.nidepuzi.entity.CodeBean;
+import com.danlai.nidepuzi.entity.WxUserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
+import com.danlai.nidepuzi.entity.event.WxLoginEvent;
+import com.danlai.nidepuzi.module.WxApiModule;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.util.LoginUtils;
-import com.mob.tools.utils.UIHandler;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.HashMap;
 import java.util.Random;
 
-import butterknife.ButterKnife;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.wechat.friends.Wechat;
-
-public class LoginActivity extends BaseActivity
-    implements View.OnClickListener, Handler.Callback {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     public static final String SECRET = "a894a72567440fa7317843d76dd7bf03";
-    private static final int MSG_USERID_FOUND = 1;
-    private static final int MSG_LOGIN = 2;
-    private static final int MSG_AUTH_CANCEL = 3;
-    private static final int MSG_AUTH_ERROR = 4;
-    private static final int MSG_AUTH_COMPLETE = 5;
     private String timestamp;
     private String noncestr;
     private String sign_params;
@@ -47,7 +41,6 @@ public class LoginActivity extends BaseActivity
     private String nickname;
     private String openid;
     private String unionid;
-    private Wechat wechat;
     private long firstTime = 0;
 
     @Override
@@ -78,12 +71,6 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        ButterKnife.bind(this);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.main_in, R.anim.main_out);
         super.onCreate(savedInstanceState);
@@ -97,14 +84,8 @@ public class LoginActivity extends BaseActivity
 
     @Override
     protected void initViews() {
+        EventBus.getDefault().register(this);
         setSwipeBackEnable(false);
-    }
-
-    @Override
-    protected void initData() {
-        if (!LoginUtils.checkLoginState(getApplicationContext())) {
-            removeWX(wechat);
-        }
     }
 
     @Override
@@ -128,15 +109,6 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_login;
     }
@@ -145,13 +117,27 @@ public class LoginActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.wx_login:
+                showIndeterminateProgressDialog(false);
                 sha1();
                 sign = SHA1Utils.hex_sha1(sign_params);
-                wechat = new Wechat(this);
-                authorize(wechat);
+                final SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "nidepuzi";
+                IWXAPI api = WXAPIFactory.createWXAPI(this, BaseConst.WX_APP_ID);
+                if (isWXAppInstalledAndSupported(api)) {
+                    api.sendReq(req);
+                } else if (!api.isWXAppInstalled()) {
+                    JUtils.Toast("未安装客户端");
+                    hideIndeterminateProgressDialog();
+                } else if (!api.isWXAppSupportAPI()) {
+                    JUtils.Toast("暂不支持登录");
+                    hideIndeterminateProgressDialog();
+                } else {
+                    JUtils.Toast("未知异常");
+                    hideIndeterminateProgressDialog();
+                }
                 break;
             case R.id.phone_login:
-                removeWX(wechat);
                 readyGo(PhoneLoginActivity.class);
                 break;
         }
@@ -163,110 +149,90 @@ public class LoginActivity extends BaseActivity
         sign_params = "noncestr=" + noncestr + "&secret=" + SECRET + "&timestamp=" + timestamp;
     }
 
-    private void login(String plat) {
-        Message msg = new Message();
-        msg.what = MSG_LOGIN;
-        msg.obj = plat;
-        UIHandler.sendMessage(msg, this);
+    private boolean isWXAppInstalledAndSupported(IWXAPI api) {
+        return api.isWXAppInstalled() && api.isWXAppSupportAPI();
     }
 
-    private void authorize(Platform plat) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshAddress(WxLoginEvent event) {
+        switch (event.getErrCode()) {
+            case BaseResp.ErrCode.ERR_OK:
+                wxLogin(event.getCode());
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                JUtils.Toast("已拒绝授权");
+                hideIndeterminateProgressDialog();
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                JUtils.Toast("已取消登录");
+                hideIndeterminateProgressDialog();
+                break;
+        }
+    }
+
+
+    private void wxLogin(String code) {
         showIndeterminateProgressDialog(false);
-        if (plat == null) {
-            return;
-        }
-        if (plat.isAuthValid()) {
-            String userId = plat.getDb().getUserId();
-            if (!TextUtils.isEmpty(userId)) {
-                UIHandler.sendEmptyMessage(MSG_USERID_FOUND, this);
-                login(plat.getName());
-                return;
-            }
-        }
-        plat.setPlatformActionListener(new PlatformActionListener() {
-            @Override
-            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                if (i == Platform.ACTION_USER_INFOR) {
-                    UIHandler.sendEmptyMessage(MSG_AUTH_COMPLETE, LoginActivity.this);
-                    login(platform.getName());
-                }
-                headimgurl = (String) hashMap.get("headimgurl");
-                nickname = (String) hashMap.get("nickname");
-                openid = (String) hashMap.get("openid");
-                unionid = (String) hashMap.get("unionid");
-                BaseApp.getUserInteractor(LoginActivity.this)
-                    .wxappLogin(noncestr, timestamp, sign, headimgurl, nickname, openid, unionid,
-                        new ServiceResponse<CodeBean>(mBaseActivity) {
+        WxApiModule.newInstance()
+            .getAccessToken(code, new ServiceResponse<AccessToken>(mBaseActivity) {
+                @Override
+                public void onNext(AccessToken accessToken) {
+                    openid = accessToken.getOpenid();
+                    unionid = accessToken.getUnionid();
+                    String token = accessToken.getAccess_token();
+                    WxApiModule.newInstance()
+                        .getUserInfo(token, openid, new ServiceResponse<WxUserInfoBean>(mBaseActivity) {
                             @Override
-                            public void onNext(CodeBean codeBean) {
-                                if (codeBean != null) {
-                                    hideIndeterminateProgressDialog();
-                                    JUtils.Toast(codeBean.getMsg());
-                                    if (0 == codeBean.getRcode()) {
-                                        EventBus.getDefault().post(new LoginEvent());
-                                        LoginUtils.saveLoginSuccess(true, mBaseActivity);
-                                        readyGoThenKill(TabActivity.class);
-                                    } else {
-                                        removeWX(wechat);
-                                        LoginUtils.delLoginInfo(mBaseActivity);
-                                    }
-                                }
+                            public void onNext(WxUserInfoBean bean) {
+                                headimgurl = bean.getHeadimgurl();
+                                nickname = bean.getNickname();
+                                BaseApp.getUserInteractor(LoginActivity.this)
+                                    .wxappLogin(noncestr, timestamp, sign, headimgurl, nickname, openid, unionid,
+                                        new ServiceResponse<CodeBean>(mBaseActivity) {
+                                            @Override
+                                            public void onNext(CodeBean codeBean) {
+                                                hideIndeterminateProgressDialog();
+                                                JUtils.Toast(codeBean.getMsg());
+                                                if (0 == codeBean.getRcode()) {
+                                                    EventBus.getDefault().post(new LoginEvent());
+                                                    LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                                                    readyGoThenKill(TabActivity.class);
+                                                } else {
+                                                    LoginUtils.delLoginInfo(mBaseActivity);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                JUtils.Toast("登录失败");
+                                                hideIndeterminateProgressDialog();
+                                            }
+                                        });
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                JUtils.Toast("登录失败");
+                                JUtils.Toast("获取用户信息失败");
                                 hideIndeterminateProgressDialog();
                             }
                         });
-            }
 
-            @Override
-            public void onError(Platform platform, int i, Throwable throwable) {
-                removeWX(wechat);
-                JUtils.Toast("授权登录失败!");
-                hideIndeterminateProgressDialog();
-            }
+                }
 
-            @Override
-            public void onCancel(Platform platform, int i) {
-                removeWX(wechat);
-                JUtils.Toast("取消授权登录!");
-                hideIndeterminateProgressDialog();
-            }
-        });
-        plat.SSOSetting(true);
-        plat.showUser(null);
+
+                @Override
+                public void onError(Throwable e) {
+                    hideIndeterminateProgressDialog();
+                    JUtils.Toast("获取授权失败!");
+                }
+            });
     }
 
-    public boolean handleMessage(Message msg) {
-        switch (msg.what) {
-            case MSG_USERID_FOUND:
-                break;
-            case MSG_LOGIN:
-                break;
-            case MSG_AUTH_CANCEL:
-                break;
-            case MSG_AUTH_ERROR:
-                break;
-            case MSG_AUTH_COMPLETE:
-                break;
-        }
-        return false;
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
-        removeWX(wechat);
-    }
-
-    public void removeWX(Platform platform) {
-        if (platform != null) {
-            platform.removeAccount(true);
-            platform.removeAccount();
-        }
+        EventBus.getDefault().unregister(this);
     }
 }
 

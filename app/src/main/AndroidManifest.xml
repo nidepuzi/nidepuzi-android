@@ -262,12 +262,6 @@
             android:name=".ui.activity.user.PhoneLoginActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
-            android:name=".ui.activity.user.PhoneForgetActivity"
-            android:theme="@style/AppTheme.TransparentActivity"/>
-        <activity
-            android:name=".ui.activity.user.EditPasswordActivity"
-            android:theme="@style/AppTheme.TransparentActivity"/>
-        <activity
             android:name=".ui.activity.user.AllCouponActivity"
             android:theme="@style/AppTheme.TransparentActivity">
             <intent-filter>
@@ -360,6 +354,12 @@
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.shop.OrderAchieveActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.DrawCashActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.LoginBindPhoneActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service

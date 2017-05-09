@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.EventBus;
 public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBinding>
     implements View.OnClickListener {
     private String phone;
+    private AlertDialog mRuleDialog;
 
     @Override
     protected void setListener() {
@@ -46,6 +47,14 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
         return R.layout.activity_phone_login;
     }
 
+    @Override
+    protected void initViews() {
+        mRuleDialog = new AlertDialog.Builder(this)
+            .setTitle("注册必读")
+            .setMessage(getResources().getString(R.string.login_rule))
+            .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
+            .create();
+    }
 
     @Override
     public void onClick(View v) {
@@ -55,12 +64,7 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
                     -1, BaseWebViewActivity.class, false, false);
                 break;
             case R.id.service_layout:
-                new AlertDialog.Builder(this)
-                    .setCancelable(false)
-                    .setTitle("你的铺子微店用户服务协议")
-                    .setMessage("协议内容")
-                    .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
-                    .show();
+                mRuleDialog.show();
                 break;
             case R.id.tv_code:
                 phone = b.etPhone.getText().toString();

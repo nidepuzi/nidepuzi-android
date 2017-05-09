@@ -19,7 +19,7 @@ import com.qiyukf.unicorn.api.YSFUserInfo;
  */
 
 public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> implements View.OnClickListener {
-    private String userId, phone, nick, avatar, email;
+    private String userId, mobile, nick, avatar;
 
     public static ServiceTabFragment newInstance() {
         return new ServiceTabFragment();
@@ -42,9 +42,8 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
                 @Override
                 public void onNext(UserInfoBean userInfoBean) {
                     userId = userInfoBean.getUser_id();
-                    phone = userInfoBean.getPhone();
+                    mobile = userInfoBean.getPhone();
                     nick = userInfoBean.getNick();
-                    email = userInfoBean.getEmail();
                     avatar = userInfoBean.getThumbnail();
                     hideIndeterminateProgressDialog();
                 }
@@ -52,7 +51,6 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
                 @Override
                 public void onError(Throwable e) {
                     JUtils.Toast("数据加载失败");
-                    initDataError();
                     hideIndeterminateProgressDialog();
                     initDataError();
                 }
@@ -78,8 +76,7 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
                 ysfUserInfo.userId = userId;
                 ysfUserInfo.data = "[ " +
                     "{\"key\":\"real_name\", \"value\":\"" + nick + "\"}, " +
-                    "{\"key\":\"mobile_phone\", \"value\":\"" + phone + "\"}, " +
-                    "{\"key\":\"email\", \"value\":\"" + email + "\"}, " +
+                    "{\"key\":\"mobile_phone\", \"value\":\"" + mobile + "\"}, " +
                     "{\"key\":\"avatar\", \"value\": \"" + avatar + "\"}]";
                 Unicorn.setUserInfo(ysfUserInfo);
                 ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "Android客户端", "Android客户端");

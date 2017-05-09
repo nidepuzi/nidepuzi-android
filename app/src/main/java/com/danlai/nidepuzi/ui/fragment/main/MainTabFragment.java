@@ -1,11 +1,7 @@
 package com.danlai.nidepuzi.ui.fragment.main;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
@@ -14,7 +10,6 @@ import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.FragmentMainTabBinding;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.ui.activity.product.CategoryActivity;
 import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
@@ -82,12 +77,12 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
 
     @Override
     protected void initViews() {
-        ((TabActivity) mActivity).mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                setTabLayoutMarginTop((double) msg.what / 100);
-            }
-        };
+//        ((TabActivity) mActivity).mHandler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                setTabLayoutMarginTop((double) msg.what / 100);
+//            }
+//        };
     }
 
     @Override
@@ -95,20 +90,20 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
         return R.layout.fragment_main_tab;
     }
 
-    public void setTabLayoutMarginTop(double percent) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, b.tabLayout.getHeight());
-        if (percent > 0) {
-            b.viewPager.setScrollable(false);
-            double height = percent * b.tabLayout.getHeight();
-            params.setMargins(0, (int) -height, 0, 0);
-            b.tabLayout.setLayoutParams(params);
-        } else {
-            b.viewPager.setScrollable(true);
-            params.setMargins(0, 0, 0, 0);
-        }
-        b.tabLayout.setLayoutParams(params);
-    }
+//    public void setTabLayoutMarginTop(double percent) {
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT, b.tabLayout.getHeight());
+//        if (percent > 0) {
+//            b.viewPager.setScrollable(false);
+//            double height = percent * b.tabLayout.getHeight();
+//            params.setMargins(0, (int) -height, 0, 0);
+//            b.tabLayout.setLayoutParams(params);
+//        } else {
+//            b.viewPager.setScrollable(true);
+//            params.setMargins(0, 0, 0, 0);
+//        }
+//        b.tabLayout.setLayoutParams(params);
+//    }
 
     @Override
     public void onClick(View v) {
