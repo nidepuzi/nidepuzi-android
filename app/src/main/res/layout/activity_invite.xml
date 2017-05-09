@@ -20,7 +20,8 @@
                 android:layout_marginRight="16dp"
                 android:text="邀请记录"
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
         </com.danlai.library.widget.titleview.BaseTitleView>
 

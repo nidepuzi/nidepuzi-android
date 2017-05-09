@@ -15,6 +15,7 @@ import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
@@ -98,6 +99,23 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
                     public void onNext(ShareModelBean shareModel) {
                         context.hideIndeterminateProgressDialog();
                         ShareUtils.shareWithModel(shareModel, context);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        context.hideIndeterminateProgressDialog();
+                        JUtils.Toast("分享失败,请点击重试!");
+                    }
+                });
+        });
+        holder.shareShopLayout.setOnClickListener(v -> {
+            context.showIndeterminateProgressDialog(false);
+            BaseApp.getActivityInteractor(context)
+                .get_party_share_content("8", new ServiceResponse<ActivityBean>(context) {
+                    @Override
+                    public void onNext(ActivityBean activityBean) {
+                        context.hideIndeterminateProgressDialog();
+                        ShareUtils.shareShop(activityBean, context);
                     }
 
                     @Override

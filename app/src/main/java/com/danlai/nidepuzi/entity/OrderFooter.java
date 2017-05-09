@@ -10,11 +10,13 @@ public class OrderFooter {
     private int orderId;
     private double payment;
     private double postFee;
+    private int status;
 
-    public OrderFooter(int orderId, double payment, double postFee) {
+    public OrderFooter(int orderId, double payment, double postFee, int status) {
         this.orderId = orderId;
         this.payment = payment;
         this.postFee = postFee;
+        this.status = status;
     }
 
     public int getOrderId() {
@@ -39,5 +41,13 @@ public class OrderFooter {
 
     public void setPostFee(double postFee) {
         this.postFee = postFee;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

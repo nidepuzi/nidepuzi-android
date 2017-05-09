@@ -14,9 +14,6 @@ import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.util.ShareUtils;
 
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.wechat.friends.Wechat;
-
 /**
  * @author wisdom
  * @date 2017年05月06日 上午9:50
@@ -63,7 +60,7 @@ public class AchievementActivity extends BaseMVVMActivity<ActivityAchievementBin
                     .get_party_share_content("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
                         @Override
                         public void onNext(ActivityBean activityBean) {
-                            ShareUtils.showShare(ShareSDK.getPlatform(Wechat.NAME).getName(), mBaseActivity, activityBean);
+                            ShareUtils.shareShop(activityBean, mBaseActivity);
                         }
                     });
                 break;

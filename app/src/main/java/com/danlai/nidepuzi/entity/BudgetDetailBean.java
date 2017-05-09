@@ -1,134 +1,140 @@
 package com.danlai.nidepuzi.entity;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by itxuye(www.itxuye.com) on 2016/02/26.
- * <p>
- * Copyright 2016年 上海己美. All rights reserved.
+ * @author wisdom-sun
+ * @date 2017年05月09日 下午2:00
  */
 public class BudgetDetailBean {
 
     /**
-     * count : 2
+     * count : 4
      * next : null
      * previous : null
-     * results : [{"budget_type":0,"budget_log_type":"envelop","budget_date":"2016-02-26","status":0,"budeget_detail_cash":2},{"budget_type":1,"budget_log_type":"consum","budget_date":"2016-02-26","status":0,"budeget_detail_cash":5}]
+     * results : [{"desc":"您通过提现支出88.0元.","budget_type":1,"budget_log_type":"cashout","budget_date":"2017-05-09","get_status_display":"待确定","status":2,"budeget_detail_cash":88,"modified":"2017-05-09T10:22:30.096974"},{"desc":"您通过退款收入88.0元.","budget_type":0,"budget_log_type":"refund","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T10:05:39.151877"},{"desc":"您通过消费支出88.0元.消费的订单号71.","budget_type":1,"budget_log_type":"consum","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T10:03:07.995981"},{"desc":"您通过退款收入88.0元.","budget_type":0,"budget_log_type":"refund","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T09:55:33.877371"}]
      */
 
-    @SerializedName("count")
-    private int mCount;
-    @SerializedName("next")
-    private String mNext;
-    @SerializedName("previous")
-    private String mPrevious;
-    /**
-     * "desc": "您通过红包收入1137.12元.",
-     * budget_type : 0
-     * budget_log_type : envelop
-     * budget_date : 2016-02-26
-     * status : 0
-     * budeget_detail_cash : 2.0
-     */
-
-    @SerializedName("results")
-    private List<ResultsEntity> mResults;
-
-    public void setCount(int count) {
-        this.mCount = count;
-    }
-
-    public void setNext(String next) {
-        this.mNext = next;
-    }
-
-    public void setPrevious(String previous) {
-        this.mPrevious = previous;
-    }
-
-    public void setResults(List<ResultsEntity> results) {
-        this.mResults = results;
-    }
+    private int count;
+    private String next;
+    private String previous;
+    private List<ResultsBean> results;
 
     public int getCount() {
-        return mCount;
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getNext() {
-        return mNext;
+        return next;
+    }
+
+    public void setNext(String next) {
+        this.next = next;
     }
 
     public String getPrevious() {
-        return mPrevious;
+        return previous;
     }
 
-    public List<ResultsEntity> getResults() {
-        return mResults;
+    public void setPrevious(String previous) {
+        this.previous = previous;
     }
 
-    public static class ResultsEntity implements Serializable {
-        @SerializedName("desc")
-        private String mDesc;
-        @SerializedName("budget_type")
-        private int mBudgetType;
-        @SerializedName("budget_log_type")
-        private String mBudgetLogType;
-        @SerializedName("budget_date")
-        private String mBudgetDate;
-        @SerializedName("status")
-        private int mStatus;
-        @SerializedName("budeget_detail_cash")
-        private double mBudegetDetailCash;
+    public List<ResultsBean> getResults() {
+        return results;
+    }
 
-        public void setDesc(String desc) {
-            this.mDesc = desc;
-        }
+    public void setResults(List<ResultsBean> results) {
+        this.results = results;
+    }
 
-        public void setBudgetType(int budgetType) {
-            this.mBudgetType = budgetType;
-        }
+    public static class ResultsBean {
+        /**
+         * desc : 您通过提现支出88.0元.
+         * budget_type : 1
+         * budget_log_type : cashout
+         * budget_date : 2017-05-09
+         * get_status_display : 待确定
+         * status : 2
+         * budeget_detail_cash : 88.0
+         * modified : 2017-05-09T10:22:30.096974
+         */
 
-        public void setBudgetLogType(String budgetLogType) {
-            this.mBudgetLogType = budgetLogType;
-        }
-
-        public void setBudgetDate(String budgetDate) {
-            this.mBudgetDate = budgetDate;
-        }
-
-        public void setStatus(int status) {
-            this.mStatus = status;
-        }
-
-        public void setBudegetDetailCash(double budegetDetailCash) {
-            this.mBudegetDetailCash = budegetDetailCash;
-        }
+        private String desc;
+        private int budget_type;
+        private String budget_log_type;
+        private String budget_date;
+        private String get_status_display;
+        private int status;
+        private double budeget_detail_cash;
+        private String modified;
 
         public String getDesc() {
-            return mDesc;
+            return desc;
         }
 
-        public int getBudgetType() {
-            return mBudgetType;
+        public void setDesc(String desc) {
+            this.desc = desc;
         }
 
-        public String getBudgetLogType() {
-            return mBudgetLogType;
+        public int getBudget_type() {
+            return budget_type;
         }
 
-        public String getBudgetDate() {
-            return mBudgetDate;
+        public void setBudget_type(int budget_type) {
+            this.budget_type = budget_type;
+        }
+
+        public String getBudget_log_type() {
+            return budget_log_type;
+        }
+
+        public void setBudget_log_type(String budget_log_type) {
+            this.budget_log_type = budget_log_type;
+        }
+
+        public String getBudget_date() {
+            return budget_date;
+        }
+
+        public void setBudget_date(String budget_date) {
+            this.budget_date = budget_date;
+        }
+
+        public String getGet_status_display() {
+            return get_status_display;
+        }
+
+        public void setGet_status_display(String get_status_display) {
+            this.get_status_display = get_status_display;
         }
 
         public int getStatus() {
-            return mStatus;
+            return status;
         }
 
-        public double getBudegetDetailCash() {
-            return mBudegetDetailCash;
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public double getBudeget_detail_cash() {
+            return budeget_detail_cash;
+        }
+
+        public void setBudeget_detail_cash(double budeget_detail_cash) {
+            this.budeget_detail_cash = budeget_detail_cash;
+        }
+
+        public String getModified() {
+            return modified;
+        }
+
+        public void setModified(String modified) {
+            this.modified = modified;
         }
     }
 }

@@ -174,7 +174,10 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
                     public void onNext(RefundMsgBean resp) {
                         new AlertDialog.Builder(mBaseActivity)
                             .setMessage(resp.getInfo())
-                            .setPositiveButton("确定", (dialog, which) -> dialog.dismiss())
+                            .setPositiveButton("确定", (dialog, which) -> {
+                                dialog.dismiss();
+                                finish();
+                            })
                             .show();
                         hideIndeterminateProgressDialog();
                     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -28,19 +29,24 @@
                         android:layout_height="match_parent"
                         android:fillViewport="true">
 
-                        <FrameLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            <android.support.v4.view.ViewPager
-                                android:id="@+id/view_pager"
+                            <com.youth.banner.Banner
+                                android:id="@+id/banner"
                                 android:layout_width="match_parent"
-                                android:layout_height="480dp"/>
+                                android:layout_height="800px"
+                                app:indicator_drawable_selected="@drawable/banner_select"
+                                app:indicator_drawable_unselected="@drawable/banner_unselect"
+                                app:indicator_height="2dp"
+                                app:indicator_margin="2dp"
+                                app:indicator_width="8dp"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="820px"
                                 android:background="@color/white"
                                 android:orientation="vertical">
 
@@ -61,7 +67,6 @@
                                         android:textSize="16dp"/>
 
                                 </LinearLayout>
-
 
                                 <LinearLayout
                                     android:id="@+id/ll_tag"
@@ -240,7 +245,7 @@
 
                             </LinearLayout>
 
-                        </FrameLayout>
+                        </LinearLayout>
 
                     </com.danlai.library.widget.pulltoload.MyScrollView>
 

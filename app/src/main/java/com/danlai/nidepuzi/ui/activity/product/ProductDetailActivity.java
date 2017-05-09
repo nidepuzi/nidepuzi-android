@@ -7,13 +7,10 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.CookieSyncManager;
@@ -27,8 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.danlai.library.utils.DateUtils;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
@@ -38,10 +33,10 @@ import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.library.widget.TagTextView;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.adapter.MyPagerAdapter;
 import com.danlai.nidepuzi.adapter.SkuColorAdapter;
 import com.danlai.nidepuzi.adapter.SkuSizeAdapter;
 import com.danlai.nidepuzi.base.BaseApi;
+import com.danlai.nidepuzi.base.BaseImageLoader;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityProductDetailBinding;
 import com.danlai.nidepuzi.entity.CartsInfoBean;
@@ -58,8 +53,8 @@ import com.danlai.nidepuzi.ui.activity.trade.PayInfoActivity;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.ShareUtils;
+import com.youth.banner.BannerConfig;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,12 +66,12 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
     private static final String POST_URL = "?imageMogr2/format/jpg/quality/70";
     private ProductDetailBean productDetail;
     private int cart_num = 0;
-    private boolean isAlive, isBoutique;
+    private boolean isBoutique;
     private Dialog dialog;
     private ImageView img, plusIv, minusIv;
     private TextView nameTv, skuTv, agentTv, saleTv, numTv, commitTv;
     private RecyclerView colorRv, sizeRv;
-    private int model_id, sku_id, item_id, num, current;
+    private int model_id, sku_id, item_id, num;
     private SkuSizeAdapter skuSizeAdapter;
     private LinearLayout colorLayout, sizeLayout;
 
@@ -198,7 +193,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         commitTv.setOnClickListener(this);
         b.pullToLoad.setScrollListener(
             (scrollView, x, y, oldx, oldy) -> {
-                float v = ((float) y) / (b.viewPager.getHeight() - b.tvTitle.getHeight());
+                float v = ((float) y) / (b.banner.getHeight() - b.tvTitle.getHeight());
                 if (v >= 0.25) {
                     b.tvTitle.setAlpha(1);
                 } else {
@@ -343,43 +338,16 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
     }
 
     private void initHeadImg(ProductDetailBean.DetailContentBean detail_content) {
-        ArrayList<ImageView> list = new ArrayList<>();
         List<String> head_imgs = detail_content.getHead_imgs();
-        int headNum = head_imgs.size();
-        for (int i = 0; i < headNum; i++) {
-            ImageView imageView = new ImageView(this);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            String watermark_op = detail_content.getWatermark_op();
-            if (watermark_op != null && !"".equals(watermark_op)) {
-                Glide.with(this).load(head_imgs.get(i) + POST_URL + "/" + watermark_op)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT).centerCrop()
-                    .placeholder(R.drawable.place_holder).into(imageView);
-            } else {
-                Glide.with(this).load(head_imgs.get(i) + POST_URL)
-                    .thumbnail(0.1f).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .centerCrop().placeholder(R.drawable.place_holder).into(imageView);
-            }
-            list.add(imageView);
+        for (int i = 0; i < head_imgs.size(); i++) {
+            String str = head_imgs.get(i) + POST_URL;
+            head_imgs.set(i, str);
         }
-        PagerAdapter viewPagerAdapter = new MyPagerAdapter(list);
-        b.viewPager.setAdapter(viewPagerAdapter);
-        isAlive = true;
-        current = 0;
-        if (headNum > 1) {
-            new Thread(() -> {
-                while (isAlive) {
-                    SystemClock.sleep(2000);
-                    runOnUiThread(() -> {
-                        b.viewPager.setCurrentItem(current++, false);
-                        if (current >= headNum) {
-                            current = 0;
-                        }
-                    });
-                }
-            }).start();
-        }
+        b.banner.setImageLoader(new BaseImageLoader());
+        b.banner.setImages(head_imgs);
+        b.banner.setIndicatorGravity(BannerConfig.CIRCLE_INDICATOR);
+        b.banner.start();
+        b.banner.setDelayTime(3000);
     }
 
     private void setStatusBar() {
@@ -397,7 +365,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
 
     @Override
     protected void onDestroy() {
-        isAlive = false;
         b.countView.cancel();
         super.onDestroy();
     }

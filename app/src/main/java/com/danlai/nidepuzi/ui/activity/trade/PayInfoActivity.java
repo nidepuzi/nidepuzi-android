@@ -15,10 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +43,6 @@ import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +62,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
     private static final String WX = "wx";
     private static final String BUDGET = "budget";
     private File file;
-    private String mCartIds, code, uuid, pay_extras, coupon_id, addressId, channel, order_no, id_no,
+    private String mCartIds, uuid, pay_extras, coupon_id, addressId, channel, id_no,
         state, city, district, address, name, mobile, face, back, side, card_facepath, card_backpath;
     private double payment, post_fee, total_fee, discount_fee, coupon_price, appCut, walletCash,
         coinCash, reallyPayment, realUseWallet, realUseCoin, totalDiscount;
@@ -74,8 +71,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
     private CartPayInfoAdapter mCartPayInfoAdapter;
     private AlertDialog mRuleDialog;
     private int needLevel, personalInfoLevel, order_id;
-    private List<CartsPayInfoBean.LogisticsCompanys> mLogisticCompanys = new ArrayList<>();
-    private List<String> mLogisticCompanyNames = new ArrayList<>();
 
     @Override
     public void getIntentUrl(Uri uri) {
@@ -109,7 +104,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
         b.cbRule.setOnCheckedChangeListener(this);
         b.cbCoin.setOnCheckedChangeListener(this);
         b.tvRule.setOnClickListener(this);
-        b.logisticLayout.setOnClickListener(this);
         b.btnId.setOnClickListener(this);
         b.imageIdFace.setOnClickListener(this);
         b.imageIdBack.setOnClickListener(this);
@@ -222,12 +216,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                         mCartIds = bean.getCartIds();
                         List<CartsPayInfoBean.CartListEntity> cartList = bean.getCartList();
                         mCartPayInfoAdapter.updateWithClear(cartList);
-                        mLogisticCompanyNames.clear();
-                        mLogisticCompanys.clear();
-                        mLogisticCompanys.addAll(bean.getLogisticsCompanyses());
-                        for (CartsPayInfoBean.LogisticsCompanys list : mLogisticCompanys) {
-                            mLogisticCompanyNames.add(list.getName());
-                        }
                         if (isFirst) {
                             boolean hideTop = true;
                             for (int i = 0; i < cartList.size(); i++) {
@@ -239,8 +227,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                             if (hideTop) {
                                 b.topLayout.setVisibility(View.GONE);
                             }
-                            b.tvLogisticCompany.setText(mLogisticCompanys.get(0).getName());
-                            code = mLogisticCompanys.get(0).getId();
                         }
                         post_fee = bean.getPostFee();
                         b.tvWallet.setText("¥" + JUtils.formatDouble(bean.getBudget_cash()));
@@ -378,9 +364,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                 } else {
                     payWithDialog();
                 }
-                break;
-            case R.id.logistic_layout:
-                new MyDialog1(this).show();
                 break;
             case R.id.btn_id:
                 if (b.etId.getVisibility() == View.VISIBLE) {
@@ -558,7 +541,7 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
             BaseApp.getTradeInteractor(this)
                 .shoppingCartCreateV2(mCartIds, addressId, channel,
                     (reallyPayment + realUseCoin + realUseWallet) + "", post_fee + "",
-                    totalDiscount + "", total_fee + "", uuid, pay_extras, code,
+                    totalDiscount + "", total_fee + "", uuid, pay_extras,
                     new ServiceResponse<PayInfoBean>(mBaseActivity) {
 
                         @Override
@@ -571,7 +554,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                         public void onNext(PayInfoBean payInfoBean) {
                             if (null != payInfoBean && payInfoBean.getTrade() != null) {
                                 order_id = payInfoBean.getTrade().getId();
-                                order_no = payInfoBean.getTrade().getTid();
                                 Gson gson = new Gson();
                                 if ((payInfoBean.getChannel() != null) && (!payInfoBean.getChannel()
                                     .equals("budget"))) {
@@ -664,8 +646,8 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
             .show();
     }
 
-    class MyDialog extends Dialog {
-        public MyDialog(Context context) {
+    private class MyDialog extends Dialog {
+        MyDialog(Context context) {
             super(context, R.style.MyDialog);
             setDialog();
         }
@@ -692,36 +674,6 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
                 MyDialog.this.dismiss();
             });
             MyDialog.this.setCanceledOnTouchOutside(true);
-            Window win = this.getWindow();
-            win.setGravity(Gravity.BOTTOM);
-            win.getDecorView().setPadding(0, 0, 0, 0);
-            WindowManager.LayoutParams lp = win.getAttributes();
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            win.setAttributes(lp);
-            super.setContentView(mView);
-        }
-    }
-
-
-    class MyDialog1 extends Dialog {
-
-        public MyDialog1(Context context) {
-            super(context, R.style.MyDialog);
-            setDialog();
-        }
-
-        private void setDialog() {
-            View mView = LayoutInflater.from(getContext()).inflate(R.layout.pop_logic, null);
-            ListView listView = (ListView) mView.findViewById(R.id.listview_wuliu);
-            listView.setAdapter(new ArrayAdapter<>(PayInfoActivity.this,
-                android.R.layout.simple_list_item_1, mLogisticCompanyNames));
-            listView.setOnItemClickListener((parent, view, position1, id) -> {
-                code = mLogisticCompanys.get(position1).getId();
-                b.tvLogisticCompany.setText(mLogisticCompanys.get(position1).getName());
-                MyDialog1.this.dismiss();
-            });
-            MyDialog1.this.setCanceledOnTouchOutside(true);
             Window win = this.getWindow();
             win.setGravity(Gravity.BOTTOM);
             win.getDecorView().setPadding(0, 0, 0, 0);

@@ -12,6 +12,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityDrawCashBinding;
 import com.danlai.nidepuzi.entity.ResultEntity;
+import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
@@ -38,21 +39,20 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
 
     @Override
     protected void initData() {
-//        BaseApp.getUserInteractor(this)
-//            .getUserInfo(new ServiceResponse<UserInfoBean>(mBaseActivity) {
-//                @Override
-//                public void onNext(UserInfoBean userNewBean) {
-//                    if (userNewBean != null) {
-//                        if (null != userNewBean.getUser_budget()) {
-//                            money = userNewBean.getUser_budget().getBudget_cash();
-//                            minMoney = userNewBean.getUser_budget().getCash_out_limit();
-//                        }
-//                        b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
-//                        b.nickName.setText(userNewBean.getNick());
-//                    }
-//                }
-//            });
-        money = 42432;
+        BaseApp.getUserInteractor(this)
+            .getUserInfo(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                @Override
+                public void onNext(UserInfoBean userNewBean) {
+                    if (userNewBean != null) {
+                        if (null != userNewBean.getUser_budget()) {
+                            money = userNewBean.getUser_budget().getBudget_cash();
+                            minMoney = userNewBean.getUser_budget().getCash_out_limit();
+                        }
+                        b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
+                        b.nickName.setText(userNewBean.getNick());
+                    }
+                }
+            });
         b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
         b.nickName.setText("旭茂");
         mCountDownTimer = new CountDownTimer(60000, 1000) {

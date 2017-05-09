@@ -57,10 +57,10 @@ public class TradeInteractorImpl implements TradeInteractor {
     public void shoppingCartCreateV2(String cart_ids, String addr_id, String channel,
                                      String payment, String post_fee, String discount_fee,
                                      String total_fee, String uuid, String pay_extras,
-                                     String code, ServiceResponse<PayInfoBean> response) {
+                                      ServiceResponse<PayInfoBean> response) {
 
             service.shoppingCartCreateV2(cart_ids, addr_id, channel, payment, post_fee,
-                discount_fee, total_fee, uuid, pay_extras, code)
+                discount_fee, total_fee, uuid, pay_extras)
                 .compose(new DefaultTransform<>())
                 .subscribe(response);
 

@@ -4,6 +4,7 @@ package com.danlai.nidepuzi.service.api;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
 import com.danlai.nidepuzi.entity.CartsNumResultBean;
 import com.danlai.nidepuzi.entity.CategoryDownBean;
+import com.danlai.nidepuzi.entity.EduBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
@@ -48,5 +49,11 @@ public interface MainService {
 
     @GET("/rest/v1/pmt/ninepic/today")
     Observable<List<MainTodayBean>> getMainTodayList();
+
+
+    @GET("/rest/v1/lesson/lessontopic")
+    Observable<EduBean> getEduBean(
+        @Query("page") int page);
+
 
 }

@@ -2,6 +2,7 @@ package com.danlai.nidepuzi.ui.activity.user;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,10 +12,16 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivitySettingBinding;
+import com.danlai.nidepuzi.entity.LogoutBean;
 import com.danlai.nidepuzi.entity.VersionBean;
+import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
+import com.danlai.nidepuzi.ui.activity.main.AboutCompanyActivity;
+import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.VersionManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author wisdom
@@ -25,22 +32,9 @@ public class SettingActivity extends BaseMVVMActivity<ActivitySettingBinding> im
 
     @Override
     protected void setListener() {
-        b.stop.setSwitchListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                JUtils.Toast("已关闭广告推送!");
-            } else {
-                JUtils.Toast("广告推送已开启!");
-            }
-        });
-        b.mode.setSwitchListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                JUtils.Toast("兼容模式已开启!");
-            } else {
-                JUtils.Toast("兼容模式已关闭!");
-            }
-        });
         b.clear.setOnClickListener(this);
         b.version.setOnClickListener(this);
+        b.tvLogout.setOnClickListener(this);
     }
 
     @Override
@@ -48,7 +42,9 @@ public class SettingActivity extends BaseMVVMActivity<ActivitySettingBinding> im
         updateCache();
         b.version.setSummary(JUtils.getAppVersionName());
         b.user.bindActivity(mBaseActivity, InformationActivity.class, null);
-        b.safe.bindActivity(mBaseActivity, SafeActivity.class, null);
+//        b.safe.bindActivity(mBaseActivity, SafeActivity.class, null);
+        b.about.bindActivity(mBaseActivity, AboutCompanyActivity.class, null);
+        b.bindPhone.bindActivity(mBaseActivity, LoginBindPhoneActivity.class, null);
     }
 
     @Override
@@ -91,6 +87,28 @@ public class SettingActivity extends BaseMVVMActivity<ActivitySettingBinding> im
                             versionManager.checkVersion(SettingActivity.this, versionBean.getVersion_code());
                         }
                     });
+                break;
+            case R.id.tv_logout:
+                new AlertDialog.Builder(this)
+                    .setTitle("注销登录")
+                    .setMessage("您确定要退出登录吗？")
+                    .setPositiveButton("注销", (dialog, which) -> {
+                        BaseApp.getUserInteractor(mBaseActivity)
+                            .customerLogout(new ServiceResponse<LogoutBean>(mBaseActivity) {
+                                @Override
+                                public void onNext(LogoutBean responseBody) {
+                                    if (responseBody.getCode() == 0) {
+                                        JUtils.Toast("退出成功");
+                                        EventBus.getDefault().post(new LogoutEvent());
+                                        LoginUtils.delLoginInfo(getApplicationContext());
+                                        readyGoThenKill(LoginActivity.class);
+                                    }
+                                }
+                            });
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                    .show();
                 break;
         }
 

@@ -4,6 +4,7 @@ package com.danlai.nidepuzi.module;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
 import com.danlai.nidepuzi.entity.CartsNumResultBean;
 import com.danlai.nidepuzi.entity.CategoryDownBean;
+import com.danlai.nidepuzi.entity.EduBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
@@ -33,4 +34,6 @@ public interface MainInteractor {
     void getTopic(ServiceResponse<UserTopic> serviceResponse);
 
     void getMainTodayList(ServiceResponse<List<MainTodayBean>> serviceResponse);
+
+    void getEduBean(int page,ServiceResponse<EduBean> serviceResponse);
 }

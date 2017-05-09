@@ -25,7 +25,7 @@ public class OrderHelper {
                 data.add(new OrderContent(entity.getId(), bean.getPic_path(), bean.getTitle(),
                     bean.getSku_name(), bean.getTotal_fee() / bean.getNum(), bean.getNum()));
             }
-            data.add(new OrderFooter(entity.getId(), entity.getPayment(), entity.getPostFee()));
+            data.add(new OrderFooter(entity.getId(), entity.getPayment(), entity.getPostFee(),entity.getStatus()));
         }
         return data;
     }

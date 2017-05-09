@@ -104,7 +104,11 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getShareContent(id);
+        if (id != -1) {
+            getShareContent(id);
+        } else {
+            b.ivShare.setVisibility(View.GONE);
+        }
     }
 
     private void getShareContent(int id) {

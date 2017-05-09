@@ -20,6 +20,7 @@ import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
+import com.danlai.nidepuzi.ui.activity.user.AccountDetailActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
 import com.danlai.nidepuzi.ui.activity.user.DrawCashActivity;
@@ -56,6 +57,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.userName.setOnClickListener(this);
         b.layoutCoupon.setOnClickListener(this);
         b.layoutWallet.setOnClickListener(this);
+        b.tvDrawCash.setOnClickListener(this);
         b.layoutAddress.setOnClickListener(this);
         b.inviteFriend.setOnClickListener(this);
         b.layoutAllOrder.setOnClickListener(this);
@@ -154,7 +156,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
             case R.id.layout_coupon:
                 readyGo(AllCouponActivity.class);
                 break;
-            case R.id.layout_wallet:
+            case R.id.tv_draw_cash:
                 readyGo(DrawCashActivity.class);
                 break;
             case R.id.layout_address:
@@ -186,6 +188,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.layout_achievement:
                 readyGo(AchievementActivity.class);
+                break;
+            case R.id.layout_wallet:
+                readyGo(AccountDetailActivity.class);
                 break;
         }
 

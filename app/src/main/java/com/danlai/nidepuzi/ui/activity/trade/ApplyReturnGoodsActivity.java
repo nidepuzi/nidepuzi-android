@@ -219,7 +219,10 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
                         new AlertDialog.Builder(ApplyReturnGoodsActivity.this)
                             .setMessage(resp.getInfo())
                             .setCancelable(false)
-                            .setPositiveButton("确认", (dialog1, which) -> ApplyReturnGoodsActivity.this.finish())
+                            .setPositiveButton("确认", (dialog1, which) -> {
+                                dialog1.dismiss();
+                                finish();
+                            })
                             .create()
                             .show();
                     }

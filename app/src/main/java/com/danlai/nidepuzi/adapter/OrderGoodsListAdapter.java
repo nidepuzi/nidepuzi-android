@@ -90,8 +90,7 @@ public class OrderGoodsListAdapter extends BaseAdapter {
             (state == BaseConst.ORDER_STATE_CONFIRM_RECEIVE)) {
             setBtnInfo(convertView, state, refund_state,
                 data.get(position).isKill_title(), data.get(position));
-            setBtnListener(convertView, state, refund_state, data.get(position).getId(),
-                data.get(position), position);
+            setBtnListener(convertView, state, refund_state, data.get(position).getId(), position);
         } else {
             convertView.findViewById(R.id.rl_info).setVisibility(View.GONE);
         }
@@ -227,8 +226,7 @@ public class OrderGoodsListAdapter extends BaseAdapter {
         }
     }
 
-    private void setBtnListener(View convertView, int state, int refund_state, int goods_id,
-                                AllOrdersBean.ResultsEntity.OrdersEntity goods_info, int position) {
+    private void setBtnListener(View convertView, int state, int refund_state, int goods_id, int position) {
         Button btn = (Button) convertView.findViewById(R.id.btn_order_proc);
         switch (state) {
             case BaseConst.ORDER_STATE_PAYED: {

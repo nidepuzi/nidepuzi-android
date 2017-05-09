@@ -361,6 +361,12 @@
         <activity
             android:name=".ui.activity.user.LoginBindPhoneActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.main.AboutCompanyActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AccountDetailActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service
             android:name=".service.UpdateService"

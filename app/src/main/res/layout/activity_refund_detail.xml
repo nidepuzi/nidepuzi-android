@@ -27,7 +27,7 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_DD"
+                    android:background="@color/bg_grey"
                     android:scrollbars="none">
 
                     <LinearLayout
@@ -238,7 +238,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_DD">
+                    android:background="@color/bg_grey">
 
                     <TextView
                         android:id="@+id/time"
@@ -466,7 +466,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:background="@color/color_DD"/>
+                    android:background="@color/bg_grey"/>
 
                 <include layout="@layout/common_gap"/>
 

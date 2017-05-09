@@ -258,57 +258,15 @@
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="12dp"/>
-
-                        <RelativeLayout
-                            android:id="@+id/logistic_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@color/white"
-                            android:paddingLeft="12dp"
-                            android:paddingRight="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="物流配送"
-                                android:textSize="14dp"/>
-
-                            <TextView
-                                android:id="@+id/tv_logistic_company"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="8dp"
-                                android:layout_toLeftOf="@+id/iv_logistic"
-                                android:textSize="14dp"/>
-
-                            <ImageView
-                                android:id="@+id/iv_logistic"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/icon_to_right"/>
-
-                        </RelativeLayout>
+                        <include layout="@layout/common_interval"/>
                     </LinearLayout>
-
-                    <include layout="@layout/common_gap"/>
 
                     <com.danlai.library.widget.NestedListView
                         android:id="@+id/lv_goods"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <include layout="@layout/common_gap"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"/>
+                    <include layout="@layout/common_interval"/>
 
                     <RelativeLayout
                         android:id="@+id/coupon_layout"
@@ -456,13 +414,7 @@
                             android:textSize="14dp"/>
                     </RelativeLayout>
 
-                    <include layout="@layout/common_gap"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"/>
-
-                    <include layout="@layout/common_gap"/>
+                    <include layout="@layout/common_interval"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -500,9 +452,6 @@
                             android:checked="true"/>
 
                     </LinearLayout>
-
-                    <include layout="@layout/common_gap"/>
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"

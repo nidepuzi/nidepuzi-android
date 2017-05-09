@@ -25,10 +25,14 @@ import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityOrderDetailBinding;
 import com.danlai.nidepuzi.entity.OrderDetailBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
+import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.RefreshOrderListEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
+import com.qiyukf.unicorn.api.YSFUserInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,6 +54,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         b.btnOrderPay.setOnClickListener(this);
         b.btnOrderCancel.setOnClickListener(this);
         payListView.setOnItemClickListener(this);
+        b.layoutService.setOnClickListener(this);
     }
 
     @Override
@@ -91,8 +96,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         closeIv.setOnClickListener(this);
     }
 
-    @Override
-    protected void initData() {
+    private void init() {
         if (order_id != -1) {
             showIndeterminateProgressDialog(false);
             BaseApp.getTradeInteractor(this)
@@ -112,6 +116,12 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
                     }
                 });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
     }
 
     private void fillDataToView(OrderDetailBean orderDetailBean) {
@@ -183,6 +193,17 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
                         b.btnOrderPay.setBackgroundResource(R.drawable.btn_common_grey);
                     }
                     break;
+                case BaseConst.ORDER_STATE_PAYED:
+                case BaseConst.ORDER_STATE_SENDED:
+                case BaseConst.ORDER_STATE_CONFIRM_RECEIVE:
+                case BaseConst.ORDER_STATE_TRADE_SUCCESS:
+                    b.layoutPay.setVisibility(View.GONE);
+                    b.layoutService.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    b.layoutPay.setVisibility(View.GONE);
+                    b.layoutService.setVisibility(View.GONE);
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -238,6 +259,25 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
+                break;
+            case R.id.layout_service:
+                BaseApp.getMainInteractor(mBaseActivity)
+                    .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                        @Override
+                        public void onNext(UserInfoBean userInfoBean) {
+                            String data = "[ " +
+                                "{\"key\":\"real_name\", \"value\":\"" + userInfoBean.getNick() + "\"}, " +
+                                "{\"key\":\"mobile_phone\", \"value\":\"" + userInfoBean.getMobile() + "\"}, " +
+                                "{\"key\":\"avatar\", \"value\": \"" + userInfoBean.getThumbnail() + "\"}]";
+                            String title = "铺子客服";
+                            YSFUserInfo ysfUserInfo = new YSFUserInfo();
+                            ysfUserInfo.userId = userInfoBean.getUser_id();
+                            ysfUserInfo.data = data;
+                            Unicorn.setUserInfo(ysfUserInfo);
+                            ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "Android客户端", "Android客户端");
+                            Unicorn.openServiceActivity(mBaseActivity, title, source);
+                        }
+                    });
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.danlai.nidepuzi.ui.fragment.main;
+package com.danlai.nidepuzi.ui.activity.user;
 
 import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
@@ -7,10 +7,10 @@ import com.danlai.library.manager.CustomLinearLayoutManager;
 import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.adapter.EduAdapter;
-import com.danlai.nidepuzi.base.BaseFragment;
-import com.danlai.nidepuzi.databinding.FragmentEduTabBinding;
-import com.danlai.nidepuzi.entity.EduBean;
+import com.danlai.nidepuzi.adapter.AccountDetailAdapter;
+import com.danlai.nidepuzi.base.BaseMVVMActivity;
+import com.danlai.nidepuzi.databinding.ActivityAccountDetailBinding;
+import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -19,25 +19,26 @@ import java.util.List;
 
 /**
  * @author wisdom
- * @date 2017年04月25日 下午4:59
+ * @date 2017年05月09日 上午11:53
  */
 
-public class EduTabFragment extends BaseFragment<FragmentEduTabBinding> {
+public class AccountDetailActivity extends BaseMVVMActivity<ActivityAccountDetailBinding> {
     private int page;
     private String next;
-    private EduAdapter adapter;
+    private AccountDetailAdapter adapter;
 
-    public static EduTabFragment newInstance() {
-        return new EduTabFragment();
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_account_detail;
     }
 
     @Override
     public View getLoadingView() {
-        return b.loadingView;
+        return b.layout;
     }
 
     @Override
-    public void initData() {
+    protected void initData() {
         showIndeterminateProgressDialog(false);
         page = 1;
         loadMoreData(true);
@@ -45,12 +46,12 @@ public class EduTabFragment extends BaseFragment<FragmentEduTabBinding> {
 
     @Override
     protected void initViews() {
-        b.xrv.setLayoutManager(new CustomLinearLayoutManager(mActivity));
+        b.xrv.setLayoutManager(new CustomLinearLayoutManager(mBaseActivity));
         b.xrv.setPullRefreshEnabled(true);
-        b.xrv.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
+        b.xrv.addItemDecoration(new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
-        adapter = new EduAdapter(mActivity);
+        adapter = new AccountDetailAdapter(mBaseActivity);
         b.xrv.setAdapter(adapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -72,18 +73,12 @@ public class EduTabFragment extends BaseFragment<FragmentEduTabBinding> {
         });
     }
 
-    @Override
-    protected int getContentViewId() {
-        return R.layout.fragment_edu_tab;
-    }
-
-
     private void loadMoreData(boolean clear) {
-        BaseApp.getMainInteractor(mActivity)
-            .getEduBean(page, new ServiceResponse<EduBean>(mActivity) {
+        BaseApp.getUserInteractor(mBaseActivity)
+            .budgetDetailBean(page, new ServiceResponse<BudgetDetailBean>(mBaseActivity) {
                 @Override
-                public void onNext(EduBean bean) {
-                    List<EduBean.ResultsBean> results = bean.getResults();
+                public void onNext(BudgetDetailBean budgetDetailBean) {
+                    List<BudgetDetailBean.ResultsBean> results = budgetDetailBean.getResults();
                     if (results != null && results.size() > 0) {
                         if (clear) {
                             adapter.updateWithClear(results);
@@ -91,10 +86,10 @@ public class EduTabFragment extends BaseFragment<FragmentEduTabBinding> {
                             adapter.update(results);
                         }
                     } else {
-                        b.layoutEmpty.setVisibility(View.VISIBLE);
+                        b.emptyLayout.setVisibility(View.VISIBLE);
                         b.xrv.setVisibility(View.GONE);
                     }
-                    next = bean.getNext();
+                    next = budgetDetailBean.getNext();
                     if (next != null && !"".equals(next)) {
                         page++;
                     } else {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.entity.AllOrdersBean;
+import com.danlai.nidepuzi.entity.AllOrdersBean.ResultsEntity.OrdersEntity;
 
 import java.util.List;
 
@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class GoodsListAdapter extends BaseAdapter {
 
-    private List<AllOrdersBean.ResultsEntity.OrdersEntity> packageBeanList;
+    private List<OrdersEntity> packageBeanList;
     private Context context;
 
-    public GoodsListAdapter(List<AllOrdersBean.ResultsEntity.OrdersEntity> packageBeanList, Context context) {
+    public GoodsListAdapter(List<OrdersEntity> packageBeanList, Context context) {
         this.packageBeanList = packageBeanList;
         this.context = context;
     }
@@ -53,7 +53,7 @@ public class GoodsListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        AllOrdersBean.ResultsEntity.OrdersEntity bean = packageBeanList.get(position);
+        OrdersEntity bean = packageBeanList.get(position);
         ViewUtils.loadImgToImgView(context, holder.imageView, bean.getPic_path());
         holder.name.setText(bean.getTitle());
         holder.price.setText("¥" + JUtils.formatDouble(bean.getTotal_fee()));

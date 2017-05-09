@@ -92,7 +92,7 @@ public class WaitSendAddressActivity extends BaseMVVMActivity<ActivityWaitSendAd
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_change_address;
+        return R.layout.activity_wait_send_address;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.danlai.nidepuzi.adapter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.OrderContent;
 import com.danlai.nidepuzi.entity.OrderFooter;
 import com.danlai.nidepuzi.entity.OrderHead;
@@ -120,6 +122,33 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 bundle.putInt("order_id", bean.getOrderId());
                 mActivity.readyGo(OrderDetailActivity.class, bundle);
             });
+            switch (bean.getStatus()) {
+                case BaseConst.ORDER_STATE_WAITPAY:
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setText("去付款");
+                    holder.btnDelete.setTextColor(Color.WHITE);
+                    holder.btnDelete.setBackgroundResource(R.drawable.btn_common_default);
+                    holder.btnDelete.setOnClickListener(v -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("order_id", bean.getOrderId());
+                        mActivity.readyGo(OrderDetailActivity.class, bundle);
+                    });
+                    break;
+                case BaseConst.ORDER_STATE_SENDED:
+                    holder.btnDelete.setVisibility(View.GONE);
+                    holder.btnDetail.setText("物流/详情");
+                    break;
+                case BaseConst.ORDER_STATE_TRADE_CLOSE:
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setText("删除");
+                    holder.btnDelete.setTextColor(mActivity.getResources().getColor(R.color.color_33));
+                    holder.btnDelete.setBackgroundResource(R.drawable.btn_common_black);
+                    holder.btnDelete.setOnClickListener(v -> JUtils.Toast("暂不支持删除订单功能!"));
+                    break;
+                default:
+                    holder.btnDelete.setVisibility(View.GONE);
+                    break;
+            }
         } else {
             holder.layoutFooter.setVisibility(View.GONE);
             holder.footerLine.setVisibility(View.GONE);

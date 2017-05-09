@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.danlai.library.widget.titleview.BaseTitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="关于你的铺子"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="你的铺子"
+            android:textColor="@color/colorAccent"
+            android:textSize="60sp"/>
+    </LinearLayout>
+
+</layout>

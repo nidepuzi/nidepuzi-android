@@ -97,7 +97,6 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         if (list.size() > 0) {
             mainTabAdapter.updateWithClear(list);
             b.bottomView.setVisibility(View.VISIBLE);
-            b.bottomLine.setVisibility(View.VISIBLE);
             int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
             b.recyclerTab.scrollBy(-scrollCount * width, 0);
             scrollCount = 0;

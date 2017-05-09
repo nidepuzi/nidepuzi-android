@@ -61,8 +61,7 @@ public interface TradeService {
         @Field("discount_fee") String discount_fee,
         @Field("total_fee") String total_fee,
         @Field("uuid") String uuid,
-        @Field("pay_extras") String pay_extras,
-        @Field("logistics_company_id") String code);
+        @Field("pay_extras") String pay_extras);
 
     //立即支付订单接口
     @FormUrlEncoded
