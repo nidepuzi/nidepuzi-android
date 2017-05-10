@@ -76,10 +76,9 @@ public class AllRefundsAdapter extends RecyclerView.Adapter<AllRefundsAdapter.Vi
         } else {
             holder.state.setText(entity.getStatus_display());
         }
-//        ViewUtils.loadImgToImgView(context, holder.good, entity.getPic_path());
-        ViewUtils.loadImgToImgViewWithPlaceholder(context,holder.good,entity.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.good, entity.getPic_path());
         holder.name.setText(entity.getTitle());
-        holder.size.setText("尺寸:" + entity.getSku_name());
+        holder.size.setText("规格:" + entity.getSku_name());
         holder.payment.setText("交易金额:" + JUtils.formatDouble(entity.getPayment()) +
             "x" + entity.getRefund_num());
         holder.refund.setText("退款金额:" + JUtils.formatDouble(entity.getRefund_fee()) +

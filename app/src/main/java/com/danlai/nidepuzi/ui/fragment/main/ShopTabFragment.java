@@ -9,6 +9,7 @@ import com.danlai.library.utils.StatusBarUtil;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
@@ -16,7 +17,9 @@ import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
-import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
+import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
+import com.danlai.nidepuzi.ui.activity.shop.SaleOrderActivity;
+import com.danlai.nidepuzi.ui.activity.shop.VisitActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
@@ -27,6 +30,7 @@ import com.danlai.nidepuzi.ui.activity.user.DrawCashActivity;
 import com.danlai.nidepuzi.ui.activity.user.InformationActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.activity.user.SettingActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.ShareUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -55,6 +59,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.imgMessage.setOnClickListener(this);
         b.userHead.setOnClickListener(this);
         b.userName.setOnClickListener(this);
+        b.layoutVisit.setOnClickListener(this);
         b.layoutCoupon.setOnClickListener(this);
         b.layoutWallet.setOnClickListener(this);
         b.tvDrawCash.setOnClickListener(this);
@@ -66,6 +71,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutAllRefund.setOnClickListener(this);
         b.layoutFans.setOnClickListener(this);
         b.layoutAchievement.setOnClickListener(this);
+        b.layoutIncome.setOnClickListener(this);
+        b.layoutSale.setOnClickListener(this);
+        b.layoutSaleOrder.setOnClickListener(this);
     }
 
     @Override
@@ -184,13 +192,24 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllOrderActivity.class, bundle);
                 break;
             case R.id.layout_fans:
-                readyGo(FansActivity.class);
+                JumpUtils.jumpToWebViewWithCookies(mActivity, "http://m.nidepuzi.com/mall/mama/invited",
+                    -1, BaseWebViewActivity.class, "粉丝");
                 break;
             case R.id.layout_achievement:
                 readyGo(AchievementActivity.class);
                 break;
             case R.id.layout_wallet:
                 readyGo(AccountDetailActivity.class);
+                break;
+            case R.id.layout_visit:
+                readyGo(VisitActivity.class);
+                break;
+            case R.id.layout_income:
+            case R.id.layout_sale:
+                readyGo(IncomeActivity.class);
+                break;
+            case R.id.layout_sale_order:
+                readyGo(SaleOrderActivity.class);
                 break;
         }
 

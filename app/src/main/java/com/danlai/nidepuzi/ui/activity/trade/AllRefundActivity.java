@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
 import com.danlai.library.utils.JUtils;
-import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.AllRefundsAdapter;
@@ -17,6 +16,7 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
+
 /**
  * @author wisdom
  * @date 17/4/7
@@ -55,7 +55,6 @@ public class AllRefundActivity extends BaseMVVMActivity<ActivityAllRefundBinding
         b.xrv.setLayoutManager(new CustomLinearLayoutManager(this));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
-        b.xrv.addItemDecoration(new SpaceItemDecoration(0, 0, 0, 12));
         b.xrv.setAdapter(adapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override

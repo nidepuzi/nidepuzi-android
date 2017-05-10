@@ -60,7 +60,7 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_vip:
-                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.nidepuzi.com/mall/boutiqueinvite",
+                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "http://m.nidepuzi.com/mall/boutiqueinvite",
                     -1, BaseWebViewActivity.class, false, false);
                 break;
             case R.id.service_layout:

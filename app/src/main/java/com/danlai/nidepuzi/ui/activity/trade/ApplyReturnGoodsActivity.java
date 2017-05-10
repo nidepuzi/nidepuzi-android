@@ -143,7 +143,7 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
     private void fillDataToView(AllOrdersBean.ResultsEntity.OrdersEntity goods) {
         if ((goods == null)) return;
 
-        ViewUtils.loadImgToImgView(this, b.imgGood, goods.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(this, b.imgGood, goods.getPic_path());
 
         b.txGoodName.setText(goods.getTitle());
         b.txGoodPrice.setText("￥" + goods.getTotal_fee());

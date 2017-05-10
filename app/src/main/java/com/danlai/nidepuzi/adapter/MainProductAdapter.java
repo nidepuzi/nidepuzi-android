@@ -60,7 +60,7 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         MainTodayBean.ItemsBean bean = data.get(position);
-        ViewUtils.loadImgToImgView(context, holder.image, bean.getPic());
+        ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.image, bean.getPic());
         holder.name.setText(bean.getName());
         String price = JUtils.formatDouble(bean.getPrice());
         holder.price.setText("售价: ¥" + price);

@@ -39,10 +39,12 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
 
     @Override
     protected void initData() {
+        showIndeterminateProgressDialog(false);
         BaseApp.getUserInteractor(this)
             .getUserInfo(new ServiceResponse<UserInfoBean>(mBaseActivity) {
                 @Override
                 public void onNext(UserInfoBean userNewBean) {
+                    hideIndeterminateProgressDialog();
                     if (userNewBean != null) {
                         if (null != userNewBean.getUser_budget()) {
                             money = userNewBean.getUser_budget().getBudget_cash();
@@ -51,6 +53,12 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
                         b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
                         b.nickName.setText(userNewBean.getNick());
                     }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    JUtils.Toast("获取零钱数目失败!");
+                    hideIndeterminateProgressDialog();
                 }
             });
         b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
@@ -118,19 +126,29 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
 
     private void setBtn() {
         if (money < minMoney) {
-            JUtils.Toast("您的零钱未满" + minMoney + "元，不满足提现条件");
+            b.tvMsg.setText("您的零钱未满" + minMoney + "元，不满足提现条件");
+            b.tvMsg.setVisibility(View.VISIBLE);
             setBtnUnClick();
         } else {
             if (drawMoney < minMoney) {
-                JUtils.Toast("提现最低金额需要" + minMoney + "元哦");
+                if (b.etMoney.getText().length() > 0) {
+                    b.tvMsg.setText("提现最低金额需要" + minMoney + "元哦");
+                    b.tvMsg.setVisibility(View.VISIBLE);
+                } else {
+                    b.tvMsg.setVisibility(View.GONE);
+                }
                 setBtnUnClick();
             } else if (drawMoney > money) {
-                JUtils.Toast("提现零钱超过账户可提额度");
+                b.tvMsg.setText("提现零钱超过账户可提额度");
+                b.tvMsg.setVisibility(View.VISIBLE);
                 setBtnUnClick();
             } else if (drawMoney > 200) {
-                JUtils.Toast("提现零钱超过微信红包限额");
+                b.tvMsg.setText("提现零钱超过微信红包限额");
+                b.tvMsg.setVisibility(View.VISIBLE);
                 setBtnUnClick();
             } else {
+                b.tvMsg.setText("");
+                b.tvMsg.setVisibility(View.GONE);
                 setBtnClick();
             }
         }
@@ -188,6 +206,7 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
                         drawMoney = 200;
                     } else {
                         b.etMoney.setText(money + "");
+                        b.etMoney.setSelection((money + "").length());
                     }
                     b.imgDrawAll.setImageResource(R.drawable.icon_wallet_select);
                 }

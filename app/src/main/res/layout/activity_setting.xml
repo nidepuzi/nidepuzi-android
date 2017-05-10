@@ -94,7 +94,7 @@
                     app:preference_icon="@drawable/icon_set_about"
                     app:preference_title="关于你的铺子"/>
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
                 <!--<com.danlai.library.widget.PreferenceView-->
                 <!--android:id="@+id/test"-->

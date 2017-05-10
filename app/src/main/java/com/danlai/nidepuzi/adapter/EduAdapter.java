@@ -60,7 +60,7 @@ public class EduAdapter extends RecyclerView.Adapter<EduAdapter.ViewHolder> {
         holder.num.setText("参与人数" + bean.getNum_attender());
         Glide.with(mActivity).load(bean.getCover_image()).into(holder.img);
         holder.itemView.setOnClickListener(v -> JumpUtils.jumpToWebViewWithCookies(mActivity, bean.getContent_link(), -1, BaseWebViewActivity.class,
-            bean.getTitle()+"测试测试测试测试测试测试测试测试测试测试测试测试测试测试", false));
+            bean.getTitle(), false));
     }
 
     @Override

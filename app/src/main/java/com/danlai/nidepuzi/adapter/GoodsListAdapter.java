@@ -54,7 +54,7 @@ public class GoodsListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         OrdersEntity bean = packageBeanList.get(position);
-        ViewUtils.loadImgToImgView(context, holder.imageView, bean.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.imageView, bean.getPic_path());
         holder.name.setText(bean.getTitle());
         holder.price.setText("¥" + JUtils.formatDouble(bean.getTotal_fee()));
         holder.num.setText("x" + bean.getNum());

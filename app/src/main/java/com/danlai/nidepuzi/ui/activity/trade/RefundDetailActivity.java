@@ -109,7 +109,7 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
                 b.phone.setText(s);
             }
         }
-        ViewUtils.loadImgToImgView(mBaseActivity, b.sdv, refundDetailBean.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(mBaseActivity, b.sdv, refundDetailBean.getPic_path());
         b.tvGoodName.setText(refundDetailBean.getTitle());
         b.tvGoodPrice.setText("¥" + refundDetailBean.getTotal_fee() + "x" + refundDetailBean.getRefund_num());
         b.tvGoodSize.setText("尺码：" + refundDetailBean.getSku_name());
@@ -121,7 +121,7 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
         RelativeLayout[] rls = {b.rlImg, b.rlImg1, b.rlImg2, b.rlImg3};
         if (refundDetailBean.getProof_pic() != null && refundDetailBean.getProof_pic().size() > 0) {
             for (int i = 0; i < refundDetailBean.getProof_pic().size(); i++) {
-                ViewUtils.loadImgToImgView(mBaseActivity, images[i],
+                ViewUtils.loadImgToImgViewWithPlaceholder(mBaseActivity, images[i],
                     refundDetailBean.getProof_pic().get(i));
                 rls[i].setVisibility(View.VISIBLE);
             }

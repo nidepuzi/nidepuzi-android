@@ -55,7 +55,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.price1.setText("¥" + (float) (Math.round(cartsInfoBean.getPrice() * 100)) / 100);
         holder.price2.setText("/¥" + (float) (Math.round(cartsInfoBean.getStd_sale_price() * 100)) / 100);
         holder.count.setText(cartsInfoBean.getNum() + "");
-        ViewUtils.loadImgToImgView(mActivity, holder.cartImage, cartsInfoBean.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.cartImage, cartsInfoBean.getPic_path());
         holder.cartImage.setOnClickListener(v -> {
             Intent intent = new Intent(mActivity, ProductDetailActivity.class);
             Bundle bundle = new Bundle();

@@ -155,7 +155,7 @@ public class OrderGoodsListAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.tx_good_size)).setText(data.get(position).getSku_name());
         ((TextView) convertView.findViewById(R.id.tx_good_num)).setText("x" + data.get(position).getNum());
         ImageView img_goods = (ImageView) convertView.findViewById(R.id.img_good);
-        ViewUtils.loadImgToImgView(context, img_goods, data.get(position).getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(context, img_goods, data.get(position).getPic_path());
         img_goods.setOnClickListener(v -> {
             int model_id = data.get(position).getModel_id();
             if (model_id != 0) {

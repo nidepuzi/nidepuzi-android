@@ -98,7 +98,7 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
     }
 
     private void fillDataToView(AllOrdersBean.ResultsEntity.OrdersEntity goods) {
-        ViewUtils.loadImgToImgView(this, b.imgGood, goods.getPic_path());
+        ViewUtils.loadImgToImgViewWithPlaceholder(this, b.imgGood, goods.getPic_path());
 
         b.txGoodName.setText(goods.getTitle());
         b.txGoodPrice.setText("￥" + goods.getTotal_fee());

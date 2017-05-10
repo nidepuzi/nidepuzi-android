@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/layout"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="70px"
+        android:layout_height="36dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -48,37 +48,28 @@
             android:textSize="13dp"/>
     </LinearLayout>
 
-    <include layout="@layout/common_gap"/>
+    <include layout="@layout/preference_line"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp">
 
-        <RelativeLayout
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            android:background="@drawable/choose_img_bg"
-            android:gravity="center">
-
-            <com.danlai.library.widget.RoundCornerImageView
-                android:id="@+id/good"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/place_holder"/>
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/good"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:layout_marginLeft="8dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="16dp"
             android:orientation="vertical">
 
             <TextView
@@ -87,6 +78,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_33"
                 android:textSize="12dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/size"
@@ -123,10 +119,10 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </LinearLayout>
 
-    <include layout="@layout/common_gap"/>
+    <include layout="@layout/common_interval"/>
+
 </LinearLayout>

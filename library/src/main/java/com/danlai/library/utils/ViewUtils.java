@@ -41,8 +41,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.danlai.library.R;
-import com.danlai.library.widget.glidemoudle.CropCircleTransformation;
-import com.danlai.library.widget.glidemoudle.GlideRoundTransform;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -219,26 +217,6 @@ public final class ViewUtils {
             .centerCrop()
             .into(img);
 
-    }
-
-    public static void loadImgToImgView(Context context, ImageView img, String picPath, int radius) {
-        if (null == picPath || "".equals(picPath)) return;
-        Glide.with(context)
-            .load(picPath)
-            .diskCacheStrategy(DiskCacheStrategy.RESULT)
-            .centerCrop()
-            .transform(new GlideRoundTransform(context, radius))
-            .into(img);
-    }
-
-    public static void loadImgToImgViewWithTransformCircle(Context context, ImageView img,
-                                                           String picPath) {
-        if (null == picPath || "".equals(picPath)) return;
-        Glide.with(context)
-            .load(picPath)
-            .diskCacheStrategy(DiskCacheStrategy.RESULT)
-            .bitmapTransform(new CropCircleTransformation(context))
-            .into(img);
     }
 
     public static void loadImgToImgViewWithPlaceholder(Context context, ImageView img, String picPath) {
