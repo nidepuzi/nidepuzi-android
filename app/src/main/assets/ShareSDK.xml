@@ -6,8 +6,8 @@
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
     <SinaWeibo
-        AppKey="568898243"
-        AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
+        AppKey="2475629754"
+        AppSecret="a3daa39a501ac9fcdb00cb73840fd7a1"
         Enable="true"
         Id="5"
         RedirectUrl="http://m.nidepuzi.com"
@@ -23,8 +23,8 @@
         SortId="2"/>
 
     <QZone
-        AppId="100371282"
-        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+        AppId="1105166296"
+        AppKey="KEYVEM8PJeqBE384GvD"
         Enable="true"
         Id="4"
         ShareByAppClient="true"
@@ -54,8 +54,8 @@
         SortId="6"/>
 
     <QQ
-        AppId="100371282"
-        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+        AppId="1105166296"
+        AppKey="KEYVEM8PJeqBE384GvD"
         Enable="true"
         Id="3"
         ShareByAppClient="true"

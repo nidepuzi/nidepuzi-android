@@ -28,6 +28,11 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
     }
 
     @Override
+    public boolean isNeedShow() {
+        return false;
+    }
+
+    @Override
     public View getLoadingView() {
         return b.layout;
     }
