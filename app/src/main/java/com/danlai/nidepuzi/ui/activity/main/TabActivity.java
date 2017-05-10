@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 
 import com.danlai.library.utils.FileUtils;
 import com.danlai.library.utils.JUtils;
@@ -22,12 +22,13 @@ import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
-import com.danlai.nidepuzi.ui.activity.user.LoginBindPhoneActivity;
-import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
+import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.ui.fragment.main.EduTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
 import com.danlai.nidepuzi.ui.fragment.product.TodayNewFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
+import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.VersionManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -38,6 +39,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import retrofit2.HttpException;
 
 
 public class TabActivity extends BaseActivity {
@@ -45,6 +47,7 @@ public class TabActivity extends BaseActivity {
     private long firstTime = 0;
     private UpdateBroadReceiver mUpdateBroadReceiver;
     private FragmentTabUtils mFragmentTabUtils;
+    private List<BaseFragment> fragments;
 //    public Handler mHandler;
 
     @Override
@@ -53,36 +56,9 @@ public class TabActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        bindPhone();
-    }
-
-    private void bindPhone() {
-        BaseApp.getMainInteractor(mBaseActivity)
-            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
-                @Override
-                public void onNext(UserInfoBean userInfoBean) {
-                    hideIndeterminateProgressDialog();
-                    String mobile = userInfoBean.getMobile();
-                    if (TextUtils.isEmpty(mobile)) {
-                        readyGo(LoginBindPhoneActivity.class);
-                    }
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    hideIndeterminateProgressDialog();
-                    readyGoThenKill(TabActivity.class);
-                }
-            });
-    }
-
-    @Override
-    public boolean isNeedShow() {
-        return false;
+    public View getLoadingView() {
+        return b.container;
     }
 
     @Override
@@ -92,7 +68,7 @@ public class TabActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        bindPhone();
+        mFragmentTabUtils = new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
         downLoadAddress();
         checkVersion();
         BaseApp.getMainInteractor(mBaseActivity)
@@ -104,6 +80,21 @@ public class TabActivity extends BaseActivity {
                         "{\"key\":\"mobile_phone\", \"value\":\"" + userInfoBean.getMobile() + "\"}, " +
                         "{\"key\":\"avatar\", \"value\": \"" + userInfoBean.getThumbnail() + "\"}]";
                     mFragmentTabUtils.setUserInfo(data, userInfoBean.getUser_id());
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    e.printStackTrace();
+                    if (e instanceof HttpException && ((HttpException) e).code() == 403) {
+                        LoginUtils.delLoginInfo(mBaseActivity);
+                        readyGoThenKill(LoginActivity.class);
+                    } else {
+                        mVaryViewHelperController.showNetworkError(view -> {
+                            refreshView();
+                            showNetworkError();
+                        });
+                        JUtils.Toast("信息获取失败,请点击重试!");
+                    }
                 }
             });
     }
@@ -117,13 +108,12 @@ public class TabActivity extends BaseActivity {
     @Override
     protected void initViews() {
         setSwipeBackEnable(false);
-        List<BaseFragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(TodayNewFragment.newInstance("每日焦点"));
 //        fragments.add(MainTabFragment.newInstance());
         fragments.add(EduTabFragment.newInstance());
         fragments.add(ShopTabFragment.newInstance());
         fragments.add(ServiceTabFragment.newInstance());
-        mFragmentTabUtils = new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
     }
 
     @Override

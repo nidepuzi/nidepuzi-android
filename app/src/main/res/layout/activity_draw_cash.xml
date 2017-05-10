@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:text="提现至微信账户"
+                    android:text="提现至微信红包"
                     android:textColor="@color/color_33"
                     android:textSize="14dp"/>
 

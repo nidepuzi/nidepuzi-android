@@ -12,6 +12,7 @@ import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
+import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
@@ -95,7 +96,10 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 @Override
                 public void onNext(UserInfoBean userInfoBean) {
                     b.userName.setText(userInfoBean.getNick());
-                    b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  " + userInfoBean.getUser_id());
+                    if (userInfoBean.getXiaolumm() != null) {
+                        b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  " + userInfoBean.getXiaolumm().getId());
+                        getVipData();
+                    }
                     if (userInfoBean.getUser_budget() != null) {
                         b.tvWallet.setText(userInfoBean.getUser_budget().getBudget_cash() + "");
                     }
@@ -111,6 +115,28 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                     initDataError();
                 }
             });
+    }
+
+    private void getVipData() {
+        BaseApp.getVipInteractor(mActivity)
+            .getMamaFortune()
+            .subscribe(new ServiceResponse<MamaFortune>(mActivity) {
+                @Override
+                public void onNext(MamaFortune mamaFortune) {
+                    MamaFortune.MamaFortuneBean fortune = mamaFortune.getMamaFortune();
+                    b.tvSaleOrder.setText(fortune.getOrderNum() + "");
+                    b.tvSale.setText(JUtils.formatDouble(fortune.getCarryValue()));
+                    b.tvVisit.setText(fortune.getTodayVisitorNum() + "");
+                    b.tvFans.setText(fortune.getFansNum() + "");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    JUtils.Toast("数据加载失败");
+                    initDataError();
+                }
+            });
+
     }
 
     @Override
