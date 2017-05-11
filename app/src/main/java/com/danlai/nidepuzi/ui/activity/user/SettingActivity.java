@@ -45,6 +45,7 @@ public class SettingActivity extends BaseMVVMActivity<ActivitySettingBinding> im
 //        b.safe.bindActivity(mBaseActivity, SafeActivity.class, null);
         b.about.bindActivity(mBaseActivity, AboutCompanyActivity.class, null);
         b.bindPhone.bindActivity(mBaseActivity, LoginBindPhoneActivity.class, null);
+        b.password.bindActivity(mBaseActivity, VerifyPhoneForgetActivity.class, null);
     }
 
     @Override

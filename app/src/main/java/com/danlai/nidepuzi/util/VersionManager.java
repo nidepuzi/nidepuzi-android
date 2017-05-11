@@ -63,7 +63,6 @@ public abstract class VersionManager {
                 }
             }
             View view = LayoutInflater.from(context).inflate(R.layout.update_dialog, null);
-
             dialog = new Dialog(context, R.style.CustomDialog);
             dialog.setContentView(view);
             dialog.setCancelable(false);

@@ -260,6 +260,7 @@ public class UserInfoBean {
     private String referal_from;
     private int last_renew_type;
     private String charge_status;
+    private String renew_time;
 
     public int getId() {
       return id;
@@ -323,6 +324,14 @@ public class UserInfoBean {
 
     public void setCharge_status(String charge_status) {
       this.charge_status = charge_status;
+    }
+
+    public String getRenew_time() {
+      return renew_time;
+    }
+
+    public void setRenew_time(String renew_time) {
+      this.renew_time = renew_time;
     }
   }
 

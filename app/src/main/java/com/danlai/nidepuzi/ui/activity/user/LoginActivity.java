@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -13,6 +14,7 @@ import com.danlai.nidepuzi.base.BaseAppManager;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.AccessToken;
 import com.danlai.nidepuzi.entity.CodeBean;
+import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.WxUserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.WxLoginEvent;
@@ -52,6 +54,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void setListener() {
         findViewById(R.id.wx_login).setOnClickListener(this);
         findViewById(R.id.phone_login).setOnClickListener(this);
+        findViewById(R.id.account_login).setOnClickListener(this);
     }
 
     public static String getRandomString(int length) {
@@ -140,6 +143,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.phone_login:
                 readyGo(PhoneLoginActivity.class);
                 break;
+            case R.id.account_login:
+                readyGo(AccountLoginActivity.class);
+                break;
         }
     }
 
@@ -191,34 +197,52 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                         new ServiceResponse<CodeBean>(mBaseActivity) {
                                             @Override
                                             public void onNext(CodeBean codeBean) {
-                                                hideIndeterminateProgressDialog();
-                                                JUtils.Toast(codeBean.getMsg());
                                                 if (0 == codeBean.getRcode()) {
-                                                    EventBus.getDefault().post(new LoginEvent());
-                                                    LoginUtils.saveLoginSuccess(true, mBaseActivity);
-                                                    readyGoThenKill(TabActivity.class);
+                                                    BaseApp.getMainInteractor(mBaseActivity)
+                                                        .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                                                            @Override
+                                                            public void onNext(UserInfoBean userInfoBean) {
+                                                                hideIndeterminateProgressDialog();
+                                                                UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
+                                                                if (bean != null && "effect".equals(bean.getStatus())) {
+                                                                    if (TextUtils.isEmpty(userInfoBean.getMobile())){
+                                                                        JUtils.Toast("绑定手机后才可以登录!");
+                                                                        readyGo(LoginBindPhoneActivity.class);
+                                                                    }else {
+                                                                        LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                                                                        EventBus.getDefault().post(new LoginEvent());
+                                                                        JUtils.Toast("登录成功!");
+                                                                        readyGoThenKill(TabActivity.class);
+                                                                    }
+                                                                } else {
+                                                                    JUtils.Toast("您不是会员暂时无法登录!");
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onError(Throwable e) {
+                                                                loginFail("登录失败,请重试!");
+                                                            }
+                                                        });
                                                 } else {
-                                                    LoginUtils.delLoginInfo(mBaseActivity);
+                                                    loginFail(codeBean.getMsg());
                                                 }
                                             }
 
                                             @Override
                                             public void onError(Throwable e) {
-                                                JUtils.Toast("登录失败");
-                                                hideIndeterminateProgressDialog();
+                                                loginFail("登录失败,请重试!");
                                             }
                                         });
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                JUtils.Toast("获取用户信息失败");
-                                hideIndeterminateProgressDialog();
+                                loginFail("获取用户信息失败,请重试!");
                             }
                         });
 
                 }
-
 
                 @Override
                 public void onError(Throwable e) {
@@ -228,6 +252,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             });
     }
 
+    private void loginFail(String msg) {
+        hideIndeterminateProgressDialog();
+        JUtils.Toast(msg);
+        LoginUtils.delLoginInfo(mBaseActivity);
+    }
 
     @Override
     protected void onDestroy() {

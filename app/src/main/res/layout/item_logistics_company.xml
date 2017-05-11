@@ -10,7 +10,7 @@
         android:id="@+id/tv_catalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_EE"
+        android:background="@color/bg_grey"
         android:gravity="bottom"
         android:padding="8dp"
         android:text="A"

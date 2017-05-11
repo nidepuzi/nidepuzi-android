@@ -11,7 +11,7 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 
 public interface ActivityInteractor {
 
-    void get_party_share_content(String id, ServiceResponse<ActivityBean> response);
+    void getActivityBean(String id, ServiceResponse<ActivityBean> response);
 
     void getStartAds(ServiceResponse<StartBean> response);
 }

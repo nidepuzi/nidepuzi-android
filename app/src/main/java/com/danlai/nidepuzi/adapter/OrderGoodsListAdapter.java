@@ -125,17 +125,6 @@ public class OrderGoodsListAdapter extends BaseAdapter {
                 if (assign_status_display != null) {
                     ((TextView) convertView.findViewById(R.id.tx_order_crtstate)).setText(assign_status_display);
                 }
-                if ((orderDetailEntity.getPackage_orders().get(i).getBook_time() != null)
-                    && orderDetailEntity.getPackage_orders().get(i).getAssign_time() == null
-                    && orderDetailEntity.getPackage_orders().get(i).getWeight_time() == null
-                    && orderDetailEntity.getOrders().get(position).getStatus() == 2) {
-                    Button btn = (Button) convertView.findViewById(R.id.btn_order_proc);
-                    btn.setOnClickListener(v -> new AlertDialog.Builder(context)
-                        .setCancelable(true)
-                        .setMessage("您的订单已经向工厂订货，暂不支持退款，请您耐心等待，在收货确认签收后申请退货，如有疑问请咨询铺子客服。")
-                        .setPositiveButton("确认", (dialog, which) -> dialog.dismiss())
-                        .show());
-                }
                 final int finalI = i;
                 textLogistic.setVisibility(View.VISIBLE);
                 convertView.findViewById(R.id.ll_item).setOnClickListener(v -> {

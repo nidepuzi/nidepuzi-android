@@ -274,7 +274,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
                             ysfUserInfo.userId = userInfoBean.getUser_id();
                             ysfUserInfo.data = data;
                             Unicorn.setUserInfo(ysfUserInfo);
-                            ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "Android客户端", "Android客户端");
+                            ConsultSource source = new ConsultSource("https://m.nidepuzi.com", "Android客户端", "Android客户端");
                             Unicorn.openServiceActivity(mBaseActivity, title, source);
                         }
                     });

@@ -12,8 +12,12 @@ import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityLoginBindPhoneBinding;
 import com.danlai.nidepuzi.entity.CodeBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
+import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
+import com.danlai.nidepuzi.util.LoginUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author wisdom-sun
@@ -129,9 +133,13 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
             .verifyCode(username, "bind", valid_code, new ServiceResponse<CodeBean>(mBaseActivity) {
                 @Override
                 public void onNext(CodeBean codeBean) {
-                    JUtils.Toast(codeBean.getMsg());
                     if (0 == codeBean.getRcode()) {
+                        LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                        EventBus.getDefault().post(new LoginEvent());
+                        JUtils.Toast("登录成功!");
                         readyGoThenKill(TabActivity.class);
+                    } else {
+                        JUtils.Toast(codeBean.getMsg());
                     }
                 }
             });

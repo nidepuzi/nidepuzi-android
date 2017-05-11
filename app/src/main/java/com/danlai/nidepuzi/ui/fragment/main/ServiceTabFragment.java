@@ -79,7 +79,7 @@ public class ServiceTabFragment extends BaseFragment<FragmentServiceTabBinding> 
                     "{\"key\":\"mobile_phone\", \"value\":\"" + mobile + "\"}, " +
                     "{\"key\":\"avatar\", \"value\": \"" + avatar + "\"}]";
                 Unicorn.setUserInfo(ysfUserInfo);
-                ConsultSource source = new ConsultSource("http://m.nidepuzi.com", "Android客户端", "Android客户端");
+                ConsultSource source = new ConsultSource("https://m.nidepuzi.com", "Android客户端", "Android客户端");
                 Unicorn.openServiceActivity(mActivity, title, source);
                 break;
         }

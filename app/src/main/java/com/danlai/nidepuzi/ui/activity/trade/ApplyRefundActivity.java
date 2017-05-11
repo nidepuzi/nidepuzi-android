@@ -129,8 +129,8 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
                 } else {
                     AlertDialog dialog = new AlertDialog.Builder(this)
                         .setCancelable(true)
-                        .setTitle("小鹿急速退款说明")
-                        .setMessage("退款立即退到小鹿零钱账户，该退款可以用于重新购买商品或者提现。")
+                        .setTitle("急速退款说明")
+                        .setMessage("退款立即退到零钱账户，该退款可以用于重新购买商品或者提现。")
                         .setPositiveButton("同意", (dialog1, which) -> {
                             dialog1.dismiss();
                             commit_apply();

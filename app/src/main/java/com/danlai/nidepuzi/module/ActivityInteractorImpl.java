@@ -24,8 +24,8 @@ public class ActivityInteractorImpl implements ActivityInteractor {
     }
 
     @Override
-    public void get_party_share_content(String id, ServiceResponse<ActivityBean> response) {
-        service.get_party_share_content(id)
+    public void getActivityBean(String id, ServiceResponse<ActivityBean> response) {
+        service.getActivityBean(id)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

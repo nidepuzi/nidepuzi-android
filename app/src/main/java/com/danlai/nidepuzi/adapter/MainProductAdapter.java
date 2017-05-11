@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.adapter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
-import com.danlai.nidepuzi.ui.activity.shop.NinePicActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
 
 import java.util.ArrayList;
@@ -65,32 +63,9 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
         String price = JUtils.formatDouble(bean.getPrice());
         holder.price.setText("售价: ¥" + price);
         String min = JUtils.formatDouble(bean.getProfit().getMin());
-        String max = JUtils.formatDouble(bean.getProfit().getMax());
-        if (bean.getProfit().getMin() == 0) {
-            min = "0";
-        }
-        if (bean.getProfit().getMax() == 0) {
-            max = "0";
-        }
-        holder.profit.setText("利润: ¥" + min + " ~ ¥" + max);
-        holder.productLayout.setOnClickListener(v -> {
-            try {
-                int modelId = bean.getModel_id();
-                Intent intent = new Intent(context, ProductDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("model_id", modelId);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            } catch (Exception ignored) {
-            }
-        });
-        holder.productDescLayout.setOnClickListener(v -> {
-            Intent intent = new Intent(context, NinePicActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("model_id", bean.getModel_id());
-            intent.putExtras(bundle);
-            context.startActivity(intent);
-        });
+        holder.profit.setText("利润: ¥" + min);
+        holder.productLayout.setOnClickListener(v -> jumpToProduct(bean));
+        holder.productDescLayout.setOnClickListener(v -> jumpToProduct(bean));
         holder.shareProductLayout.setOnClickListener(v -> {
             context.showIndeterminateProgressDialog(false);
             BaseApp.getProductInteractor(context)
@@ -111,7 +86,7 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
         holder.shareShopLayout.setOnClickListener(v -> {
             context.showIndeterminateProgressDialog(false);
             BaseApp.getActivityInteractor(context)
-                .get_party_share_content("8", new ServiceResponse<ActivityBean>(context) {
+                .getActivityBean("8", new ServiceResponse<ActivityBean>(context) {
                     @Override
                     public void onNext(ActivityBean activityBean) {
                         context.hideIndeterminateProgressDialog();
@@ -125,6 +100,12 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
                     }
                 });
         });
+    }
+
+    private void jumpToProduct(MainTodayBean.ItemsBean bean) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("model_id", bean.getModel_id());
+        context.readyGo(ProductDetailActivity.class, bundle);
     }
 
 

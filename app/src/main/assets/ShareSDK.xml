@@ -6,8 +6,8 @@
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
     <SinaWeibo
-        AppKey="2475629754"
-        AppSecret="a3daa39a501ac9fcdb00cb73840fd7a1"
+        AppKey="1433464940"
+        AppSecret="f53fea3cee88a57a19578cdeff0e239d"
         Enable="true"
         Id="5"
         RedirectUrl="http://m.nidepuzi.com"

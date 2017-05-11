@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.danlai.library.rx.RxCountDown;
@@ -11,6 +12,7 @@ import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityPhoneLoginBinding;
 import com.danlai.nidepuzi.entity.CodeBean;
+import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
@@ -60,7 +62,7 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_vip:
-                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "http://m.nidepuzi.com/mall/boutiqueinvite",
+                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.nidepuzi.com/mall/boutiqueinvite",
                     -1, BaseWebViewActivity.class, false, false);
                 break;
             case R.id.service_layout:
@@ -105,26 +107,52 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
                         .verifyCode(phone, "sms_login", code, new ServiceResponse<CodeBean>(mBaseActivity) {
                             @Override
                             public void onNext(CodeBean codeBean) {
-                                hideIndeterminateProgressDialog();
-                                JUtils.Toast(codeBean.getMsg());
                                 if (codeBean.getRcode() == 0) {
-                                    EventBus.getDefault().post(new LoginEvent());
-                                    LoginUtils.saveLoginSuccess(true, mBaseActivity);
-                                    readyGoThenKill(TabActivity.class);
+                                    BaseApp.getMainInteractor(mBaseActivity)
+                                        .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                                            @Override
+                                            public void onNext(UserInfoBean userInfoBean) {
+                                                hideIndeterminateProgressDialog();
+                                                UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
+                                                if (bean != null && "effect".equals(bean.getStatus())) {
+                                                    if (TextUtils.isEmpty(userInfoBean.getMobile())) {
+                                                        JUtils.Toast("绑定手机后才可以登录!");
+                                                        readyGo(LoginBindPhoneActivity.class);
+                                                    } else {
+                                                        LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                                                        EventBus.getDefault().post(new LoginEvent());
+                                                        JUtils.Toast("登录成功!");
+                                                        readyGoThenKill(TabActivity.class);
+                                                    }
+                                                } else {
+                                                    JUtils.Toast("您不是会员暂时无法登录!");
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                loginFail("登录失败,请重试!");
+                                            }
+                                        });
                                 } else {
-                                    LoginUtils.delLoginInfo(mBaseActivity);
+                                    loginFail(codeBean.getMsg());
                                 }
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                JUtils.Toast("登录失败");
-                                hideIndeterminateProgressDialog();
+                                loginFail("登录失败,请重试!");
                             }
                         });
                 }
                 break;
         }
+    }
+
+    private void loginFail(String msg) {
+        hideIndeterminateProgressDialog();
+        JUtils.Toast(msg);
+        LoginUtils.delLoginInfo(mBaseActivity);
     }
 
     public boolean checkMobileInput(String mobile) {

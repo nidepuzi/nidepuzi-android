@@ -122,7 +122,7 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         b.scrollLayout.setOnScrollListener(this);
         b.recyclerTab.setOnScrollCallback(this);
         b.imgMessage.setOnClickListener(this);
-        b.imgInvite.setOnClickListener(this);
+        b.layoutInvite.setOnClickListener(this);
         b.imgSearch.setOnClickListener(this);
     }
 
@@ -252,7 +252,7 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
             case R.id.img_message:
                 readyGo(MessageActivity.class);
                 break;
-            case R.id.img_invite:
+            case R.id.layout_invite:
                 readyGo(InviteActivity.class);
                 break;
             case R.id.img_search:

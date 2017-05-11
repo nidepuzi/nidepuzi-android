@@ -42,7 +42,7 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
         switch (v.getId()) {
             case R.id.btn:
                 BaseApp.getActivityInteractor(mBaseActivity)
-                    .get_party_share_content("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
+                    .getActivityBean("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
                         @Override
                         public void onNext(ActivityBean activityBean) {
                             ShareUtils.shareShop(activityBean, mBaseActivity);

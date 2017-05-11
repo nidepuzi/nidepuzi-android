@@ -1,11 +1,13 @@
 package com.danlai.nidepuzi.ui.activity.main;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.danlai.library.utils.FileUtils;
 import com.danlai.library.utils.JUtils;
@@ -22,6 +24,7 @@ import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
+import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.ui.fragment.main.EduTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
@@ -34,7 +37,10 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -80,6 +86,36 @@ public class TabActivity extends BaseActivity {
                         "{\"key\":\"mobile_phone\", \"value\":\"" + userInfoBean.getMobile() + "\"}, " +
                         "{\"key\":\"avatar\", \"value\": \"" + userInfoBean.getThumbnail() + "\"}]";
                     mFragmentTabUtils.setUserInfo(data, userInfoBean.getUser_id());
+                    UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
+                    if (bean != null && "effect".equals(bean.getStatus())) {
+                        String renewTime = bean.getRenew_time().replace("T", " ");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        try {
+                            Date date = sdf.parse(renewTime);
+                            long time = date.getTime() - new Date().getTime();
+                            int day = (int) (time / 1000 / 60 / 60 / 24);
+                            if (time / 1000 / 60 / 60 / 24 > 0) {
+                                day += 1;
+                            }
+                            Dialog dialog = new Dialog(mBaseActivity, R.style.CustomDialog);
+                            dialog.setContentView(R.layout.pop_vip_msg);
+                            dialog.setCancelable(true);
+                            ((TextView) dialog.findViewById(R.id.tv_day)).setText("" + day);
+                            dialog.findViewById(R.id.tv_join).setOnClickListener(v -> {
+                                dialog.dismiss();
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("model_id", 94);
+                                readyGo(ProductDetailActivity.class, bundle);
+                            });
+                            dialog.findViewById(R.id.iv_cancel).setOnClickListener(v -> dialog.dismiss());
+                            dialog.show();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        LoginUtils.delLoginInfo(mBaseActivity);
+                        readyGoThenKill(LoginActivity.class);
+                    }
                 }
 
                 @Override

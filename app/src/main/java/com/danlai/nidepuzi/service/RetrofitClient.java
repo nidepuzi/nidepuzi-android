@@ -48,7 +48,7 @@ public class RetrofitClient {
         SharedPreferences sharedPreferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);
         String baseUrl;
         if (!TextUtils.isEmpty(sharedPreferences.getString("BASE_URL", ""))) {
-            baseUrl = "http://" + sharedPreferences.getString("BASE_URL", "");
+            baseUrl = "https://" + sharedPreferences.getString("BASE_URL", "");
         } else {
             baseUrl = BaseApi.APP_BASE_URL;
         }

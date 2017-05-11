@@ -55,8 +55,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     @Override
     public void setListener() {
-        b.imgSet.setOnClickListener(this);
-        b.imgCart.setOnClickListener(this);
+        b.layoutSet.setOnClickListener(this);
+        b.layoutCart.setOnClickListener(this);
         b.imgMessage.setOnClickListener(this);
         b.userHead.setOnClickListener(this);
         b.userName.setOnClickListener(this);
@@ -177,10 +177,10 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
             case R.id.img_message:
                 readyGo(MessageActivity.class);
                 break;
-            case R.id.img_set:
+            case R.id.layout_set:
                 readyGo(SettingActivity.class);
                 break;
-            case R.id.img_cart:
+            case R.id.layout_cart:
                 readyGo(CartActivity.class);
                 break;
             case R.id.user_head:
@@ -198,7 +198,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.invite_friend:
                 BaseApp.getActivityInteractor(mActivity)
-                    .get_party_share_content("8", new ServiceResponse<ActivityBean>(mActivity) {
+                    .getActivityBean("8", new ServiceResponse<ActivityBean>(mActivity) {
                         @Override
                         public void onNext(ActivityBean activityBean) {
                             ShareUtils.shareShop(activityBean, mActivity);
@@ -218,7 +218,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllOrderActivity.class, bundle);
                 break;
             case R.id.layout_fans:
-                JumpUtils.jumpToWebViewWithCookies(mActivity, "http://m.nidepuzi.com/mall/mama/invited",
+                JumpUtils.jumpToWebViewWithCookies(mActivity, "https://m.nidepuzi.com/mall/mama/invited",
                     -1, BaseWebViewActivity.class, "粉丝");
                 break;
             case R.id.layout_achievement:

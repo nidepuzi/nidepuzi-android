@@ -19,7 +19,7 @@
     <color name="transparent_4c">#4C000000</color>
 
     <color name="white_10">#E5FFFFFF</color>
-    <color name="bg_grey">#F0F0F0</color>
+    <color name="bg_grey">#EEEEEE</color>
     <color name="bg_grey3">#33DADADA</color>
     <color name="limegreen">#009900</color>
     <color name="F3F3F4">#F3F3F4</color>
@@ -37,6 +37,5 @@
     <color name="color_BB">#BBBBBB</color>
     <color name="color_CC">#CCCCCC</color>
     <color name="color_DD">#DDDDDD</color>
-    <color name="color_EE">#EEEEEE</color>
 
 </resources>

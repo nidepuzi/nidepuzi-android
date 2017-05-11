@@ -24,7 +24,9 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
+import cn.sharesdk.wechat.moments.WechatMoments;
 
 /**
  * Created by wisdom on 17/3/9.
@@ -59,7 +61,7 @@ public class ShareUtils {
         });
         view.findViewById(R.id.layout_code).setOnClickListener(v -> {
             dialog.dismiss();
-            JUtils.Toast("已经保存二维码");
+            JUtils.Toast("该商品暂未创建二维码");
         });
         view.findViewById(R.id.layout_cancel).setOnClickListener(v -> dialog.dismiss());
         Window window = dialog.getWindow();
@@ -93,6 +95,21 @@ public class ShareUtils {
             Platform plat = ShareSDK.getPlatform(SinaWeibo.NAME);
             showShare(plat.getName(), activity, bean);
         });
+        view.findViewById(R.id.layout_moment).setOnClickListener(v -> {
+            dialog.dismiss();
+            Platform plat = ShareSDK.getPlatform(WechatMoments.NAME);
+            showShare(plat.getName(), activity, bean);
+        });
+        view.findViewById(R.id.layout_qzone).setOnClickListener(v -> {
+            dialog.dismiss();
+            Platform plat = ShareSDK.getPlatform(QZone.NAME);
+            showShare(plat.getName(), activity, bean);
+        });
+        view.findViewById(R.id.layout_copy).setOnClickListener(v -> {
+            dialog.dismiss();
+            JUtils.Toast("已复制链接到粘贴板!");
+            JUtils.copyToClipboard(bean.getShareLink());
+        });
         view.findViewById(R.id.layout_cancel).setOnClickListener(v -> dialog.dismiss());
         Window window = dialog.getWindow();
         assert window != null;
@@ -100,11 +117,10 @@ public class ShareUtils {
         wlp.gravity = Gravity.BOTTOM;
         wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(wlp);
-        window.setWindowAnimations(R.style.BottomDialogAnim);
         dialog.show();
     }
 
-    public static void showShare(String platform, Context context, ActivityBean bean) {
+    private static void showShare(String platform, Context context, ActivityBean bean) {
         OnekeyShare oks = new OnekeyShare();
         oks.setPlatform(platform);
         oks.disableSSOWhenAuthorize();
@@ -114,7 +130,7 @@ public class ShareUtils {
         oks.setImageUrl(bean.getShareIcon());
         oks.setUrl(bean.getShareLink());
         oks.setSite("你的铺子");
-        oks.setSiteUrl("http://m.nidepuzi.com/mall/");
+        oks.setSiteUrl("https://m.nidepuzi.com/mall/");
         oks.show(context);
     }
 
@@ -128,7 +144,7 @@ public class ShareUtils {
         oks.setImageUrl(bean.getShare_img());
         oks.setUrl(bean.getShare_link());
         oks.setSite("你的铺子");
-        oks.setSiteUrl("http://m.nidepuzi.com/mall/");
+        oks.setSiteUrl("https://m.nidepuzi.com/mall/");
         oks.show(context);
     }
 

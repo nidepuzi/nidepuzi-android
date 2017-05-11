@@ -50,7 +50,7 @@
     </declare-styleable>
 
     <declare-styleable name="PasswordEditText">
-        <attr name="iconShow" format="integer"/>
-        <attr name="iconHide" format="integer"/>
+        <attr name="iconShow" format="reference"/>
+        <attr name="iconHide" format="reference"/>
     </declare-styleable>
 </resources>

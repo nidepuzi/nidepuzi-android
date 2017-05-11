@@ -26,7 +26,7 @@ public class PasswordEditText extends EditText {
      * This area is added as padding to increase the clickable area of the icon
      */
     @SuppressWarnings("FieldCanBeLocal")
-    private static int EXTRA_TAPPABLE_AREA = 50;
+    private static int EXTRA_TAPPABLE_AREA = 200;
 
     @DrawableRes
     private int showPwIcon = R.drawable.eye1;

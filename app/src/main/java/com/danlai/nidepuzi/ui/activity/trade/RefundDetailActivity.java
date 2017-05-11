@@ -103,7 +103,7 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
         for (String s : split) {
             if (s.contains("市")) {
                 b.address.setText(s);
-            } else if (s.contains("小鹿")) {
+            } else if (s.contains("小鹿") || s.contains("铺子")) {
                 b.name.setText("铺子售后");
             } else {
                 b.phone.setText(s);

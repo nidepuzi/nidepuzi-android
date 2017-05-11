@@ -15,7 +15,7 @@ public interface ActivityService {
 
     //活动内容分享
     @GET("/rest/v1/activitys/{id}/get_share_params")
-    Observable<ActivityBean> get_party_share_content(
+    Observable<ActivityBean> getActivityBean(
         @Path("id") String id);
 
     @GET("/rest/v1/activitys/startup_diagrams")

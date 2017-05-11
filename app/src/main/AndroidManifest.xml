@@ -376,6 +376,15 @@
         <activity
             android:name=".ui.activity.shop.SaleOrderActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.AccountLoginActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.VerifyPhoneForgetActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.SetPasswordActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service
             android:name=".service.UpdateService"

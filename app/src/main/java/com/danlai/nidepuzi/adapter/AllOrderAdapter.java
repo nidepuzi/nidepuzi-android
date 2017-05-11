@@ -90,13 +90,14 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initContent(ContentHolder holder, OrderContent bean) {
-        if (isShow) {
-            holder.ivSave.setVisibility(View.VISIBLE);
-            holder.tvSave.setVisibility(View.VISIBLE);
-        } else {
-            holder.ivSave.setVisibility(View.GONE);
-            holder.tvSave.setVisibility(View.GONE);
-        }
+        // TODO: 17/5/11 暂时隐藏
+//        if (isShow) {
+//            holder.ivSave.setVisibility(View.VISIBLE);
+//            holder.tvSave.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.ivSave.setVisibility(View.GONE);
+//            holder.tvSave.setVisibility(View.GONE);
+//        }
         if (isShare) {
             holder.ivSave.setImageResource(R.drawable.icon_earn);
         } else {
@@ -139,7 +140,8 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     holder.btnDetail.setText("物流/详情");
                     break;
                 case BaseConst.ORDER_STATE_TRADE_CLOSE:
-                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    // TODO: 17/5/11 暂时隐藏
+                    holder.btnDelete.setVisibility(View.GONE);
                     holder.btnDelete.setText("删除");
                     holder.btnDelete.setTextColor(mActivity.getResources().getColor(R.color.color_33));
                     holder.btnDelete.setBackgroundResource(R.drawable.btn_common_black);

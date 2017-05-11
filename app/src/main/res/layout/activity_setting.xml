@@ -33,6 +33,15 @@
 
                 <include layout="@layout/preference_line"/>
 
+                <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:preference_icon="@drawable/icon_set_password"
+                    app:preference_title="修改密码"/>
+
+                <include layout="@layout/preference_line"/>
+
                 <!--<com.danlai.library.widget.PreferenceView-->
                 <!--android:id="@+id/safe"-->
                 <!--android:layout_width="match_parent"-->
@@ -47,7 +56,6 @@
                     app:preference_title="绑定手机"/>
 
                 <include layout="@layout/common_interval"/>
-
 
                 <com.danlai.library.widget.PreferenceView
                     android:id="@+id/clear"

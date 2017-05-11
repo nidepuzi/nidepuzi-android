@@ -113,7 +113,7 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
 
     private void getShareContent(int id) {
         BaseApp.getActivityInteractor(this)
-            .get_party_share_content(id + "", new ServiceResponse<ActivityBean>(mBaseActivity) {
+            .getActivityBean(id + "", new ServiceResponse<ActivityBean>(mBaseActivity) {
                 @Override
                 public void onNext(ActivityBean activityBean) {
                     if (null != activityBean) {
