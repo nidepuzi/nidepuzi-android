@@ -65,12 +65,14 @@ public class CartHistoryAdapter extends RecyclerView.Adapter<CartHistoryAdapter.
                     cartsInfoBean.getId() + "", new ServiceResponse<CartsHisBean>(mActivity) {
                         @Override
                         public void onNext(CartsHisBean cartsHisBean) {
-                            mActivity.hideIndeterminateProgressDialog();
                             if (null != cartsHisBean) {
                                 if (cartsHisBean.getCode() == 0) {
-                                    mActivity.removeHistory(cartsInfoBean);
+                                    mList.remove(position);
+                                    notifyItemRemoved(position);
+                                    notifyItemChanged(position, mList.size());
                                     mActivity.refreshCartList();
                                 } else {
+                                    mActivity.hideIndeterminateProgressDialog();
                                     JUtils.Toast(cartsHisBean.getInfo());
                                 }
                             }

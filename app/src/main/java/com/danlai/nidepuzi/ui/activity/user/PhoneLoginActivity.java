@@ -79,6 +79,8 @@ public class PhoneLoginActivity extends BaseMVVMActivity<ActivityPhoneLoginBindi
                                 @Override
                                 public void onNext(CodeBean codeBean) {
                                     JUtils.Toast(codeBean.getMsg());
+                                    b.etPhone.setFocusable(false);
+                                    b.etCode.setFocusable(true);
                                 }
                             });
                     }).subscribe(new ServiceResponse<Integer>(mBaseActivity) {

@@ -182,6 +182,8 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
                         @Override
                         public void onNext(ResultEntity resultEntity) {
                             JUtils.Toast(resultEntity.getInfo());
+                            b.etMoney.setFocusable(false);
+                            b.etCode.setFocusable(true);
                         }
 
                         @Override

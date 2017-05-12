@@ -50,7 +50,6 @@ public interface MainService {
     @GET("/rest/v1/pmt/ninepic/today")
     Observable<List<MainTodayBean>> getMainTodayList();
 
-
     @GET("/rest/v1/lesson/lessontopic")
     Observable<EduBean> getEduBean(
         @Query("page") int page);

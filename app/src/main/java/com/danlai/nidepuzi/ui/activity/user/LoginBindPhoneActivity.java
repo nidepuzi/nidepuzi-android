@@ -85,6 +85,8 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
                                 @Override
                                 public void onNext(CodeBean codeBean) {
                                     JUtils.Toast(codeBean.getMsg());
+                                    b.registerName.setFocusable(false);
+                                    b.checkCode.setFocusable(true);
                                 }
                             });
                     }).subscribe(new ServiceResponse<Integer>(mBaseActivity) {

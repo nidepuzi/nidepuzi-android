@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:ems="1"
-                    android:text="优惠券"
+                    android:text="满减券"
                     android:textColor="@color/color_DD"
                     android:textSize="16sp"/>
 

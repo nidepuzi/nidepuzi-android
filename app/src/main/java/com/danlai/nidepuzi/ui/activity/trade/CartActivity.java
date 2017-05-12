@@ -160,9 +160,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
             });
     }
 
-    public void removeHistory(CartsInfoBean cartsInfoBean) {
-        cartHisList.remove(cartsInfoBean);
-        cartHisAdapter.notifyDataSetChanged();
+    public void removeHistory() {
         if (cartHisList.size() == 0) b.tvLine.setVisibility(View.GONE);
     }
 

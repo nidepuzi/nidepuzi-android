@@ -16,9 +16,11 @@ import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
+import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
+import com.danlai.nidepuzi.module.VipInteractor;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
 import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
@@ -42,6 +44,8 @@ import com.danlai.nidepuzi.util.ShareUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import io.reactivex.Observable;
 
 /**
  * @author wisdom
@@ -132,16 +136,20 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     }
 
     private void getVipData() {
-        BaseApp.getVipInteractor(mActivity)
-            .getMamaFortune()
-            .subscribe(new ServiceResponse<MamaFortune>(mActivity) {
+        VipInteractor interactor = BaseApp.getVipInteractor(mActivity);
+        Observable.mergeDelayError(interactor.getMamaFortune(), interactor.getRecentCarry("0", "1"))
+            .subscribe(new ServiceResponse<Object>(mActivity) {
                 @Override
-                public void onNext(MamaFortune mamaFortune) {
-                    MamaFortune.MamaFortuneBean fortune = mamaFortune.getMamaFortune();
-                    b.tvSaleOrder.setText(fortune.getOrderNum() + "");
-                    b.tvSale.setText(JUtils.formatDouble(fortune.getCarryValue()));
-                    b.tvVisit.setText(fortune.getTodayVisitorNum() + "");
-                    b.tvFans.setText(fortune.getFansNum() + "");
+                public void onNext(Object o) {
+                    if (o instanceof MamaFortune) {
+                        MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMamaFortune();
+                        b.tvSale.setText(JUtils.formatDouble(fortune.getCarryValue()));
+                        b.tvFans.setText(fortune.getFansNum() + "");
+                    } else if (o instanceof RecentCarryBean) {
+                        RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
+                        b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));
+                        b.tvSaleOrder.setText(Integer.toString(entity.getOrderNum()));
+                    }
                 }
 
                 @Override
@@ -150,7 +158,6 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                     initDataError();
                 }
             });
-
     }
 
     @Override
