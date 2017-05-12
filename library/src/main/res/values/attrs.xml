@@ -43,6 +43,7 @@
         <attr name="preference_hide_icon" format="boolean"/>
         <attr name="preference_show_switch" format="boolean"/>
         <attr name="preference_desc_color" format="color"/>
+        <attr name="preference_hide_right" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="ClearEditText">

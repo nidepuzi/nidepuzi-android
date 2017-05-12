@@ -2,10 +2,9 @@ package com.danlai.nidepuzi.module;
 
 import com.danlai.nidepuzi.entity.CategoryBean;
 import com.danlai.nidepuzi.entity.ChooseListBean;
-import com.danlai.nidepuzi.entity.MMCarryBean;
-import com.danlai.nidepuzi.entity.MMShoppingBean;
-import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.FansBean;
+import com.danlai.nidepuzi.entity.MMCarryBean;
+import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.MamaSelfListBean;
 import com.danlai.nidepuzi.entity.MamaUrl;
@@ -14,6 +13,7 @@ import com.danlai.nidepuzi.entity.OderCarryBean;
 import com.danlai.nidepuzi.entity.ProductNinePicBean;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
+import com.danlai.nidepuzi.entity.ShopBean;
 import com.danlai.nidepuzi.entity.WxQrcode;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
@@ -39,7 +39,7 @@ public interface VipInteractor {
     void getChooseList(int page, String sort_field, String cid, int reverse,
                        ServiceResponse<ChooseListBean> response);
 
-    Observable<MMShoppingBean> getShareShopping();
+    void  getShopBean(ServiceResponse<ShopBean> response);
 
     Observable<MamaUrl> getMamaUrl();
 

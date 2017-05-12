@@ -1,7 +1,10 @@
 package com.danlai.nidepuzi.ui.fragment.main;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.danlai.library.utils.JUtils;
@@ -29,9 +32,11 @@ import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
 import com.danlai.nidepuzi.ui.activity.user.DrawCashActivity;
 import com.danlai.nidepuzi.ui.activity.user.InformationActivity;
+import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.activity.user.SettingActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
+import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.ShareUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,6 +49,10 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 
 public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implements View.OnClickListener {
+
+    private int type = 0;
+    private Dialog vipDialog;
+
     public static ShopTabFragment newInstance() {
         return new ShopTabFragment();
     }
@@ -93,12 +102,17 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     public void initData() {
         BaseApp.getMainInteractor(mActivity)
             .getProfile(new ServiceResponse<UserInfoBean>(mFragment) {
+
                 @Override
                 public void onNext(UserInfoBean userInfoBean) {
                     b.userName.setText(userInfoBean.getNick());
                     if (userInfoBean.getXiaolumm() != null) {
                         b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  " + userInfoBean.getXiaolumm().getId());
                         getVipData();
+                        type = userInfoBean.getXiaolumm().getLast_renew_type();
+                    } else {
+                        LoginUtils.delLoginInfo(mActivity);
+                        mActivity.readyGoThenKill(LoginActivity.class);
                     }
                     if (userInfoBean.getUser_budget() != null) {
                         b.tvWallet.setText(userInfoBean.getUser_budget().getBudget_cash() + "");
@@ -142,6 +156,17 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     @Override
     protected void initViews() {
         EventBus.getDefault().register(this);
+        vipDialog = new Dialog(mActivity, R.style.CustomDialog);
+        vipDialog.setContentView(R.layout.pop_join_vip);
+        vipDialog.setCancelable(true);
+        ((TextView) vipDialog.findViewById(R.id.tv_btn)).setText("成为掌柜");
+        ((TextView) vipDialog.findViewById(R.id.tv_desc)).setText(Html.fromHtml("成为正式<big>掌柜</big>才可以提现哦!"));
+        vipDialog.findViewById(R.id.cancel).setOnClickListener(v -> vipDialog.dismiss());
+        vipDialog.findViewById(R.id.tv_btn).setOnClickListener(v -> {
+            vipDialog.dismiss();
+            JumpUtils.jumpToWebViewWithCookies(mActivity,
+                "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
+        });
     }
 
     @Override
@@ -191,7 +216,11 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllCouponActivity.class);
                 break;
             case R.id.tv_draw_cash:
-                readyGo(DrawCashActivity.class);
+                if (type == 0 || type == 15) {
+                    vipDialog.show();
+                } else {
+                    readyGo(DrawCashActivity.class);
+                }
                 break;
             case R.id.layout_address:
                 readyGo(AddressActivity.class);

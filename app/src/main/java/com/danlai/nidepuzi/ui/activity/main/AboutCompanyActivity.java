@@ -1,5 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.main;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityAboutCompanyBinding;
@@ -13,6 +14,11 @@ public class AboutCompanyActivity extends BaseMVVMActivity<ActivityAboutCompanyB
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_about_company;
+    }
+
+    @Override
+    protected void initViews() {
+        b.tvVersion.setText(JUtils.getAppVersionName());
     }
 
     @Override

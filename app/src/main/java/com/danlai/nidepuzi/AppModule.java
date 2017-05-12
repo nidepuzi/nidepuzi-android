@@ -22,7 +22,7 @@ import com.danlai.nidepuzi.service.api.ActivityService;
 import com.danlai.nidepuzi.service.api.AddressService;
 import com.danlai.nidepuzi.service.api.CartsService;
 import com.danlai.nidepuzi.service.api.MainService;
-import com.danlai.nidepuzi.service.api.MamaService;
+import com.danlai.nidepuzi.service.api.VipService;
 import com.danlai.nidepuzi.service.api.ProductService;
 import com.danlai.nidepuzi.service.api.TradeService;
 import com.danlai.nidepuzi.service.api.UserService;
@@ -119,13 +119,13 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public MamaService provideVipApi(Retrofit retrofit) {
-        return retrofit.create(MamaService.class);
+    public VipService provideVipApi(Retrofit retrofit) {
+        return retrofit.create(VipService.class);
     }
 
     @Singleton
     @Provides
-    public VipInteractor provideVipInteractor(MamaService service) {
+    public VipInteractor provideVipInteractor(VipService service) {
         return new VipInteractorImpl(service);
     }
 

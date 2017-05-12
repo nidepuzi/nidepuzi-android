@@ -37,17 +37,18 @@
                     android:layout_height="wrap_content"
                     app:preference_desc="你的铺子"
                     app:preference_hide_icon="true"
+                    app:preference_hide_right="true"
                     app:preference_title="店名"/>
 
                 <include layout="@layout/preference_line"/>
 
-                <com.danlai.library.widget.PreferenceView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:preference_hide_icon="true"
-                    app:preference_title="店铺介绍"/>
+                <!--<com.danlai.library.widget.PreferenceView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:preference_hide_icon="true"-->
+                <!--app:preference_title="店铺介绍"/>-->
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
                 <RelativeLayout
                     android:id="@+id/head_layout"
@@ -75,7 +76,7 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <com.danlai.library.widget.CircleImageView
                             android:id="@+id/head_layout_img"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
@@ -86,54 +87,55 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
-                            android:src="@drawable/common_right"/>
+                            android:src="@drawable/common_right"
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                 </RelativeLayout>
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
-                <RelativeLayout
-                    android:id="@+id/code_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:minHeight="?android:listPreferredItemHeightSmall"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/code_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:minHeight="?android:listPreferredItemHeightSmall"-->
+                <!--android:paddingLeft="16dp"-->
+                <!--android:paddingRight="16dp">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:maxLines="1"
-                        android:text="店主名片"
-                        android:textColor="@color/color_33"
-                        android:textSize="16sp"/>
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="店主名片"-->
+                <!--android:textColor="@color/color_33"-->
+                <!--android:textSize="16sp"/>-->
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:id="@+id/code_layout_img"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_margin="8dp"
-                            android:src="@color/green"/>
+                <!--<ImageView-->
+                <!--android:id="@+id/code_layout_img"-->
+                <!--android:layout_width="32dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:src="@color/green"/>-->
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:src="@drawable/common_right"/>
-                    </LinearLayout>
+                <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:src="@drawable/common_right"/>-->
+                <!--</LinearLayout>-->
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -146,39 +148,41 @@
                     android:textSize="14sp"/>
 
                 <com.danlai.library.widget.PreferenceView
+                    android:id="@+id/nick_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:preference_desc="XX"
                     app:preference_hide_icon="true"
+                    app:preference_hide_right="true"
                     app:preference_title="昵称"/>
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
                 <com.danlai.library.widget.PreferenceView
                     android:id="@+id/birthday_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:preference_desc="1995-10-10"
                     app:preference_hide_icon="true"
                     app:preference_title="生日"/>
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
-                <com.danlai.library.widget.PreferenceView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:preference_desc="女"
-                    app:preference_hide_icon="true"
-                    app:preference_title="性别"/>
+                <!--<com.danlai.library.widget.PreferenceView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:preference_desc="女"-->
+                <!--app:preference_hide_icon="true"-->
+                <!--app:preference_title="性别"/>-->
 
-                <include layout="@layout/preference_line"/>
+                <!--<include layout="@layout/preference_line"/>-->
 
-                <com.danlai.library.widget.PreferenceView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:preference_desc="上海-杨浦区"
-                    app:preference_hide_icon="true"
-                    app:preference_title="地区"/>
+                <!--<com.danlai.library.widget.PreferenceView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:preference_desc="上海-杨浦区"-->
+                <!--app:preference_hide_icon="true"-->
+                <!--app:preference_title="地区"/>-->
 
             </LinearLayout>
 

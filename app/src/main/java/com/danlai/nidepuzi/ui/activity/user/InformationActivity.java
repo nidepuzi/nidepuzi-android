@@ -4,9 +4,14 @@ import android.app.DatePickerDialog;
 import android.view.View;
 import android.widget.DatePicker;
 
+import com.bumptech.glide.Glide;
+import com.danlai.library.utils.JUtils;
+import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityInformationBinding;
+import com.danlai.nidepuzi.entity.UserInfoBean;
+import com.danlai.nidepuzi.service.ServiceResponse;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +27,24 @@ public class InformationActivity extends BaseMVVMActivity<ActivityInformationBin
     @Override
     public boolean isNeedShow() {
         return false;
+    }
+
+    @Override
+    protected void initData() {
+        BaseApp.getMainInteractor(mBaseActivity)
+            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+                @Override
+                public void onNext(UserInfoBean userInfoBean) {
+                    Glide.with(mBaseActivity).load(userInfoBean.getThumbnail()).into(b.headLayoutImg);
+                    b.nickLayout.setSummary(userInfoBean.getNick());
+                }
+
+
+                @Override
+                public void onError(Throwable e) {
+                    JUtils.Toast("信息获取失败!");
+                }
+            });
     }
 
     @Override

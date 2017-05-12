@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CartPayInfoAdapter;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityPayInfoBinding;
 import com.danlai.nidepuzi.entity.AddressBean;
 import com.danlai.nidepuzi.entity.AddressResultBean;
@@ -39,6 +41,7 @@ import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddAddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AddressSelectActivity;
 import com.danlai.nidepuzi.ui.activity.user.SelectCouponActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
 
@@ -94,6 +97,21 @@ public class PayInfoActivity extends BaseMVVMActivity<ActivityPayInfoBinding>
             .setMessage(getResources().getString(R.string.buy_rule))
             .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
             .create();
+        if (!((BaseApp) getApplication()).isShow()) {
+            Dialog vipDialog = new Dialog(mBaseActivity, R.style.CustomDialog);
+            vipDialog.setContentView(R.layout.pop_join_vip);
+            vipDialog.setCancelable(true);
+            ((TextView) vipDialog.findViewById(R.id.tv_btn)).setText("立刻使用");
+            ((TextView) vipDialog.findViewById(R.id.tv_desc)).setText(Html.fromHtml("您还有<big>200</big>元购物礼券哦!"));
+            vipDialog.findViewById(R.id.cancel).setOnClickListener(v -> vipDialog.dismiss());
+            vipDialog.findViewById(R.id.tv_btn).setOnClickListener(v -> {
+                vipDialog.dismiss();
+                JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
+                    "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
+            });
+            vipDialog.show();
+            ((BaseApp) getApplication()).setShow(true);
+        }
     }
 
     @Override

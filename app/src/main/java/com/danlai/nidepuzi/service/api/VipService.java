@@ -4,7 +4,7 @@ package com.danlai.nidepuzi.service.api;
 import com.danlai.nidepuzi.entity.CategoryBean;
 import com.danlai.nidepuzi.entity.ChooseListBean;
 import com.danlai.nidepuzi.entity.MMCarryBean;
-import com.danlai.nidepuzi.entity.MMShoppingBean;
+import com.danlai.nidepuzi.entity.ShopBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
@@ -31,7 +31,7 @@ import retrofit2.http.Query;
  * Created by wisdom on 16/11/23.
  */
 
-public interface MamaService {
+public interface VipService {
 
     //获取粉丝列表
     @GET("/rest/v2/mama/fans")
@@ -73,7 +73,7 @@ public interface MamaService {
         @Query("reverse") int reverse);
 
     @GET("/rest/v1/pmt/cushop/customer_shop")
-    Observable<MMShoppingBean> getShareShopping();
+    Observable<ShopBean> getShop();
 
     @GET("/rest/v1/mmwebviewconfig")
     Observable<MamaUrl> getMamaUrl(

@@ -35,6 +35,7 @@ import cn.sharesdk.framework.ShareSDK;
 public class BaseApp extends MultiDexApplication {
     private static Context mContext;
     private AppComponent component;
+    private boolean isShow;
 
     public static Context getInstance() {
         return mContext;
@@ -44,6 +45,7 @@ public class BaseApp extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         ShareSDK.initSDK(this);
+        isShow = false;
 //        Thread.setDefaultUncaughtExceptionHandler(new MyUnCaughtExceptionHandler());
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
@@ -77,6 +79,14 @@ public class BaseApp extends MultiDexApplication {
             }
         }
         return false;
+    }
+
+    public boolean isShow() {
+        return isShow;
+    }
+
+    public void setShow(boolean show) {
+        isShow = show;
     }
 
     //异常退出的时候,自动重启

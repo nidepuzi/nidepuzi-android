@@ -40,19 +40,17 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding>
     @Override
     protected void initData() {
         showIndeterminateProgressDialog(false);
-        BaseApp.getUserInteractor(this)
-            .getUserInfo(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+        BaseApp.getMainInteractor(this)
+            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
                 @Override
                 public void onNext(UserInfoBean userNewBean) {
                     hideIndeterminateProgressDialog();
-                    if (userNewBean != null) {
-                        if (null != userNewBean.getUser_budget()) {
-                            money = userNewBean.getUser_budget().getBudget_cash();
-                            minMoney = userNewBean.getUser_budget().getCash_out_limit();
-                        }
-                        b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
-                        b.nickName.setText(userNewBean.getNick());
+                    if (userNewBean.getUser_budget() != null) {
+                        money = userNewBean.getUser_budget().getBudget_cash();
+                        minMoney = userNewBean.getUser_budget().getCash_out_limit();
                     }
+                    b.tvMoney.setText((float) (Math.round(money * 100)) / 100 + "元");
+                    b.nickName.setText(userNewBean.getNick());
                 }
 
                 @Override

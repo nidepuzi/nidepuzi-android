@@ -3,6 +3,7 @@ package com.danlai.nidepuzi.ui.activity.product;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -170,6 +171,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         skuTv = ((TextView) view.findViewById(R.id.sku));
         agentTv = ((TextView) view.findViewById(R.id.agent_price));
         saleTv = ((TextView) view.findViewById(R.id.sale_price));
+        saleTv.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         plusIv = ((ImageView) view.findViewById(R.id.plus));
         minusIv = ((ImageView) view.findViewById(R.id.minus));
         numTv = ((TextView) view.findViewById(R.id.num));
@@ -295,6 +297,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         b.name.setText(detailContent.getName());
         b.agentPrice.setText("¥" + detailContent.getLowest_agent_price());
         b.salePrice.setText("/¥" + detailContent.getLowest_std_sale_price());
+        b.salePrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         if (detailContent.getOffshelf_time() != null) {
             String offshelf_time = detailContent.getOffshelf_time().replace("T", " ");
             long left = DateUtils.calcLeftTime(offshelf_time);

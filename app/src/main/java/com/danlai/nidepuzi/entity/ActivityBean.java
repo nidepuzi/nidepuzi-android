@@ -34,6 +34,16 @@ public class ActivityBean {
     @SerializedName("share_icon")
     private String mShareIcon;
 
+    public ActivityBean() {
+    }
+
+    public ActivityBean(String activeDec, String title, String shareLink, String shareIcon) {
+        mActiveDec = activeDec;
+        mTitle = title;
+        mShareLink = shareLink;
+        mShareIcon = shareIcon;
+    }
+
     public String getActiveDec() {
         return mActiveDec;
     }

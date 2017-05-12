@@ -46,8 +46,8 @@ public class BaseConst {
     public static final String ALIPAY_APP_ID = "2017042206893641";
 
     //成交订单类别
-    public static final int ORDER_SHARE = 0;
-    public static final int ORDER_SELF = 1;
+    public static final int ORDER_SHARE = 4;
+    public static final int ORDER_SELF = 0;
 
 
     public static final String BASE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()

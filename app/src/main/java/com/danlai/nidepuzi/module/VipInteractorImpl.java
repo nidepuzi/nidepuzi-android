@@ -4,7 +4,7 @@ import com.danlai.library.rx.DefaultTransform;
 import com.danlai.nidepuzi.entity.CategoryBean;
 import com.danlai.nidepuzi.entity.ChooseListBean;
 import com.danlai.nidepuzi.entity.MMCarryBean;
-import com.danlai.nidepuzi.entity.MMShoppingBean;
+import com.danlai.nidepuzi.entity.ShopBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
@@ -17,7 +17,7 @@ import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
 import com.danlai.nidepuzi.entity.WxQrcode;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.danlai.nidepuzi.service.api.MamaService;
+import com.danlai.nidepuzi.service.api.VipService;
 
 import java.util.List;
 
@@ -31,10 +31,10 @@ import io.reactivex.Observable;
  */
 
 public class VipInteractorImpl implements VipInteractor {
-    private final MamaService service;
+    private final VipService service;
 
     @Inject
-    public VipInteractorImpl(MamaService service) {
+    public VipInteractorImpl(VipService service) {
         this.service = service;
     }
 
@@ -88,9 +88,10 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
-    public Observable<MMShoppingBean> getShareShopping() {
-        return service.getShareShopping()
-            .compose(new DefaultTransform<>());
+    public void getShopBean(ServiceResponse<ShopBean> response) {
+        service.getShop()
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
     }
 
     @Override

@@ -68,6 +68,9 @@ public class PreferenceView extends RelativeLayout implements View.OnClickListen
                 mSwitchCompat.setVisibility(VISIBLE);
             }
         }
+        if (array.getBoolean(R.styleable.PreferenceView_preference_hide_right, false)) {
+            hideImg();
+        }
         TextView titleText = ((TextView) view.findViewById(R.id.title));
         summaryText = ((TextView) view.findViewById(R.id.summary));
         setOnClickListener(this);

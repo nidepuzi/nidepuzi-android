@@ -17,6 +17,7 @@ import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
+import com.danlai.nidepuzi.entity.ShopBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
@@ -85,11 +86,14 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
         });
         holder.shareShopLayout.setOnClickListener(v -> {
             context.showIndeterminateProgressDialog(false);
-            BaseApp.getActivityInteractor(context)
-                .getActivityBean("8", new ServiceResponse<ActivityBean>(context) {
+            BaseApp.getVipInteractor(context)
+                .getShopBean(new ServiceResponse<ShopBean>(context) {
                     @Override
-                    public void onNext(ActivityBean activityBean) {
+                    public void onNext(ShopBean shopBean) {
                         context.hideIndeterminateProgressDialog();
+                        ShopBean.ShopInfoBean info = shopBean.getShop_info();
+                        ActivityBean activityBean = new ActivityBean(info.getDesc(), info.getName(),
+                            info.getShop_link(), info.getThumbnail());
                         ShareUtils.shareShop(activityBean, context);
                     }
 
