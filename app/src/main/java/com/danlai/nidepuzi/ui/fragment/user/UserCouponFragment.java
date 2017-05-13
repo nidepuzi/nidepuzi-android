@@ -72,6 +72,8 @@ public class UserCouponFragment extends BaseFragment<FragmentUserCouponBinding> 
             status = 3;
         } else if (type == BaseConst.USED_COUPON) {
             status = 1;
+        } else if (type == BaseConst.FREEZE_COUPON) {
+            status = 2;
         }
         b.recyclerView.setLayoutManager(new CustomLinearLayoutManager(mActivity));
         mCouponAdapter = new CouponAdapter(mActivity, type);

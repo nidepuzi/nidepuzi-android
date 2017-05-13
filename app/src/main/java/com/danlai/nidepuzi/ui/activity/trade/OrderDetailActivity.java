@@ -55,6 +55,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         b.btnOrderCancel.setOnClickListener(this);
         payListView.setOnItemClickListener(this);
         b.layoutService.setOnClickListener(this);
+        b.tvOrderId.setOnClickListener(this);
     }
 
     @Override
@@ -278,6 +279,10 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
                             Unicorn.openServiceActivity(mBaseActivity, title, source);
                         }
                     });
+                break;
+            case R.id.tv_order_id:
+                JUtils.copyToClipboard(tid);
+                JUtils.Toast("已复制订单号到粘贴板!");
                 break;
         }
     }

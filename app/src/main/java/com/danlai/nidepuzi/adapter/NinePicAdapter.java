@@ -119,7 +119,7 @@ public class NinePicAdapter extends BaseAdapter {
             if (mContext instanceof BaseMVVMActivity) {
                 mContext.showIndeterminateProgressDialog(true);
             }
-            if (JUtils.isPermission(mContext,"android.permission.WRITE_EXTERNAL_STORAGE")){
+            if (JUtils.isPermission(mContext, "android.permission.WRITE_EXTERNAL_STORAGE")) {
                 mFiles.clear();
                 JUtils.copyToClipboard(description);
                 if (picArray.size() > 0) {
@@ -128,8 +128,14 @@ public class NinePicAdapter extends BaseAdapter {
                     shareToWx(description);
                 }
                 JUtils.ToastLong("努力分享中,请稍等几秒钟...");
-            }else {
-                JUtils.Toast("你的铺子需要存储权限存储图片,请再次点击保存并打开权限许可.");
+            } else {
+                hideLoading();
+                Intent localIntent = new Intent();
+                localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
+                mContext.startActivity(localIntent);
+                JUtils.Toast("你的铺子需要存储权限存储图片,请打开存储权限再次操作.");
             }
         });
         holder.copy.setOnClickListener(v -> {

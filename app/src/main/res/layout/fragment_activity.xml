@@ -20,7 +20,7 @@
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="280px"
+                    android:layout_height="340px"
                     app:indicator_drawable_selected="@drawable/banner_select"
                     app:indicator_drawable_unselected="@drawable/banner_unselect"
                     app:indicator_height="2dp"

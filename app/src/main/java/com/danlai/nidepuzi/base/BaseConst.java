@@ -29,9 +29,10 @@ public class BaseConst {
 
     //优惠券状态
     public static final int UNUSED_COUPON = 0;
-    public static final int PAST_COUPON = 1;
-    public static final int USED_COUPON = 2;
-    public static final int DISABLE_COUPON = 3;
+    public static final int FREEZE_COUPON = 1;
+    public static final int PAST_COUPON = 2;
+    public static final int USED_COUPON = 3;
+    public static final int DISABLE_COUPON = 4;
 
     //订单类型
     public static final int ALL_ORDER = 0;

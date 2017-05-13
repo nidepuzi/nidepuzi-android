@@ -68,6 +68,8 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             holder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
             holder.rl.setBackgroundResource(R.drawable.img_coupon_unused);
             holder.imgFlag.setImageResource(R.drawable.icon_coupon_use);
+        } else if (mCouponTyp == BaseConst.FREEZE_COUPON) {
+            holder.imgFlag.setImageResource(R.drawable.icon_coupon_normal);
         } else if (mCouponTyp == BaseConst.PAST_COUPON) {
             holder.imgFlag.setImageResource(R.drawable.icon_coupon_past);
         } else if (mCouponTyp == BaseConst.USED_COUPON) {

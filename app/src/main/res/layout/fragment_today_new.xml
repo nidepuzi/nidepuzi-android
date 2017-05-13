@@ -29,31 +29,35 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 
-            <ImageView
-                android:id="@+id/img_search"
+            <RelativeLayout
+                android:id="@+id/layout_search"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_height="45dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_search"
-                android:visibility="gone"/>
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/icon_search"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layout_invite"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_alignParentRight="true">
+                android:layout_toLeftOf="@id/layout_search">
+                <!--android:layout_alignParentRight="true">-->
 
                 <ImageView
-                    android:id="@+id/img_invite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="8dp"
                     android:src="@drawable/icon_invite"/>
 
             </RelativeLayout>
@@ -78,7 +82,7 @@
                     <com.youth.banner.Banner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
-                        android:layout_height="280px"
+                        android:layout_height="340px"
                         app:indicator_drawable_selected="@drawable/banner_select"
                         app:indicator_drawable_unselected="@drawable/banner_unselect"
                         app:indicator_height="2dp"

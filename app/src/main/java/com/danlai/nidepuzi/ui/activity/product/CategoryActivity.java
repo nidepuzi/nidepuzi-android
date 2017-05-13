@@ -2,7 +2,9 @@ package com.danlai.nidepuzi.ui.activity.product;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Pair;
 import android.view.View;
@@ -68,8 +70,31 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
 
     @Override
     protected void initData() {
-        showIndeterminateProgressDialog(false);
-        downloadJson("");
+        if (JUtils.isPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE")) {
+            showIndeterminateProgressDialog(false);
+            downloadJson("");
+        } else {
+            new AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("应用包含缓存节省流量功能,需要打开存储权限,应用才能正常使用。")
+                .setPositiveButton("确认", (dialog, which) -> {
+                    dialog.dismiss();
+                    getAppDetailSettingIntent();
+                })
+                .setNegativeButton("取消", (dialog, which) -> {
+                    dialog.dismiss();
+                    JUtils.Toast("拒绝授权，类目查看失败!");
+                }).show();
+        }
+    }
+
+    private void getAppDetailSettingIntent() {
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+        localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+        startActivity(localIntent);
+        finish();
     }
 
     private void downloadJson(String cid) {

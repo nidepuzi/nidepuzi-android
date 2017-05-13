@@ -1,7 +1,9 @@
 package com.danlai.nidepuzi.htmlJsBridge;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.CallNativeFuncBean;
 import com.danlai.nidepuzi.entity.JumpBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
+import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 import com.google.gson.Gson;
@@ -36,7 +39,7 @@ import cn.sharesdk.wechat.moments.WechatMoments;
  * <p>
  * Copyright 2016年 上海己美. All rights reserved.
  */
-public class AndroidJsBridge{
+public class AndroidJsBridge {
 
     private static final int MSG_ACTION_CCALLBACK = 2;
 
@@ -84,33 +87,39 @@ public class AndroidJsBridge{
         }
     }
 
-// TODO: 17/4/25  
-//    @JavascriptInterface
-//    public void callNativeLoginActivity(String pageUrl) {
-//        JUtils.Log(TAG, "pageUrl" + pageUrl);
-//        Intent intent = new Intent(mContext, LoginActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("login", "h5");
-//        bundle.putString("actlink", pageUrl);
-//        intent.putExtras(bundle);
-//        mContext.startActivity(intent);
-//        mContext.finish();
-//    }
-//
-//    @JavascriptInterface
-//    public void jumpToNativeLogin(String json) {
-//        Gson gson = new Gson();
-//        JumpBean jumpBean = gson.fromJson(json, new TypeToken<JumpBean>() {
-//        }.getType());
-//        String url = jumpBean.getTarget_url();
-//        Intent intent = new Intent(mContext, LoginActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("login", "h5");
-//        bundle.putString("actlink", url);
-//        intent.putExtras(bundle);
-//        mContext.startActivity(intent);
-//        mContext.finish();
-//    }
+    @JavascriptInterface
+    public void callNativeLoginActivity(String pageUrl) {
+        JUtils.Log(TAG, "pageUrl" + pageUrl);
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("login", "h5");
+        bundle.putString("actlink", pageUrl);
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
+        mContext.finish();
+    }
+
+    @JavascriptInterface
+    public void jumpToNativeLogin(String json) {
+        Gson gson = new Gson();
+        JumpBean jumpBean = gson.fromJson(json, new TypeToken<JumpBean>() {
+        }.getType());
+        String url = jumpBean.getTarget_url();
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("login", "h5");
+        bundle.putString("actlink", url);
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
+        mContext.finish();
+    }
+
+    @JavascriptInterface
+    public void jumpToNativeLogin() {
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        mContext.startActivity(intent);
+        mContext.finish();
+    }
 
     @JavascriptInterface
     public void callNativeUniShareFunc(String json) {

@@ -40,7 +40,11 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
         imageView = ((ImageView) findViewById(R.id.img));
         mView = findViewById(R.id.jump);
         mView.setOnClickListener(this);
-        checkPermissionAndJump();
+        RxCountDown.countdown(2).subscribe(integer -> {
+            if (integer == 0) {
+                jumpToAds();
+            }
+        }, throwable -> jumpToAds());
     }
 
     private void checkPermissionAndJump() {
