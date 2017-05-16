@@ -26,8 +26,6 @@ import java.util.List;
 
 public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implements View.OnClickListener {
     private List<Integer> ids = new ArrayList<>();
-    private List<CartsInfoBean> cartList = new ArrayList<>();
-    private List<CartsInfoBean> cartHisList = new ArrayList<>();
     private CartListAdapter cartListAdapter;
     private CartHistoryAdapter cartHisAdapter;
 
@@ -44,7 +42,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
         ScrollLinearLayoutManager layoutManager = new ScrollLinearLayoutManager(this);
         layoutManager.setAutoMeasureEnabled(false);
         b.rvCart.setLayoutManager(layoutManager);
-        cartListAdapter = new CartListAdapter(this, cartList);
+        cartListAdapter = new CartListAdapter(this);
         b.rvCart.setAdapter(cartListAdapter);
 
         b.rvHistory.setNestedScrollingEnabled(false);
@@ -53,7 +51,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
         ScrollLinearLayoutManager manager = new ScrollLinearLayoutManager(this);
         manager.setAutoMeasureEnabled(false);
         b.rvHistory.setLayoutManager(manager);
-        cartHisAdapter = new CartHistoryAdapter(this, cartHisList);
+        cartHisAdapter = new CartHistoryAdapter(this);
         b.rvHistory.setAdapter(cartHisAdapter);
     }
 
@@ -84,7 +82,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
                 if (ids.size() > 0) {
                     Bundle bundle = new Bundle();
                     bundle.putString("ids", getIds());
-                    readyGoThenKill(PayInfoActivity.class,bundle);
+                    readyGoThenKill(PayInfoActivity.class, bundle);
                 } else {
                     JUtils.Toast("请至少选择一件商品哦!");
                 }
@@ -119,10 +117,9 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
             .getCartsHisList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<CartsInfoBean> cartsInfoBeen) {
-                    cartHisList.clear();
+                    cartHisAdapter.clear();
                     if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
-                        cartHisList.addAll(cartsInfoBeen);
-                        cartHisAdapter.notifyDataSetChanged();
+                        cartHisAdapter.update(cartsInfoBeen);
                         b.tvLine.setVisibility(View.VISIBLE);
                     } else {
                         b.tvLine.setVisibility(View.GONE);
@@ -132,13 +129,12 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
     }
 
     public void removeCartList(CartsInfoBean cartsInfoBean) {
-        cartList.remove(cartsInfoBean);
-        if (cartList.size() == 0) {
+        cartListAdapter.removeOneData(cartsInfoBean);
+        if (cartListAdapter.getItemCount() == 0) {
             b.emptyContent.setVisibility(View.VISIBLE);
             b.totalPrice.setText("¥0");
             b.confirmLayout.setVisibility(View.GONE);
         }
-        cartListAdapter.notifyDataSetChanged();
         refreshIds();
     }
 
@@ -160,13 +156,13 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
             });
     }
 
-    public void removeHistory() {
-        if (cartHisList.size() == 0) b.tvLine.setVisibility(View.GONE);
+    public void hideLine() {
+        if (cartHisAdapter.getItemCount() == 0)
+            b.tvLine.setVisibility(View.GONE);
     }
 
-    public void addHistory(CartsInfoBean cartsInfoBean) {
-        cartHisList.add(0, cartsInfoBean);
-        cartHisAdapter.notifyDataSetChanged();
+    public void showLine(CartsInfoBean cartsInfoBean) {
+        cartHisAdapter.addOneData(cartsInfoBean);
         b.tvLine.setVisibility(View.VISIBLE);
     }
 
@@ -176,11 +172,10 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
             .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
                 @Override
                 public void onNext(List<CartsInfoBean> cartsInfoBeen) {
-                    cartList.clear();
+                    cartListAdapter.clear();
                     if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
-                        cartList.addAll(cartsInfoBeen);
+                        cartListAdapter.update(cartsInfoBeen);
                         b.emptyContent.setVisibility(View.GONE);
-                        cartListAdapter.notifyDataSetChanged();
                         ids.clear();
                         for (int i = 0; i < cartsInfoBeen.size(); i++) {
                             ids.add(cartsInfoBeen.get(i).getId());

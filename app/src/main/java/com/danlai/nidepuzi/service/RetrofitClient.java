@@ -79,7 +79,7 @@ public class RetrofitClient {
                             Request request = chain.request();
 //                            if (JUtils.isNetWorkAvilable()) {
                             request = request.newBuilder()
-                                .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " App/"
+                                .header("User-Agent", "Android/" + Build.VERSION.RELEASE + " ndpz/"
                                     + String.valueOf(BuildConfig.VERSION_CODE) + " Mobile/"
                                     + Build.MODEL + " NetType/" + NetUtil.getNetType(BaseApp.getInstance()))
                                 .build();

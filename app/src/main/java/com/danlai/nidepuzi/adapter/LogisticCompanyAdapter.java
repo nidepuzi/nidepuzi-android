@@ -4,75 +4,44 @@ package com.danlai.nidepuzi.adapter;
  * Created by wulei on 2016/1/24.
  */
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.danlai.nidepuzi.R;
+import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseListViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemLogisticsCompanyBinding;
 import com.danlai.nidepuzi.entity.LogisticsCompanyInfo;
 
 import java.util.List;
 
-public class LogisticCompanyAdapter extends BaseAdapter {
+public class LogisticCompanyAdapter extends BaseListViewAdapter<ItemLogisticsCompanyBinding, LogisticsCompanyInfo> {
 
-    private List<LogisticsCompanyInfo> list = null;
-    private Context mContext;
-
-    public LogisticCompanyAdapter(Context mContext, List<LogisticsCompanyInfo> list) {
-        this.mContext = mContext;
-        this.list = list;
-
+    public LogisticCompanyAdapter(BaseActivity mActivity, List<LogisticsCompanyInfo> data) {
+        super(mActivity);
+        this.data = data;
     }
 
-    public int getCount() {
-        return this.list.size();
+    @Override
+    protected int getLayoutId() {
+        return R.layout.item_logistics_company;
     }
 
-    public Object getItem(int position) {
-        return list.get(position);
-    }
-
-    public long getItemId(int position) {
-        return position;
-    }
-
-    public View getView(final int position, View view, ViewGroup arg2) {
-        ViewHolder viewHolder;
-        if (view == null) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_logistics_company, null);
-            viewHolder = new ViewHolder(view);
-            view.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) view.getTag();
-        }
-        final LogisticsCompanyInfo mContent = list.get(position);
+    @Override
+    protected void fillData(LogisticsCompanyInfo logisticsCompanyInfo, BaseViewHolder<ItemLogisticsCompanyBinding> holder, int position) {
         if (position == 0) {
-            viewHolder.tvLetter.setVisibility(View.VISIBLE);
-            viewHolder.tvLetter.setText(mContent.getLetter());
+            holder.b.tvCategory.setVisibility(View.VISIBLE);
+            holder.b.tvCategory.setText(logisticsCompanyInfo.getLetter());
         } else {
-            String lastCatalog = list.get(position - 1).getLetter();
-            if (mContent.getLetter().equals(lastCatalog)) {
-                viewHolder.tvLetter.setVisibility(View.GONE);
+            String lastCatalog = data.get(position - 1).getLetter();
+            if (logisticsCompanyInfo.getLetter().equals(lastCatalog)) {
+                holder.b.tvCategory.setVisibility(View.GONE);
             } else {
-                viewHolder.tvLetter.setVisibility(View.VISIBLE);
-                viewHolder.tvLetter.setText(mContent.getLetter());
+                holder.b.tvCategory.setVisibility(View.VISIBLE);
+                holder.b.tvCategory.setText(logisticsCompanyInfo.getLetter());
             }
         }
-        viewHolder.tvTitle.setText(this.list.get(position).getName());
-        return view;
-    }
-
-    final static class ViewHolder {
-        TextView tvTitle;
-        TextView tvLetter;
-
-        public ViewHolder(View itemView) {
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvLetter = (TextView) itemView.findViewById(R.id.tv_catalog);
-        }
+        holder.b.tvTitle.setText(logisticsCompanyInfo.getName());
     }
 
     public int getPositionForSection(int section) {
@@ -82,7 +51,7 @@ public class LogisticCompanyAdapter extends BaseAdapter {
             return 0;
         } else {
             for (int i = 0; i < getCount(); i++) {
-                mContent = list.get(i);
+                mContent = data.get(i);
                 l = mContent.getLetter();
                 char firstChar = l.toUpperCase().charAt(0);
                 if (firstChar == section) {

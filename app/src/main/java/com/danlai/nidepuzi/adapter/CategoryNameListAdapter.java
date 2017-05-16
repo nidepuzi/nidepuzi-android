@@ -1,47 +1,23 @@
 package com.danlai.nidepuzi.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-
 import com.danlai.nidepuzi.R;
+import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseListViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemCategoryItemBinding;
 import com.danlai.nidepuzi.entity.CategoryBean;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
- * Created by wisdom on 16/9/23.
+ * @author wisdom
+ * @date 2016年09月23日 上午11:50
  */
 
-public class CategoryNameListAdapter extends BaseAdapter {
-    private List<CategoryBean> data;
-    private Context mContext;
+public class CategoryNameListAdapter extends BaseListViewAdapter<ItemCategoryItemBinding, CategoryBean> {
     private String cid;
 
-    public CategoryNameListAdapter(Context context) {
-        mContext = context;
-        data = new ArrayList<>();
-    }
-
-    public void update(List<CategoryBean> list) {
-        data.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void clear() {
-        data.clear();
-        notifyDataSetChanged();
-    }
-
-    public void updateWithClear(List<CategoryBean> list) {
-        data.clear();
-        data.addAll(list);
-        notifyDataSetChanged();
+    public CategoryNameListAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     public void setCid(String cid) {
@@ -49,61 +25,31 @@ public class CategoryNameListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getCount() {
-        return data.size();
+    protected int getLayoutId() {
+        return R.layout.item_category_item;
     }
 
     @Override
-    public Object getItem(int position) {
-        return data.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.category_item, null);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.tv.setText(data.get(position).getName());
+    protected void fillData(CategoryBean categoryBean, BaseViewHolder<ItemCategoryItemBinding> holder, int position) {
+        holder.b.tv.setText(categoryBean.getName());
         if (cid != null && !"".equals(cid)) {
-            if (cid.equals(data.get(position).getCid())) {
-                holder.tv.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
-                holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.bg_grey));
+            if (cid.equals(categoryBean.getCid())) {
+                holder.b.tv.setTextColor(mActivity.getResources().getColor(R.color.colorAccent));
+                holder.b.selectedView.setBackgroundColor(mActivity.getResources().getColor(R.color.colorAccent));
+                holder.b.tv.setBackgroundColor(mActivity.getResources().getColor(R.color.bg_grey));
             } else {
-                holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_33));
-                holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-                holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                holder.b.tv.setTextColor(mActivity.getResources().getColor(R.color.color_33));
+                holder.b.selectedView.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
+                holder.b.tv.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
             }
         } else if (position == 0) {
-            holder.tv.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.bg_grey));
+            holder.b.tv.setTextColor(mActivity.getResources().getColor(R.color.colorAccent));
+            holder.b.selectedView.setBackgroundColor(mActivity.getResources().getColor(R.color.colorAccent));
+            holder.b.tv.setBackgroundColor(mActivity.getResources().getColor(R.color.bg_grey));
         } else {
-            holder.tv.setTextColor(mContext.getResources().getColor(R.color.color_33));
-            holder.selectedView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-        }
-        return convertView;
-    }
-
-    class ViewHolder {
-        TextView tv;
-        View selectedView;
-
-        public ViewHolder(View itemView) {
-            tv = ((TextView) itemView.findViewById(R.id.tv));
-            selectedView = itemView.findViewById(R.id.selected_view);
+            holder.b.tv.setTextColor(mActivity.getResources().getColor(R.color.color_33));
+            holder.b.selectedView.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
+            holder.b.tv.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
         }
     }
 }

@@ -18,7 +18,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/icon_message"/>
+                android:src="@drawable/icon_message"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,17 +38,25 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/icon_search"/>
+                android:src="@drawable/icon_search"
+                android:visibility="gone"/>
 
-            <ImageView
-                android:id="@+id/img_invite"
+            <RelativeLayout
+                android:id="@+id/layout_invite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_toLeftOf="@id/img_search"
-                android:src="@drawable/icon_invite"/>
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_invite"/>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

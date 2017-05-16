@@ -3,7 +3,8 @@ package com.danlai.nidepuzi.entity;
 import java.util.List;
 
 /**
- * Created by wisdom on 16/8/19.
+ * @author wisdom
+ * @date 2016年08月19日 上午9:28
  */
 public class UserTopic {
 

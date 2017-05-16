@@ -40,34 +40,34 @@ import okhttp3.Call;
  * @date 16/6/7 上午09:45
  */
 public class NinePicAdapter extends BaseAdapter {
-    private BaseActivity mContext;
-    private List<NinePicBean> mList;
+    private BaseActivity mActivity;
+    private List<NinePicBean> data;
     private List<Uri> mFiles;
 
     public NinePicAdapter(BaseActivity mContext) {
-        this.mContext = mContext;
-        mList = new ArrayList<>();
+        this.mActivity = mContext;
+        data = new ArrayList<>();
         mFiles = new ArrayList<>();
     }
 
     public void clear() {
-        mList.clear();
+        data.clear();
         notifyDataSetChanged();
     }
 
     public void update(List<NinePicBean> list) {
-        mList.addAll(list);
+        data.addAll(list);
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return mList == null ? 0 : mList.size();
+        return data == null ? 0 : data.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mList.get(position);
+        return data.get(position);
     }
 
     @Override
@@ -77,10 +77,10 @@ public class NinePicAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        NinePicBean ninePicBean = mList.get(position);
+        NinePicBean ninePicBean = data.get(position);
         ViewHolder holder;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.item_ninepic, null);
+            convertView = View.inflate(mActivity, R.layout.item_ninepic, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -106,7 +106,7 @@ public class NinePicAdapter extends BaseAdapter {
                 holder.multiImageView.setVisibility(View.VISIBLE);
                 holder.multiImageView.setList(picArray);
                 holder.multiImageView.setOnItemClickListener((view, currentPosition) ->
-                    ImagePagerActivity.startImagePagerActivity(mContext, picArray, currentPosition));
+                    ImagePagerActivity.startImagePagerActivity(mActivity, picArray, currentPosition));
             } else {
                 holder.multiImageView.setVisibility(View.GONE);
             }
@@ -114,12 +114,12 @@ public class NinePicAdapter extends BaseAdapter {
             holder.multiImageView.setVisibility(View.GONE);
         }
         holder.save.setOnClickListener(v -> {
-            BaseApp.getVipInteractor(mContext)
-                .saveTime(ninePicBean.getId(), 1, new ServiceResponse<>(mContext));
-            if (mContext instanceof BaseMVVMActivity) {
-                mContext.showIndeterminateProgressDialog(true);
+            BaseApp.getVipInteractor(mActivity)
+                .saveTime(ninePicBean.getId(), 1, new ServiceResponse<>(mActivity));
+            if (mActivity instanceof BaseMVVMActivity) {
+                mActivity.showIndeterminateProgressDialog(true);
             }
-            if (JUtils.isPermission(mContext, "android.permission.WRITE_EXTERNAL_STORAGE")) {
+            if (JUtils.isPermission(mActivity, "android.permission.WRITE_EXTERNAL_STORAGE")) {
                 mFiles.clear();
                 JUtils.copyToClipboard(description);
                 if (picArray.size() > 0) {
@@ -133,8 +133,8 @@ public class NinePicAdapter extends BaseAdapter {
                 Intent localIntent = new Intent();
                 localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
-                mContext.startActivity(localIntent);
+                localIntent.setData(Uri.fromParts("package", mActivity.getPackageName(), null));
+                mActivity.startActivity(localIntent);
                 JUtils.Toast("你的铺子需要存储权限存储图片,请打开存储权限再次操作.");
             }
         });
@@ -157,7 +157,7 @@ public class NinePicAdapter extends BaseAdapter {
                     uri = Uri.fromFile(new File(newFileName));
                     mFiles.add(uri);
                     if (mFiles.size() == picArry.size()) {
-                        mContext.runOnUiThread(() -> shareToWx(desc));
+                        mActivity.runOnUiThread(() -> shareToWx(desc));
                     }
                 } else {
                     final int finalI = i;
@@ -189,7 +189,7 @@ public class NinePicAdapter extends BaseAdapter {
                                         Intent scannerIntent =
                                             new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
                                         scannerIntent.setData(uri);
-                                        mContext.sendBroadcast(scannerIntent);
+                                        mActivity.sendBroadcast(scannerIntent);
                                         if (mFiles.size() == picArry.size()) {
                                             shareToWx(desc);
                                         }
@@ -206,8 +206,8 @@ public class NinePicAdapter extends BaseAdapter {
     }
 
     private void hideLoading() {
-        if (mContext != null) {
-            mContext.hideIndeterminateProgressDialog();
+        if (mActivity != null) {
+            mActivity.hideIndeterminateProgressDialog();
         }
     }
 
@@ -227,7 +227,7 @@ public class NinePicAdapter extends BaseAdapter {
                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
                     intent.setType("image/*");
                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
-                    mContext.startActivity(Intent.createChooser(intent, "分享"));
+                    mActivity.startActivity(Intent.createChooser(intent, "分享"));
                 } else {
                     ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareToTimeLineUI");
                     intent.setComponent(comp);
@@ -235,7 +235,7 @@ public class NinePicAdapter extends BaseAdapter {
                     intent.setType("image/*");
                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
                     intent.putExtra("Kdescription", desc);
-                    mContext.startActivity(intent);
+                    mActivity.startActivity(intent);
                 }
             }
         } catch (Exception e) {

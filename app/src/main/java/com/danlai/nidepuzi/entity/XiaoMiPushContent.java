@@ -1,41 +1,18 @@
 package com.danlai.nidepuzi.entity;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
- * Created by wulei on 2016/2/21.
+ * @author wisdom-sun
+ * @date 2017年05月15日 上午9:27
  */
 public class XiaoMiPushContent {
 
-    /**
-     * target_url : target_url
-     */
+    private String target_url;
 
-    @SerializedName("target_url")
-    private String targetUrl;
-    @SerializedName("url")
-    private String url;
-
-    public void setTargetUrl(String targetUrl) {
-        this.targetUrl = targetUrl;
+    public String getTarget_url() {
+        return target_url;
     }
 
-    public String getTargetUrl() {
-        return targetUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "XiaoMiPushContent{" +
-                "targetUrl='" + targetUrl + '\'' +
-                '}';
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setTarget_url(String target_url) {
+        this.target_url = target_url;
     }
 }

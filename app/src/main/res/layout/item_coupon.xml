@@ -1,125 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:id="@+id/rl"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="220px"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/img_coupon_default">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="72px"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:ems="1"
-                    android:text="满减券"
-                    android:textColor="@color/color_DD"
-                    android:textSize="16sp"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="180px"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_coupon_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥"
-                    android:textColor="@color/color_DD"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/tv_coupon_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_DD"
-                    android:textSize="30sp"/>
-
-            </LinearLayout>
+            android:layout_height="220px"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/img_coupon_default">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_99"
-                    android:textSize="13sp"/>
+                <RelativeLayout
+                    android:layout_width="72px"
+                    android:layout_height="match_parent">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:ems="1"
+                        android:text="满减券"
+                        android:textColor="@color/color_DD"
+                        android:textSize="16sp"/>
 
-                <TextView
-                    android:id="@+id/use_fee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_99"
-                    android:textSize="13sp"/>
+                </RelativeLayout>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="180px"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_coupon_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_99"
-                    android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_coupon_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥"
+                        android:textColor="@color/color_DD"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_coupon_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_DD"
+                        android:textSize="30sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_99"
+                        android:textSize="13sp"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/use_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_99"
+                        android:textSize="13sp"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/tv_coupon_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_99"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/img_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="16dp"/>
 
-        <ImageView
-            android:id="@+id/img_flag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="16dp"/>
+            <ImageView
+                android:id="@+id/img_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/img_mark_selected_coupon"
+                android:visibility="invisible"/>
 
-        <ImageView
-            android:id="@+id/img_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/img_mark_selected_coupon"
-            android:visibility="invisible"/>
+        </RelativeLayout>
 
-    </RelativeLayout>
-</LinearLayout>
+    </LinearLayout>
+</layout>

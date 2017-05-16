@@ -64,7 +64,6 @@ public class OrderGoodsListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-
     @Override
     public int getCount() {
         return data.size();

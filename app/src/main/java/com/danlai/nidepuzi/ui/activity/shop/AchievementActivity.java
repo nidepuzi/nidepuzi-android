@@ -74,7 +74,7 @@ public class AchievementActivity extends BaseMVVMActivity<ActivityAchievementBin
                 break;
             case R.id.order_self:
                 bundle = new Bundle();
-                bundle.putInt("type", BaseConst.ORDER_SELF);
+                bundle.putInt("type", BaseConst.ALL_ORDER);
                 readyGo(OrderAchieveActivity.class, bundle);
                 break;
         }

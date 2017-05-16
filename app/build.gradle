@@ -47,7 +47,7 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170513
+        versionCode 20170516
         versionName "1.0"
 
         multiDexEnabled = true
@@ -159,4 +159,5 @@ dependencies {
     compile files('libs/alipaySingle-20160825.jar')
     compile files('libs/libammsdk.jar')
     compile 'com.qiyukf.unicorn:unicorn:3.6.0'
+    compile files('libs/MiPush_SDK_Client_3_2_3.jar')
 }

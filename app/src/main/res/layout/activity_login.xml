@@ -61,6 +61,16 @@
         </LinearLayout>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="200dp"
+            android:text="新掌柜首次登陆请使用微信登录哦!"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"/>
+
+        <TextView
             android:id="@+id/account_login"
             android:layout_width="100dp"
             android:layout_height="30dp"

@@ -56,16 +56,25 @@
                     android:textSize="32dp"/>
 
                 <TextView
-                    android:id="@+id/sale_price"
+                    android:id="@+id/gap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/agent_price"
                     android:layout_toRightOf="@id/agent_price"
+                    android:text="/¥"
+                    android:textColor="@color/color_99"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:id="@+id/sale_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/gap"
+                    android:layout_toRightOf="@id/gap"
                     android:textColor="@color/color_99"
                     android:textSize="13dp"/>
 
             </RelativeLayout>
-
 
         </LinearLayout>
 

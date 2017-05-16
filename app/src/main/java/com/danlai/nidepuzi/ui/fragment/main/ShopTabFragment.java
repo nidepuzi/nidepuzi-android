@@ -142,9 +142,9 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 @Override
                 public void onNext(Object o) {
                     if (o instanceof MamaFortune) {
-                        MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMamaFortune();
-                        b.tvSale.setText(JUtils.formatDouble(fortune.getCarryValue()));
-                        b.tvFans.setText(fortune.getFansNum() + "");
+                        MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMama_fortune();
+                        b.tvSale.setText(JUtils.formatDouble(fortune.getCarry_value()));
+                        b.tvFans.setText(fortune.getInvite_all_num() + "");
                     } else if (o instanceof RecentCarryBean) {
                         RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
                         b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));

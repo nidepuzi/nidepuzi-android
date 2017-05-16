@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by itxuye(www.itxuye.com) on 2016/03/15.
+ * Created by itxuye on 2016/03/15.
  * <p>
  * Copyright 2016年 上海己美. All rights reserved.
  */

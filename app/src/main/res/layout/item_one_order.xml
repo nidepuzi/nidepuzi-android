@@ -4,18 +4,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="15px">
+        android:padding="8dp">
 
         <RelativeLayout
-            android:layout_width="200px"
-            android:layout_height="200px"
+            android:id="@+id/img_layout"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/choose_img_bg"
             android:gravity="center">
 
             <com.danlai.library.widget.RoundCornerImageView
-                android:id="@+id/cart_image"
+                android:id="@+id/img_good"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -24,25 +26,41 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="210px"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_width="0dp"
+            android:layout_height="84dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tx_good_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:textColor="@color/color_33"
                 android:textSize="12dp"/>
 
-            <TextView
-                android:id="@+id/sku_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_99"
-                android:textSize="12dp"/>
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="尺寸:"
+                    android:textColor="@color/color_99"
+                    android:textSize="12dp"/>
+
+                <TextView
+                    android:id="@+id/tx_good_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_99"
+                    android:textSize="12dp"/>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -50,46 +68,30 @@
                 android:layout_weight="1"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/price1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16dp"/>
 
                 <TextView
-                    android:id="@+id/price2"
+                    android:id="@+id/tx_good_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_99"
+                    android:textColor="@color/color_33"
                     android:textSize="12dp"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
-
                 <TextView
-                    android:id="@+id/rebuy"
+                    android:id="@+id/tx_good_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_common_white"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="4dp"
-                    android:text="重新购买"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/color_99"
+                    android:textSize="12dp"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
 </layout>

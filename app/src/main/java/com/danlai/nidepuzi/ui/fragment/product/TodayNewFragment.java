@@ -21,9 +21,7 @@ import com.danlai.nidepuzi.databinding.FragmentTodayNewBinding;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.danlai.nidepuzi.ui.activity.product.CategoryActivity;
-import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
-import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
+import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.youth.banner.BannerConfig;
 
@@ -37,7 +35,7 @@ import java.util.List;
 
 public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
     implements ScrollableHelper.ScrollableContainer, SwipeRefreshLayout.OnRefreshListener,
-    ScrollableLayout.OnScrollListener, OnScrollCallback, View.OnClickListener {
+    ScrollableLayout.OnScrollListener, OnScrollCallback {
     private MainTabAdapter mainTabAdapter;
     private List<MainTodayBean> data = new ArrayList<>();
     private MainProductAdapter mainProductAdapter;
@@ -121,9 +119,6 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
         b.swipeLayout.setOnRefreshListener(this);
         b.scrollLayout.setOnScrollListener(this);
         b.recyclerTab.setOnScrollCallback(this);
-        b.imgMessage.setOnClickListener(this);
-        b.layoutInvite.setOnClickListener(this);
-        b.layoutSearch.setOnClickListener(this);
     }
 
     @Override
@@ -180,12 +175,12 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
 
     @Override
     public void onScroll(int currentY, int maxY) {
-//        if (mActivity instanceof TabActivity) {
-//            double percent = (double) currentY / b.banner.getHeight();
-//            Message msg = new Message();
-//            msg.what = (int) (percent * 100);
-//            ((TabActivity) mActivity).mHandler.sendMessage(msg);
-//        }
+        if (mActivity instanceof TabActivity) {
+            double percent = (double) currentY / b.banner.getHeight();
+            Message msg = new Message();
+            msg.what = (int) (percent * 100);
+            ((TabActivity) mActivity).mHandler.sendMessage(msg);
+        }
         if (currentY > 0) {
             b.swipeLayout.setEnabled(false);
         } else {
@@ -243,21 +238,6 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
                 msg.what = scrollCount + 1;
                 handler.sendMessage(msg);
             }
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.img_message:
-                readyGo(MessageActivity.class);
-                break;
-            case R.id.layout_invite:
-                readyGo(InviteActivity.class);
-                break;
-            case R.id.layout_search:
-                readyGo(CategoryActivity.class);
-                break;
         }
     }
 }

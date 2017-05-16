@@ -1,168 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="147dp"
-              android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/common_gap"/>
+    <data>
+
+        <import type="com.danlai.nidepuzi.entity.MainTodayBean.ItemsBean"/>
+
+        <import type="com.danlai.library.utils.JUtils"/>
+
+        <variable
+            name="data"
+            type="ItemsBean"/>
+    </data>
 
     <LinearLayout
-        android:id="@+id/product_layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/choose_img_bg"
-            android:gravity="center">
+        <include layout="@layout/common_gap"/>
 
-            <com.danlai.library.widget.RoundCornerImageView
-                android:id="@+id/img"
+        <LinearLayout
+            android:id="@+id/product_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/choose_img_bg"
+                android:gravity="center">
+
+                <com.danlai.library.widget.RoundCornerImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/place_holder"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/place_holder"/>
+                android:layout_height="84dp"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
 
-        </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{data.name}"
+                    android:textColor="@color/color_33"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{@string/main_product_price + JUtils.formatDouble(data.price)}"
+                        android:textColor="@color/color_33"
+                        android:textSize="14sp"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/profit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/main_product_min + JUtils.formatDouble(data.profit.min)}"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="库存500件/在售人数1200"
+                    android:textColor="@color/color_99"
+                    android:textSize="12sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/common_gap"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:layout_margin="8dp"
-            android:orientation="vertical">
+            android:layout_height="40dp"
+            android:orientation="horizontal">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/layout_product_desc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/color_33"
-                android:textSize="14dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_main_share_desc"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="分享素材"
+                    android:textSize="14dp"/>
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/color_99"
-                android:textSize="12dp"/>
+            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+            <include layout="@layout/common_line"/>
 
-            <TextView
-                android:id="@+id/profit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:textSize="14dp"/>
+            <LinearLayout
+                android:id="@+id/layout_share_product"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_main_share"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="单品分享"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <include layout="@layout/common_line"/>
+
+            <LinearLayout
+                android:id="@+id/layout_share_shop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_main_share_shop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="分享店铺"
+                    android:textSize="14dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/bg_grey"/>
     </LinearLayout>
 
-    <include layout="@layout/common_gap"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/layout_product_desc"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_main_share_desc"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="查看文案"
-                android:textSize="14dp"/>
-
-        </LinearLayout>
-
-        <include layout="@layout/common_line"/>
-
-        <LinearLayout
-            android:id="@+id/layout_share_product"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_main_share"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="单品分享"
-                android:textSize="14dp"/>
-        </LinearLayout>
-
-        <include layout="@layout/common_line"/>
-
-        <LinearLayout
-            android:id="@+id/layout_share_shop"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_main_share_shop"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="分享店铺"
-                android:textSize="14dp"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/bg_grey"/>
-</LinearLayout>
+</layout>

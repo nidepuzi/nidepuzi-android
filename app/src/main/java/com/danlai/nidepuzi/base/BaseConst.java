@@ -39,6 +39,11 @@ public class BaseConst {
     public static final int WAIT_PAY = 1;
     public static final int WAIT_SEND = 2;
 
+    //小米推送
+    public static final String MIPUSH_ID = "2882303761517576471";
+    public static final String MIPUSH_KEY = "5861757624471";
+    public static final String MIPUSH_SECRET = "N94b6BmlG/MNLDMkKvPTSg==";
+
     //微信
     public static final String WX_APP_ID = "wxa6e8010fa0b31eb3";
     public static final String WX_APP_SECRET = "a894a72567440fa7317843d76dd7bf03";

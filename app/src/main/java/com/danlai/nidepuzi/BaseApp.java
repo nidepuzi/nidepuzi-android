@@ -1,13 +1,16 @@
 package com.danlai.nidepuzi;
 
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Process;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.danlai.library.utils.JUtils;
+import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseUnicornImageLoader;
 import com.danlai.nidepuzi.module.ActivityInteractor;
 import com.danlai.nidepuzi.module.AddressInteractor;
@@ -22,6 +25,9 @@ import com.qiyukf.unicorn.api.SavePowerConfig;
 import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.YSFOptions;
+import com.xiaomi.channel.commonutils.logger.LoggerInterface;
+import com.xiaomi.mipush.sdk.Logger;
+import com.xiaomi.mipush.sdk.MiPushClient;
 
 import java.util.List;
 
@@ -53,6 +59,30 @@ public class BaseApp extends MultiDexApplication {
         Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(), new BaseUnicornImageLoader(getInstance()));
         JUtils.setDebug(BuildConfig.DEBUG, "nidepuzi");
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
+        //初始化push推送服务
+        if (shouldInit()) {
+            MiPushClient.registerPush(this, BaseConst.MIPUSH_ID, BaseConst.MIPUSH_KEY);
+        }
+        //打开Log
+        LoggerInterface newLogger = new LoggerInterface() {
+
+            @Override
+            public void setTag(String tag) {
+
+            }
+
+            @Override
+            public void log(String content, Throwable t) {
+                JUtils.Log(content);
+                JUtils.Log(t.getMessage());
+            }
+
+            @Override
+            public void log(String content) {
+                JUtils.Log(content);
+            }
+        };
+        Logger.setLogger(this, newLogger);
     }
 
     @Override
@@ -70,10 +100,10 @@ public class BaseApp extends MultiDexApplication {
 
     private boolean shouldInit() {
         ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
-        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+        List<RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
         String mainProcessName = getPackageName();
-        int myPid = android.os.Process.myPid();
-        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
+        int myPid = Process.myPid();
+        for (RunningAppProcessInfo info : processInfos) {
             if (info.pid == myPid && mainProcessName.equals(info.processName)) {
                 return true;
             }
@@ -97,7 +127,7 @@ public class BaseApp extends MultiDexApplication {
             Intent intent = new Intent(BaseApp.this, TabActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             BaseApp.this.startActivity(intent);
-            android.os.Process.killProcess(android.os.Process.myPid());
+            Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
     }

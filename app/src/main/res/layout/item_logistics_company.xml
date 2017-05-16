@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_coupon_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/tv_catalog"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_grey"
-        android:gravity="bottom"
-        android:padding="8dp"
-        android:text="A"
-        android:textSize="18dp"/>
+        android:orientation="vertical">
 
-    <include layout="@layout/common_gap"/>
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_grey"
+            android:gravity="bottom"
+            android:padding="8dp"
+            android:textSize="18sp"/>
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:padding="8dp"
-        android:text="快递"
-        android:textSize="20dp"/>
+        <include layout="@layout/common_gap"/>
 
-    <include layout="@layout/common_gap"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:padding="8dp"
+            android:textSize="20sp"/>
 
-</LinearLayout>
+        <include layout="@layout/common_gap"/>
+
+    </LinearLayout>
+
+</layout>

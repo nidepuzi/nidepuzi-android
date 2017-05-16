@@ -1,105 +1,81 @@
 package com.danlai.nidepuzi.adapter;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseRecyclerViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemMainProductBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
+import com.danlai.nidepuzi.entity.MainTodayBean.ItemsBean;
 import com.danlai.nidepuzi.entity.ShareModelBean;
 import com.danlai.nidepuzi.entity.ShopBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
- * Created by wisdom on 17/2/14.
+ * @author wisdom
+ * @date 2017年05月15日 下午4:16
  */
 
-public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.ViewHolder> {
-    private List<MainTodayBean.ItemsBean> data;
-    private BaseActivity context;
+public class MainProductAdapter extends BaseRecyclerViewAdapter<ItemMainProductBinding, ItemsBean> {
 
-    public MainProductAdapter(BaseActivity context) {
-        this.context = context;
-        data = new ArrayList<>();
-    }
-
-    public void updateWithClear(List<MainTodayBean.ItemsBean> list) {
-        data.clear();
-        data.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void clear() {
-        data.clear();
-        notifyDataSetChanged();
+    public MainProductAdapter(BaseActivity activity) {
+        super(activity);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_main_product, parent, false);
-        return new ViewHolder(view);
+    public int getLayoutId() {
+        return R.layout.item_main_product;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        MainTodayBean.ItemsBean bean = data.get(position);
-        ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.image, bean.getPic());
-        holder.name.setText(bean.getName());
-        String price = JUtils.formatDouble(bean.getPrice());
-        holder.price.setText("售价: ¥" + price);
-        String min = JUtils.formatDouble(bean.getProfit().getMin());
-        holder.profit.setText("利润: ¥" + min);
-        holder.productLayout.setOnClickListener(v -> jumpToProduct(bean));
-        holder.productDescLayout.setOnClickListener(v -> jumpToProduct(bean));
-        holder.shareProductLayout.setOnClickListener(v -> {
-            context.showIndeterminateProgressDialog(false);
-            BaseApp.getProductInteractor(context)
-                .getShareModel(bean.getModel_id(), new ServiceResponse<ShareModelBean>(context) {
+    public void onBindViewHolder(BaseViewHolder<ItemMainProductBinding> holder, int position) {
+        ItemsBean bean = data.get(position);
+        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.img, bean.getPic());
+        holder.b.setData(bean);
+        holder.b.productLayout.setOnClickListener(v -> jumpToProduct(bean));
+        holder.b.layoutProductDesc.setOnClickListener(v -> jumpToProduct(bean));
+        holder.b.desc.setText("库存500件/在售人数1200");
+        holder.b.layoutShareProduct.setOnClickListener(v -> {
+            mActivity.showIndeterminateProgressDialog(false);
+            BaseApp.getProductInteractor(mActivity)
+                .getShareModel(bean.getModel_id(), new ServiceResponse<ShareModelBean>(mActivity) {
                     @Override
                     public void onNext(ShareModelBean shareModel) {
-                        context.hideIndeterminateProgressDialog();
-                        ShareUtils.shareWithModel(shareModel, context);
+                        mActivity.hideIndeterminateProgressDialog();
+                        ShareUtils.shareWithModel(shareModel, mActivity);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        context.hideIndeterminateProgressDialog();
+                        mActivity.hideIndeterminateProgressDialog();
                         JUtils.Toast("分享失败,请点击重试!");
                     }
                 });
         });
-        holder.shareShopLayout.setOnClickListener(v -> {
-            context.showIndeterminateProgressDialog(false);
-            BaseApp.getVipInteractor(context)
-                .getShopBean(new ServiceResponse<ShopBean>(context) {
+        holder.b.layoutShareShop.setOnClickListener(v -> {
+            mActivity.showIndeterminateProgressDialog(false);
+            BaseApp.getVipInteractor(mActivity)
+                .getShopBean(new ServiceResponse<ShopBean>(mActivity) {
                     @Override
                     public void onNext(ShopBean shopBean) {
-                        context.hideIndeterminateProgressDialog();
+                        mActivity.hideIndeterminateProgressDialog();
                         ShopBean.ShopInfoBean info = shopBean.getShop_info();
                         ActivityBean activityBean = new ActivityBean(info.getDesc(), info.getName(),
                             info.getShop_link(), info.getThumbnail());
-                        ShareUtils.shareShop(activityBean, context);
+                        ShareUtils.shareShop(activityBean, mActivity);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        context.hideIndeterminateProgressDialog();
+                        mActivity.hideIndeterminateProgressDialog();
                         JUtils.Toast("分享失败,请点击重试!");
                     }
                 });
@@ -109,32 +85,6 @@ public class MainProductAdapter extends RecyclerView.Adapter<MainProductAdapter.
     private void jumpToProduct(MainTodayBean.ItemsBean bean) {
         Bundle bundle = new Bundle();
         bundle.putInt("model_id", bean.getModel_id());
-        context.readyGo(ProductDetailActivity.class, bundle);
+        mActivity.readyGo(ProductDetailActivity.class, bundle);
     }
-
-
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView name, price, profit;
-        LinearLayout productLayout, productDescLayout, shareProductLayout, shareShopLayout;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            productLayout = (LinearLayout) itemView.findViewById(R.id.product_layout);
-            productDescLayout = (LinearLayout) itemView.findViewById(R.id.layout_product_desc);
-            shareProductLayout = (LinearLayout) itemView.findViewById(R.id.layout_share_product);
-            shareShopLayout = (LinearLayout) itemView.findViewById(R.id.layout_share_shop);
-            image = (ImageView) itemView.findViewById(R.id.img);
-            name = (TextView) itemView.findViewById(R.id.name);
-            price = (TextView) itemView.findViewById(R.id.price);
-            profit = (TextView) itemView.findViewById(R.id.profit);
-        }
-    }
-
 }

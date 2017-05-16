@@ -3,82 +3,55 @@ package com.danlai.nidepuzi.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.danlai.nidepuzi.R;
+import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseRecyclerViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemAddressSelectBinding;
 import com.danlai.nidepuzi.entity.AddressBean;
 import com.danlai.nidepuzi.ui.activity.user.ChangeAddressActivity;
-import com.zhy.autolayout.utils.AutoUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * @author wisdom
  * @date 2017年04月13日 下午5:54
  */
-public class AddressSelectAdapter extends RecyclerView.Adapter<AddressSelectAdapter.ViewHolder> {
-
-    private List<AddressBean> mList;
-    private Activity context;
+public class AddressSelectAdapter extends BaseRecyclerViewAdapter<ItemAddressSelectBinding, AddressBean> {
     private String addressId;
     private int needLevel;
 
-    public AddressSelectAdapter(Activity context, String addressId) {
-        this.context = context;
+    public AddressSelectAdapter(BaseActivity activity, String addressId) {
+        super(activity);
         this.addressId = addressId;
-        mList = new ArrayList<>();
         needLevel = 1;
     }
 
-    public void update(List<AddressBean> list) {
-
-        mList.addAll(list);
-        notifyDataSetChanged();
-    }
-
-    public void updateWithClear(List<AddressBean> list) {
-        mList.clear();
-        mList.addAll(list);
-        notifyDataSetChanged();
+    @Override
+    public int getLayoutId() {
+        return R.layout.item_address_select;
     }
 
     @Override
-    public AddressSelectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.item_address_select, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(AddressSelectAdapter.ViewHolder holder, int position) {
-        AddressBean addressBean = mList.get(position);
+    public void onBindViewHolder(BaseViewHolder<ItemAddressSelectBinding> holder, int position) {
+        AddressBean addressBean = data.get(position);
         if (addressBean.isDefaultX()) {
-            holder.tvDefault.setVisibility(View.VISIBLE);
+            holder.b.addressDefault.setVisibility(View.VISIBLE);
         } else {
-            holder.tvDefault.setVisibility(View.GONE);
+            holder.b.addressDefault.setVisibility(View.GONE);
         }
-        holder.mCheckBox.setClickable(false);
+        holder.b.checkBox.setClickable(false);
         if (addressId != null && addressId.equals(addressBean.getId() + "")) {
-            holder.mCheckBox.setChecked(true);
+            holder.b.checkBox.setChecked(true);
         } else {
-            holder.mCheckBox.setChecked(false);
+            holder.b.checkBox.setChecked(false);
         }
-        holder.receiverMobile.setText(addressBean.getReceiver_mobile());
-        holder.receiverAddress.setText(addressBean.getReceiver_state() + "" + addressBean.getReceiver_city()
+        holder.b.receiverMobile.setText(addressBean.getReceiver_mobile());
+        holder.b.receiverAddress.setText(addressBean.getReceiver_state() + "" + addressBean.getReceiver_city()
             + "" + addressBean.getReceiver_district() + "" + addressBean.getReceiver_address());
-        holder.receiverName.setText(addressBean.getReceiver_name());
-        holder.card.setOnClickListener(v -> setBundle(addressBean));
-        holder.change.setOnClickListener(v -> setBundle1(addressBean));
+        holder.b.receiverName.setText(addressBean.getReceiver_name());
+        holder.itemView.setOnClickListener(v -> setBundle(addressBean));
+        holder.b.change.setOnClickListener(v -> setBundle1(addressBean));
     }
 
     private void setBundle(AddressBean addressBean) {
@@ -99,12 +72,12 @@ public class AddressSelectAdapter extends RecyclerView.Adapter<AddressSelectAdap
         intent.putExtra("level", addressBean.getPersonalinfo_level());
         intent.putExtra("face", addressBean.getIdcard().getFace());
         intent.putExtra("back", addressBean.getIdcard().getBack());
-        context.setResult(Activity.RESULT_OK, intent);
-        context.finish();
+        mActivity.setResult(Activity.RESULT_OK, intent);
+        mActivity.finish();
     }
 
     private void setBundle1(AddressBean addressBean) {
-        Intent intent = new Intent(context, ChangeAddressActivity.class);
+        Intent intent = new Intent(mActivity, ChangeAddressActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("receiver_state", addressBean.getReceiver_state());
         bundle.putString("receiver_district", addressBean.getReceiver_district());
@@ -120,38 +93,10 @@ public class AddressSelectAdapter extends RecyclerView.Adapter<AddressSelectAdap
         bundle.putString("idNo", addressBean.getIdentification_no());
         bundle.putBoolean("isDefaultX", addressBean.isDefaultX());
         intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        mActivity.startActivity(intent);
     }
 
     public void setNeedLevel(int needLevel) {
         this.needLevel = needLevel;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.address_default)
-        TextView tvDefault;
-        @Bind(R.id.receiver_name)
-        TextView receiverName;
-        @Bind(R.id.receiver_mobile)
-        TextView receiverMobile;
-        @Bind(R.id.receiver_address)
-        TextView receiverAddress;
-        @Bind(R.id.change)
-        Button change;
-        @Bind(R.id.check_box)
-        CheckBox mCheckBox;
-        View card;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            card = itemView;
-            AutoUtils.auto(itemView);
-            ButterKnife.bind(this, itemView);
-        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -27,9 +28,9 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.ui.fragment.main.EduTabFragment;
+import com.danlai.nidepuzi.ui.fragment.main.MainTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
-import com.danlai.nidepuzi.ui.fragment.product.TodayNewFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
@@ -44,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import okhttp3.Call;
 import retrofit2.HttpException;
 
@@ -55,7 +55,7 @@ public class TabActivity extends BaseActivity {
     private UpdateBroadReceiver mUpdateBroadReceiver;
     private FragmentTabUtils mFragmentTabUtils;
     private List<BaseFragment> fragments;
-//    public Handler mHandler;
+    public Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +78,11 @@ public class TabActivity extends BaseActivity {
         mFragmentTabUtils = new FragmentTabUtils(getSupportFragmentManager(), b.radioGroup, fragments, R.id.container, this);
         downLoadAddress();
         checkVersion();
+        initService();
+        LoginUtils.clearCacheEveryWeek(mBaseActivity);
+    }
+
+    private void initService() {
         BaseApp.getMainInteractor(mBaseActivity)
             .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
                 @Override
@@ -140,17 +145,11 @@ public class TabActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
     protected void initViews() {
         setSwipeBackEnable(false);
         fragments = new ArrayList<>();
-        fragments.add(TodayNewFragment.newInstance("每日焦点"));
-//        fragments.add(MainTabFragment.newInstance());
+//        fragments.add(TodayNewFragment.newInstance("每日焦点"));
+        fragments.add(MainTabFragment.newInstance());
         fragments.add(EduTabFragment.newInstance());
         fragments.add(ShopTabFragment.newInstance());
         fragments.add(ServiceTabFragment.newInstance());

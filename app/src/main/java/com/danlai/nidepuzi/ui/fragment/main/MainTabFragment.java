@@ -1,7 +1,11 @@
 package com.danlai.nidepuzi.ui.fragment.main;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
@@ -10,10 +14,10 @@ import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.databinding.FragmentMainTabBinding;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.ui.activity.main.TabActivity;
 import com.danlai.nidepuzi.ui.activity.product.CategoryActivity;
 import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
-import com.danlai.nidepuzi.ui.fragment.product.ActivityFragment;
 import com.danlai.nidepuzi.ui.fragment.product.ProductFragment;
 import com.danlai.nidepuzi.ui.fragment.product.TodayNewFragment;
 
@@ -38,7 +42,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
     @Override
     public void setListener() {
         b.imgMessage.setOnClickListener(this);
-        b.imgInvite.setOnClickListener(this);
+        b.layoutInvite.setOnClickListener(this);
         b.imgSearch.setOnClickListener(this);
     }
 
@@ -46,7 +50,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
     public void initData() {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(TodayNewFragment.newInstance("每日焦点"));
-        fragments.add(ActivityFragment.newInstance("精品活动"));
+//        fragments.add(ActivityFragment.newInstance("精品活动"));
         BaseApp.getMainInteractor(mActivity)
             .getPortalBean("activitys,posters", new ServiceResponse<PortalBean>(mFragment) {
                 @Override
@@ -77,12 +81,12 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
 
     @Override
     protected void initViews() {
-//        ((TabActivity) mActivity).mHandler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                setTabLayoutMarginTop((double) msg.what / 100);
-//            }
-//        };
+        ((TabActivity) mActivity).mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                setTabLayoutMarginTop((double) msg.what / 100);
+            }
+        };
     }
 
     @Override
@@ -90,28 +94,28 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
         return R.layout.fragment_main_tab;
     }
 
-//    public void setTabLayoutMarginTop(double percent) {
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//            ViewGroup.LayoutParams.MATCH_PARENT, b.tabLayout.getHeight());
-//        if (percent > 0) {
-//            b.viewPager.setScrollable(false);
-//            double height = percent * b.tabLayout.getHeight();
-//            params.setMargins(0, (int) -height, 0, 0);
-//            b.tabLayout.setLayoutParams(params);
-//        } else {
-//            b.viewPager.setScrollable(true);
-//            params.setMargins(0, 0, 0, 0);
-//        }
-//        b.tabLayout.setLayoutParams(params);
-//    }
+    public void setTabLayoutMarginTop(double percent) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, b.tabLayout.getHeight());
+        if (percent > 0) {
+            b.viewPager.setScrollable(false);
+            double height = percent * b.tabLayout.getHeight();
+            params.setMargins(0, (int) -height, 0, 0);
+            b.tabLayout.setLayoutParams(params);
+        } else {
+            b.viewPager.setScrollable(true);
+            params.setMargins(0, 0, 0, 0);
+        }
+        b.tabLayout.setLayoutParams(params);
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_message:
-                readyGo( MessageActivity.class);
+                readyGo(MessageActivity.class);
                 break;
-            case R.id.img_invite:
+            case R.id.layout_invite:
                 readyGo(InviteActivity.class);
                 break;
             case R.id.img_search:

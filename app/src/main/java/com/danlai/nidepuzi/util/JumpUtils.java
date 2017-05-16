@@ -15,8 +15,6 @@ import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
  */
 public class JumpUtils {
 
-    public static final String TAG = "JumpUtils";
-
     public static void push_jump_proc(Context context, String recvContent) {
         if (TextUtils.isEmpty(recvContent)) return;
         if (LoginUtils.checkLoginState(context)) {

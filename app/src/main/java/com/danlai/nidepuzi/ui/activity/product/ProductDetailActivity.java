@@ -277,7 +277,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                     nameTv.setText(detailContent.getName() + "/" + skuInfo.get(0).getName());
                     skuTv.setText(skuInfo.get(0).getSku_items().get(0).getName());
                     agentTv.setText("¥" + skuInfo.get(0).getSku_items().get(0).getAgent_price() + "");
-                    saleTv.setText("/¥" + skuInfo.get(0).getSku_items().get(0).getStd_sale_price());
+                    saleTv.setText("" + skuInfo.get(0).getSku_items().get(0).getStd_sale_price());
                 }
             } catch (Exception ignored) {
             }
@@ -296,7 +296,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         }
         b.name.setText(detailContent.getName());
         b.agentPrice.setText("¥" + detailContent.getLowest_agent_price());
-        b.salePrice.setText("/¥" + detailContent.getLowest_std_sale_price());
+        b.salePrice.setText("" + detailContent.getLowest_std_sale_price());
         b.salePrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         if (detailContent.getOffshelf_time() != null) {
             String offshelf_time = detailContent.getOffshelf_time().replace("T", " ");
@@ -524,7 +524,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
 
     public void refreshSkuId(ProductDetailBean.SkuInfoBean.SkuItemsBean skuItemsBean) {
         agentTv.setText("¥" + skuItemsBean.getAgent_price());
-        saleTv.setText("/¥" + skuItemsBean.getStd_sale_price());
+        saleTv.setText("" + skuItemsBean.getStd_sale_price());
         skuTv.setText(skuItemsBean.getName());
         sku_id = skuItemsBean.getSku_id();
     }

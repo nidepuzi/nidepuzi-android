@@ -1,78 +1,38 @@
 package com.danlai.nidepuzi.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
+import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseListViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemOneOrderBinding;
 import com.danlai.nidepuzi.entity.AllOrdersBean.ResultsEntity.OrdersEntity;
 
 import java.util.List;
 
 /**
- * Created by wisdom on 16/5/28.
+ * @author wisdom
+ * @date 2016年05月28日 下午3:18
  */
-public class GoodsListAdapter extends BaseAdapter {
+public class GoodsListAdapter extends BaseListViewAdapter<ItemOneOrderBinding, OrdersEntity> {
 
-    private List<OrdersEntity> packageBeanList;
-    private Context context;
-
-    public GoodsListAdapter(List<OrdersEntity> packageBeanList, Context context) {
-        this.packageBeanList = packageBeanList;
-        this.context = context;
+    public GoodsListAdapter(List<OrdersEntity> data, BaseActivity mActivity) {
+        super(mActivity);
+        this.data = data;
     }
 
     @Override
-    public int getCount() {
-        return packageBeanList.size();
+    protected int getLayoutId() {
+        return R.layout.item_one_order;
     }
 
     @Override
-    public Object getItem(int position) {
-        return packageBeanList;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.one_order_item, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        OrdersEntity bean = packageBeanList.get(position);
-        ViewUtils.loadImgToImgViewWithPlaceholder(context, holder.imageView, bean.getPic_path());
-        holder.name.setText(bean.getTitle());
-        holder.price.setText("¥" + JUtils.formatDouble(bean.getTotal_fee()));
-        holder.num.setText("x" + bean.getNum());
-        holder.size.setText(bean.getSku_name());
-        return convertView;
-    }
-
-    private class ViewHolder {
-        TextView name, price, num, size;
-        ImageView imageView;
-
-
-        public ViewHolder(View itemView) {
-            imageView = ((ImageView) itemView.findViewById(R.id.img_good));
-            name = ((TextView) itemView.findViewById(R.id.tx_good_name));
-            price = ((TextView) itemView.findViewById(R.id.tx_good_price));
-            num = ((TextView) itemView.findViewById(R.id.tx_good_num));
-            size = ((TextView) itemView.findViewById(R.id.tx_good_size));
-        }
+    protected void fillData(OrdersEntity ordersEntity, BaseViewHolder<ItemOneOrderBinding> holder, int position) {
+        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.imgGood, ordersEntity.getPic_path());
+        holder.b.txGoodName.setText(ordersEntity.getTitle());
+        holder.b.txGoodPrice.setText("¥" + JUtils.formatDouble(ordersEntity.getTotal_fee()));
+        holder.b.txGoodNum.setText("x" + ordersEntity.getNum());
+        holder.b.txGoodSize.setText(ordersEntity.getSku_name());
     }
 }

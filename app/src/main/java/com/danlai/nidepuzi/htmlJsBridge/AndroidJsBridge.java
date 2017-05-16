@@ -41,8 +41,6 @@ import cn.sharesdk.wechat.moments.WechatMoments;
  */
 public class AndroidJsBridge {
 
-    private static final int MSG_ACTION_CCALLBACK = 2;
-
     private static final String TAG = "AndroidJsBridge";
     private BaseActivity mContext;
 

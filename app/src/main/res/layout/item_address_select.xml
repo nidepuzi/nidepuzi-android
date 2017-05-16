@@ -1,71 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="5dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:id="@+id/change"
-        android:layout_width="45dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/btn_common_white"
-        android:text="修改"
-        android:textColor="@color/colorAccent"
-        android:textSize="14dp"/>
-
-
-    <CheckBox
-        android:id="@+id/check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:clickable="false"/>
-
-    <LinearLayout
-        android:id="@+id/ll"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@id/change"
-        android:layout_toRightOf="@id/check_box"
-        android:orientation="horizontal">
+        android:padding="5dp">
 
-        <TextView
-            android:id="@+id/address_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:text="默认地址"
+        <Button
+            android:id="@+id/change"
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_common_white"
+            android:text="修改"
             android:textColor="@color/colorAccent"
             android:textSize="14dp"/>
 
-        <TextView
-            android:id="@+id/receiver_name"
+
+        <CheckBox
+            android:id="@+id/check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:clickable="false"/>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/change"
+            android:layout_toRightOf="@id/check_box"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/address_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="默认地址"
+                android:textColor="@color/colorAccent"
+                android:textSize="14dp"/>
+
+            <TextView
+                android:id="@+id/receiver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"/>
+
+            <TextView
+                android:id="@+id/receiver_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/receiver_mobile"
-            android:layout_width="wrap_content"
+            android:id="@+id/receiver_address"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_below="@id/ll"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_toLeftOf="@id/change"
+            android:layout_toRightOf="@id/check_box"
             android:textSize="14dp"/>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/receiver_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="4dp"
-        android:layout_toLeftOf="@id/change"
-        android:layout_toRightOf="@id/check_box"
-        android:textSize="14dp"/>
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/time"
+    <data>
+
+        <import type="com.danlai.nidepuzi.entity.MMCarryBean.ResultsBean"/>
+
+        <import type="com.danlai.library.utils.JUtils"/>
+
+        <variable
+            name="data"
+            type="ResultsBean"/>
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_grey"
-        android:padding="10dp"
-        android:textSize="16sp"/>
-
-
-    <RelativeLayout
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/time_detail"
-            android:layout_width="wrap_content"
+            android:id="@+id/time"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:textColor="@color/color_99"
-            android:textSize="13sp"/>
+            android:background="@color/bg_grey"
+            android:padding="10dp"
+            android:text="@{data.created.substring(0, 10)}"
+            android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/desc"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/time_detail"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/color_66"/>
+            android:background="@color/white"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/color_66"
-            android:textSize="20sp"/>
-    </RelativeLayout>
-</LinearLayout>
+            <TextView
+                android:id="@+id/time_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@{data.created.substring(11)}"
+                android:textColor="@color/color_99"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/time_detail"
+                android:layout_marginTop="8dp"
+                android:text="@{data.type}"
+                android:textColor="@color/color_66"/>
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@{data.amount>0?'+'+JUtils.formatDouble((double)data.amount/100):JUtils.formatDouble((double)data.amount/100)}"
+                android:textColor="@color/color_66"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

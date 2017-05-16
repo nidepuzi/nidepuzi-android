@@ -1,16 +1,11 @@
 package com.danlai.nidepuzi.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.TextView;
-
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.entity.OrderDetailBean;
+import com.danlai.nidepuzi.base.BaseActivity;
+import com.danlai.nidepuzi.base.BaseListViewAdapter;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemRefundTypeBinding;
+import com.danlai.nidepuzi.entity.OrderDetailBean.ExtrasBean.RefundChoicesBean;
 
 import java.util.List;
 
@@ -18,51 +13,34 @@ import java.util.List;
 /**
  * Created by wisdom on 16/6/30.
  */
-public class RefundTypeAdapter extends BaseAdapter {
-
-    private Context context;
-    private List<OrderDetailBean.ExtrasBean.RefundChoicesBean> refund_choices;
+public class RefundTypeAdapter extends BaseListViewAdapter<ItemRefundTypeBinding, RefundChoicesBean> {
     private boolean[] flag;
 
-    public RefundTypeAdapter(Context context, List<OrderDetailBean.ExtrasBean.RefundChoicesBean> refund_choices) {
-        this.context = context;
-        this.refund_choices = refund_choices;
-        flag = new boolean[refund_choices.size()];
+    public RefundTypeAdapter(BaseActivity mActivity, List<RefundChoicesBean> data) {
+        super(mActivity);
+        this.data = data;
+        flag = new boolean[data.size()];
         for (int i = 0; i < flag.length; i++) {
             flag[i] = false;
         }
     }
 
     @Override
-    public int getCount() {
-        return refund_choices.size();
+    protected int getLayoutId() {
+        return R.layout.item_refund_type;
     }
 
     @Override
-    public OrderDetailBean.ExtrasBean.RefundChoicesBean getItem(int position) {
-        return refund_choices.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.item_refund_type, parent, false);
-        ImageView icon = (ImageView) convertView.findViewById(R.id.refund_iv);
-        TextView name = (TextView) convertView.findViewById(R.id.refund_tv);
-        TextView desc = (TextView) convertView.findViewById(R.id.refund_tv_desc);
-        ((RadioButton) convertView.findViewById(R.id.refund_rb)).setChecked(flag[position]);
-        name.setText(refund_choices.get(position).getName());
-        desc.setText(refund_choices.get(position).getDesc());
-        if ("budget".equals(refund_choices.get(position).getRefund_channel())) {
-            icon.setImageResource(R.drawable.icon_fast_return);
+    protected void fillData(RefundChoicesBean refundChoicesBean, BaseViewHolder<ItemRefundTypeBinding> holder, int position) {
+        holder.b.refundRb.setChecked(flag[position]);
+        holder.b.refundName.setText(refundChoicesBean.getName());
+        holder.b.refundDesc.setText(refundChoicesBean.getDesc());
+        if ("budget".equals(refundChoicesBean.getRefund_channel())) {
+            holder.b.refundIcon.setImageResource(R.drawable.icon_fast_return);
         } else {
-            icon.setImageResource(R.drawable.icon_return);
+            holder.b.refundIcon.setImageResource(R.drawable.icon_return);
         }
-        convertView.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> {
             for (int i = 0; i < flag.length; i++) {
                 if (position == i) {
                     flag[i] = true;
@@ -72,7 +50,6 @@ public class RefundTypeAdapter extends BaseAdapter {
             }
             RefundTypeAdapter.this.notifyDataSetChanged();
         });
-        return convertView;
     }
 
     public int getSelect() {

@@ -107,7 +107,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <include layout="@layout/one_order_item"/>
+                <include layout="@layout/item_one_order"/>
 
             </LinearLayout>
 
