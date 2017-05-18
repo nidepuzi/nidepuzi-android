@@ -90,7 +90,7 @@ public class ActivityFragment extends BaseFragment<FragmentActivityBinding>
     @Override
     protected void initViews() {
         b.swipeLayout.setColorSchemeResources(R.color.colorAccent);
-        b.recyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        b.recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         b.recyclerView.addItemDecoration(new SpaceItemDecoration(0, 0, 0, 18));
         adapter = new ActivityAdapter(mActivity);
         b.recyclerView.setAdapter(adapter);

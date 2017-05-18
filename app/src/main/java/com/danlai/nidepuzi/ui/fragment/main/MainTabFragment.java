@@ -15,7 +15,7 @@ import com.danlai.nidepuzi.databinding.FragmentMainTabBinding;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
-import com.danlai.nidepuzi.ui.activity.product.CategoryActivity;
+import com.danlai.nidepuzi.ui.activity.product.CategoryListActivity;
 import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.fragment.product.ProductFragment;
@@ -118,7 +118,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
                 readyGo(InviteActivity.class);
                 break;
             case R.id.layout_search:
-                readyGo(CategoryActivity.class);
+                readyGo(CategoryListActivity.class);
                 break;
         }
     }

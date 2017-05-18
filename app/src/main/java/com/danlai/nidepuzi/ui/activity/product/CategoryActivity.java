@@ -16,11 +16,10 @@ import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CategoryItemAdapter;
-import com.danlai.nidepuzi.adapter.CategoryNameListAdapter;
+import com.danlai.nidepuzi.adapter.CategoryNameAdapter;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityCategoryBinding;
-import com.danlai.nidepuzi.entity.CategoryBean;
 import com.danlai.nidepuzi.entity.CategoryDownBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.task.CategoryListTask;
@@ -39,7 +38,7 @@ import okhttp3.Call;
 
 public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> implements AdapterView.OnItemClickListener, View.OnClickListener {
     private CategoryItemAdapter adapter;
-    private CategoryNameListAdapter mCategoryNameListAdapter;
+    private CategoryNameAdapter mCategoryNameAdapter;
 
 
     @Override
@@ -54,10 +53,10 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
 
     @Override
     protected void initViews() {
-        mCategoryNameListAdapter = new CategoryNameListAdapter(mBaseActivity);
-        b.lv.setAdapter(mCategoryNameListAdapter);
+        mCategoryNameAdapter = new CategoryNameAdapter(mBaseActivity);
+        b.lv.setAdapter(mCategoryNameAdapter);
 
-        LinearLayoutManager manager = new LinearLayoutManager(mBaseActivity, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager manager = new LinearLayoutManager(mBaseActivity);
         b.xrv.setLayoutManager(manager);
         b.xrv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         b.xrv.addItemDecoration(new SpaceItemDecoration(10));
@@ -121,7 +120,7 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
                                         @Override
                                         public void onResponse(File response, int id) {
                                             FileUtils.saveCategoryFile(mBaseActivity, sha1);
-                                            new CategoryListTask(mCategoryNameListAdapter, cid).execute();
+                                            new CategoryListTask(mCategoryNameAdapter, cid).execute();
                                             new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute(cid);
                                         }
                                     });
@@ -130,7 +129,7 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
                                 hideIndeterminateProgressDialog();
                             }
                         } else {
-                            new CategoryListTask(mCategoryNameListAdapter, "").execute();
+                            new CategoryListTask(mCategoryNameAdapter, "").execute();
                             new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute("");
                         }
                     }
@@ -152,18 +151,19 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
     public void setListener() {
         b.lv.setOnItemClickListener(this);
         b.searchLayout.setOnClickListener(this);
+        b.finishLayout.setOnClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         showIndeterminateProgressDialog(false);
         b.emptyLayout.setVisibility(View.GONE);
-        String cid = ((CategoryBean) mCategoryNameListAdapter.getItem(position)).getCid();
-        mCategoryNameListAdapter.setCid(cid);
+        String cid = mCategoryNameAdapter.getItem(position).getCid();
+        mCategoryNameAdapter.setCid(cid);
         if (!FileUtils.isFileExist(BaseConst.CATEGORY_JSON)) {
             downloadJson(cid);
         } else {
-            mCategoryNameListAdapter.setCid(cid);
+            mCategoryNameAdapter.setCid(cid);
             new CategoryTask(adapter, b.emptyLayout, mBaseActivity).execute(cid);
         }
     }
@@ -172,14 +172,17 @@ public class CategoryActivity extends BaseMVVMActivity<ActivityCategoryBinding> 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_layout:
-                Pair<View, String> searchPair = new Pair<>(b.searchLayout, "search");//nameTv是名字控件
                 Intent intent = new Intent(this, SearchActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Pair<View, String> searchPair = new Pair<>(b.searchLayout, "search");
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                         searchPair).toBundle());
                 } else {
                     startActivity(intent);
                 }
+                break;
+            case R.id.finish_layout:
+                finish();
                 break;
         }
     }

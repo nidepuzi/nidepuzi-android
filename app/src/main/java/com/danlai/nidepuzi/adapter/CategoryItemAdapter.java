@@ -16,7 +16,8 @@ import com.danlai.nidepuzi.ui.activity.product.CategoryProductActivity;
 import java.util.ArrayList;
 
 /**
- * Created by wisdom on 17/2/16.
+ * @author wisdom
+ * @date 2017年02月16日 下午2:38
  */
 
 public class CategoryItemAdapter extends BaseRecyclerViewAdapter<ItemItemCategoryBinding, CategoryBean> {

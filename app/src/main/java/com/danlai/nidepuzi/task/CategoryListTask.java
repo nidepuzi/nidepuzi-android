@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.danlai.library.utils.FileUtils;
 import com.danlai.library.utils.JUtils;
-import com.danlai.nidepuzi.adapter.CategoryNameListAdapter;
+import com.danlai.nidepuzi.adapter.CategoryNameAdapter;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.CategoryBean;
 import com.google.gson.Gson;
@@ -23,10 +23,10 @@ import java.util.List;
 
 public class CategoryListTask extends AsyncTask<String, Integer, List<CategoryBean>> {
 
-    private CategoryNameListAdapter adapter;
+    private CategoryNameAdapter adapter;
     private String cid;
 
-    public CategoryListTask(CategoryNameListAdapter adapter, String cid) {
+    public CategoryListTask(CategoryNameAdapter adapter, String cid) {
         this.adapter = adapter;
         this.cid = cid;
     }

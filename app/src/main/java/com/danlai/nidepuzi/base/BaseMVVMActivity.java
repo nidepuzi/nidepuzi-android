@@ -31,4 +31,11 @@ public abstract class BaseMVVMActivity<T extends ViewDataBinding> extends BaseAc
         overridePendingTransition(R.anim.right_in, R.anim.right_out);
     }
 
+    public void initDataError() {
+        hideIndeterminateProgressDialog();
+        mVaryViewHelperController.showNetworkError(view -> {
+            refreshView();
+            showNetworkError();
+        });
+    }
 }

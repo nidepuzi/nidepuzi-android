@@ -2,7 +2,8 @@ package com.danlai.nidepuzi.ui.activity.product;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.danlai.library.utils.JUtils;
-import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.ProductListAdapter;
@@ -75,10 +75,9 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
 
     @Override
     protected void initViews() {
-        GridLayoutManager manager = new GridLayoutManager(this, 2);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         b.xrv.setLayoutManager(manager);
         b.xrv.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        b.xrv.addItemDecoration(new SpaceItemDecoration(10));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
         adapter = new ProductListAdapter(this);
@@ -186,6 +185,7 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
 
     @Override
     public void onRefresh() {
+        b.xrv.setLoadingMoreEnabled(true);
         refreshData(true);
     }
 
@@ -218,7 +218,9 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
                         b.xrv.setVisibility(View.GONE);
                     }
                     next = bean.getNext();
-                    if (next != null && !"".equals(next)) {
+                    if (TextUtils.isEmpty(next)) {
+                        b.xrv.setLoadingMoreEnabled(false);
+                    } else {
                         page++;
                     }
                     hideIndeterminateProgressDialog();

@@ -125,7 +125,7 @@ public class TodayNewFragment extends BaseFragment<FragmentTodayNewBinding>
     protected void initViews() {
         width = JUtils.getScreenWidth() / 5;
         b.swipeLayout.setColorSchemeResources(R.color.colorAccent);
-        b.recyclerProduct.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        b.recyclerProduct.setLayoutManager(new LinearLayoutManager(mActivity));
         mainProductAdapter = new MainProductAdapter(mActivity);
         b.recyclerProduct.setAdapter(mainProductAdapter);
 

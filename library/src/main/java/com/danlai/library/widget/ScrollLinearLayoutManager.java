@@ -7,19 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by itxuye on 16/4/7.
+ * @author wisdom
+ * @date 2017年05月18日 下午2:44
  */
 
 public class ScrollLinearLayoutManager extends LinearLayoutManager {
 
-    private static final String TAG = ScrollLinearLayoutManager.class.getSimpleName();
-
     public ScrollLinearLayoutManager(Context context) {
         super(context);
-    }
-
-    public ScrollLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
-        super(context, orientation, reverseLayout);
     }
 
     private int[] mMeasuredDimension = new int[2];
