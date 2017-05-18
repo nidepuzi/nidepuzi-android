@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.widget.loading.VaryViewHelperController;
-import com.danlai.library.widget.loading.WisdomLoading;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -33,7 +32,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     private boolean isVisible = false;
     public boolean isInitView = false;
     private boolean isFirstLoad = true;
-    private WisdomLoading wisdomLoading;
     public VaryViewHelperController mVaryViewHelperController;
     private CompositeDisposable mCompositeDisposable;
     protected T b;
@@ -156,28 +154,11 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     }
 
     public void showIndeterminateProgressDialog(boolean cancelable) {
-        if (wisdomLoading == null) {
-            wisdomLoading = WisdomLoading.createDialog(mActivity)
-                .setCanCancel(cancelable)
-                .start();
-        }
-    }
-
-    public void setDialogContent(String content) {
-        if (wisdomLoading != null) {
-            wisdomLoading.setContent(content);
-        }
+        mActivity.showIndeterminateProgressDialog(cancelable);
     }
 
     public void hideIndeterminateProgressDialog() {
-        try {
-            if (wisdomLoading != null) {
-                wisdomLoading.dismiss();
-                wisdomLoading = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mActivity.hideIndeterminateProgressDialog();
     }
 
     public String getTitle() {
@@ -210,7 +191,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
         mVaryViewHelperController.restore();
     }
 
-    public void initDataError(){
+    public void initDataError() {
         mVaryViewHelperController.showNetworkError(view -> {
             refreshView();
             showNetworkError();

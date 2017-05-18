@@ -425,7 +425,7 @@ public class JUtils {
     }
 
     public static String formatDouble(double d) {
-        return new DecimalFormat("0.00").format(d);
+        return new DecimalFormat("0.##").format(d);
     }
 
 }

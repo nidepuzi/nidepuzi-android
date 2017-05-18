@@ -43,7 +43,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
     public void setListener() {
         b.imgMessage.setOnClickListener(this);
         b.layoutInvite.setOnClickListener(this);
-        b.imgSearch.setOnClickListener(this);
+        b.layoutSearch.setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +67,6 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
                         b.tabLayout.setupWithViewPager(b.viewPager);
                         b.tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
                     }
-                    hideIndeterminateProgressDialog();
                 }
 
                 @Override
@@ -118,7 +117,7 @@ public class MainTabFragment extends BaseFragment<FragmentMainTabBinding> implem
             case R.id.layout_invite:
                 readyGo(InviteActivity.class);
                 break;
-            case R.id.img_search:
+            case R.id.layout_search:
                 readyGo(CategoryActivity.class);
                 break;
         }

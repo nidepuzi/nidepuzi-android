@@ -60,15 +60,14 @@ public class AllRefundsBean {
     @Override
     public String toString() {
         return "AllRefundsBean{" +
-                "count=" + count +
-                ", next=" + next +
-                ", previous=" + previous +
-                ", results=" + results +
-                '}';
+            "count=" + count +
+            ", next=" + next +
+            ", previous=" + previous +
+            ", results=" + results +
+            '}';
     }
 
     public static class ResultsEntity {
-
 
         private int id;
         private String url;
@@ -101,6 +100,8 @@ public class AllRefundsBean {
         private double refund_fee;
         private String return_address;
         private String status_display;
+        private String return_mobile;
+        private String return_contact;
         /**
          * desc :
          */
@@ -393,6 +394,22 @@ public class AllRefundsBean {
 
         public void setStatus_shaft(List<StatusShaftBean> status_shaft) {
             this.status_shaft = status_shaft;
+        }
+
+        public String getReturn_mobile() {
+            return return_mobile;
+        }
+
+        public void setReturn_mobile(String return_mobile) {
+            this.return_mobile = return_mobile;
+        }
+
+        public String getReturn_contact() {
+            return return_contact;
+        }
+
+        public void setReturn_contact(String return_contact) {
+            this.return_contact = return_contact;
         }
 
         public static class AmountFlowBean {

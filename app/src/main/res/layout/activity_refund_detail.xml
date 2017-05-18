@@ -332,19 +332,10 @@
                     android:orientation="horizontal"
                     android:padding="8dp">
 
-                    <RelativeLayout
-                        android:id="@+id/img_layout"
+                    <ImageView
+                        android:id="@+id/sdv"
                         android:layout_width="84dp"
-                        android:layout_height="84dp"
-                        android:background="@drawable/choose_img_bg"
-                        android:gravity="center">
-
-                        <com.danlai.library.widget.RoundCornerImageView
-                            android:id="@+id/sdv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/place_holder"/>
-                    </RelativeLayout>
+                        android:layout_height="84dp"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -509,11 +500,10 @@
                         android:layout_width="110px"
                         android:layout_height="110px"
                         android:layout_margin="8dp"
-                        android:background="@drawable/choose_img_bg"
                         android:gravity="center"
                         android:visibility="invisible">
 
-                        <com.danlai.library.widget.RoundCornerImageView
+                        <ImageView
                             android:id="@+id/round_image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -527,11 +517,10 @@
                         android:layout_width="110px"
                         android:layout_height="110px"
                         android:layout_margin="8dp"
-                        android:background="@drawable/choose_img_bg"
                         android:gravity="center"
                         android:visibility="invisible">
 
-                        <com.danlai.library.widget.RoundCornerImageView
+                        <ImageView
                             android:id="@+id/round_image1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -545,11 +534,10 @@
                         android:layout_width="110px"
                         android:layout_height="110px"
                         android:layout_margin="8dp"
-                        android:background="@drawable/choose_img_bg"
                         android:gravity="center"
                         android:visibility="invisible">
 
-                        <com.danlai.library.widget.RoundCornerImageView
+                        <ImageView
                             android:id="@+id/round_image2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -563,11 +551,10 @@
                         android:layout_width="110px"
                         android:layout_height="110px"
                         android:layout_margin="8dp"
-                        android:background="@drawable/choose_img_bg"
                         android:gravity="center"
                         android:visibility="invisible">
 
-                        <com.danlai.library.widget.RoundCornerImageView
+                        <ImageView
                             android:id="@+id/round_image3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

@@ -6,26 +6,18 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="15px">
+        android:padding="8dp">
 
-        <RelativeLayout
-            android:layout_width="200px"
-            android:layout_height="200px"
-            android:background="@drawable/choose_img_bg"
-            android:gravity="center">
-
-            <com.danlai.library.widget.RoundCornerImageView
-                android:id="@+id/cart_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/place_holder"/>
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/cart_image"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/place_holder"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="210px"
+            android:layout_height="84dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="vertical">
@@ -81,8 +73,8 @@
 
                     <ImageView
                         android:id="@+id/delete"
-                        android:layout_width="40px"
-                        android:layout_height="40px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:src="@drawable/icon_minus"
                         android:textColor="@color/colorPrimary"/>
@@ -91,16 +83,16 @@
                         android:id="@+id/count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
-                        android:gravity="center"
                         android:text="1"
                         android:textColor="@color/color_33"
                         android:textSize="16dp"/>
 
                     <ImageView
                         android:id="@+id/add"
-                        android:layout_width="40px"
-                        android:layout_height="40px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:gravity="center"
                         android:src="@drawable/icon_plus"

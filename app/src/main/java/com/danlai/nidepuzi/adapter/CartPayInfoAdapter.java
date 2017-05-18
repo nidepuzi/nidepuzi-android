@@ -49,6 +49,7 @@ public class CartPayInfoAdapter extends BaseListViewAdapter<ItemCartsPayBinding,
                         .load(head_img)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .centerCrop()
+                        .placeholder(R.drawable.place_holder)
                         .into(holder.b.cartImage);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -59,6 +60,7 @@ public class CartPayInfoAdapter extends BaseListViewAdapter<ItemCartsPayBinding,
                 .load(picPath)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
+                .placeholder(R.drawable.place_holder)
                 .into(holder.b.cartImage);
         }
         holder.b.title.setText(cartListEntity.getTitle());

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,7 +28,7 @@ import okhttp3.ResponseBody;
 
 public class WriteLogisticsInfoActivity extends BaseMVVMActivity<ActivityWriteLogisticsInfoBinding>
     implements View.OnClickListener {
-    private String address;
+    private String address, mobile, contact;
     String company;
     int goods_id;
     private boolean flag;
@@ -48,30 +49,12 @@ public class WriteLogisticsInfoActivity extends BaseMVVMActivity<ActivityWriteLo
 
     @Override
     protected void initData() {
-        if (address == null || "".equals(address)) {
-            JUtils.Toast("未查询到退货地址，请联系客服查询");
-        } else if (address.contains("，")) {
-            String[] split = address.split("，");
-            for (String s : split) {
-                if (s.contains("市")) {
-                    b.tvAddress.setText("收货地址:" + s);
-                } else if (s.contains("铺子")) {
-                    b.tvName.setText("收件人:铺子售后");
-                } else {
-                    b.tvPhone.setText("联系电话:" + s);
-                }
-            }
-        } else if (address.contains(",")) {
-            String[] split = address.split(",");
-            for (String s : split) {
-                if (s.contains("市")) {
-                    b.tvAddress.setText("收货地址:" + s);
-                } else if (s.contains("铺子")) {
-                    b.tvName.setText("收件人:铺子售后");
-                } else {
-                    b.tvPhone.setText("联系电话:" + s);
-                }
-            }
+        if (TextUtils.isEmpty(address) || TextUtils.isEmpty(mobile)) {
+            JUtils.Toast("未查询到详细退货信息，请联系客服查询");
+        } else {
+            b.tvName.setText("收件人:" + contact);
+            b.tvMobile.setText("联系电话:" + mobile);
+            b.tvAddress.setText(address);
         }
         if (flag) {
             BaseApp.getTradeInteractor(this)
@@ -128,6 +111,8 @@ public class WriteLogisticsInfoActivity extends BaseMVVMActivity<ActivityWriteLo
     protected void getBundleExtras(Bundle extras) {
         goods_id = extras.getInt("goods_id");
         address = extras.getString("address");
+        mobile = extras.getString("mobile");
+        contact = extras.getString("contact");
         flag = extras.getBoolean("flag");
         company_name = extras.getString("company_name", "");
         packetid = extras.getString("packetid", "");

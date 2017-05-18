@@ -9,10 +9,10 @@ import java.util.List;
 public class BudgetDetailBean {
 
     /**
-     * count : 4
-     * next : null
+     * count : 37
+     * next : http://m.nidepuzi.com/rest/v1/users/get_budget_detail?page=2
      * previous : null
-     * results : [{"desc":"您通过提现支出88.0元.","budget_type":1,"budget_log_type":"cashout","budget_date":"2017-05-09","get_status_display":"待确定","status":2,"budeget_detail_cash":88,"modified":"2017-05-09T10:22:30.096974"},{"desc":"您通过退款收入88.0元.","budget_type":0,"budget_log_type":"refund","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T10:05:39.151877"},{"desc":"您通过消费支出88.0元.消费的订单号71.","budget_type":1,"budget_log_type":"consum","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T10:03:07.995981"},{"desc":"您通过退款收入88.0元.","budget_type":0,"budget_log_type":"refund","budget_date":"2017-05-09","get_status_display":"已确定","status":0,"budeget_detail_cash":88,"modified":"2017-05-09T09:55:33.877371"}]
+     * results : [{"desc":"您通过收益取消支出6.99元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":6.99,"modified":"2017-05-17T19:10:01.022758"},{"desc":"您通过订单收益收入6.99元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":6.99,"modified":"2017-05-17T19:10:00.999393"},{"desc":"您通过收益取消支出35.69元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":35.69,"modified":"2017-05-17T11:00:47.696701"},{"desc":"您通过订单收益收入35.69元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":35.69,"modified":"2017-05-17T10:59:46.037171"},{"desc":"您通过收益取消支出4.45元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":4.45,"modified":"2017-05-17T10:57:28.133477"},{"desc":"您通过订单收益收入4.45元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-17","get_status_display":"已确定","status":0,"budeget_detail_cash":4.45,"modified":"2017-05-17T10:57:09.832914"},{"desc":"您通过收益取消支出13.35元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":13.35,"modified":"2017-05-15T17:35:00.839643"},{"desc":"您通过收益取消支出14.7元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":14.7,"modified":"2017-05-15T17:02:58.562533"},{"desc":"您通过订单收益收入14.7元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":14.7,"modified":"2017-05-15T17:02:58.527957"},{"desc":"您通过订单收益收入13.35元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":13.35,"modified":"2017-05-15T17:35:00.761329"},{"desc":"您通过收益取消支出5.9元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":5.9,"modified":"2017-05-15T16:41:22.277619"},{"desc":"您通过订单收益收入5.9元.","budget_type":0,"budget_log_type":"order","budget_log_type_display":"订单收益","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":5.9,"modified":"2017-05-15T16:41:22.250556"},{"desc":"您通过提现失败退回收入2.0元.","budget_type":0,"budget_log_type":"cashfail","budget_log_type_display":"提现失败退回","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":2,"modified":"2017-05-15T09:31:50.948717"},{"desc":"您通过提现失败退回收入2.0元.","budget_type":0,"budget_log_type":"cashfail","budget_log_type_display":"提现失败退回","budget_date":"2017-05-15","get_status_display":"已确定","status":0,"budeget_detail_cash":2,"modified":"2017-05-15T09:31:50.900664"},{"desc":"您通过收益取消支出6.4元.","budget_type":1,"budget_log_type":"cancel","budget_log_type_display":"收益取消","budget_date":"2017-05-13","get_status_display":"已确定","status":0,"budeget_detail_cash":6.4,"modified":"2017-05-13T17:20:00.805136"}]
      */
 
     private int count;
@@ -54,19 +54,21 @@ public class BudgetDetailBean {
 
     public static class ResultsBean {
         /**
-         * desc : 您通过提现支出88.0元.
+         * desc : 您通过收益取消支出6.99元.
          * budget_type : 1
-         * budget_log_type : cashout
-         * budget_date : 2017-05-09
-         * get_status_display : 待确定
-         * status : 2
-         * budeget_detail_cash : 88.0
-         * modified : 2017-05-09T10:22:30.096974
+         * budget_log_type : cancel
+         * budget_log_type_display : 收益取消
+         * budget_date : 2017-05-17
+         * get_status_display : 已确定
+         * status : 0
+         * budeget_detail_cash : 6.99
+         * modified : 2017-05-17T19:10:01.022758
          */
 
         private String desc;
         private int budget_type;
         private String budget_log_type;
+        private String budget_log_type_display;
         private String budget_date;
         private String get_status_display;
         private int status;
@@ -95,6 +97,14 @@ public class BudgetDetailBean {
 
         public void setBudget_log_type(String budget_log_type) {
             this.budget_log_type = budget_log_type;
+        }
+
+        public String getBudget_log_type_display() {
+            return budget_log_type_display;
+        }
+
+        public void setBudget_log_type_display(String budget_log_type_display) {
+            this.budget_log_type_display = budget_log_type_display;
         }
 
         public String getBudget_date() {

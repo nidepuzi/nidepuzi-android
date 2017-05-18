@@ -1,31 +1,29 @@
 package com.danlai.nidepuzi.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseConst;
+import com.danlai.nidepuzi.base.BaseViewHolder;
+import com.danlai.nidepuzi.databinding.ItemOrderContentBinding;
+import com.danlai.nidepuzi.databinding.ItemOrderFooterBinding;
+import com.danlai.nidepuzi.databinding.ItemOrderHeadBinding;
 import com.danlai.nidepuzi.entity.OrderContent;
 import com.danlai.nidepuzi.entity.OrderFooter;
 import com.danlai.nidepuzi.entity.OrderHead;
 import com.danlai.nidepuzi.ui.activity.trade.OrderDetailActivity;
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * @author wisdom
@@ -64,14 +62,14 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEAD) {
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.item_order_head, parent, false);
-            return new HeadHolder(view);
+            ItemOrderHeadBinding b = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.item_order_head, parent, false);
+            return new HeadHolder(b);
         } else if (viewType == TYPE_FOOTER) {
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.item_order_footer, parent, false);
-            return new FooterHolder(view);
+            ItemOrderFooterBinding b = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.item_order_footer, parent, false);
+            return new FooterHolder(b);
         } else if (viewType == TYPE_CONTENT) {
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.item_order_content, parent, false);
-            return new ContentHolder(view);
+            ItemOrderContentBinding b = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.item_order_content, parent, false);
+            return new ContentHolder(b);
         } else {
             return null;
         }
@@ -92,21 +90,21 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void initContent(ContentHolder holder, OrderContent bean) {
         // TODO: 17/5/11 暂时隐藏
 //        if (isShow) {
-//            holder.ivSave.setVisibility(View.VISIBLE);
-//            holder.tvSave.setVisibility(View.VISIBLE);
+//            holder.b.ivSave.setVisibility(View.VISIBLE);
+//            holder.b.tvSave.setVisibility(View.VISIBLE);
 //        } else {
-//            holder.ivSave.setVisibility(View.GONE);
-//            holder.tvSave.setVisibility(View.GONE);
+//            holder.b.ivSave.setVisibility(View.GONE);
+//            holder.b.tvSave.setVisibility(View.GONE);
 //        }
         if (isShare) {
-            holder.ivSave.setImageResource(R.drawable.icon_earn);
+            holder.b.ivSave.setImageResource(R.drawable.icon_earn);
         } else {
-            holder.ivSave.setImageResource(R.drawable.icon_save);
+            holder.b.ivSave.setImageResource(R.drawable.icon_save);
         }
-        holder.tvName.setText(bean.getName());
-        holder.tvSize.setText("规格:" + bean.getSize());
-        holder.tvPrice.setText("单价:" + bean.getPrice() + "  x" + bean.getNum());
-        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.ivGood, bean.getUrl());
+        holder.b.tvName.setText(bean.getName());
+        holder.b.tvSize.setText("规格:" + bean.getSize());
+        holder.b.tvPrice.setText("单价:" + bean.getPrice() + "  x" + bean.getNum());
+        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.ivGood, bean.getUrl());
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("order_id", bean.getOrderId());
@@ -116,53 +114,53 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void initFooter(FooterHolder holder, OrderFooter bean) {
         if (isShow && !isAchievement) {
-            holder.layoutFooter.setVisibility(View.VISIBLE);
-            holder.footerLine.setVisibility(View.VISIBLE);
-            holder.btnDetail.setOnClickListener(v -> {
+            holder.b.layoutFooter.setVisibility(View.VISIBLE);
+            holder.b.footerLine.setVisibility(View.VISIBLE);
+            holder.b.btnDetail.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putInt("order_id", bean.getOrderId());
                 mActivity.readyGo(OrderDetailActivity.class, bundle);
             });
             switch (bean.getStatus()) {
                 case BaseConst.ORDER_STATE_WAITPAY:
-                    holder.btnDelete.setVisibility(View.VISIBLE);
-                    holder.btnDelete.setText("去付款");
-                    holder.btnDelete.setTextColor(Color.WHITE);
-                    holder.btnDelete.setBackgroundResource(R.drawable.btn_common_default);
-                    holder.btnDelete.setOnClickListener(v -> {
+                    holder.b.btnDelete.setVisibility(View.VISIBLE);
+                    holder.b.btnDelete.setText("去付款");
+                    holder.b.btnDelete.setTextColor(Color.WHITE);
+                    holder.b.btnDelete.setBackgroundResource(R.drawable.btn_common_default);
+                    holder.b.btnDelete.setOnClickListener(v -> {
                         Bundle bundle = new Bundle();
                         bundle.putInt("order_id", bean.getOrderId());
                         mActivity.readyGo(OrderDetailActivity.class, bundle);
                     });
                     break;
                 case BaseConst.ORDER_STATE_SENDED:
-                    holder.btnDelete.setVisibility(View.GONE);
-                    holder.btnDetail.setText("物流/详情");
+                    holder.b.btnDelete.setVisibility(View.GONE);
+                    holder.b.btnDetail.setText("物流/详情");
                     break;
                 case BaseConst.ORDER_STATE_TRADE_CLOSE:
                     // TODO: 17/5/11 暂时隐藏
-                    holder.btnDelete.setVisibility(View.GONE);
-                    holder.btnDelete.setText("删除");
-                    holder.btnDelete.setTextColor(mActivity.getResources().getColor(R.color.color_33));
-                    holder.btnDelete.setBackgroundResource(R.drawable.btn_common_black);
-                    holder.btnDelete.setOnClickListener(v -> JUtils.Toast("暂不支持删除订单功能!"));
+                    holder.b.btnDelete.setVisibility(View.GONE);
+                    holder.b.btnDelete.setText("删除");
+                    holder.b.btnDelete.setTextColor(mActivity.getResources().getColor(R.color.color_33));
+                    holder.b.btnDelete.setBackgroundResource(R.drawable.btn_common_black);
+                    holder.b.btnDelete.setOnClickListener(v -> JUtils.Toast("暂不支持删除订单功能!"));
                     break;
                 default:
-                    holder.btnDelete.setVisibility(View.GONE);
+                    holder.b.btnDelete.setVisibility(View.GONE);
                     break;
             }
         } else {
-            holder.layoutFooter.setVisibility(View.GONE);
-            holder.footerLine.setVisibility(View.GONE);
-            holder.btnDetail.setOnClickListener(null);
+            holder.b.layoutFooter.setVisibility(View.GONE);
+            holder.b.footerLine.setVisibility(View.GONE);
+            holder.b.btnDetail.setOnClickListener(null);
         }
-        holder.tvPayment.setText("￥" + JUtils.formatDouble(bean.getPayment()));
-        holder.tvPost.setText("(运费:￥" + JUtils.formatDouble(bean.getPostFee()) + ")");
+        holder.b.tvPayment.setText("￥" + JUtils.formatDouble(bean.getPayment()));
+        holder.b.tvPost.setText("(运费:￥" + JUtils.formatDouble(bean.getPostFee()) + ")");
     }
 
     private void initHead(HeadHolder holder, OrderHead bean) {
-        holder.tvTime.setText(bean.getTime().replaceAll("T", " ").substring(0, 19));
-        holder.tvStatus.setText(bean.getStatus());
+        holder.b.tvTime.setText(bean.getTime().replaceAll("T", " ").substring(0, 19));
+        holder.b.tvStatus.setText(bean.getStatus());
     }
 
     @Override
@@ -199,58 +197,24 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    class HeadHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_time)
-        TextView tvTime;
-        @Bind(R.id.tv_status)
-        TextView tvStatus;
+    private class HeadHolder extends BaseViewHolder<ItemOrderHeadBinding> {
 
-        HeadHolder(View itemView) {
-            super(itemView);
-            AutoUtils.auto(itemView);
-            ButterKnife.bind(this, itemView);
+        HeadHolder(ItemOrderHeadBinding itemOrderHeadBinding) {
+            super(itemOrderHeadBinding);
         }
     }
 
-    class FooterHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_payment)
-        TextView tvPayment;
-        @Bind(R.id.tv_post)
-        TextView tvPost;
-        @Bind(R.id.footer_line)
-        View footerLine;
-        @Bind(R.id.layout_footer)
-        LinearLayout layoutFooter;
-        @Bind(R.id.btn_delete)
-        TextView btnDelete;
-        @Bind(R.id.btn_detail)
-        TextView btnDetail;
+    private class FooterHolder extends BaseViewHolder<ItemOrderFooterBinding> {
 
-        FooterHolder(View itemView) {
-            super(itemView);
-            AutoUtils.auto(itemView);
-            ButterKnife.bind(this, itemView);
+        FooterHolder(ItemOrderFooterBinding itemOrderFooterBinding) {
+            super(itemOrderFooterBinding);
         }
     }
 
-    class ContentHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.iv_good)
-        ImageView ivGood;
-        @Bind(R.id.tv_name)
-        TextView tvName;
-        @Bind(R.id.tv_size)
-        TextView tvSize;
-        @Bind(R.id.tv_price)
-        TextView tvPrice;
-        @Bind(R.id.iv_save)
-        ImageView ivSave;
-        @Bind(R.id.tv_save)
-        TextView tvSave;
+    private class ContentHolder extends BaseViewHolder<ItemOrderContentBinding> {
 
-        ContentHolder(View itemView) {
-            super(itemView);
-            AutoUtils.auto(itemView);
-            ButterKnife.bind(this, itemView);
+        ContentHolder(ItemOrderContentBinding itemOrderContentBinding) {
+            super(itemOrderContentBinding);
         }
     }
 }

@@ -560,7 +560,7 @@
             "name": "中环外环之间"
           }
         ],
-        "name": "黄埔区",
+        "name": "黄浦区",
         "grade": 2,
         "zipcode": "",
         "parent_id": 72,
@@ -15571,7 +15571,7 @@
             "parent_id": 2145,
             "zipcode": "",
             "id": 2172,
-            "name": "黄浦区"
+            "name": "黄埔区"
           },
           {
             "grade": 3,

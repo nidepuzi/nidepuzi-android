@@ -1,21 +1,18 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
-import android.Manifest;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.danlai.library.utils.CameraUtils;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
+import com.danlai.library.widget.zxing.decode.Utils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseApi;
@@ -197,15 +194,7 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
                 break;
 
             case R.id.imgbtn_camera_pic:
-                if (JUtils.isPermission(this, Manifest.permission.CAMERA)) {
-                    if (JUtils.isPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        Image_Picker_Dialog();
-                    } else {
-                        JUtils.Toast("你的铺子需要照存储权限,请再次点击并打开权限许可.");
-                    }
-                } else {
-                    JUtils.Toast("你的铺子需要照相机和相册权限,请再次点击并打开权限许可.");
-                }
+                CameraUtils.getSystemPicture(this);
                 break;
         }
     }
@@ -240,102 +229,31 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
             .show();
     }
 
-    public void Image_Picker_Dialog() {
-        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
-        myAlertDialog.setTitle("请选择照片模式");
-        final String[] arrayPhotoType = new String[]{"照相机", "相册"};
-        myAlertDialog.setItems(arrayPhotoType, (dialog, which) -> {
-            if (0 == which) {
-                CameraUtils.pictureActionIntent =
-                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(CameraUtils.pictureActionIntent,
-                    CameraUtils.CAMERA_PICTURE);
-            } else if (1 == which) {
-                CameraUtils.pictureActionIntent = new Intent(Intent.ACTION_GET_CONTENT, null);
-                CameraUtils.pictureActionIntent.setType("image/*");
-                CameraUtils.pictureActionIntent.putExtra("return-data", true);
-                startActivityForResult(CameraUtils.pictureActionIntent,
-                    CameraUtils.GALLERY_PICTURE);
-            }
-        });
-        myAlertDialog.show();
-    }
-
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        File b = null;
-        if (data == null) {
-            return;
-        }
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CameraUtils.GALLERY_PICTURE) {
-            b = Image_Selecting_Task(data);
-        } else if (requestCode == CameraUtils.CAMERA_PICTURE) {
-            b = Image_Photo_Task(data);
-        }
-
-        if (b != null) {
-            if (picNum <= 2) {
-                tmpPic[picNum] = b;
-                uploadPic[picNum] = b.getName();
-                picNum++;
+        if (resultCode == RESULT_OK) {
+            File b;
+            Uri uri = data.getData();
+            String path = Utils.getPath(this, uri);
+            if (path != null) {
+                b = new File(path);
+                if (picNum <= 2) {
+                    tmpPic[picNum] = b;
+                    uploadPic[picNum] = b.getName();
+                    picNum++;
+                } else {
+                    tmpPic[picNum - 1] = b;
+                    uploadPic[picNum - 1] = b.getName();
+                }
+                showPic();
+                uploadFile(b);
             } else {
-                tmpPic[picNum - 1] = b;
-                uploadPic[picNum - 1] = b.getName();
+                JUtils.Toast("获取照片失败");
             }
-
-            showPic();
-            uploadFile(b);
+        } else {
+            JUtils.Toast("请重新上传");
         }
-    }
-
-    public File Image_Selecting_Task(Intent data) {
-        File b = null;
-        try {
-            CameraUtils.uri = data.getData();
-            if (CameraUtils.uri != null) {
-                b = read_img_from_uri();
-            } else {
-                Toast toast = Toast.makeText(this, "对不起，您还没有选择任何照片。", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        } catch (Exception ignored) {
-        }
-        return b;
-    }
-
-    public File Image_Photo_Task(Intent data) {
-        File b = null;
-        try {
-            Bundle bundle = data.getExtras();
-            Bitmap bitmap = (Bitmap) bundle.get("data");
-
-            CameraUtils.uri = data.getData();
-            if (CameraUtils.uri == null) {
-                CameraUtils.uri = Uri.parse(
-                    MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,
-                        null));
-            }
-            if (CameraUtils.uri != null) {
-                b = read_img_from_uri();
-            } else {
-                JUtils.Toast("对不起，照相机返回照片失败。");
-            }
-        } catch (Exception ignored) {
-        }
-        return b;
-    }
-
-    public File read_img_from_uri() {
-        Cursor cursor = getContentResolver().query(CameraUtils.uri,
-            new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
-        if (cursor == null) return null;
-        cursor.moveToFirst();
-        final String imageFilePath = cursor.getString(0);
-        CameraUtils.Default_DIR = new File(imageFilePath);
-        CameraUtils.Create_MY_IMAGES_DIR();
-        CameraUtils.copyFile(CameraUtils.Default_DIR, CameraUtils.MY_IMG_DIR);
-        cursor.close();
-        return CameraUtils.Paste_Target_Location;
     }
 
     private void getQiniuToken() {

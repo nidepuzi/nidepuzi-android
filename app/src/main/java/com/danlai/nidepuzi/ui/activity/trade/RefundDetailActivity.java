@@ -6,10 +6,11 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
-import com.danlai.library.widget.RoundCornerImageView;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseConst;
@@ -48,6 +49,16 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
                     refundDetail = refundDetailBean;
                     fillDataToView(refundDetailBean);
                     hideIndeterminateProgressDialog();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    hideIndeterminateProgressDialog();
+                    JUtils.Toast("数据加载失败!");
+                    mVaryViewHelperController.showNetworkError(view -> {
+                        refreshView();
+                        showNetworkError();
+                    });
                 }
             });
     }
@@ -91,24 +102,9 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
         }
         b.tvOrderId.setText(refundDetailBean.getRefund_no());
         b.tvStatus.setText(refundDetailBean.getStatus_display());
-        String address = refundDetailBean.getReturn_address();
-        String[] split;
-        if (address.contains("，")) {
-            split = address.split("，");
-        } else if (address.contains(",")) {
-            split = address.split(",");
-        } else {
-            split = address.split(";");
-        }
-        for (String s : split) {
-            if (s.contains("市")) {
-                b.address.setText(s);
-            } else if (s.contains("小鹿") || s.contains("铺子")) {
-                b.name.setText("铺子售后");
-            } else {
-                b.phone.setText(s);
-            }
-        }
+        b.address.setText(refundDetailBean.getReturn_address());
+        b.name.setText(refundDetailBean.getReturn_contact());
+        b.phone.setText(refundDetailBean.getReturn_mobile());
         ViewUtils.loadImgToImgViewWithPlaceholder(mBaseActivity, b.sdv, refundDetailBean.getPic_path());
         b.tvGoodName.setText(refundDetailBean.getTitle());
         b.tvGoodPrice.setText("¥" + refundDetailBean.getTotal_fee() + "x" + refundDetailBean.getRefund_num());
@@ -117,7 +113,7 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
         b.num.setText(Integer.toString(refundDetailBean.getRefund_num()));
         b.price.setText("¥" + refundDetailBean.getRefund_fee());
         b.reason.setText(refundDetailBean.getReason());
-        RoundCornerImageView[] images = {b.roundImage, b.roundImage1, b.roundImage2, b.roundImage3};
+        ImageView[] images = {b.roundImage, b.roundImage1, b.roundImage2, b.roundImage3};
         RelativeLayout[] rls = {b.rlImg, b.rlImg1, b.rlImg2, b.rlImg3};
         if (refundDetailBean.getProof_pic() != null && refundDetailBean.getProof_pic().size() > 0) {
             for (int i = 0; i < refundDetailBean.getProof_pic().size(); i++) {
@@ -227,10 +223,9 @@ public class RefundDetailActivity extends BaseMVVMActivity<ActivityRefundDetailB
                 Bundle bundle = new Bundle();
                 if (refundDetail != null) {
                     bundle.putInt("goods_id", refundDetail.getOrder_id());
-                    if ((refundDetail.getReturn_address() != null)
-                        && (!refundDetail.getReturn_address().isEmpty())) {
-                        bundle.putString("address", refundDetail.getReturn_address());
-                    }
+                    bundle.putString("address", refundDetail.getReturn_address());
+                    bundle.putString("mobile", refundDetail.getReturn_mobile());
+                    bundle.putString("contact", refundDetail.getReturn_contact());
                 }
                 bundle.putBoolean("flag", isWrited);
                 if (isWrited) {

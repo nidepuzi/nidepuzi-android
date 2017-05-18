@@ -51,6 +51,8 @@ public class MainTodayBean {
         private double price;
         private String pic;
         private String start_time;
+        private int selling_num;
+        private int stock;
 
         public String getName() {
             return name;
@@ -114,6 +116,22 @@ public class MainTodayBean {
 
         public void setActivity_id(int activity_id) {
             this.activity_id = activity_id;
+        }
+
+        public int getSelling_num() {
+            return selling_num;
+        }
+
+        public void setSelling_num(int selling_num) {
+            this.selling_num = selling_num;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+
+        public void setStock(int stock) {
+            this.stock = stock;
         }
 
         public static class ProfitBean {

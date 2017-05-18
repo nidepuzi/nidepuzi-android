@@ -53,7 +53,7 @@ public class CouponAdapter extends BaseRecyclerViewAdapter<ItemCouponBinding, Co
         } else {
             holder.b.tvCouponValue.setText("" + format);
         }
-        holder.b.title.setText(bean.getPros_desc());
+        holder.b.title.setText(bean.getTitle());
         String deadline = bean.getDeadline();
         holder.b.tvCouponTime.setText("有效期至:  " + deadline.substring(0, 10));
         holder.b.useFee.setText(bean.getUse_fee_des());

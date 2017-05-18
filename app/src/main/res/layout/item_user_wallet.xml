@@ -36,7 +36,7 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{data.budget_log_type}"
+                    android:text="@{data.budget_log_type_display}"
                     android:textColor="@color/color_33"
                     android:textSize="16sp"/>
 

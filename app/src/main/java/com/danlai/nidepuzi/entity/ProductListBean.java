@@ -8,35 +8,15 @@ import java.util.List;
 public class ProductListBean {
 
     /**
-     * count : 77
-     * next : http://m.xiaolumeimei.com/rest/v2/modelproducts/today?page=3
-     * previous : http://m.xiaolumeimei.com/rest/v2/modelproducts/today
-     * results : [{"id":16784,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/16784","name":"优雅气质纯色连衣裙","category_id":60,"lowest_agent_price":99.9,"lowest_std_sale_price":499,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1468482988133.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/16784","watermark_op":""},{"id":16786,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/16786","name":"小香风修身蕾丝套装","category_id":61,"lowest_agent_price":189.9,"lowest_std_sale_price":598,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1468485247952.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/16786","watermark_op":""},{"id":17239,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17239","name":"性感运动字母背心","category_id":70,"lowest_agent_price":29.9,"lowest_std_sale_price":99,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1468998603232.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17239","watermark_op":""},{"id":17241,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17241","name":"简约必备条纹背心裙","category_id":60,"lowest_agent_price":39.9,"lowest_std_sale_price":99,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1468999293588.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17241","watermark_op":""},{"id":17243,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17243","name":"修身百搭米老鼠T恤","category_id":70,"lowest_agent_price":39.9,"lowest_std_sale_price":99,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1469000707853.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17243","watermark_op":""},{"id":17248,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17248","name":"简约必备背心裙两件套","category_id":61,"lowest_agent_price":69.9,"lowest_std_sale_price":199,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1468981779124.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17248","watermark_op":""},{"id":17253,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17253","name":"时尚V领条纹套装","category_id":65,"lowest_agent_price":59.9,"lowest_std_sale_price":199,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1469073420996.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17253","watermark_op":""},{"id":17254,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17254","name":"韩版芒果吊带裙","category_id":64,"lowest_agent_price":59.9,"lowest_std_sale_price":199,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":true,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1469074382091-.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17254","watermark_op":""},{"id":17262,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17262","name":"时尚卡通动物套装","category_id":65,"lowest_agent_price":49.9,"lowest_std_sale_price":199,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1469083185770-.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17262","watermark_op":""},{"id":17269,"url":"http://m.xiaolumeimei.com/rest/v2/modelproducts/17269","name":"韩版挂脖吊带套装","category_id":65,"lowest_agent_price":49.9,"lowest_std_sale_price":199,"onshelf_time":"2016-08-11T10:00:00","offshelf_time":"2016-08-13T10:00:00","is_saleout":false,"sale_state":"on","head_img":"http://image.xiaolu.so/MG_1469084398422-.jpg","web_url":"http://m.xiaolumeimei.com/mall/product/details/17269","watermark_op":""}]
-     * offshelf_deadline : 2016-08-13T10:00:00
-     * onshelf_starttime : 2016-08-11T10:00:00
+     * count : 52
+     * next : https://m.nidepuzi.com/rest/v2/modelproducts?cid=120&page=2
+     * previous : null
+     * results : [{"id":195,"name":"日本进口Propolinse比那氏复合蜂胶漱口水600ml 杀菌除口臭去牙渍","category_id":135,"lowest_agent_price":69,"lowest_std_sale_price":119,"onshelf_time":"2017-05-11T21:00:00","offshelf_time":"2021-05-15T00:00:00","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494302008706.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/195","watermark_op":"","elite_score":0,"stock":500,"selling_num":190,"profit":{"max":10.35,"min":10.35}},{"id":194,"name":"日本Propolinse比那氏漱口水樱花限量款美白去渍清新口气600ml","category_id":135,"lowest_agent_price":89,"lowest_std_sale_price":149,"onshelf_time":"2017-05-11T21:00:00","offshelf_time":"2021-06-01T00:00:00","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494301950506.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/194","watermark_op":"","elite_score":0,"stock":500,"selling_num":132,"profit":{"max":13.35,"min":13.35}},{"id":293,"name":"德国进口LCN足部果酸磨砂膏100ml+足部宝芯软枕滋润霜50ml","category_id":137,"lowest_agent_price":338.2,"lowest_std_sale_price":389,"onshelf_time":"2017-05-16T07:20:55","offshelf_time":"2017-05-19T07:20:58","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494497302937.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/293","watermark_op":"","elite_score":0,"stock":100,"selling_num":89,"profit":{"max":33.82,"min":33.82}},{"id":193,"name":"日本比那氏 Propolinse蜂胶美白漱口水 600ml","category_id":135,"lowest_agent_price":118,"lowest_std_sale_price":149,"onshelf_time":"2017-05-11T21:00:00","offshelf_time":"2017-06-01T00:00:00","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494301851405.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/193","watermark_op":"","elite_score":0,"stock":500,"selling_num":52,"profit":{"max":17.7,"min":17.7}},{"id":285,"name":"法国进口Cottage悠香伊沐浴露（甜紫罗兰+白蜜桃+海之花）250ml*3瓶","category_id":148,"lowest_agent_price":98,"lowest_std_sale_price":158,"onshelf_time":"2017-05-16T07:20:55","offshelf_time":"2017-05-19T07:20:58","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494492690578.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/285","watermark_op":"","elite_score":0,"stock":100,"selling_num":80,"profit":{"max":4.9,"min":4.9}},{"id":191,"name":"意大利尚护健香薰手环2条装*2盒","category_id":136,"lowest_agent_price":79,"lowest_std_sale_price":99,"onshelf_time":"2017-05-15T14:34:40","offshelf_time":"2021-06-30T23:59:59","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494297920511.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/191","watermark_op":"","elite_score":0,"stock":100,"selling_num":84,"profit":{"max":11.85,"min":11.85}},{"id":284,"name":"法国进口Cottage悠香伊沐浴露（香草+西柚+甜紫罗兰）250ml*3瓶","category_id":148,"lowest_agent_price":98,"lowest_std_sale_price":158,"onshelf_time":"2017-05-16T07:20:55","offshelf_time":"2017-05-19T07:20:58","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494492559282.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/284","watermark_op":"","elite_score":0,"stock":100,"selling_num":196,"profit":{"max":4.9,"min":4.9}},{"id":190,"name":"意大利尚护健香熏机+尚护健香熏芯片（补充装）","category_id":136,"lowest_agent_price":148,"lowest_std_sale_price":168,"onshelf_time":"2017-05-11T14:00:00","offshelf_time":"2021-05-31T23:59:59","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494297797783.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/190","watermark_op":"","elite_score":0,"stock":100,"selling_num":58,"profit":{"max":22.2,"min":22.2}},{"id":189,"name":"意大利尚护健香熏喷雾30ml*3瓶","category_id":136,"lowest_agent_price":85,"lowest_std_sale_price":109,"onshelf_time":"2017-05-11T14:00:00","offshelf_time":"2021-05-31T23:59:59","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494297657223.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/189","watermark_op":"","elite_score":0,"stock":100,"selling_num":190,"profit":{"max":12.75,"min":12.75}},{"id":188,"name":"意大利尚护健香熏贴12片装","category_id":136,"lowest_agent_price":78,"lowest_std_sale_price":99,"onshelf_time":"2017-05-15T14:34:40","offshelf_time":"2021-06-30T23:59:59","is_saleout":false,"sale_state":"on","head_img":"http://img.nidepuzi.com/img_1494297534158.jpg","web_url":"https://m.nidepuzi.com/mall/product/details/188","watermark_op":"","elite_score":0,"stock":100,"selling_num":149,"profit":{"max":11.7,"min":11.7}}]
      */
 
     private int count;
     private String next;
     private String previous;
-    private String offshelf_deadline;
-    private String onshelf_starttime;
-    /**
-     * id : 16784
-     * url : http://m.xiaolumeimei.com/rest/v2/modelproducts/16784
-     * name : 优雅气质纯色连衣裙
-     * category_id : 60
-     * lowest_agent_price : 99.9
-     * lowest_std_sale_price : 499
-     * onshelf_time : 2016-08-11T10:00:00
-     * offshelf_time : 2016-08-13T10:00:00
-     * is_saleout : false
-     * sale_state : on
-     * head_img : http://image.xiaolu.so/MG_1468482988133.jpg
-     * web_url : http://m.xiaolumeimei.com/mall/product/details/16784
-     * watermark_op :
-     */
-
     private List<ResultsBean> results;
 
     public int getCount() {
@@ -63,22 +43,6 @@ public class ProductListBean {
         this.previous = previous;
     }
 
-    public String getOffshelf_deadline() {
-        return offshelf_deadline;
-    }
-
-    public void setOffshelf_deadline(String offshelf_deadline) {
-        this.offshelf_deadline = offshelf_deadline;
-    }
-
-    public String getOnshelf_starttime() {
-        return onshelf_starttime;
-    }
-
-    public void setOnshelf_starttime(String onshelf_starttime) {
-        this.onshelf_starttime = onshelf_starttime;
-    }
-
     public List<ResultsBean> getResults() {
         return results;
     }
@@ -88,8 +52,26 @@ public class ProductListBean {
     }
 
     public static class ResultsBean {
+        /**
+         * id : 195
+         * name : 日本进口Propolinse比那氏复合蜂胶漱口水600ml 杀菌除口臭去牙渍
+         * category_id : 135
+         * lowest_agent_price : 69
+         * lowest_std_sale_price : 119
+         * onshelf_time : 2017-05-11T21:00:00
+         * offshelf_time : 2021-05-15T00:00:00
+         * is_saleout : false
+         * sale_state : on
+         * head_img : http://img.nidepuzi.com/img_1494302008706.jpg
+         * web_url : https://m.nidepuzi.com/mall/product/details/195
+         * watermark_op :
+         * elite_score : 0
+         * stock : 500
+         * selling_num : 190
+         * profit : {"max":10.35,"min":10.35}
+         */
+
         private int id;
-        private String url;
         private String name;
         private int category_id;
         private double lowest_agent_price;
@@ -101,6 +83,10 @@ public class ProductListBean {
         private String head_img;
         private String web_url;
         private String watermark_op;
+        private int elite_score;
+        private int stock;
+        private int selling_num;
+        private ProfitBean profit;
 
         public int getId() {
             return id;
@@ -108,14 +94,6 @@ public class ProductListBean {
 
         public void setId(int id) {
             this.id = id;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
         }
 
         public String getName() {
@@ -204,6 +182,64 @@ public class ProductListBean {
 
         public void setWatermark_op(String watermark_op) {
             this.watermark_op = watermark_op;
+        }
+
+        public int getElite_score() {
+            return elite_score;
+        }
+
+        public void setElite_score(int elite_score) {
+            this.elite_score = elite_score;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+
+        public void setStock(int stock) {
+            this.stock = stock;
+        }
+
+        public int getSelling_num() {
+            return selling_num;
+        }
+
+        public void setSelling_num(int selling_num) {
+            this.selling_num = selling_num;
+        }
+
+        public ProfitBean getProfit() {
+            return profit;
+        }
+
+        public void setProfit(ProfitBean profit) {
+            this.profit = profit;
+        }
+
+        public static class ProfitBean {
+            /**
+             * max : 10.35
+             * min : 10.35
+             */
+
+            private double max;
+            private double min;
+
+            public double getMax() {
+                return max;
+            }
+
+            public void setMax(double max) {
+                this.max = max;
+            }
+
+            public double getMin() {
+                return min;
+            }
+
+            public void setMin(double min) {
+                this.min = min;
+            }
         }
     }
 }

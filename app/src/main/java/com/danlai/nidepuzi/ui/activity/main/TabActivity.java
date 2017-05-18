@@ -79,6 +79,7 @@ public class TabActivity extends BaseActivity {
         downLoadAddress();
         checkVersion();
         initService();
+        LoginUtils.registerMiPush(mBaseActivity);
         LoginUtils.clearCacheEveryWeek(mBaseActivity);
     }
 

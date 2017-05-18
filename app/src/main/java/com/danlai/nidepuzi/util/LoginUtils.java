@@ -6,7 +6,6 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.danlai.library.utils.DataClearManager;
-import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
@@ -92,16 +91,15 @@ public class LoginUtils {
         return sharedPreferences.getBoolean("success", false);
     }
 
-    public static void registerMiPush(BaseActivity context, String mRegId) {
-        String android_id = Settings.Secure.getString(BaseApp.getInstance().getContentResolver(),
-            Settings.Secure.ANDROID_ID);
-        JUtils.Log("android_id", android_id);
-        BaseApp.getUserInteractor(context)
-            .getUserAccount("android", mRegId, android_id, new ServiceResponse<UserAccountBean>(context) {
+    public static void registerMiPush(BaseActivity mActivity) {
+        String android_id = Settings.Secure.getString(mActivity.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String mRegId = MiPushClient.getRegId(mActivity);
+        BaseApp.getUserInteractor(mActivity)
+            .getUserAccount("android", mRegId, android_id, new ServiceResponse<UserAccountBean>(mActivity) {
 
                 @Override
                 public void onNext(UserAccountBean user) {
-                    MiPushClient.setUserAccount(context.getApplicationContext(), user.getUserAccount(), null);
+                    MiPushClient.setUserAccount(mActivity, user.getUserAccount(), null);
                 }
             });
     }

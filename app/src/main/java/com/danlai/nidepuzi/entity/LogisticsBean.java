@@ -1,7 +1,5 @@
 package com.danlai.nidepuzi.entity;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -19,19 +17,12 @@ public class LogisticsBean {
      * order :
      */
 
-    @SerializedName("status")
     private String status;
-    @SerializedName("name")
     private String name;
-    @SerializedName("errcode")
     private String errcode;
-    @SerializedName("id")
     private String id;
-    @SerializedName("message")
     private String message;
-    @SerializedName("order")
     private String order;
-    @SerializedName("data")
     private List<Msg> data;
 
     public String getStatus() {
@@ -91,9 +82,7 @@ public class LogisticsBean {
     }
 
     public class Msg {
-        @SerializedName("content")
         private String content;
-        @SerializedName("time")
         private String time;
 
         public String getContent() {

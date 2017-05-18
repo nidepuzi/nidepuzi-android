@@ -15,6 +15,6 @@ public class BaseImageLoader extends ImageLoader {
 
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context).load(path).thumbnail(0.1f).into(imageView);
     }
 }

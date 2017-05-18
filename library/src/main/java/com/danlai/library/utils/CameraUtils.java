@@ -92,7 +92,7 @@ public class CameraUtils {
         if (cameraPermission && storagePermission) {
             ImagePickerDialog(activity);
         } else {
-            JUtils.Toast("小鹿美美需要照相机和相册权限,请再次点击并打开权限许可.");
+            JUtils.Toast("你的铺子需要照相机和相册权限,请再次点击并打开权限许可.");
         }
     }
 

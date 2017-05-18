@@ -9,7 +9,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseRecyclerViewAdapter;
 import com.danlai.nidepuzi.base.BaseViewHolder;
-import com.danlai.nidepuzi.databinding.ItemMainProductBinding;
+import com.danlai.nidepuzi.databinding.ItemProductBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.MainTodayBean.ItemsBean;
@@ -19,12 +19,14 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.product.ProductDetailActivity;
 import com.danlai.nidepuzi.util.ShareUtils;
 
+import java.util.List;
+
 /**
  * @author wisdom
  * @date 2017年05月15日 下午4:16
  */
 
-public class MainProductAdapter extends BaseRecyclerViewAdapter<ItemMainProductBinding, ItemsBean> {
+public class MainProductAdapter extends BaseRecyclerViewAdapter<ItemProductBinding, ItemsBean> {
 
     public MainProductAdapter(BaseActivity activity) {
         super(activity);
@@ -32,17 +34,20 @@ public class MainProductAdapter extends BaseRecyclerViewAdapter<ItemMainProductB
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_main_product;
+        return R.layout.item_product;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder<ItemMainProductBinding> holder, int position) {
+    public void onBindViewHolder(BaseViewHolder<ItemProductBinding> holder, int position) {
         ItemsBean bean = data.get(position);
         ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.img, bean.getPic());
-        holder.b.setData(bean);
+        holder.b.name.setText(bean.getName());
+        holder.b.price.setText("¥" + JUtils.formatDouble(bean.getPrice()));
+        holder.b.profit.setText("赚" + JUtils.formatDouble(bean.getProfit().getMin()));
         holder.b.productLayout.setOnClickListener(v -> jumpToProduct(bean));
         holder.b.layoutProductDesc.setOnClickListener(v -> jumpToProduct(bean));
-        holder.b.desc.setText("库存500件/在售人数1200");
+        holder.b.sellingNum.setText("在售人数" + bean.getSelling_num());
+        holder.b.stock.setText("库存" + bean.getStock());
         holder.b.layoutShareProduct.setOnClickListener(v -> {
             mActivity.showIndeterminateProgressDialog(false);
             BaseApp.getProductInteractor(mActivity)
@@ -86,5 +91,10 @@ public class MainProductAdapter extends BaseRecyclerViewAdapter<ItemMainProductB
         Bundle bundle = new Bundle();
         bundle.putInt("model_id", bean.getModel_id());
         mActivity.readyGo(ProductDetailActivity.class, bundle);
+    }
+
+
+    public List<ItemsBean> getData() {
+        return data;
     }
 }

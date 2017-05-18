@@ -13,7 +13,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 public class BaseViewHolder<B extends ViewDataBinding> extends RecyclerView.ViewHolder {
     public B b;
 
-    BaseViewHolder(B b) {
+    public BaseViewHolder(B b) {
         super(b.getRoot());
         this.b = b;
         AutoUtils.auto(itemView);

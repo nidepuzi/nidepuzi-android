@@ -1,11 +1,10 @@
 package com.danlai.nidepuzi.ui.fragment.product;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.danlai.library.manager.CustomGridLayoutManager;
 import com.danlai.library.utils.JUtils;
-import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.ProductListAdapter;
@@ -72,9 +71,8 @@ public class ProductFragment extends BaseFragment<FragmentProductBinding> {
     protected void initViews() {
         sortBy = "";
         EventBus.getDefault().register(this);
-        b.xrv.setLayoutManager(new CustomGridLayoutManager(mActivity, 2));
+        b.xrv.setLayoutManager(new LinearLayoutManager(mActivity));
         b.xrv.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        b.xrv.addItemDecoration(new SpaceItemDecoration(10));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setRefreshProgressStyle(ProgressStyle.BallPulse);
         mProductListAdapter = new ProductListAdapter(mActivity);

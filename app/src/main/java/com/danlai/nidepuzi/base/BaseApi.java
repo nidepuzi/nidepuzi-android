@@ -14,7 +14,7 @@ import com.danlai.nidepuzi.BaseApp;
 public class BaseApi {
     public static final String APP_BASE_URL = "https://m.nidepuzi.com";
     public static final String QINIU_UPLOAD_URL_BASE =
-        "http://7xkyoy.com2.z0.glb.qiniucdn.com/";
+        "http://oon0iwvsw.bkt.clouddn.com/";
 
     public static String getAppUrl() {
         SharedPreferences preferences = BaseApp.getInstance().getSharedPreferences("APICLIENT", Context.MODE_PRIVATE);

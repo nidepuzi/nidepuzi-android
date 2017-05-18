@@ -29,24 +29,12 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 
-            <ImageView
-                android:id="@+id/img_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_search"
-                android:visibility="gone"/>
-
             <RelativeLayout
                 android:id="@+id/layout_invite"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
-                android:paddingLeft="16dp"
+                android:paddingLeft="8dp"
                 android:paddingRight="16dp">
 
                 <ImageView
@@ -57,6 +45,20 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_search"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_toLeftOf="@id/layout_invite"
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_search"/>
+            </RelativeLayout>
 
         </RelativeLayout>
 

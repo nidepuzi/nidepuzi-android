@@ -1,5 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.trade;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
@@ -60,6 +61,7 @@ public class AllRefundActivity extends BaseMVVMActivity<ActivityAllRefundBinding
             @Override
             public void onRefresh() {
                 page = 1;
+                b.xrv.setLoadingMoreEnabled(true);
                 loadMoreData();
             }
 
@@ -101,8 +103,8 @@ public class AllRefundActivity extends BaseMVVMActivity<ActivityAllRefundBinding
                             adapter.update(results);
                         }
                         next = allOrdersBean.getNext();
-                        if (allOrdersBean.getNext() == null && adapter.getItemCount() != 0) {
-                            JUtils.Toast("全部订单加载完成!");
+                        if (TextUtils.isEmpty(next)) {
+                            b.xrv.setLoadingMoreEnabled(false);
                         }
                     }
                 }

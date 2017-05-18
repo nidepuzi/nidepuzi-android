@@ -72,10 +72,10 @@
                                     android:id="@+id/ll_tag"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="15px"
-                                    android:layout_marginLeft="32px"
-                                    android:layout_marginRight="32px"
-                                    android:layout_marginTop="15px"
+                                    android:layout_marginBottom="8dp"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_marginTop="8dp"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal">
 
@@ -120,27 +120,17 @@
                                         android:background="@drawable/grey_btn"
                                         android:gravity="center"
                                         android:orientation="horizontal"
+                                        android:layout_marginRight="6dp"
                                         android:paddingLeft="4dp"
                                         android:paddingRight="4dp">
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/icon_text"/>
 
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="4dp"
                                             android:text="查看文案"
                                             android:textSize="14dp"/>
 
                                     </LinearLayout>
-
-                                    <View
-                                        android:layout_width="0dp"
-                                        android:layout_height="1dp"
-                                        android:layout_weight="1"/>
 
                                 </LinearLayout>
 
