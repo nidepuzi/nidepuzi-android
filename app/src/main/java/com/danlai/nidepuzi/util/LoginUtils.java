@@ -6,6 +6,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.danlai.library.utils.DataClearManager;
+import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
@@ -14,6 +15,7 @@ import com.xiaomi.mipush.sdk.MiPushClient;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by itxuye(www.itxuye.com) on 15/12/29.
@@ -94,11 +96,17 @@ public class LoginUtils {
     public static void registerMiPush(BaseActivity mActivity) {
         String android_id = Settings.Secure.getString(mActivity.getContentResolver(), Settings.Secure.ANDROID_ID);
         String mRegId = MiPushClient.getRegId(mActivity);
+        JUtils.Log("android_id", android_id);
+        JUtils.Log("mRegId", mRegId);
         BaseApp.getUserInteractor(mActivity)
             .getUserAccount("android", mRegId, android_id, new ServiceResponse<UserAccountBean>(mActivity) {
 
                 @Override
                 public void onNext(UserAccountBean user) {
+                    List<String> account = MiPushClient.getAllUserAccount(mActivity);
+                    for (int i = 0; i < account.size(); i++) {
+                        MiPushClient.unsetUserAccount(mActivity,account.get(i),null);
+                    }
                     MiPushClient.setUserAccount(mActivity, user.getUserAccount(), null);
                 }
             });

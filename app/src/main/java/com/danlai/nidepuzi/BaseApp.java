@@ -61,7 +61,7 @@ public class BaseApp extends MultiDexApplication {
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
         //初始化push推送服务
         if (shouldInit()) {
-            MiPushClient.registerPush(this, BaseConst.MIPUSH_ID, BaseConst.MIPUSH_KEY);
+            MiPushClient.registerPush(getApplicationContext(), BaseConst.MIPUSH_ID, BaseConst.MIPUSH_KEY);
         }
         //打开Log
         LoggerInterface newLogger = new LoggerInterface() {
@@ -73,13 +73,13 @@ public class BaseApp extends MultiDexApplication {
 
             @Override
             public void log(String content, Throwable t) {
-                JUtils.Log(content);
-                JUtils.Log(t.getMessage());
+                JUtils.Log("------------------------------->", content);
+                JUtils.Log("------------------------------->", t.getMessage());
             }
 
             @Override
             public void log(String content) {
-                JUtils.Log(content);
+                JUtils.Log("------------------------------->", content);
             }
         };
         Logger.setLogger(this, newLogger);
