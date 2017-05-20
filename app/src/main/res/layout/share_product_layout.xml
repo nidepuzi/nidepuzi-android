@@ -29,14 +29,13 @@
         android:textColor="@color/color_33"
         android:textSize="14sp"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/layout_product"
+            android:id="@+id/layout_wx"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -48,13 +47,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_share_product"/>
+                android:src="@drawable/icon_share_wx"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="分享商品"
+                android:text="微信"
                 android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
@@ -62,7 +61,7 @@
 
 
         <LinearLayout
-            android:id="@+id/layout_link"
+            android:id="@+id/layout_qq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -74,13 +73,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_share_link"/>
+                android:src="@drawable/icon_share_qq"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="商品链接"
+                android:text="QQ"
                 android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
@@ -88,12 +87,11 @@
 
 
         <LinearLayout
-            android:id="@+id/layout_code"
+            android:id="@+id/layout_sina"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:visibility="gone"
             android:orientation="vertical"
             android:paddingBottom="12dp"
             android:paddingTop="13dp">
@@ -101,20 +99,104 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_share_code"/>
+                android:src="@drawable/icon_share_sina"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="商品二维码"
+                android:text="微博"
+                android:textColor="@color/color_33"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/layout_moment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_share_moment"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="朋友圈"
                 android:textColor="@color/color_33"
                 android:textSize="13dp"/>
 
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/layout_qzone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_share_qzone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="QQ空间"
+                android:textColor="@color/color_33"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_copy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingTop="13dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_share_copy"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="复制链接"
+                android:textColor="@color/color_33"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/layout_cancel"

@@ -286,7 +286,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <include layout="@layout/common_interval"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/bg_grey"/>
 
             </LinearLayout>
 

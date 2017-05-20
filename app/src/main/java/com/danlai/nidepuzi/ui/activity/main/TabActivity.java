@@ -35,6 +35,9 @@ import com.danlai.nidepuzi.util.FragmentTabUtils;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.VersionManager;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
@@ -56,6 +59,17 @@ public class TabActivity extends BaseActivity {
     private FragmentTabUtils mFragmentTabUtils;
     private List<BaseFragment> fragments;
     public Handler mHandler;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            // 打开客服窗口
+            Unicorn.openServiceActivity(this, "铺子客服", new ConsultSource("https://m.nidepuzi.com", "Android客户端", "Android客户端"));
+            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
+            setIntent(new Intent());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

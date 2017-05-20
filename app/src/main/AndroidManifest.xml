@@ -363,7 +363,19 @@
             android:name=".ui.activity.shop.OrderAchieveActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
+            android:name=".ui.activity.user.WxDrawCashActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
             android:name=".ui.activity.user.DrawCashActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.DrawCashInfoActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.BankDrawCashActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.user.ChooseBankActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.user.LoginBindPhoneActivity"

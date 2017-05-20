@@ -2,7 +2,6 @@ package com.danlai.nidepuzi;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
@@ -12,6 +11,7 @@ import android.support.multidex.MultiDexApplication;
 import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseUnicornImageLoader;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.module.ActivityInteractor;
 import com.danlai.nidepuzi.module.AddressInteractor;
 import com.danlai.nidepuzi.module.CartsInteractor;
@@ -20,13 +20,13 @@ import com.danlai.nidepuzi.module.ProductInteractor;
 import com.danlai.nidepuzi.module.TradeInteractor;
 import com.danlai.nidepuzi.module.UserInteractor;
 import com.danlai.nidepuzi.module.VipInteractor;
+import com.danlai.nidepuzi.ui.activity.main.TabActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.facebook.stetho.Stetho;
 import com.qiyukf.unicorn.api.SavePowerConfig;
 import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.YSFOptions;
-import com.xiaomi.channel.commonutils.logger.LoggerInterface;
-import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import java.util.List;
@@ -63,26 +63,26 @@ public class BaseApp extends MultiDexApplication {
         if (shouldInit()) {
             MiPushClient.registerPush(getApplicationContext(), BaseConst.MIPUSH_ID, BaseConst.MIPUSH_KEY);
         }
-        //打开Log
-        LoggerInterface newLogger = new LoggerInterface() {
-
-            @Override
-            public void setTag(String tag) {
-
-            }
-
-            @Override
-            public void log(String content, Throwable t) {
-                JUtils.Log("------------------------------->", content);
-                JUtils.Log("------------------------------->", t.getMessage());
-            }
-
-            @Override
-            public void log(String content) {
-                JUtils.Log("------------------------------->", content);
-            }
-        };
-        Logger.setLogger(this, newLogger);
+//        //打开Log
+//        LoggerInterface newLogger = new LoggerInterface() {
+//
+//            @Override
+//            public void setTag(String tag) {
+//
+//            }
+//
+//            @Override
+//            public void log(String content, Throwable t) {
+//                JUtils.Log("------------------------------->", content);
+//                JUtils.Log("------------------------------->", t.getMessage());
+//            }
+//
+//            @Override
+//            public void log(String content) {
+//                JUtils.Log("------------------------------->", content);
+//            }
+//        };
+//        Logger.setLogger(this, newLogger);
     }
 
     @Override
@@ -91,10 +91,13 @@ public class BaseApp extends MultiDexApplication {
         MultiDex.install(this);
     }
 
-    private YSFOptions options() {
+    private static YSFOptions options() {
         YSFOptions options = new YSFOptions();
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
+        options.statusBarNotificationConfig.notificationEntrance = TabActivity.class;
         options.savePowerConfig = new SavePowerConfig();
+        options.onMessageItemClickListener = (context, url) ->
+            JumpUtils.jumpToWebViewWithCookies(getInstance(), url, -1, BaseWebViewActivity.class);
         return options;
     }
 

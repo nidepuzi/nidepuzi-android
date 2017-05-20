@@ -1,6 +1,9 @@
 package com.danlai.nidepuzi.module;
 
 import com.danlai.library.rx.DefaultTransform;
+import com.danlai.nidepuzi.entity.BankCardEntity;
+import com.danlai.nidepuzi.entity.BankListEntity;
+import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
 import com.danlai.nidepuzi.entity.CoinHistoryListBean;
@@ -109,6 +112,14 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
+    public void userWithDrawCash(String amount, String verify_code, int card_id,
+                                 ServiceResponse<UserWithDrawResult> response) {
+        service.userWithDrawCash(amount, verify_code, "channel", card_id)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
     public void getVerifyCode(ServiceResponse<ResultEntity> response) {
         service.getVerifyCode()
             .compose(new DefaultTransform<>())
@@ -162,6 +173,27 @@ public class UserInteractorImpl implements UserInteractor {
     @Override
     public void getVersion(ServiceResponse<VersionBean> response) {
         service.getVersion()
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getBankList(ServiceResponse<BankListEntity> response) {
+        service.getBankList()
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void createBankCard(String account_no, String account_name, String bank_name, ServiceResponse<BankResultEntity> response) {
+        service.createBankCard(account_no, account_name, bank_name, true)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getDefaultCard(ServiceResponse<BankCardEntity> response) {
+        service.getDefaultCard()
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

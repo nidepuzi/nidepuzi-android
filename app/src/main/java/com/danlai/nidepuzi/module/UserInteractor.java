@@ -1,6 +1,9 @@
 package com.danlai.nidepuzi.module;
 
 
+import com.danlai.nidepuzi.entity.BankCardEntity;
+import com.danlai.nidepuzi.entity.BankListEntity;
+import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
 import com.danlai.nidepuzi.entity.CoinHistoryListBean;
@@ -48,6 +51,8 @@ public interface UserInteractor {
 
     void userWithDrawCash(String amount, String verify_code, ServiceResponse<UserWithDrawResult> response);
 
+    void userWithDrawCash(String amount, String verify_code, int card_id, ServiceResponse<UserWithDrawResult> response);
+
     void getVerifyCode(ServiceResponse<ResultEntity> response);
 
     void getCodeBean(String mobile, String action, ServiceResponse<CodeBean> response);
@@ -65,6 +70,12 @@ public interface UserInteractor {
     void budgetDetailBean(int page, ServiceResponse<BudgetDetailBean> response);
 
     void getVersion(ServiceResponse<VersionBean> response);
+
+    void getBankList(ServiceResponse<BankListEntity> response);
+
+    void createBankCard(String account_no, String account_name, String bank_name, ServiceResponse<BankResultEntity> response);
+
+    void getDefaultCard(ServiceResponse<BankCardEntity> response);
 }
 
 

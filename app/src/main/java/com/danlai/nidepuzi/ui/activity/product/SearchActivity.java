@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -75,6 +76,10 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
 
     @Override
     protected void initViews() {
+        b.et.setFocusable(true);
+        b.et.setFocusableInTouchMode(true);
+        b.et.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         b.xrv.setLayoutManager(manager);
         b.xrv.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -121,6 +126,7 @@ public class SearchActivity extends BaseMVVMActivity<ActivitySearchBinding> impl
                 break;
             case R.id.clear:
                 b.et.setText("");
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                 b.flowContainer.setVisibility(View.VISIBLE);
                 b.emptyLayout.setVisibility(View.GONE);
                 b.xrv.setVisibility(View.GONE);

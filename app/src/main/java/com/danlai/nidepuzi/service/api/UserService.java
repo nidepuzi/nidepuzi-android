@@ -1,6 +1,9 @@
 package com.danlai.nidepuzi.service.api;
 
 
+import com.danlai.nidepuzi.entity.BankCardEntity;
+import com.danlai.nidepuzi.entity.BankListEntity;
+import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
 import com.danlai.nidepuzi.entity.CoinHistoryListBean;
@@ -100,6 +103,15 @@ public interface UserService {
         @Field("cashout_amount") String amount,
         @Field("verify_code") String verify_code);
 
+    //创建提款信息
+    @FormUrlEncoded
+    @POST("/rest/v1/users/budget_cash_out")
+    Observable<UserWithDrawResult> userWithDrawCash(
+        @Field("cashout_amount") String amount,
+        @Field("verify_code") String verify_code,
+        @Field("channel") String channel,
+        @Field("card_id") int card_id);
+
     @POST("/rest/v2/request_cashout_verify_code")
     Observable<ResultEntity> getVerifyCode();
 
@@ -149,4 +161,18 @@ public interface UserService {
 
     @GET("/sale/apprelease/newversion")
     Observable<VersionBean> getVersion();
+
+    @GET("/rest/v2/bankcards/preferances")
+    Observable<BankListEntity> getBankList();
+
+    @FormUrlEncoded
+    @POST("/rest/v2/bankcards")
+    Observable<BankResultEntity> createBankCard(
+        @Field("account_no") String account_no,
+        @Field("account_name") String account_name,
+        @Field("bank_name") String bank_name,
+        @Field("default") boolean isDefault);
+
+    @GET("/rest/v2/bankcards/get_default")
+    Observable<BankCardEntity> getDefaultCard();
 }

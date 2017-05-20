@@ -49,19 +49,35 @@ public class ShareUtils {
         spannable.setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.colorAccent)),
             25, 25 + min.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         desc.setText(spannable);
-        view.findViewById(R.id.layout_product).setOnClickListener(v -> {
+        view.findViewById(R.id.layout_wx).setOnClickListener(v -> {
             dialog.dismiss();
             Platform plat = ShareSDK.getPlatform(Wechat.NAME);
             showShare(plat.getName(), activity, shareModel);
         });
-        view.findViewById(R.id.layout_link).setOnClickListener(v -> {
+        view.findViewById(R.id.layout_qq).setOnClickListener(v -> {
             dialog.dismiss();
-            JUtils.copyToClipboard(shareModel.getShare_link());
-            JUtils.Toast("已复制链接");
+            Platform plat = ShareSDK.getPlatform(QQ.NAME);
+            showShare(plat.getName(), activity, shareModel);
         });
-        view.findViewById(R.id.layout_code).setOnClickListener(v -> {
+        view.findViewById(R.id.layout_sina).setOnClickListener(v -> {
             dialog.dismiss();
-            JUtils.Toast("该商品暂未创建二维码");
+            Platform plat = ShareSDK.getPlatform(SinaWeibo.NAME);
+            showShare(plat.getName(), activity, shareModel);
+        });
+        view.findViewById(R.id.layout_moment).setOnClickListener(v -> {
+            dialog.dismiss();
+            Platform plat = ShareSDK.getPlatform(WechatMoments.NAME);
+            showShare(plat.getName(), activity, shareModel);
+        });
+        view.findViewById(R.id.layout_qzone).setOnClickListener(v -> {
+            dialog.dismiss();
+            Platform plat = ShareSDK.getPlatform(QZone.NAME);
+            showShare(plat.getName(), activity, shareModel);
+        });
+        view.findViewById(R.id.layout_copy).setOnClickListener(v -> {
+            dialog.dismiss();
+            JUtils.Toast("已复制链接到粘贴板!");
+            JUtils.copyToClipboard(shareModel.getShare_link());
         });
         view.findViewById(R.id.layout_cancel).setOnClickListener(v -> dialog.dismiss());
         Window window = dialog.getWindow();
