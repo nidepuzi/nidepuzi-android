@@ -63,7 +63,9 @@ public class FansActivity extends BaseMVVMActivity<ActivityFansBinding> {
                     if (fansBeen != null) {
                         mAdapter.update(fansBeen.getResults());
                         if (fansBeen.getNext() == null) {
-                            JUtils.Toast("没有更多了");
+                            if (page != 1) {
+                                JUtils.Toast("全部加载完成!");
+                            }
                             b.xrv.setLoadingMoreEnabled(false);
                         } else {
                             page++;

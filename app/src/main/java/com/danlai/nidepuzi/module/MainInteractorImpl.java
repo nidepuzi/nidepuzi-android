@@ -9,7 +9,6 @@ import com.danlai.nidepuzi.entity.EduBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
-import com.danlai.nidepuzi.entity.UserTopic;
 import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.api.MainService;
@@ -68,13 +67,6 @@ public class MainInteractorImpl implements MainInteractor {
     @Override
     public void getCategoryDown(ServiceResponse<CategoryDownBean> serviceResponse) {
         service.getCategoryDown()
-            .compose(new DefaultTransform<>())
-            .subscribe(serviceResponse);
-    }
-
-    @Override
-    public void getTopic(ServiceResponse<UserTopic> serviceResponse) {
-        service.getTopic()
             .compose(new DefaultTransform<>())
             .subscribe(serviceResponse);
     }

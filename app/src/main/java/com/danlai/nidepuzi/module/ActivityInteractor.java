@@ -2,7 +2,6 @@ package com.danlai.nidepuzi.module;
 
 
 import com.danlai.nidepuzi.entity.ActivityBean;
-import com.danlai.nidepuzi.entity.StartBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
 /**
@@ -12,6 +11,4 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 public interface ActivityInteractor {
 
     void getActivityBean(String id, ServiceResponse<ActivityBean> response);
-
-    void getStartAds(ServiceResponse<StartBean> response);
 }

@@ -68,10 +68,12 @@ public class SaleOrderActivity extends BaseMVVMActivity<ActivitySaleOrderBinding
                 @Override
                 public void onNext(OderCarryBean bean) {
                     if (bean != null) {
-                        b.tvAll.setText(bean.getCount()+"");
+                        b.tvAll.setText(bean.getCount() + "");
                         mAdapter.update(bean.getResults());
-                        if (null == bean.getNext() && page != 1) {
-                            JUtils.Toast("没有更多了");
+                        if (null == bean.getNext()) {
+                            if (page != 1) {
+                                JUtils.Toast("全部加载完成!");
+                            }
                             b.xrv.setLoadingMoreEnabled(false);
                         }
                     }

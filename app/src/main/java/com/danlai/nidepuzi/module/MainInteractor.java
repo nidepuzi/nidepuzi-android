@@ -8,7 +8,6 @@ import com.danlai.nidepuzi.entity.EduBean;
 import com.danlai.nidepuzi.entity.MainTodayBean;
 import com.danlai.nidepuzi.entity.PortalBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
-import com.danlai.nidepuzi.entity.UserTopic;
 import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
@@ -30,8 +29,6 @@ public interface MainInteractor {
     void getVersion(ServiceResponse<VersionBean> serviceResponse);
 
     void getCategoryDown(ServiceResponse<CategoryDownBean> serviceResponse);
-
-    void getTopic(ServiceResponse<UserTopic> serviceResponse);
 
     void getMainTodayList(ServiceResponse<List<MainTodayBean>> serviceResponse);
 

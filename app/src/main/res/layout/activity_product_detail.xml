@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
@@ -117,10 +116,10 @@
                                         android:id="@+id/text_layout"
                                         android:layout_width="wrap_content"
                                         android:layout_height="25dp"
+                                        android:layout_marginRight="6dp"
                                         android:background="@drawable/grey_btn"
                                         android:gravity="center"
                                         android:orientation="horizontal"
-                                        android:layout_marginRight="6dp"
                                         android:paddingLeft="4dp"
                                         android:paddingRight="4dp">
 
@@ -216,6 +215,38 @@
                                         android:layout_height="102px"
                                         android:src="@drawable/img_product_desc"/>
                                 </RelativeLayout>
+
+                                <include layout="@layout/common_gap"/>
+
+                                <LinearLayout
+                                    android:id="@+id/layout_refund"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/icon_refund_msg"/>
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_weight="1"
+                                        android:text="七天退换货规则"
+                                        android:textColor="@color/color_33"
+                                        android:textSize="16sp"/>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/icon_to_right"/>
+
+                                </LinearLayout>
 
                                 <View
                                     android:layout_width="match_parent"

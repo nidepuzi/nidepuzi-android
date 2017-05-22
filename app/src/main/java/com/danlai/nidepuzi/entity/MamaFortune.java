@@ -59,9 +59,9 @@ public class MamaFortune {
         private int order_num;
         private double carry_value;
         private int active_value_num;
-        private int carry_pending_display;
-        private int carry_confirmed_display;
-        private int carry_cashout_display;
+        private double carry_pending_display;
+        private double carry_confirmed_display;
+        private double carry_cashout_display;
         private String mama_event_link;
         private String history_last_day;
         private int today_visitor_num;
@@ -167,27 +167,27 @@ public class MamaFortune {
             this.active_value_num = active_value_num;
         }
 
-        public int getCarry_pending_display() {
+        public double getCarry_pending_display() {
             return carry_pending_display;
         }
 
-        public void setCarry_pending_display(int carry_pending_display) {
+        public void setCarry_pending_display(double carry_pending_display) {
             this.carry_pending_display = carry_pending_display;
         }
 
-        public int getCarry_confirmed_display() {
+        public double getCarry_confirmed_display() {
             return carry_confirmed_display;
         }
 
-        public void setCarry_confirmed_display(int carry_confirmed_display) {
+        public void setCarry_confirmed_display(double carry_confirmed_display) {
             this.carry_confirmed_display = carry_confirmed_display;
         }
 
-        public int getCarry_cashout_display() {
+        public double getCarry_cashout_display() {
             return carry_cashout_display;
         }
 
-        public void setCarry_cashout_display(int carry_cashout_display) {
+        public void setCarry_cashout_display(double carry_cashout_display) {
             this.carry_cashout_display = carry_cashout_display;
         }
 

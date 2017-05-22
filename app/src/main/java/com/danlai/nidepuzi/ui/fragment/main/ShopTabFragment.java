@@ -20,9 +20,11 @@ import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
+import com.danlai.nidepuzi.entity.event.UserInfoEvent;
 import com.danlai.nidepuzi.module.VipInteractor;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
+import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
 import com.danlai.nidepuzi.ui.activity.shop.SaleOrderActivity;
 import com.danlai.nidepuzi.ui.activity.shop.VisitActivity;
@@ -56,6 +58,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     private int type = 0;
     private Dialog vipDialog;
+    private String carryValue;
+    private Bundle bundle = new Bundle();
 
     public static ShopTabFragment newInstance() {
         return new ShopTabFragment();
@@ -98,6 +102,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         } else {
             StatusBarUtil.setColorNoTranslucent(mActivity,
                 mActivity.getResources().getColor(R.color.shop_top));
+            EventBus.getDefault().post(new UserInfoEvent());
         }
         super.onHiddenChanged(hidden);
     }
@@ -143,7 +148,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 public void onNext(Object o) {
                     if (o instanceof MamaFortune) {
                         MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMama_fortune();
-                        b.tvSale.setText(JUtils.formatDouble(fortune.getCarry_value()));
+                        carryValue = JUtils.formatDouble(fortune.getCarry_value());
+                        b.tvSale.setText(carryValue);
                         b.tvFans.setText(fortune.getInvite_all_num() + "");
                     } else if (o instanceof RecentCarryBean) {
                         RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
@@ -183,7 +189,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refreshLogin(LoginEvent event) {
+    public void refreshInfo(UserInfoEvent event) {
         initData();
     }
 
@@ -194,6 +200,11 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         Glide.with(mFragment).load(R.drawable.img_user_head).into(b.userHead);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshLogin(LoginEvent event) {
+        initData();
+    }
+
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_shop_tab;
@@ -201,7 +212,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     @Override
     public void onClick(View v) {
-        Bundle bundle = new Bundle();
+        bundle.clear();
         switch (v.getId()) {
             case R.id.layout_all_refund:
                 readyGo(AllRefundActivity.class);
@@ -254,8 +265,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllOrderActivity.class, bundle);
                 break;
             case R.id.layout_fans:
-                JumpUtils.jumpToWebViewWithCookies(mActivity, "https://m.nidepuzi.com/mall/mama/invited",
-                    -1, BaseWebViewActivity.class, "粉丝");
+                readyGo(FansActivity.class);
                 break;
             case R.id.layout_achievement:
                 readyGo(AchievementActivity.class);
@@ -268,7 +278,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.layout_income:
             case R.id.layout_sale:
-                readyGo(IncomeActivity.class);
+                bundle.putString("carryValue", carryValue);
+                readyGo(IncomeActivity.class, bundle);
                 break;
             case R.id.layout_sale_order:
                 readyGo(SaleOrderActivity.class);

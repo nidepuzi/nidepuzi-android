@@ -1,20 +1,15 @@
 package com.danlai.nidepuzi.module;
 
-import com.danlai.nidepuzi.entity.CategoryBean;
-import com.danlai.nidepuzi.entity.ChooseListBean;
+import com.danlai.nidepuzi.entity.CarryListBean;
 import com.danlai.nidepuzi.entity.FansBean;
-import com.danlai.nidepuzi.entity.MMCarryBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
-import com.danlai.nidepuzi.entity.MamaSelfListBean;
-import com.danlai.nidepuzi.entity.MamaUrl;
 import com.danlai.nidepuzi.entity.NinePicBean;
 import com.danlai.nidepuzi.entity.OderCarryBean;
 import com.danlai.nidepuzi.entity.ProductNinePicBean;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
 import com.danlai.nidepuzi.entity.ShopBean;
-import com.danlai.nidepuzi.entity.WxQrcode;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
 import java.util.List;
@@ -28,22 +23,11 @@ import io.reactivex.Observable;
 
 public interface VipInteractor {
 
-    void getFans(int page, ServiceResponse<FansBean> response);
-
     void getMamaVisitor(int page, ServiceResponse<MMVisitorsBean> response);
 
     Observable<MamaFortune> getMamaFortune();
 
-    void getCategory(ServiceResponse<List<CategoryBean>> response);
-
-    void getChooseList(int page, String sort_field, String cid, int reverse,
-                       ServiceResponse<ChooseListBean> response);
-
-    void  getShopBean(ServiceResponse<ShopBean> response);
-
-    Observable<MamaUrl> getMamaUrl();
-
-    Observable<MamaSelfListBean> getMaMaSelfList();
+    void getShopBean(ServiceResponse<ShopBean> response);
 
     Observable<RecentCarryBean> getRecentCarry(String from, String days);
 
@@ -53,9 +37,9 @@ public interface VipInteractor {
 
     void getMamaAllOder(int page, ServiceResponse<OderCarryBean> response);
 
-    void getWxCode(ServiceResponse<WxQrcode> response);
-
     void saveTime(int id, int save_times, ServiceResponse<SaveTimeBean> response);
 
-    void getCarryBean(int page, ServiceResponse<MMCarryBean> response);
+    void getCarryList(int page, ServiceResponse<CarryListBean> response);
+
+    void getFans(int page, ServiceResponse<FansBean> response);
 }

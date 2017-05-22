@@ -5,6 +5,7 @@
       <w>activitys</w>
       <w>actlink</w>
       <w>appid</w>
+      <w>appkey</w>
       <w>axiba</w>
       <w>backpath</w>
       <w>bumptech</w>
@@ -25,9 +26,12 @@
       <w>qiniu</w>
       <w>qzone</w>
       <w>rebuy</w>
+      <w>redenvelope</w>
       <w>referal</w>
+      <w>sandpay</w>
       <w>sessionid</w>
       <w>sina</w>
+      <w>umeng</w>
       <w>unselect</w>
       <w>userid</w>
       <w>webview</w>

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -34,12 +32,11 @@ import com.danlai.nidepuzi.databinding.ActivityBaseWebViewBinding;
 import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.htmlJsBridge.AndroidJsBridge;
 import com.danlai.nidepuzi.service.ServiceResponse;
+import com.danlai.nidepuzi.util.ShareUtils;
 import com.danlai.nidepuzi.util.pay.PayUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * @author wisdom
@@ -314,7 +311,7 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_share:
-                sharePartyInfo();
+                ShareUtils.shareShop(partyShareInfo, mBaseActivity);
                 break;
         }
     }
@@ -341,28 +338,6 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void sharePartyInfo() {
-        if (partyShareInfo == null) {
-            JUtils.Toast("页面加载未完成!");
-            return;
-        }
-        OnekeyShare oks = new OnekeyShare();
-        oks.disableSSOWhenAuthorize();
-        oks.setTitle(partyShareInfo.getTitle());
-        oks.setTitleUrl(partyShareInfo.getShareLink());
-        oks.setText(partyShareInfo.getActiveDec());
-        oks.setImageUrl(partyShareInfo.getShareIcon());
-        oks.setUrl(partyShareInfo.getShareLink());
-        Bitmap enableLogo =
-            BitmapFactory.decodeResource(mBaseActivity.getResources(), R.drawable.ssdk_oks_logo_copy);
-        View.OnClickListener listener = v -> {
-            JUtils.copyToClipboard(partyShareInfo.getShareLink() + "");
-            JUtils.Toast("已复制链接");
-        };
-        oks.setCustomerLogo(enableLogo, "复制链接", listener);
-        oks.show(this);
     }
 
 }

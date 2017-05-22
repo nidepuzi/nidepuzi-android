@@ -48,12 +48,6 @@ public class AndroidJsBridge {
         this.mContext = context;
     }
 
-    @Deprecated
-    @JavascriptInterface
-    public void callNativeShareFunc(String uform, String activity_id) {
-        JUtils.Log("BaseWebViewActivity", uform + "======activity_id =" + activity_id);
-    }
-
     @JavascriptInterface
     public void jumpToNativeLocation(String json) {
         Gson gson = new Gson();

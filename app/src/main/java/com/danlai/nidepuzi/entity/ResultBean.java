@@ -1,7 +1,7 @@
 package com.danlai.nidepuzi.entity;
 
 /**
- * Created by itxuye(http://www.itxuye.com) on 16/4/5.
+ * Created by itxuye on 16/4/5.
  */
 public class ResultBean {
 

@@ -3,7 +3,6 @@ package com.danlai.nidepuzi.module;
 
 import com.danlai.library.rx.DefaultTransform;
 import com.danlai.nidepuzi.entity.ActivityBean;
-import com.danlai.nidepuzi.entity.StartBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.api.ActivityService;
 
@@ -26,13 +25,6 @@ public class ActivityInteractorImpl implements ActivityInteractor {
     @Override
     public void getActivityBean(String id, ServiceResponse<ActivityBean> response) {
         service.getActivityBean(id)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
-    public void getStartAds(ServiceResponse<StartBean> response) {
-        service.getStartAds()
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

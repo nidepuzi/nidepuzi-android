@@ -1,5 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.shop;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,7 +12,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.CarryAdapter;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityIncomeBinding;
-import com.danlai.nidepuzi.entity.MMCarryBean;
+import com.danlai.nidepuzi.entity.CarryListBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -24,11 +25,18 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> implements ScrollableHelper.ScrollableContainer {
     private int page = 2;
     private CarryAdapter mAdapter;
+    private String mCarryValue;
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+        mCarryValue = extras.getString("carryValue");
+    }
 
     @Override
     protected void initViews() {
         b.scrollableLayout.getHelper().setCurrentScrollableContainer(this);
         initRecyclerView();
+        b.tvAll.setText(mCarryValue);
     }
 
     @Override
@@ -58,19 +66,19 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
                 page++;
             }
         });
-
     }
 
     private void loadMoreData(int page) {
         BaseApp.getVipInteractor(this)
-            .getCarryBean(page, new ServiceResponse<MMCarryBean>(mBaseActivity) {
+            .getCarryList(page, new ServiceResponse<CarryListBean>(mBaseActivity) {
                 @Override
-                public void onNext(MMCarryBean bean) {
+                public void onNext(CarryListBean bean) {
                     if (bean != null) {
-                        b.tvAll.setText(JUtils.formatDouble((double) bean.getTotal() / 100));
                         mAdapter.update(bean.getResults());
-                        if (null == bean.getNext() && page != 1) {
-                            JUtils.Toast("没有更多了");
+                        if (null == bean.getNext()) {
+                            if (page != 1) {
+                                JUtils.Toast("全部记录加载完成");
+                            }
                             b.xrv.setLoadingMoreEnabled(false);
                         }
                     }

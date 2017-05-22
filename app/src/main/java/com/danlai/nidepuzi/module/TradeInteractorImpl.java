@@ -4,19 +4,14 @@ import com.danlai.library.rx.DefaultTransform;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.entity.AllOrdersBean;
 import com.danlai.nidepuzi.entity.AllRefundsBean;
-import com.danlai.nidepuzi.entity.LogisticCompany;
 import com.danlai.nidepuzi.entity.LogisticsBean;
 import com.danlai.nidepuzi.entity.OrderDetailBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
 import com.danlai.nidepuzi.entity.QiniuTokenBean;
 import com.danlai.nidepuzi.entity.RefundMsgBean;
-import com.danlai.nidepuzi.entity.ResultBean;
-import com.danlai.nidepuzi.entity.TeamBuyBean;
 import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.api.TradeService;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -167,25 +162,4 @@ public class TradeInteractorImpl implements TradeInteractor {
             .subscribe(response);
     }
 
-    @Override
-    public void getLogisticCompany(int referal_trade_id, ServiceResponse<List<LogisticCompany>> response) {
-        service.getLogisticCompany(referal_trade_id)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
-    public void changeLogisticCompany(int address_id, String referal_trade_id, String logistic_company_code,
-                                      ServiceResponse<ResultBean> response) {
-        service.changeLogisticCompany(address_id, referal_trade_id, logistic_company_code)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
-    public void getTeamBuyBean(String tid, ServiceResponse<TeamBuyBean> response) {
-        service.getTeamBuyBean(tid)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
 }

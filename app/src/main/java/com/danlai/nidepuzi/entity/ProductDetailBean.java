@@ -156,6 +156,7 @@ public class ProductDetailBean {
         private String sale_time;
         private String watermark_op;
         private String offshelf_time;
+        private String refund_tips_url;
         private boolean is_onsale;
         private boolean is_recommend;
         private boolean is_saleopen;
@@ -317,6 +318,14 @@ public class ProductDetailBean {
 
         public void setIs_boutique(boolean is_boutique) {
             this.is_boutique = is_boutique;
+        }
+
+        public String getRefund_tips_url() {
+            return refund_tips_url;
+        }
+
+        public void setRefund_tips_url(String refund_tips_url) {
+            this.refund_tips_url = refund_tips_url;
         }
 
         public static class CategoryBean {

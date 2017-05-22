@@ -12,7 +12,7 @@ import android.view.View;
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     private int space;
     private int left, right, top, bottom;
-    boolean flag;
+    private boolean flag;
 
     public SpaceItemDecoration(int left, int right, int top, int bottom) {
         this.left = left;

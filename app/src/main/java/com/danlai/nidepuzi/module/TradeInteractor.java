@@ -2,18 +2,13 @@ package com.danlai.nidepuzi.module;
 
 import com.danlai.nidepuzi.entity.AllOrdersBean;
 import com.danlai.nidepuzi.entity.AllRefundsBean;
-import com.danlai.nidepuzi.entity.LogisticCompany;
 import com.danlai.nidepuzi.entity.LogisticsBean;
 import com.danlai.nidepuzi.entity.OrderDetailBean;
 import com.danlai.nidepuzi.entity.PayInfoBean;
 import com.danlai.nidepuzi.entity.QiniuTokenBean;
 import com.danlai.nidepuzi.entity.RefundMsgBean;
-import com.danlai.nidepuzi.entity.ResultBean;
-import com.danlai.nidepuzi.entity.TeamBuyBean;
 import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
-
-import java.util.List;
 
 import okhttp3.ResponseBody;
 
@@ -64,11 +59,4 @@ public interface TradeInteractor {
 
     void getRefundLogistic(int rid, String packetid, String company_name,
                            ServiceResponse<LogisticsBean> response);
-
-    void getLogisticCompany(int referal_trade_id, ServiceResponse<List<LogisticCompany>> response);
-
-    void changeLogisticCompany(int address_id, String referal_trade_id, String logistic_company_code,
-                               ServiceResponse<ResultBean> response);
-
-    void getTeamBuyBean(String tid, ServiceResponse<TeamBuyBean> response);
 }

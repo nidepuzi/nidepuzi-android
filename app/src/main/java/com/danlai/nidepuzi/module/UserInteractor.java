@@ -6,17 +6,15 @@ import com.danlai.nidepuzi.entity.BankListEntity;
 import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
-import com.danlai.nidepuzi.entity.CoinHistoryListBean;
 import com.danlai.nidepuzi.entity.CouponPagingBean;
+import com.danlai.nidepuzi.entity.DrawCashBean;
+import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
-import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
-import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
-import com.danlai.nidepuzi.entity.WxPubAuthInfo;
 import com.danlai.nidepuzi.service.ServiceResponse;
 
 import io.reactivex.Observable;
@@ -30,11 +28,7 @@ import io.reactivex.Observer;
 public interface UserInteractor {
     void getUserInfo(ServiceResponse<UserInfoBean> response);
 
-    void setNickName(int userid, NicknameBean nickname, ServiceResponse<UserBean> response);
-
     void customerLogout(ServiceResponse<LogoutBean> response);
-
-    void getCoinHisList(int page, ServiceResponse<CoinHistoryListBean> response);
 
     Observable<CouponPagingBean> getCouponPaging(int status, int page);
 
@@ -46,8 +40,6 @@ public interface UserInteractor {
 
     void getUserAccount(String platform, String regid, String device_id,
                         Observer<UserAccountBean> response);
-
-    void getWxPubAuthInfo(ServiceResponse<WxPubAuthInfo> response);
 
     void userWithDrawCash(String amount, String verify_code, ServiceResponse<UserWithDrawResult> response);
 
@@ -65,8 +57,6 @@ public interface UserInteractor {
     void passwordLogin(String username, String password, String next,
                        ServiceResponse<CodeBean> response);
 
-    void openDebug(String debug_secret, ServiceResponse<CodeBean> response);
-
     void budgetDetailBean(int page, ServiceResponse<BudgetDetailBean> response);
 
     void getVersion(ServiceResponse<VersionBean> response);
@@ -76,6 +66,10 @@ public interface UserInteractor {
     void createBankCard(String account_no, String account_name, String bank_name, ServiceResponse<BankResultEntity> response);
 
     void getDefaultCard(ServiceResponse<BankCardEntity> response);
+
+    void getDrawCashList(int page, ServiceResponse<DrawCashListBean> response);
+
+    void getDrawCashDetail(int id, ServiceResponse<DrawCashBean> response);
 }
 
 

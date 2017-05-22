@@ -47,7 +47,7 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170519
+        versionCode 20170522
         versionName "1.0.1"
 
         multiDexEnabled = true
@@ -128,7 +128,7 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // nidepuzi_版本_yyyy_MM_dd.apk
-                        def fileName = "Ndpz_v${defaultConfig.versionName.replace(".", "")}_${defaultConfig.versionCode}.apk"
+                        def fileName = "Ndpz_v${defaultConfig.versionName.replace(".", "")}_${defaultConfig.versionCode}_${variant.productFlavors[0].name}.apk"
                         println("====== buildTypes.output ======")
                         println("AppName: " + fileName)
                         output.outputFile = new File(outputFile.parent, fileName)
@@ -137,7 +137,52 @@ android {
             }
         }
     }
+
+    productFlavors {
+        ndpz {
+            manifestPlaceholders = [CHANNEL_NAME: "ndpz"]
+        }
+
+        Fir {
+            manifestPlaceholders = [CHANNEL_NAME: "Fir"]
+        }
+
+//        xiaomi {
+//            manifestPlaceholders = [CHANNEL_NAME: "xiaomi"]
+//        }
+//
+//        huawei {
+//            manifestPlaceholders = [CHANNEL_NAME: "huawei"]
+//        }
+//
+//        qihu360 {
+//            manifestPlaceholders = [CHANNEL_NAME: "qihu360"]
+//        }
+//
+//        tencent {
+//            manifestPlaceholders = [CHANNEL_NAME: "tencent"]
+//        }
+//
+//        assistant91 {
+//            manifestPlaceholders = [CHANNEL_NAME: "assistant91"]
+//        }
+//
+//        lenovo {
+//            manifestPlaceholders = [CHANNEL_NAME: "lenovo"]
+//        }
+//
+//        baidu {
+//            manifestPlaceholders = [CHANNEL_NAME: "baidu"]
+//        }
+//
+//        vivo {
+//            manifestPlaceholders = [CHANNEL_NAME: "vivo"]
+//        }
+
+    }
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

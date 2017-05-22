@@ -6,24 +6,20 @@ import com.danlai.nidepuzi.entity.BankListEntity;
 import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
-import com.danlai.nidepuzi.entity.CoinHistoryListBean;
 import com.danlai.nidepuzi.entity.CouponPagingBean;
+import com.danlai.nidepuzi.entity.DrawCashBean;
+import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
-import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
-import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
-import com.danlai.nidepuzi.entity.WxPubAuthInfo;
 
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -37,32 +33,13 @@ public interface UserService {
     @GET("/rest/v1/users/profile")
     Observable<UserInfoBean> getUserInfo();
 
-    //设置用户昵称
-    @PATCH("/rest/v1/users/{id}")
-    Observable<UserBean> setNickName(
-        @Path("id") int id,
-        @Body NicknameBean nickname);
-
     @POST("/rest/v1/users/customer_logout")
     Observable<LogoutBean> customerLogout();
 
-    //获取用户积分记录信息
-    @GET("/rest/v2/xiaolucoin/history")
-    Observable<CoinHistoryListBean> getCoinHisList(
-        @Query("page") int page);
-
     //获取优惠券
     @GET("/rest/v1/usercoupons/get_user_coupons")
     Observable<CouponPagingBean> getCouponPaging(
         @Query("status") int status,
-        @Query("paging") int paging,
-        @Query("page") int page);
-
-    //获取优惠券
-    @GET("/rest/v1/usercoupons/get_user_coupons")
-    Observable<CouponPagingBean> getCouponPaging(
-        @Query("status") int status,
-        @Query("coupon_type") int coupon_type,
         @Query("paging") int paging,
         @Query("page") int page);
 
@@ -93,9 +70,6 @@ public interface UserService {
         @Field("regid") String regid,
         @Field("device_id") String device_id);
 
-    @GET("/rest/v1/users/get_wxpub_authinfo")
-    Observable<WxPubAuthInfo> getWxPubAuthInfo();
-
     //创建提款信息
     @FormUrlEncoded
     @POST("/rest/v1/users/budget_cash_out")
@@ -105,7 +79,7 @@ public interface UserService {
 
     //创建提款信息
     @FormUrlEncoded
-    @POST("/rest/v1/users/budget_cash_out")
+    @POST("/rest/v2/redenvelope/budget_cash_out")
     Observable<UserWithDrawResult> userWithDrawCash(
         @Field("cashout_amount") String amount,
         @Field("verify_code") String verify_code,
@@ -175,4 +149,12 @@ public interface UserService {
 
     @GET("/rest/v2/bankcards/get_default")
     Observable<BankCardEntity> getDefaultCard();
+
+    @GET("/rest/v2/redenvelope")
+    Observable<DrawCashListBean> getDrawCashList(
+        @Query("page") int page);
+
+    @GET("/rest/v2/redenvelope/{id}")
+    Observable<DrawCashBean> getDrawCashDetail(
+        @Path("id") int id);
 }

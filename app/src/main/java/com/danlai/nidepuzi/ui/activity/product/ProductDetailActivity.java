@@ -39,6 +39,7 @@ import com.danlai.nidepuzi.adapter.SkuSizeAdapter;
 import com.danlai.nidepuzi.base.BaseApi;
 import com.danlai.nidepuzi.base.BaseImageLoader;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
+import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityProductDetailBinding;
 import com.danlai.nidepuzi.entity.CartsInfoBean;
 import com.danlai.nidepuzi.entity.CartsNumResultBean;
@@ -52,6 +53,7 @@ import com.danlai.nidepuzi.ui.activity.shop.NinePicActivity;
 import com.danlai.nidepuzi.ui.activity.trade.CartActivity;
 import com.danlai.nidepuzi.ui.activity.trade.PayInfoActivity;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
+import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.ShareUtils;
 import com.youth.banner.BannerConfig;
@@ -193,6 +195,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         plusIv.setOnClickListener(this);
         minusIv.setOnClickListener(this);
         commitTv.setOnClickListener(this);
+        b.layoutRefund.setOnClickListener(this);
         b.pullToLoad.setScrollListener(
             (scrollView, x, y, oldx, oldy) -> {
                 float v = ((float) y) / (b.banner.getHeight() - b.tvTitle.getHeight());
@@ -382,6 +385,10 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         switch (v.getId()) {
             case R.id.finish:
                 this.finish();
+                break;
+            case R.id.layout_refund:
+                JumpUtils.jumpToWebViewWithCookies(this, productDetail.getDetail_content().getRefund_tips_url()
+                    , -1, BaseWebViewActivity.class, "七天退换货规则");
                 break;
             case R.id.share:
                 showIndeterminateProgressDialog(false);

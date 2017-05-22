@@ -36,7 +36,7 @@
                     android:id="@+id/rb_edu"
                     style="@style/TabRadioButtonStyle"
                     android:drawableTop="@drawable/tab_edu"
-                    android:text="培训"/>
+                    android:text="攻略"/>
 
                 <RadioButton
                     android:id="@+id/rb_shop"

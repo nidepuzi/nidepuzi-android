@@ -3,7 +3,7 @@ package com.danlai.nidepuzi.entity;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by itxuye(www.itxuye.com) on 2016/03/30.
+ * Created by itxuyeon 2016/03/30.
  *
  * Copyright 2016年 上海己美. All rights reserved.
  */

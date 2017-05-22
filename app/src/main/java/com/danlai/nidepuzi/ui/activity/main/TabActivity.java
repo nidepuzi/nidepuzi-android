@@ -23,6 +23,7 @@ import com.danlai.nidepuzi.databinding.ActivityTabBinding;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.VersionBean;
+import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.receiver.UpdateBroadReceiver;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.UpdateService;
@@ -40,6 +41,10 @@ import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.ParseException;
@@ -161,6 +166,7 @@ public class TabActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        EventBus.getDefault().register(this);
         setSwipeBackEnable(false);
         fragments = new ArrayList<>();
 //        fragments.add(TodayNewFragment.newInstance("每日焦点"));
@@ -267,6 +273,17 @@ public class TabActivity extends BaseActivity {
         filter.addAction(UpdateBroadReceiver.ACTION_RETRY_DOWNLOAD);
         mUpdateBroadReceiver = new UpdateBroadReceiver();
         registerReceiver(mUpdateBroadReceiver, filter);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshLogin(LoginEvent event) {
+        initService();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

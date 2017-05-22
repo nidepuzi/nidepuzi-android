@@ -6,17 +6,15 @@ import com.danlai.nidepuzi.entity.BankListEntity;
 import com.danlai.nidepuzi.entity.BankResultEntity;
 import com.danlai.nidepuzi.entity.BudgetDetailBean;
 import com.danlai.nidepuzi.entity.CodeBean;
-import com.danlai.nidepuzi.entity.CoinHistoryListBean;
 import com.danlai.nidepuzi.entity.CouponPagingBean;
+import com.danlai.nidepuzi.entity.DrawCashBean;
+import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
-import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
-import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
-import com.danlai.nidepuzi.entity.WxPubAuthInfo;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.service.api.UserService;
 
@@ -47,22 +45,8 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void setNickName(int userid, NicknameBean nickname, ServiceResponse<UserBean> response) {
-        service.setNickName(userid, nickname)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
     public void customerLogout(ServiceResponse<LogoutBean> response) {
         service.customerLogout()
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
-    public void getCoinHisList(int page, ServiceResponse<CoinHistoryListBean> response) {
-        service.getCoinHisList(page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -97,13 +81,6 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void getWxPubAuthInfo(ServiceResponse<WxPubAuthInfo> response) {
-        service.getWxPubAuthInfo()
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
     public void userWithDrawCash(String amount, String verify_code,
                                  ServiceResponse<UserWithDrawResult> response) {
         service.userWithDrawCash(amount, verify_code)
@@ -114,7 +91,7 @@ public class UserInteractorImpl implements UserInteractor {
     @Override
     public void userWithDrawCash(String amount, String verify_code, int card_id,
                                  ServiceResponse<UserWithDrawResult> response) {
-        service.userWithDrawCash(amount, verify_code, "channel", card_id)
+        service.userWithDrawCash(amount, verify_code, "sandpay", card_id)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -157,13 +134,6 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void openDebug(String debug_secret, ServiceResponse<CodeBean> response) {
-        service.openDebug(debug_secret)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
-    }
-
-    @Override
     public void budgetDetailBean(int page, ServiceResponse<BudgetDetailBean> response) {
         service.budgetDetailBean(page)
             .compose(new DefaultTransform<>())
@@ -194,6 +164,20 @@ public class UserInteractorImpl implements UserInteractor {
     @Override
     public void getDefaultCard(ServiceResponse<BankCardEntity> response) {
         service.getDefaultCard()
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getDrawCashList(int page,ServiceResponse<DrawCashListBean> response) {
+        service.getDrawCashList(page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getDrawCashDetail(int id, ServiceResponse<DrawCashBean> response) {
+        service.getDrawCashDetail(id)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
