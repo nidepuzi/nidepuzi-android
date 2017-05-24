@@ -1,12 +1,13 @@
 package com.danlai.nidepuzi.module;
 
 import com.danlai.library.rx.DefaultTransform;
+import com.danlai.nidepuzi.entity.AwardCarryBean;
 import com.danlai.nidepuzi.entity.CarryListBean;
 import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.NinePicBean;
-import com.danlai.nidepuzi.entity.OderCarryBean;
+import com.danlai.nidepuzi.entity.OrderCarryBean;
 import com.danlai.nidepuzi.entity.ProductNinePicBean;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
@@ -35,7 +36,14 @@ public class VipInteractorImpl implements VipInteractor {
 
     @Override
     public void getMamaVisitor(int page, ServiceResponse<MMVisitorsBean> response) {
-        service.getMamaVisitor(14, page)
+        service.getMamaVisitor(60, page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getMamaVisitorToday(int page, ServiceResponse<MMVisitorsBean> response) {
+        service.getMamaVisitor(1, page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -80,8 +88,22 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
-    public void getMamaAllOder(int page, ServiceResponse<OderCarryBean> response) {
+    public void getMamaAllOder(int page, ServiceResponse<OrderCarryBean> response) {
         service.getMamaAllOder("direct", page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getMamaAllOderToday(int page, ServiceResponse<OrderCarryBean> response) {
+        service.getMamaAllOderToday("direct", page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getMamaAllAwardToday(int page, ServiceResponse<AwardCarryBean> response) {
+        service.getMamaAllAwardToday(page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -101,7 +123,14 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
-    public void getFans(int page,ServiceResponse<FansBean> response) {
+    public void getCarryListToday(int page, ServiceResponse<CarryListBean> response) {
+        service.getCarryListToday(page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getFans(int page, ServiceResponse<FansBean> response) {
         service.getFans(page)
             .compose(new DefaultTransform<>())
             .subscribe(response);

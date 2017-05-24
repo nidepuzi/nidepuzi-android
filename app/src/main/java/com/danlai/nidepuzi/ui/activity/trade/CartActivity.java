@@ -38,7 +38,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
     protected void initViews() {
         b.rvCart.setNestedScrollingEnabled(false);
         b.rvCart.setHasFixedSize(false);
-        b.rvCart.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        b.rvCart.addItemDecoration(new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         ScrollLinearLayoutManager layoutManager = new ScrollLinearLayoutManager(this);
         layoutManager.setAutoMeasureEnabled(false);
         b.rvCart.setLayoutManager(layoutManager);
@@ -47,7 +47,7 @@ public class CartActivity extends BaseMVVMActivity<ActivityCartBinding> implemen
 
         b.rvHistory.setNestedScrollingEnabled(false);
         b.rvHistory.setHasFixedSize(false);
-        b.rvHistory.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        b.rvHistory.addItemDecoration(new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         ScrollLinearLayoutManager manager = new ScrollLinearLayoutManager(this);
         manager.setAutoMeasureEnabled(false);
         b.rvHistory.setLayoutManager(manager);

@@ -1,9 +1,9 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.danlai.library.widget.DividerItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.BankListAdapter;

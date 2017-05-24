@@ -68,7 +68,7 @@ public class AddressSelectActivity extends BaseMVVMActivity<ActivityAddressSelec
     protected void initViews() {
         EventBus.getDefault().register(this);
         b.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        b.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        b.recyclerView.addItemDecoration(new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         adapter = new AddressSelectAdapter(this, addressId);
         adapter.setNeedLevel(needLevel);
         b.recyclerView.setAdapter(adapter);

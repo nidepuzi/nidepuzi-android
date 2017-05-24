@@ -1,13 +1,14 @@
 package com.danlai.nidepuzi.service.api;
 
 
+import com.danlai.nidepuzi.entity.AwardCarryBean;
 import com.danlai.nidepuzi.entity.CarryListBean;
 import com.danlai.nidepuzi.entity.CategoryBean;
 import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.NinePicBean;
-import com.danlai.nidepuzi.entity.OderCarryBean;
+import com.danlai.nidepuzi.entity.OrderCarryBean;
 import com.danlai.nidepuzi.entity.ProductNinePicBean;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
@@ -62,8 +63,17 @@ public interface VipService {
         @Query("page") int page);
 
     @GET("/rest/v2/mama/ordercarry")
-    Observable<OderCarryBean> getMamaAllOder(
+    Observable<OrderCarryBean> getMamaAllOder(
         @Query("carry_type") String carry_type,
+        @Query("page") int page);
+
+    @GET("/rest/v2/mama/ordercarry/today")
+    Observable<OrderCarryBean> getMamaAllOderToday(
+        @Query("carry_type") String carry_type,
+        @Query("page") int page);
+
+    @GET("/rest/v2/mama/awardcarry/today")
+    Observable<AwardCarryBean> getMamaAllAwardToday(
         @Query("page") int page);
 
     @FormUrlEncoded
@@ -74,6 +84,10 @@ public interface VipService {
 
     @GET("/rest/v2/mama/carry")
     Observable<CarryListBean> getCarryList(
+        @Query("page") int page);
+
+    @GET("/rest/v2/mama/carry/today")
+    Observable<CarryListBean> getCarryListToday(
         @Query("page") int page);
 
     @GET("rest/v1/pmt/xlmm/get_referal_mama")

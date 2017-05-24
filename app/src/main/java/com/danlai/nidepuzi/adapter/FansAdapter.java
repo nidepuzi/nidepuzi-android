@@ -50,6 +50,7 @@ public class FansAdapter extends BaseRecyclerViewAdapter<ItemFansBinding, Result
                 Date date = sdf.parse(renewTime);
                 long time = new Date().getTime() - date.getTime();
                 int day = (int) (30 - time / 1000 / 60 / 60 / 24);
+                day = day < 0 ? 0 : day;
                 holder.b.tvDay.setText("" + day);
             } catch (ParseException e) {
                 e.printStackTrace();

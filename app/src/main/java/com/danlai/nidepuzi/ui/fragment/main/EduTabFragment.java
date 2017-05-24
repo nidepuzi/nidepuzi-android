@@ -1,10 +1,10 @@
 package com.danlai.nidepuzi.ui.fragment.main;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
 import com.danlai.library.utils.JUtils;
+import com.danlai.library.widget.DividerItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.EduAdapter;

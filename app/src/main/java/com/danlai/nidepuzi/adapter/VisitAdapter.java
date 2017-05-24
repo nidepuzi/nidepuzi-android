@@ -17,9 +17,11 @@ import com.danlai.nidepuzi.entity.MMVisitorsBean.ResultsEntity;
  */
 
 public class VisitAdapter extends BaseRecyclerViewAdapter<ItemVisitBinding, ResultsEntity> {
+    private boolean isToday;
 
     public VisitAdapter(BaseActivity activity) {
         super(activity);
+        isToday = false;
     }
 
     @Override
@@ -28,7 +30,9 @@ public class VisitAdapter extends BaseRecyclerViewAdapter<ItemVisitBinding, Resu
         String created = entity.getCreated().replace("T", " ");
         String time = created.substring(0, 10);
         holder.b.timeTv.setText(time);
-        if (position == 0) {
+        if (isToday) {
+            holder.b.timeLayout.setVisibility(View.GONE);
+        } else if (position == 0) {
             holder.b.timeLayout.setVisibility(View.VISIBLE);
         } else {
             if (time.equals(data.get(position - 1).getCreated().substring(0, 10))) {
@@ -52,5 +56,8 @@ public class VisitAdapter extends BaseRecyclerViewAdapter<ItemVisitBinding, Resu
         return R.layout.item_visit;
     }
 
+    public void setToday(boolean today) {
+        isToday = today;
+    }
 }
 

@@ -16,75 +16,156 @@
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_grey"
+            android:background="@color/white"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <com.danlai.library.widget.CircleImageView
                 android:id="@+id/head_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="24dp"
-                app:civ_border_color="@color/colorPrimary"
-                app:civ_border_width="2dp"/>
+                android:src="@drawable/img_user_head"/>
 
             <TextView
                 android:id="@+id/tv_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="12dp"
+                android:textColor="@color/color_33"
+                android:textSize="16sp"/>
 
-            <com.danlai.library.widget.ClearEditText
-                android:id="@+id/register_name"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/white"
-                android:hint="请输入手机号"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:textCursorDrawable="@drawable/color_cursor"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="为了保证返佣及时到账，请完整填写信息哦~！"
+                android:textColor="@color/color_99"
                 android:textSize="14sp"/>
 
-            <include layout="@layout/common_gap"/>
+            <com.danlai.library.widget.ClearEditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_common_black"
+                android:gravity="center_vertical"
+                android:hint="请输入掌柜姓名(2-4个汉字组成)"
+                android:inputType="text"
+                android:maxLength="4"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_99"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="14sp"
+                app:iconClear="@drawable/clear_text"/>
+
+            <com.danlai.library.widget.ClearEditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_common_black"
+                android:gravity="center_vertical"
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_99"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="14sp"
+                app:iconClear="@drawable/clear_text"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/white"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_common_black"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/check_code"
+                    android:id="@+id/et_code"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请输入短信验证码"
+                    android:gravity="center_vertical"
+                    android:hint="请输入验证码"
                     android:inputType="number"
                     android:maxLength="6"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textColor="@color/color_33"
+                    android:textColorHint="@color/color_99"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="14sp"/>
 
-                <Button
-                    android:id="@+id/get_check_code"
-                    android:layout_width="100dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/btn_common_white"
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:background="@color/color_33"/>
+
+                <TextView
+                    android:id="@+id/tv_code"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="获取验证码"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/color_33"
+                    android:textSize="13sp"/>
+
             </LinearLayout>
 
             <Button
                 android:id="@+id/next"
                 style="@style/CommonButton"
-                android:layout_marginTop="16dp"
-                android:text="绑定"/>
+                android:layout_marginTop="30dp"
+                android:text="确认提交"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/service_layout"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="登录代表您已阅读并同意"
+                    android:textColor="@color/color_99"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《你的铺子微店用户服务协议》"
+                    android:textColor="@color/color_33"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="内容"
+                    android:textColor="@color/color_99"
+                    android:textSize="10sp"/>
+            </LinearLayout>
 
         </LinearLayout>
 

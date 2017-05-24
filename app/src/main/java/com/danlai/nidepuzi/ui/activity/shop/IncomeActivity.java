@@ -48,7 +48,7 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
     private void initRecyclerView() {
         b.xrv.setLayoutManager(new LinearLayoutManager(this));
         b.xrv.addItemDecoration(
-            new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+            new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setPullRefreshEnabled(false);
         b.xrv.setLoadingMoreEnabled(true);
@@ -69,7 +69,7 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
     }
 
     private void loadMoreData(int page) {
-        BaseApp.getVipInteractor(this)
+        BaseApp.getVipInteractor(mBaseActivity)
             .getCarryList(page, new ServiceResponse<CarryListBean>(mBaseActivity) {
                 @Override
                 public void onNext(CarryListBean bean) {

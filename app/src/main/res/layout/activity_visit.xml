@@ -25,9 +25,10 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最近两周访客记录"
+                    android:text="最近两月访客记录"
                     android:textColor="@color/color_33"
                     android:textSize="15sp"/>
 
@@ -41,7 +42,9 @@
 
             </LinearLayout>
 
-            <include layout="@layout/common_gap"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
 
             <com.jcodecraeer.xrecyclerview.XRecyclerView
                 android:id="@+id/xrv"

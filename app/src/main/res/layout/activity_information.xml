@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     app:preference_hide_icon="true"
                     app:preference_hide_right="true"
-                    app:preference_title="昵称"/>
+                    app:preference_title="姓名"/>
 
                 <!--<include layout="@layout/preference_line"/>-->
 

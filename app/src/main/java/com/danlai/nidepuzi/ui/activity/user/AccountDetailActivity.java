@@ -1,10 +1,10 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
 
 import com.danlai.library.manager.CustomLinearLayoutManager;
 import com.danlai.library.utils.JUtils;
+import com.danlai.library.widget.DividerItemDecoration;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.AccountDetailAdapter;
@@ -66,7 +66,7 @@ public class AccountDetailActivity extends BaseMVVMActivity<ActivityAccountDetai
                 if (next != null && !"".equals(next)) {
                     loadMoreData(false);
                 } else {
-                    JUtils.Toast("没有更多了!");
+                    JUtils.Toast("全部记录加载完成!");
                     b.xrv.loadMoreComplete();
                 }
             }
@@ -95,7 +95,7 @@ public class AccountDetailActivity extends BaseMVVMActivity<ActivityAccountDetai
                     } else {
                         b.xrv.setLoadingMoreEnabled(false);
                         if (!clear) {
-                            JUtils.Toast("已经到底啦!");
+                            JUtils.Toast("全部记录加载完成!");
                         }
                     }
                     hideIndeterminateProgressDialog();

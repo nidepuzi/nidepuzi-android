@@ -1,6 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
-import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.danlai.library.rx.RxCountDown;
@@ -27,11 +27,22 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
     implements View.OnClickListener {
 
     private String mobile;
+    private AlertDialog mRuleDialog;
 
     @Override
     protected void setListener() {
         b.next.setOnClickListener(this);
-        b.getCheckCode.setOnClickListener(this);
+        b.tvCode.setOnClickListener(this);
+        b.serviceLayout.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initViews() {
+        mRuleDialog = new AlertDialog.Builder(this)
+            .setTitle("注册必读")
+            .setMessage(getResources().getString(R.string.login_rule))
+            .setPositiveButton("同意", (dialog, which) -> dialog.dismiss())
+            .create();
     }
 
     @Override
@@ -43,7 +54,7 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
                     if (userInfoBean != null) {
                         if (userInfoBean.getThumbnail() != null && !"".equals(userInfoBean.getThumbnail())) {
                             ViewUtils.loadImgToImgView(mBaseActivity, b.headImage, userInfoBean.getThumbnail());
-                            b.tvNickName.setText("微信账号： " + userInfoBean.getNick());
+                            b.tvNickName.setText("微信号： " + userInfoBean.getNick());
                         } else {
                             b.headImage.setVisibility(View.GONE);
                             b.tvNickName.setVisibility(View.GONE);
@@ -67,41 +78,43 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                mobile = b.registerName.getText().toString().trim();
-                String invalid_code = b.checkCode.getText().toString().trim();
+                mobile = b.etPhone.getText().toString().trim();
+                String invalid_code = b.etCode.getText().toString().trim();
                 if (checkInput(mobile, invalid_code)) {
                     bindMobilePhone(mobile, invalid_code);
                 }
                 break;
-            case R.id.get_check_code:
-                mobile = b.registerName.getText().toString().trim();
+            case R.id.tv_code:
+                mobile = b.etPhone.getText().toString().trim();
                 if (checkMobileInput(mobile)) {
                     RxCountDown.countdown(60).doOnSubscribe(disposable -> {
                         addDisposable(disposable);
-                        b.getCheckCode.setClickable(false);
-                        b.getCheckCode.setBackgroundColor(Color.parseColor("#f3f3f4"));
+                        b.tvCode.setClickable(false);
                         BaseApp.getUserInteractor(mBaseActivity)
                             .getCodeBean(mobile, "bind", new ServiceResponse<CodeBean>(mBaseActivity) {
                                 @Override
                                 public void onNext(CodeBean codeBean) {
                                     JUtils.Toast(codeBean.getMsg());
-                                    b.registerName.setFocusable(false);
-                                    b.checkCode.setFocusable(true);
+                                    b.etPhone.setFocusable(false);
+                                    b.etCode.setFocusable(true);
                                 }
                             });
                     }).subscribe(new ServiceResponse<Integer>(mBaseActivity) {
                         @Override
                         public void onComplete() {
-                            b.getCheckCode.setText("获取验证码");
-                            b.getCheckCode.setClickable(true);
+                            b.tvCode.setText("获取验证码");
+                            b.tvCode.setClickable(true);
                         }
 
                         @Override
                         public void onNext(Integer integer) {
-                            b.getCheckCode.setText(integer + "S");
+                            b.tvCode.setText(integer + "S");
                         }
                     });
                 }
+                break;
+            case R.id.service_layout:
+                mRuleDialog.show();
                 break;
         }
     }

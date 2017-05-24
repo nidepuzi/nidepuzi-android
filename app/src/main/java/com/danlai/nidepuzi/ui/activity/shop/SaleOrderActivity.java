@@ -11,7 +11,7 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.adapter.SaleOrderAdapter;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivitySaleOrderBinding;
-import com.danlai.nidepuzi.entity.OderCarryBean;
+import com.danlai.nidepuzi.entity.OrderCarryBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -41,7 +41,7 @@ public class SaleOrderActivity extends BaseMVVMActivity<ActivitySaleOrderBinding
     private void initRecyclerView() {
         b.xrv.setLayoutManager(new LinearLayoutManager(this));
         b.xrv.addItemDecoration(
-            new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+            new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setPullRefreshEnabled(false);
         b.xrv.setLoadingMoreEnabled(true);
@@ -64,9 +64,9 @@ public class SaleOrderActivity extends BaseMVVMActivity<ActivitySaleOrderBinding
 
     private void loadMoreData(int page) {
         BaseApp.getVipInteractor(this)
-            .getMamaAllOder(page, new ServiceResponse<OderCarryBean>(mBaseActivity) {
+            .getMamaAllOder(page, new ServiceResponse<OrderCarryBean>(mBaseActivity) {
                 @Override
-                public void onNext(OderCarryBean bean) {
+                public void onNext(OrderCarryBean bean) {
                     if (bean != null) {
                         b.tvAll.setText(bean.getCount() + "");
                         mAdapter.update(bean.getResults());

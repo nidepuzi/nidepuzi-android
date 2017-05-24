@@ -140,7 +140,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:id="@+id/layout_sale_order"
+                            android:id="@+id/layout_today_sale_order"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -168,7 +168,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/layout_sale"
+                            android:id="@+id/layout_today_sale"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -189,14 +189,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="累计销量"
+                                android:text="今日收益"
                                 android:textColor="@color/white"
                                 android:textSize="12sp"/>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/layout_visit"
+                            android:id="@+id/layout_today_visit"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

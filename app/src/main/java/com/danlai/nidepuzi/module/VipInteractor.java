@@ -1,11 +1,12 @@
 package com.danlai.nidepuzi.module;
 
+import com.danlai.nidepuzi.entity.AwardCarryBean;
 import com.danlai.nidepuzi.entity.CarryListBean;
 import com.danlai.nidepuzi.entity.FansBean;
 import com.danlai.nidepuzi.entity.MMVisitorsBean;
 import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.NinePicBean;
-import com.danlai.nidepuzi.entity.OderCarryBean;
+import com.danlai.nidepuzi.entity.OrderCarryBean;
 import com.danlai.nidepuzi.entity.ProductNinePicBean;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.SaveTimeBean;
@@ -25,6 +26,8 @@ public interface VipInteractor {
 
     void getMamaVisitor(int page, ServiceResponse<MMVisitorsBean> response);
 
+    void getMamaVisitorToday(int page, ServiceResponse<MMVisitorsBean> response);
+
     Observable<MamaFortune> getMamaFortune();
 
     void getShopBean(ServiceResponse<ShopBean> response);
@@ -35,11 +38,17 @@ public interface VipInteractor {
 
     void getNinePicByModelId(int model_id, int page, ServiceResponse<ProductNinePicBean> response);
 
-    void getMamaAllOder(int page, ServiceResponse<OderCarryBean> response);
+    void getMamaAllOder(int page, ServiceResponse<OrderCarryBean> response);
+
+    void getMamaAllOderToday(int page, ServiceResponse<OrderCarryBean> response);
+
+    void getMamaAllAwardToday(int page, ServiceResponse<AwardCarryBean> response);
 
     void saveTime(int id, int save_times, ServiceResponse<SaveTimeBean> response);
 
     void getCarryList(int page, ServiceResponse<CarryListBean> response);
+
+    void getCarryListToday(int page, ServiceResponse<CarryListBean> response);
 
     void getFans(int page, ServiceResponse<FansBean> response);
 }

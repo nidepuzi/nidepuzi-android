@@ -25,6 +25,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="累计收益"
@@ -39,9 +40,19 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="30sp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="备注：累计收益未考虑可能退换货，请参考实际到账收益"
+                    android:textColor="@color/color_99"
+                    android:textSize="12sp"/>
+
             </LinearLayout>
 
-            <include layout="@layout/common_gap"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
 
             <com.jcodecraeer.xrecyclerview.XRecyclerView
                 android:id="@+id/xrv"

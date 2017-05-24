@@ -26,7 +26,8 @@ import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
 import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
-import com.danlai.nidepuzi.ui.activity.shop.SaleOrderActivity;
+import com.danlai.nidepuzi.ui.activity.shop.TodayIncomeActivity;
+import com.danlai.nidepuzi.ui.activity.shop.TodaySaleOrderActivity;
 import com.danlai.nidepuzi.ui.activity.shop.VisitActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllOrderActivity;
 import com.danlai.nidepuzi.ui.activity.trade.AllRefundActivity;
@@ -58,7 +59,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     private int type = 0;
     private Dialog vipDialog;
-    private String carryValue;
+    private String carryValue, todayCarryValue;
     private Bundle bundle = new Bundle();
 
     public static ShopTabFragment newInstance() {
@@ -77,7 +78,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.imgMessage.setOnClickListener(this);
         b.userHead.setOnClickListener(this);
         b.userName.setOnClickListener(this);
-        b.layoutVisit.setOnClickListener(this);
+        b.layoutTodayVisit.setOnClickListener(this);
         b.layoutCoupon.setOnClickListener(this);
         b.layoutWallet.setOnClickListener(this);
         b.tvDrawCash.setOnClickListener(this);
@@ -90,8 +91,8 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutFans.setOnClickListener(this);
         b.layoutAchievement.setOnClickListener(this);
         b.layoutIncome.setOnClickListener(this);
-        b.layoutSale.setOnClickListener(this);
-        b.layoutSaleOrder.setOnClickListener(this);
+        b.layoutTodaySale.setOnClickListener(this);
+        b.layoutTodaySaleOrder.setOnClickListener(this);
     }
 
     @Override
@@ -149,10 +150,11 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                     if (o instanceof MamaFortune) {
                         MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMama_fortune();
                         carryValue = JUtils.formatDouble(fortune.getCarry_value());
-                        b.tvSale.setText(carryValue);
                         b.tvFans.setText(fortune.getInvite_all_num() + "");
                     } else if (o instanceof RecentCarryBean) {
                         RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
+                        todayCarryValue = JUtils.formatDouble(entity.getCarry());
+                        b.tvSale.setText(todayCarryValue);
                         b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));
                         b.tvSaleOrder.setText(Integer.toString(entity.getOrderNum()));
                     }
@@ -273,16 +275,20 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
             case R.id.layout_wallet:
                 readyGo(AccountDetailActivity.class);
                 break;
-            case R.id.layout_visit:
-                readyGo(VisitActivity.class);
+            case R.id.layout_today_visit:
+                bundle.putBoolean("isToday", true);
+                readyGo(VisitActivity.class, bundle);
                 break;
             case R.id.layout_income:
-            case R.id.layout_sale:
                 bundle.putString("carryValue", carryValue);
                 readyGo(IncomeActivity.class, bundle);
                 break;
-            case R.id.layout_sale_order:
-                readyGo(SaleOrderActivity.class);
+            case R.id.layout_today_sale:
+                bundle.putString("carryValue", todayCarryValue);
+                readyGo(TodayIncomeActivity.class, bundle);
+                break;
+            case R.id.layout_today_sale_order:
+                readyGo(TodaySaleOrderActivity.class);
                 break;
         }
 

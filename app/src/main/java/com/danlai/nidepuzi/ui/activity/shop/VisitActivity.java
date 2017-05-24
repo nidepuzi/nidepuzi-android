@@ -1,5 +1,6 @@
 package com.danlai.nidepuzi.ui.activity.shop;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -25,11 +26,20 @@ public class VisitActivity extends BaseMVVMActivity<ActivityVisitBinding>
     implements ScrollableHelper.ScrollableContainer {
     private int page = 2;
     private VisitAdapter mAdapter;
+    private boolean isToday;
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+        isToday = extras.getBoolean("isToday", false);
+    }
 
     @Override
     protected void initViews() {
         b.scrollableLayout.getHelper().setCurrentScrollableContainer(this);
         initRecyclerView();
+        if (isToday) {
+            b.tvDesc.setText("今日访客记录");
+        }
     }
 
     @Override
@@ -41,11 +51,12 @@ public class VisitActivity extends BaseMVVMActivity<ActivityVisitBinding>
     private void initRecyclerView() {
         b.xrv.setLayoutManager(new LinearLayoutManager(this));
         b.xrv.addItemDecoration(
-            new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+            new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setPullRefreshEnabled(false);
         b.xrv.setLoadingMoreEnabled(true);
         mAdapter = new VisitAdapter(this);
+        mAdapter.setToday(isToday);
         b.xrv.setAdapter(mAdapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -63,28 +74,57 @@ public class VisitActivity extends BaseMVVMActivity<ActivityVisitBinding>
     }
 
     private void loadMoreData(int page) {
-        BaseApp.getVipInteractor(this)
-            .getMamaVisitor(page, new ServiceResponse<MMVisitorsBean>(mBaseActivity) {
-                @Override
-                public void onNext(MMVisitorsBean mmVisitorsBean) {
-                    if (mmVisitorsBean != null) {
-                        b.tvCount.setText(mmVisitorsBean.getCount() + "");
-                        mAdapter.update(mmVisitorsBean.getResults());
-                        if (null == mmVisitorsBean.getNext() && page != 1) {
-                            JUtils.Toast("没有更多了");
-                            b.xrv.setLoadingMoreEnabled(false);
+        if (isToday) {
+            BaseApp.getVipInteractor(this)
+                .getMamaVisitorToday(page, new ServiceResponse<MMVisitorsBean>(mBaseActivity) {
+                    @Override
+                    public void onNext(MMVisitorsBean mmVisitorsBean) {
+                        if (mmVisitorsBean != null) {
+                            b.tvCount.setText(mmVisitorsBean.getCount() + "");
+                            mAdapter.update(mmVisitorsBean.getResults());
+                            if (null == mmVisitorsBean.getNext()) {
+                                if (page != 1) {
+                                    JUtils.Toast("全部加载完成!");
+                                }
+                                b.xrv.setLoadingMoreEnabled(false);
+                            }
                         }
+                        b.xrv.loadMoreComplete();
+                        hideIndeterminateProgressDialog();
                     }
-                    b.xrv.loadMoreComplete();
-                    hideIndeterminateProgressDialog();
-                }
 
-                @Override
-                public void onError(Throwable e) {
-                    b.xrv.loadMoreComplete();
-                    hideIndeterminateProgressDialog();
-                }
-            });
+                    @Override
+                    public void onError(Throwable e) {
+                        b.xrv.loadMoreComplete();
+                        hideIndeterminateProgressDialog();
+                    }
+                });
+        } else {
+            BaseApp.getVipInteractor(this)
+                .getMamaVisitor(page, new ServiceResponse<MMVisitorsBean>(mBaseActivity) {
+                    @Override
+                    public void onNext(MMVisitorsBean mmVisitorsBean) {
+                        if (mmVisitorsBean != null) {
+                            b.tvCount.setText(mmVisitorsBean.getCount() + "");
+                            mAdapter.update(mmVisitorsBean.getResults());
+                            if (null == mmVisitorsBean.getNext()) {
+                                if (page != 1) {
+                                    JUtils.Toast("全部加载完成!");
+                                }
+                                b.xrv.setLoadingMoreEnabled(false);
+                            }
+                        }
+                        b.xrv.loadMoreComplete();
+                        hideIndeterminateProgressDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        b.xrv.loadMoreComplete();
+                        hideIndeterminateProgressDialog();
+                    }
+                });
+        }
     }
 
 

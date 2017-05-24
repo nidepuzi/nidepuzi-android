@@ -398,7 +398,13 @@
             android:name=".ui.activity.shop.IncomeActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
+            android:name=".ui.activity.shop.TodayIncomeActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
             android:name=".ui.activity.shop.SaleOrderActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.TodaySaleOrderActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.user.AccountLoginActivity"

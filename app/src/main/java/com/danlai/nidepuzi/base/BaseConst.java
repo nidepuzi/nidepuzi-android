@@ -34,6 +34,11 @@ public class BaseConst {
     public static final int USED_COUPON = 3;
     public static final int DISABLE_COUPON = 4;
 
+    //收益类型
+    public static final int CARRY_ALL = 0;
+    public static final int CARRY_AWARD = 1;
+    public static final int CARRY_ORDER = 2;
+
     //订单类型
     public static final int ALL_ORDER = 0;
     public static final int WAIT_PAY = 1;

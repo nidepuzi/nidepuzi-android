@@ -47,8 +47,8 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170522
-        versionName "1.0.1"
+        versionCode 20170523
+        versionName "1.0.2"
 
         multiDexEnabled = true
     }
@@ -139,14 +139,14 @@ android {
     }
 
     productFlavors {
-        ndpz {
-            manifestPlaceholders = [CHANNEL_NAME: "ndpz"]
-        }
+//        ndpz {
+//            manifestPlaceholders = [CHANNEL_NAME: "ndpz"]
+//        }
 
         Fir {
             manifestPlaceholders = [CHANNEL_NAME: "Fir"]
         }
-
+//
 //        xiaomi {
 //            manifestPlaceholders = [CHANNEL_NAME: "xiaomi"]
 //        }
