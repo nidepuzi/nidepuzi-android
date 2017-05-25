@@ -172,8 +172,8 @@ public class TabActivity extends BaseActivity {
 //        fragments.add(TodayNewFragment.newInstance("每日焦点"));
         fragments.add(MainTabFragment.newInstance());
         fragments.add(EduTabFragment.newInstance());
-        fragments.add(ShopTabFragment.newInstance());
         fragments.add(ServiceTabFragment.newInstance());
+        fragments.add(ShopTabFragment.newInstance());
     }
 
     @Override

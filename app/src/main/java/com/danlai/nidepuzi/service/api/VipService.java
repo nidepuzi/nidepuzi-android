@@ -93,4 +93,9 @@ public interface VipService {
     @GET("rest/v1/pmt/xlmm/get_referal_mama")
     Observable<FansBean> getFans(
         @Query("page") int page);
+
+    @GET("rest/v1/pmt/xlmm/get_today_referal_mama")
+    Observable<FansBean> getFans(
+        @Query("page") int page,
+        @Query("type") int type);
 }

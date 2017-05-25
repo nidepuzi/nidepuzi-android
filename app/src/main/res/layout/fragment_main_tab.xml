@@ -30,7 +30,7 @@
                 android:textSize="18sp"/>
 
             <RelativeLayout
-                android:id="@+id/layout_invite"
+                android:id="@+id/layout_search"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
@@ -41,15 +41,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/icon_invite"/>
+                    android:src="@drawable/icon_search"/>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_search"
+
+                android:id="@+id/layout_invite"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_toLeftOf="@id/layout_invite"
+                android:layout_toLeftOf="@id/layout_search"
                 android:paddingLeft="16dp"
                 android:paddingRight="8dp">
 
@@ -57,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/icon_search"/>
+                    android:src="@drawable/icon_invite"/>
             </RelativeLayout>
 
         </RelativeLayout>

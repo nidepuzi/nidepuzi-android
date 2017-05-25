@@ -110,7 +110,7 @@ public class DrawCashActivity extends BaseMVVMActivity<ActivityDrawCashBinding> 
                 mRuleDialog.show();
                 break;
             case R.id.layout_draw:
-                readyGo(DrawCashInfoActivity.class);
+                readyGoThenKill(DrawCashInfoActivity.class);
                 break;
         }
     }

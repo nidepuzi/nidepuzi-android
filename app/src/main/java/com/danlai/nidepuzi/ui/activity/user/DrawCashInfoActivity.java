@@ -122,7 +122,6 @@ public class DrawCashInfoActivity extends BaseMVVMActivity<ActivityDrawCashInfoB
                                     if (resultEntity.getCode() == 0) {
                                         id = resultEntity.getCard().getId();
                                         jumpToDrawCash();
-
                                     } else {
                                         JUtils.Toast(resultEntity.getInfo());
                                     }
@@ -147,7 +146,7 @@ public class DrawCashInfoActivity extends BaseMVVMActivity<ActivityDrawCashInfoB
     private void jumpToDrawCash() {
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
-        readyGo(BankDrawCashActivity.class, bundle);
+        readyGoThenKill(BankDrawCashActivity.class, bundle);
     }
 
     @Override

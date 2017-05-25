@@ -39,17 +39,16 @@
                     android:text="攻略"/>
 
                 <RadioButton
-                    android:id="@+id/rb_shop"
-                    style="@style/TabRadioButtonStyle"
-                    android:drawableTop="@drawable/tab_shop"
-                    android:text="店铺"/>
-
-                <RadioButton
                     android:id="@+id/rb_service"
                     style="@style/TabRadioButtonStyle"
                     android:drawableTop="@drawable/tab_service"
                     android:text="客服"/>
 
+                <RadioButton
+                    android:id="@+id/rb_shop"
+                    style="@style/TabRadioButtonStyle"
+                    android:drawableTop="@drawable/tab_shop"
+                    android:text="店铺"/>
             </RadioGroup>
         </FrameLayout>
     </LinearLayout>

@@ -40,7 +40,7 @@ public class FragmentTabUtils implements RadioGroup.OnCheckedChangeListener {
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (group.getChildAt(3).getId() == checkedId && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(data)) {
+        if (group.getChildAt(2).getId() == checkedId && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(data)) {
             String title = "铺子客服";
             YSFUserInfo ysfUserInfo = new YSFUserInfo();
             ysfUserInfo.userId = userId;

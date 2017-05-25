@@ -161,6 +161,7 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
             b.webView.getSettings().setDomStorageEnabled(true);
             b.webView.getSettings().setDatabaseEnabled(true);
             b.webView.getSettings().setUseWideViewPort(true);
+            b.webView.getSettings().setLoadWithOverviewMode(true);
             b.webView.getSettings().setTextZoom(100);
             b.webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
             b.webView.setInitialScale(100);
@@ -321,9 +322,9 @@ public class BaseWebViewActivity extends BaseMVVMActivity<ActivityBaseWebViewBin
         super.onDestroy();
         if (b.webView != null) {
             b.webView.removeAllViews();
+            b.layout.removeView(b.webView);
             b.webView.destroy();
         }
-        b.layout.removeView(b.webView);
     }
 
     public void syncCookie(Context context) {

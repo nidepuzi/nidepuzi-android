@@ -24,8 +24,8 @@ import com.danlai.nidepuzi.entity.event.UserInfoEvent;
 import com.danlai.nidepuzi.module.VipInteractor;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
-import com.danlai.nidepuzi.ui.activity.shop.FansActivity;
 import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
+import com.danlai.nidepuzi.ui.activity.shop.TodayFansActivity;
 import com.danlai.nidepuzi.ui.activity.shop.TodayIncomeActivity;
 import com.danlai.nidepuzi.ui.activity.shop.TodaySaleOrderActivity;
 import com.danlai.nidepuzi.ui.activity.shop.VisitActivity;
@@ -150,13 +150,13 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                     if (o instanceof MamaFortune) {
                         MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMama_fortune();
                         carryValue = JUtils.formatDouble(fortune.getCarry_value());
-                        b.tvFans.setText(fortune.getInvite_all_num() + "");
                     } else if (o instanceof RecentCarryBean) {
                         RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
                         todayCarryValue = JUtils.formatDouble(entity.getCarry());
                         b.tvSale.setText(todayCarryValue);
                         b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));
                         b.tvSaleOrder.setText(Integer.toString(entity.getOrderNum()));
+                        b.tvFans.setText(Integer.toString(entity.getToday_referal_num()));
                     }
                 }
 
@@ -267,7 +267,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllOrderActivity.class, bundle);
                 break;
             case R.id.layout_fans:
-                readyGo(FansActivity.class);
+                readyGo(TodayFansActivity.class);
                 break;
             case R.id.layout_achievement:
                 readyGo(AchievementActivity.class);

@@ -74,6 +74,7 @@ public class RecentCarryBean {
         private String dateField;
         @SerializedName("visitor_num")
         private int visitorNum;
+        private int today_referal_num;
 
         public void setOrderNum(int orderNum) {
             this.orderNum = orderNum;
@@ -106,15 +107,23 @@ public class RecentCarryBean {
         public int getVisitorNum() {
             return visitorNum;
         }
+
+        public int getToday_referal_num() {
+            return today_referal_num;
+        }
+
+        public void setToday_referal_num(int today_referal_num) {
+            this.today_referal_num = today_referal_num;
+        }
     }
 
     @Override
     public String toString() {
         return "RecentCarryBean{" +
-                "count=" + count +
-                ", next=" + next +
-                ", previous=" + previous +
-                ", results=" + results +
-                '}';
+            "count=" + count +
+            ", next=" + next +
+            ", previous=" + previous +
+            ", results=" + results +
+            '}';
     }
 }

@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="备注：今日累计收益未考虑可能退换货，请参考实际到账收益"
+                    android:text="备注：今日累计收益未考虑可能退换货，以实际到账收益为准"
                     android:textColor="@color/color_99"
                     android:textSize="12sp"/>
 
@@ -54,7 +54,6 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="bottom"
                 android:background="@color/bg_grey"
                 app:tabIndicatorColor="@color/colorPrimary"
                 app:tabSelectedTextColor="@color/colorPrimaryDark"

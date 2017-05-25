@@ -2,6 +2,7 @@ package com.danlai.nidepuzi.ui.activity.user;
 
 import android.view.View;
 
+import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
@@ -19,7 +20,8 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
 
     @Override
     protected void setListener() {
-        b.btn.setOnClickListener(this);
+        b.btnFormal.setOnClickListener(this);
+        b.btnTryout.setOnClickListener(this);
     }
 
     @Override
@@ -40,12 +42,37 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn:
+            case R.id.btn_formal:
+                showIndeterminateProgressDialog(false);
+                BaseApp.getActivityInteractor(mBaseActivity)
+                    .getActivityBean("13", new ServiceResponse<ActivityBean>(mBaseActivity) {
+                        @Override
+                        public void onNext(ActivityBean activityBean) {
+                            hideIndeterminateProgressDialog();
+                            ShareUtils.shareShop(activityBean, mBaseActivity);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            JUtils.Toast("数据加载失败!");
+                            hideIndeterminateProgressDialog();
+                        }
+                    });
+                break;
+            case R.id.btn_tryout:
+                showIndeterminateProgressDialog(false);
                 BaseApp.getActivityInteractor(mBaseActivity)
                     .getActivityBean("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
                         @Override
                         public void onNext(ActivityBean activityBean) {
+                            hideIndeterminateProgressDialog();
                             ShareUtils.shareShop(activityBean, mBaseActivity);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            JUtils.Toast("数据加载失败!");
+                            hideIndeterminateProgressDialog();
                         }
                     });
                 break;

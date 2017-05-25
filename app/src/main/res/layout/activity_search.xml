@@ -56,7 +56,7 @@
                     android:hint="请输入关键词查询商品"
                     android:imeOptions="actionSearch"
                     android:maxLength="20"
-                    android:maxLines="1"
+                    android:singleLine="true"
                     android:textSize="12dp"/>
 
                 <RelativeLayout

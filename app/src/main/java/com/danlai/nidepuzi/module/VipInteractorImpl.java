@@ -135,4 +135,11 @@ public class VipInteractorImpl implements VipInteractor {
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
+
+    @Override
+    public void getFans(int page, int type, ServiceResponse<FansBean> response) {
+        service.getFans(page, type)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
 }

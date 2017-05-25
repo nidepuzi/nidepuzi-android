@@ -15,7 +15,10 @@ import com.danlai.nidepuzi.databinding.ActivityBankDrawCashBinding;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
+import com.danlai.nidepuzi.entity.event.UserInfoEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author wisdom
@@ -125,6 +128,9 @@ public class BankDrawCashActivity extends BaseMVVMActivity<ActivityBankDrawCashB
                 new ServiceResponse<UserWithDrawResult>(mBaseActivity) {
                     @Override
                     public void onNext(UserWithDrawResult resp) {
+                        if (resp.getCode() == 0) {
+                            EventBus.getDefault().post(new UserInfoEvent());
+                        }
                         new AlertDialog.Builder(mBaseActivity)
                             .setTitle("提示")
                             .setMessage(resp.getMessage())

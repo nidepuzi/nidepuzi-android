@@ -51,4 +51,6 @@ public interface VipInteractor {
     void getCarryListToday(int page, ServiceResponse<CarryListBean> response);
 
     void getFans(int page, ServiceResponse<FansBean> response);
+
+    void getFans(int page, int type, ServiceResponse<FansBean> response);
 }

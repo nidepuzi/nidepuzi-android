@@ -59,6 +59,9 @@ public class DrawCashDetailActivity extends BaseMVVMActivity<ActivityDrawCashDet
         if ("fail".equals(state)) {
             b.ivStatus.setImageResource(R.drawable.icon_draw_fail);
             b.tvStatus.setText("提现失败");
+            b.tvError.setText(bean.getFail_msg());
+            b.tvError.setVisibility(View.VISIBLE);
+            b.tvErrorTitle.setVisibility(View.VISIBLE);
         } else if ("success".equals(state)) {
             b.ivStatus.setImageResource(R.drawable.icon_draw_success);
         }
@@ -77,6 +80,7 @@ public class DrawCashDetailActivity extends BaseMVVMActivity<ActivityDrawCashDet
         } else {
             b.tvSuccessTime.setText(success_time.substring(0, 10));
         }
+
         b.tvCreateTime.setText(created_time.substring(0, 10));
         b.tvInTime.setText(created_time.substring(0, 10));
         b.tvType.setText(bean.getPlatform_name());
