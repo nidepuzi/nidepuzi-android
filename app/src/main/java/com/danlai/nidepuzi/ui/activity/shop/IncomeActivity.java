@@ -26,14 +26,23 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
     private int page = 2;
     private CarryAdapter mAdapter;
     private String mCarryValue;
+    private int days;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
         mCarryValue = extras.getString("carryValue");
+        days = extras.getInt("days", -1);
     }
 
     @Override
     protected void initViews() {
+        if (days == 7) {
+            b.titleView.setName("本周收益记录");
+            b.tvDesc.setText("本周累计收益");
+        } else if (days == 30) {
+            b.titleView.setName("本月收益记录");
+            b.tvDesc.setText("本月累计收益");
+        }
         b.scrollableLayout.getHelper().setCurrentScrollableContainer(this);
         initRecyclerView();
         b.tvAll.setText(mCarryValue);
@@ -46,13 +55,13 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
     }
 
     private void initRecyclerView() {
-        b.xrv.setLayoutManager(new LinearLayoutManager(this));
+        b.xrv.setLayoutManager(new LinearLayoutManager(mBaseActivity));
         b.xrv.addItemDecoration(
             new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         b.xrv.setLoadingMoreProgressStyle(ProgressStyle.BallPulse);
         b.xrv.setPullRefreshEnabled(false);
         b.xrv.setLoadingMoreEnabled(true);
-        mAdapter = new CarryAdapter(this);
+        mAdapter = new CarryAdapter(mBaseActivity);
         b.xrv.setAdapter(mAdapter);
         b.xrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -70,7 +79,7 @@ public class IncomeActivity extends BaseMVVMActivity<ActivityIncomeBinding> impl
 
     private void loadMoreData(int page) {
         BaseApp.getVipInteractor(mBaseActivity)
-            .getCarryList(page, new ServiceResponse<CarryListBean>(mBaseActivity) {
+            .getCarryList(page, days, new ServiceResponse<CarryListBean>(mBaseActivity) {
                 @Override
                 public void onNext(CarryListBean bean) {
                     if (bean != null) {

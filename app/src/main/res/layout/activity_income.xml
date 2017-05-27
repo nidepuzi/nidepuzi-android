@@ -8,6 +8,7 @@
         android:orientation="vertical">
 
         <com.danlai.library.widget.titleview.BaseTitleView
+            android:id="@+id/title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="收益记录"/>

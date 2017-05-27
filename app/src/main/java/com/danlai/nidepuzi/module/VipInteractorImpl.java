@@ -95,6 +95,13 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
+    public void getMamaAllOder(int page, String type, ServiceResponse<OrderCarryBean> response) {
+        service.getMamaAllOder(type, page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
     public void getMamaAllOderToday(int page, ServiceResponse<OrderCarryBean> response) {
         service.getMamaAllOderToday("direct", page)
             .compose(new DefaultTransform<>())
@@ -116,10 +123,16 @@ public class VipInteractorImpl implements VipInteractor {
     }
 
     @Override
-    public void getCarryList(int page, ServiceResponse<CarryListBean> response) {
-        service.getCarryList(page)
-            .compose(new DefaultTransform<>())
-            .subscribe(response);
+    public void getCarryList(int page, int days, ServiceResponse<CarryListBean> response) {
+        if (days == -1) {
+            service.getCarryList(page)
+                .compose(new DefaultTransform<>())
+                .subscribe(response);
+        } else {
+            service.getCarryList(page, days)
+                .compose(new DefaultTransform<>())
+                .subscribe(response);
+        }
     }
 
     @Override
@@ -132,6 +145,13 @@ public class VipInteractorImpl implements VipInteractor {
     @Override
     public void getFans(int page, ServiceResponse<FansBean> response) {
         service.getFans(page)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void getFans(int page, String type, ServiceResponse<FansBean> response) {
+        service.getFans(page, type)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

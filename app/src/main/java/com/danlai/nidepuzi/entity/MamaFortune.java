@@ -395,7 +395,8 @@ public class MamaFortune {
             private int personal_total_rank;
             private int task_percentage;
             private int today_carry_record;
-            private int week_duration_total;
+            private double week_duration_total;
+            private double month_duration_total;
             private int week_duration_rank;
 
             public int getTeam_total_rank() {
@@ -430,11 +431,11 @@ public class MamaFortune {
                 this.today_carry_record = today_carry_record;
             }
 
-            public int getWeek_duration_total() {
+            public double getWeek_duration_total() {
                 return week_duration_total;
             }
 
-            public void setWeek_duration_total(int week_duration_total) {
+            public void setWeek_duration_total(double week_duration_total) {
                 this.week_duration_total = week_duration_total;
             }
 
@@ -444,6 +445,14 @@ public class MamaFortune {
 
             public void setWeek_duration_rank(int week_duration_rank) {
                 this.week_duration_rank = week_duration_rank;
+            }
+
+            public double getMonth_duration_total() {
+                return month_duration_total;
+            }
+
+            public void setMonth_duration_total(double month_duration_total) {
+                this.month_duration_total = month_duration_total;
             }
         }
     }

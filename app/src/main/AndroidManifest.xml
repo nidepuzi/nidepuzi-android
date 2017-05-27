@@ -78,26 +78,6 @@
 
                 <data
                     android:host="app"
-                    android:path="/v1/products/promote_today"
-                    android:scheme="com.danlai.ndpz"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="app"
-                    android:path="/v1/products/promote_previous"
-                    android:scheme="com.danlai.ndpz"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="app"
                     android:path="/v1/home"
                     android:scheme="com.danlai.ndpz"/>
             </intent-filter>
@@ -139,41 +119,10 @@
                     android:path="/v1/products/modellist"
                     android:scheme="com.danlai.ndpz"/>
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="app"
-                    android:path="/v1/products/modelist"
-                    android:scheme="com.danlai.ndpz"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="app"
-                    android:path="/v1/products"
-                    android:scheme="com.danlai.ndpz"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.shop.NinePicActivity"
-            android:theme="@style/AppTheme.TransparentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="app"
-                    android:path="/v1/vip_0day"
-                    android:scheme="com.danlai.ndpz"/>
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.trade.CartActivity"
             android:launchMode="singleTask"
@@ -346,7 +295,18 @@
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.trade.AllRefundActivity"
-            android:theme="@style/AppTheme.TransparentActivity"/>
+            android:theme="@style/AppTheme.TransparentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="app"
+                    android:path="/v1/refunds"
+                    android:scheme="com.danlai.ndpz"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activity.trade.ApplyRefundActivity"
             android:theme="@style/AppTheme.TransparentActivity"
@@ -365,7 +325,7 @@
             android:name=".ui.activity.shop.AchievementActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
-            android:name=".ui.activity.shop.CustomIncomeActivity"
+            android:name=".ui.activity.shop.ShareHistoryActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.shop.OrderAchieveActivity"
@@ -399,6 +359,9 @@
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.shop.IncomeActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
+            android:name=".ui.activity.shop.AllIncomeActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.shop.TodayIncomeActivity"

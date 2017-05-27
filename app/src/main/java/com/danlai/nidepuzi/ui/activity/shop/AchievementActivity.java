@@ -6,13 +6,11 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
-import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
 import com.danlai.nidepuzi.databinding.ActivityAchievementBinding;
-import com.danlai.nidepuzi.entity.ActivityBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.danlai.nidepuzi.util.ShareUtils;
+import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
 
 /**
  * @author wisdom
@@ -29,9 +27,9 @@ public class AchievementActivity extends BaseMVVMActivity<ActivityAchievementBin
     @Override
     protected void setListener() {
         b.shareWx.setOnClickListener(this);
-        b.customIncome.setOnClickListener(this);
-        b.orderShare.setOnClickListener(this);
+        b.shareHistory.setOnClickListener(this);
         b.orderSelf.setOnClickListener(this);
+        b.orderShare.setOnClickListener(this);
     }
 
     @Override
@@ -56,27 +54,22 @@ public class AchievementActivity extends BaseMVVMActivity<ActivityAchievementBin
         Bundle bundle;
         switch (v.getId()) {
             case R.id.share_wx:
-                BaseApp.getActivityInteractor(mBaseActivity)
-                    .getActivityBean("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
-                        @Override
-                        public void onNext(ActivityBean activityBean) {
-                            ShareUtils.shareShop(activityBean, mBaseActivity);
-                        }
-                    });
+                readyGo(InviteActivity.class);
                 break;
-            case R.id.custom_income:
-                readyGo(CustomIncomeActivity.class);
-                break;
-            case R.id.order_share:
-                bundle = new Bundle();
-                bundle.putInt("type", BaseConst.ORDER_SHARE);
-                readyGo(OrderAchieveActivity.class, bundle);
+            case R.id.share_history:
+                readyGo(ShareHistoryActivity.class);
                 break;
             case R.id.order_self:
                 bundle = new Bundle();
-                bundle.putInt("type", BaseConst.ALL_ORDER);
+                bundle.putString("type", "self");
                 readyGo(OrderAchieveActivity.class, bundle);
                 break;
+            case R.id.order_share:
+                bundle = new Bundle();
+                bundle.putString("type", "share");
+                readyGo(OrderAchieveActivity.class, bundle);
+                break;
+
         }
     }
 }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -74,6 +75,11 @@ public class TabActivity extends BaseActivity {
             // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
             setIntent(new Intent());
         }
+    }
+
+    @Override
+    public void getIntentUrl(Uri uri) {
+        b.radioGroup.check(R.id.rb_main);
     }
 
     @Override

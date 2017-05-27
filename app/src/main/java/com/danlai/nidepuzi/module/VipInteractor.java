@@ -40,17 +40,21 @@ public interface VipInteractor {
 
     void getMamaAllOder(int page, ServiceResponse<OrderCarryBean> response);
 
+    void getMamaAllOder(int page, String type, ServiceResponse<OrderCarryBean> response);
+
     void getMamaAllOderToday(int page, ServiceResponse<OrderCarryBean> response);
 
     void getMamaAllAwardToday(int page, ServiceResponse<AwardCarryBean> response);
 
     void saveTime(int id, int save_times, ServiceResponse<SaveTimeBean> response);
 
-    void getCarryList(int page, ServiceResponse<CarryListBean> response);
+    void getCarryList(int page, int days,ServiceResponse<CarryListBean> response);
 
     void getCarryListToday(int page, ServiceResponse<CarryListBean> response);
 
     void getFans(int page, ServiceResponse<FansBean> response);
+
+    void getFans(int page, String type, ServiceResponse<FansBean> response);
 
     void getFans(int page, int type, ServiceResponse<FansBean> response);
 }

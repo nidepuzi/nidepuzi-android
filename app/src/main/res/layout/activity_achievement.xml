@@ -71,34 +71,17 @@
             android:id="@+id/share_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             app:preference_hide_icon="true"
-            app:preference_title="分享记录"/>
+            app:preference_title="邀请记录"/>
 
-        <include
-            layout="@layout/preference_line"
-            android:visibility="gone"/>
-
-        <com.danlai.library.widget.PreferenceView
-            android:id="@+id/custom_income"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:preference_desc="￥0.00"
-            app:preference_desc_color="@color/color_33"
-            app:preference_hide_icon="true"
-            app:preference_title="客户总收入"/>
-
-        <include
-            layout="@layout/preference_line"
-            android:visibility="gone"/>
+        <include layout="@layout/preference_line"/>
 
         <com.danlai.library.widget.PreferenceView
             android:id="@+id/order_self"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:preference_hide_icon="true"
-            app:preference_title="自购成功订单"/>
+            app:preference_title="自购佣金"/>
 
         <include layout="@layout/preference_line"/>
 
@@ -106,18 +89,13 @@
             android:id="@+id/order_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             app:preference_hide_icon="true"
-            app:preference_title="分享成功订单"/>
-
-        <include
-            layout="@layout/common_gap"
-            android:visibility="gone"/>
+            app:preference_title="分享佣金"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"/>
+            android:background="@color/color_DD"/>
     </LinearLayout>
 
 </layout>

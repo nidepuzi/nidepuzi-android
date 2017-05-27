@@ -14,17 +14,14 @@ import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseFragment;
 import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.FragmentShopTabBinding;
-import com.danlai.nidepuzi.entity.ActivityBean;
-import com.danlai.nidepuzi.entity.MamaFortune;
 import com.danlai.nidepuzi.entity.RecentCarryBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.entity.event.LogoutEvent;
 import com.danlai.nidepuzi.entity.event.UserInfoEvent;
-import com.danlai.nidepuzi.module.VipInteractor;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.shop.AchievementActivity;
-import com.danlai.nidepuzi.ui.activity.shop.IncomeActivity;
+import com.danlai.nidepuzi.ui.activity.shop.AllIncomeActivity;
 import com.danlai.nidepuzi.ui.activity.shop.TodayFansActivity;
 import com.danlai.nidepuzi.ui.activity.shop.TodayIncomeActivity;
 import com.danlai.nidepuzi.ui.activity.shop.TodaySaleOrderActivity;
@@ -37,18 +34,16 @@ import com.danlai.nidepuzi.ui.activity.user.AddressActivity;
 import com.danlai.nidepuzi.ui.activity.user.AllCouponActivity;
 import com.danlai.nidepuzi.ui.activity.user.DrawCashActivity;
 import com.danlai.nidepuzi.ui.activity.user.InformationActivity;
+import com.danlai.nidepuzi.ui.activity.user.InviteActivity;
 import com.danlai.nidepuzi.ui.activity.user.LoginActivity;
 import com.danlai.nidepuzi.ui.activity.user.MessageActivity;
 import com.danlai.nidepuzi.ui.activity.user.SettingActivity;
 import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
-import com.danlai.nidepuzi.util.ShareUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import io.reactivex.Observable;
 
 /**
  * @author wisdom
@@ -59,7 +54,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
 
     private int type = 0;
     private Dialog vipDialog;
-    private String carryValue, todayCarryValue;
+    private String todayCarryValue;
     private Bundle bundle = new Bundle();
 
     public static ShopTabFragment newInstance() {
@@ -142,22 +137,17 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     }
 
     private void getVipData() {
-        VipInteractor interactor = BaseApp.getVipInteractor(mActivity);
-        Observable.mergeDelayError(interactor.getMamaFortune(), interactor.getRecentCarry("0", "1"))
-            .subscribe(new ServiceResponse<Object>(mActivity) {
+        BaseApp.getVipInteractor(mActivity)
+            .getRecentCarry("0", "1")
+            .subscribe(new ServiceResponse<RecentCarryBean>(mActivity) {
                 @Override
-                public void onNext(Object o) {
-                    if (o instanceof MamaFortune) {
-                        MamaFortune.MamaFortuneBean fortune = ((MamaFortune) o).getMama_fortune();
-                        carryValue = JUtils.formatDouble(fortune.getCarry_value());
-                    } else if (o instanceof RecentCarryBean) {
-                        RecentCarryBean.ResultsEntity entity = ((RecentCarryBean) o).getResults().get(0);
-                        todayCarryValue = JUtils.formatDouble(entity.getCarry());
-                        b.tvSale.setText(todayCarryValue);
-                        b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));
-                        b.tvSaleOrder.setText(Integer.toString(entity.getOrderNum()));
-                        b.tvFans.setText(Integer.toString(entity.getToday_referal_num()));
-                    }
+                public void onNext(RecentCarryBean recentCarryBean) {
+                    RecentCarryBean.ResultsEntity entity = recentCarryBean.getResults().get(0);
+                    todayCarryValue = JUtils.formatDouble(entity.getCarry());
+                    b.tvSale.setText(todayCarryValue);
+                    b.tvVisit.setText(Integer.toString(entity.getVisitorNum()));
+                    b.tvSaleOrder.setText(Integer.toString(entity.getOrderNum()));
+                    b.tvFans.setText(Integer.toString(entity.getToday_referal_num()));
                 }
 
                 @Override
@@ -246,13 +236,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AddressActivity.class);
                 break;
             case R.id.invite_friend:
-                BaseApp.getActivityInteractor(mActivity)
-                    .getActivityBean("8", new ServiceResponse<ActivityBean>(mActivity) {
-                        @Override
-                        public void onNext(ActivityBean activityBean) {
-                            ShareUtils.shareShop(activityBean, mActivity);
-                        }
-                    });
+                readyGo(InviteActivity.class);
                 break;
             case R.id.layout_all_order:
                 bundle.putInt("fragment", 1);
@@ -280,8 +264,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(VisitActivity.class, bundle);
                 break;
             case R.id.layout_income:
-                bundle.putString("carryValue", carryValue);
-                readyGo(IncomeActivity.class, bundle);
+                readyGo(AllIncomeActivity.class);
                 break;
             case R.id.layout_today_sale:
                 bundle.putString("carryValue", todayCarryValue);

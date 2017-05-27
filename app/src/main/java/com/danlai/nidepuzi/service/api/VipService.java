@@ -86,6 +86,11 @@ public interface VipService {
     Observable<CarryListBean> getCarryList(
         @Query("page") int page);
 
+    @GET("/rest/v2/mama/carry")
+    Observable<CarryListBean> getCarryList(
+        @Query("page") int page,
+        @Query("days") int days);
+
     @GET("/rest/v2/mama/carry/today")
     Observable<CarryListBean> getCarryListToday(
         @Query("page") int page);
@@ -93,6 +98,12 @@ public interface VipService {
     @GET("rest/v1/pmt/xlmm/get_referal_mama")
     Observable<FansBean> getFans(
         @Query("page") int page);
+
+    @GET("rest/v1/pmt/xlmm/get_referal_mama")
+    Observable<FansBean> getFans(
+        @Query("page") int page,
+        @Query("last_renew_type") String type);
+
 
     @GET("rest/v1/pmt/xlmm/get_today_referal_mama")
     Observable<FansBean> getFans(

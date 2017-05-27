@@ -37,15 +37,11 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private BaseActivity mActivity;
     private List<Object> data;
     private boolean isShow;
-    private boolean isAchievement;
-    private boolean isShare;
 
     public AllOrderAdapter(BaseActivity activity) {
         mActivity = activity;
         data = new ArrayList<>();
         isShow = false;
-        isShare = false;
-        isAchievement = false;
     }
 
     public void updateWithClear(List<Object> list) {
@@ -96,11 +92,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            holder.b.ivSave.setVisibility(View.GONE);
 //            holder.b.tvSave.setVisibility(View.GONE);
 //        }
-        if (isShare) {
-            holder.b.ivSave.setImageResource(R.drawable.icon_earn);
-        } else {
-            holder.b.ivSave.setImageResource(R.drawable.icon_save);
-        }
+        holder.b.ivSave.setImageResource(R.drawable.icon_save);
         holder.b.tvName.setText(bean.getName());
         holder.b.tvSize.setText("规格:" + bean.getSize());
         holder.b.tvPrice.setText("单价:" + bean.getPrice() + "  x" + bean.getNum());
@@ -113,7 +105,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initFooter(FooterHolder holder, OrderFooter bean) {
-        if (isShow && !isAchievement) {
+        if (isShow) {
             holder.b.layoutFooter.setVisibility(View.VISIBLE);
             holder.b.footerLine.setVisibility(View.VISIBLE);
             holder.b.btnDetail.setOnClickListener(v -> {
@@ -184,16 +176,6 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void setShow(boolean show) {
         isShow = show;
-        notifyDataSetChanged();
-    }
-
-    public void setShare(boolean share) {
-        isShare = share;
-        notifyDataSetChanged();
-    }
-
-    public void setAchievement(boolean achievement) {
-        isAchievement = achievement;
         notifyDataSetChanged();
     }
 

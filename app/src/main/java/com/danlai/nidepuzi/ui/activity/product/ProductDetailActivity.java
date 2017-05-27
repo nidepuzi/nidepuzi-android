@@ -80,20 +80,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
 
     @Override
     public void getIntentUrl(Uri uri) {
-        String path = uri.getPath();
-        switch (path) {
-            case "/v1/products/modellist":
-                model_id = Integer.valueOf(uri.getQueryParameter("model_id"));
-                break;
-            case "/v1/products/modelist":
-                model_id = Integer.valueOf(uri.getQueryParameter("model_id"));
-                break;
-            case "/v1/products":
-                String product_id = uri.getQueryParameter("product_id");
-                String[] split = product_id.split("details/");
-                model_id = Integer.valueOf(split[1]);
-                break;
-        }
+        model_id = Integer.valueOf(uri.getQueryParameter("model_id"));
     }
 
     @Override

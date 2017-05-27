@@ -63,26 +63,6 @@ public class BaseApp extends MultiDexApplication {
         if (shouldInit()) {
             MiPushClient.registerPush(getApplicationContext(), BaseConst.MIPUSH_ID, BaseConst.MIPUSH_KEY);
         }
-//        //打开Log
-//        LoggerInterface newLogger = new LoggerInterface() {
-//
-//            @Override
-//            public void setTag(String tag) {
-//
-//            }
-//
-//            @Override
-//            public void log(String content, Throwable t) {
-//                JUtils.Log("------------------------------->", content);
-//                JUtils.Log("------------------------------->", t.getMessage());
-//            }
-//
-//            @Override
-//            public void log(String content) {
-//                JUtils.Log("------------------------------->", content);
-//            }
-//        };
-//        Logger.setLogger(this, newLogger);
     }
 
     @Override

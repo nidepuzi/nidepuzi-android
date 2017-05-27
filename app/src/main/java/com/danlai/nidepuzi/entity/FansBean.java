@@ -63,6 +63,8 @@ public class FansBean {
         private String thumbnail;
         private String charge_time;
         private int referal_type;
+        private String invitee_mobile;
+        private String invitee_status;
         private Object award;
 
         public int getId() {
@@ -111,6 +113,22 @@ public class FansBean {
 
         public void setReferal_type(int referal_type) {
             this.referal_type = referal_type;
+        }
+
+        public String getInvitee_mobile() {
+            return invitee_mobile;
+        }
+
+        public void setInvitee_mobile(String invitee_mobile) {
+            this.invitee_mobile = invitee_mobile;
+        }
+
+        public String getInvitee_status() {
+            return invitee_status;
+        }
+
+        public void setInvitee_status(String invitee_status) {
+            this.invitee_status = invitee_status;
         }
     }
 }
