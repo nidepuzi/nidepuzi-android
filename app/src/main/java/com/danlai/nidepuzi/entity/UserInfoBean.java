@@ -43,6 +43,7 @@ public class UserInfoBean {
   private int score;
   private String thumbnail;
   private int status;
+  private int check_xiaolumm;
   private String created;
   private String modified;
   private XiaolummBean xiaolumm;
@@ -238,6 +239,14 @@ public class UserInfoBean {
 
   public void setXiaolu_coin(double xiaolu_coin) {
     this.xiaolu_coin = xiaolu_coin;
+  }
+
+  public int getCheck_xiaolumm() {
+    return check_xiaolumm;
+  }
+
+  public void setCheck_xiaolumm(int check_xiaolumm) {
+    this.check_xiaolumm = check_xiaolumm;
   }
 
   public static class XiaolummBean {

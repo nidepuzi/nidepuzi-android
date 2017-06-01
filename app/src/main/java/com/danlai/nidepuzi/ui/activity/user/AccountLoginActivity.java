@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,15 +14,16 @@ import com.danlai.library.utils.JUtils;
 import com.danlai.nidepuzi.BaseApp;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseMVVMActivity;
-import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityAccountLoginBinding;
 import com.danlai.nidepuzi.entity.CodeBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.event.LoginEvent;
 import com.danlai.nidepuzi.service.ServiceResponse;
 import com.danlai.nidepuzi.ui.activity.main.TabActivity;
-import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
+import com.qiyukf.unicorn.api.YSFUserInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -68,8 +70,17 @@ public class AccountLoginActivity extends BaseMVVMActivity<ActivityAccountLoginB
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_vip:
-                JumpUtils.jumpToWebViewWithCookies(mBaseActivity, "https://m.nidepuzi.com/mall/boutiqueinvite",
-                    -1, BaseWebViewActivity.class, false, false);
+                String deviceId = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                String title = "铺子客服";
+                YSFUserInfo ysfUserInfo = new YSFUserInfo();
+                ysfUserInfo.userId = deviceId;
+                ysfUserInfo.data = "[ " +
+                    "{\"key\":\"real_name\", \"value\":\"未注册新用户\"}, " +
+                    "{\"key\":\"mobile_phone\", \"value\":\"12345678\"}, " +
+                    "{\"key\":\"avatar\", \"value\": \"http://oon0iwvsw.bkt.clouddn.com/192_192.jpg\"}]";
+                Unicorn.setUserInfo(ysfUserInfo);
+                ConsultSource source = new ConsultSource("https://m.nidepuzi.com", "Android客户端", "Android客户端");
+                Unicorn.openServiceActivity(mBaseActivity, title, source);
                 break;
             case R.id.service_layout:
                 mRuleDialog.show();

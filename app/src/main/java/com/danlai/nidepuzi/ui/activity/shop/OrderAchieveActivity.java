@@ -26,9 +26,11 @@ public class OrderAchieveActivity extends BaseMVVMActivity<ActivityOrderAchieveB
     private String mType;
     private OrderAchieveAdapter adapter;
     private int page = 2;
+    private double mValue;
 
     @Override
     protected void initViews() {
+        b.tvAmount.setText(JUtils.formatDouble(mValue));
         b.scrollableLayout.getHelper().setCurrentScrollableContainer(this);
         if ("share".equals(mType)) {
             b.titleView.setName("分享佣金");
@@ -93,6 +95,7 @@ public class OrderAchieveActivity extends BaseMVVMActivity<ActivityOrderAchieveB
     @Override
     protected void getBundleExtras(Bundle extras) {
         mType = extras.getString("type");
+        mValue = extras.getDouble("value", 0);
     }
 
     @Override

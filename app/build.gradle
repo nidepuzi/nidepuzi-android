@@ -47,8 +47,8 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170527
-        versionName "1.0.2"
+        versionCode 20170601
+        versionName "1.0.3"
 
         multiDexEnabled = true
     }

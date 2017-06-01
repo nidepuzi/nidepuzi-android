@@ -10,16 +10,20 @@ import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.DrawCashBean;
 import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
+import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
+import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -35,6 +39,12 @@ public interface UserService {
 
     @POST("/rest/v1/users/customer_logout")
     Observable<LogoutBean> customerLogout();
+
+    //设置用户昵称
+    @PATCH("/rest/v1/users/{id}")
+    Observable<UserBean> setNickName(
+        @Path("id") int id,
+        @Body NicknameBean nickname);
 
     //获取优惠券
     @GET("/rest/v1/usercoupons/get_user_coupons")
@@ -104,6 +114,16 @@ public interface UserService {
         @Field("action") String action,
         @Field("verify_code") String code,
         @Field("devtype") String devtype);
+
+    //验证码验证
+    @FormUrlEncoded
+    @POST("/rest/v2/verify_code")
+    Observable<CodeBean> verifyCode(
+        @Field("mobile") String mobile,
+        @Field("action") String action,
+        @Field("verify_code") String code,
+        @Field("devtype") String devtype,
+        @Field("nickname")String nickname);
 
     //设置账号密码
     @FormUrlEncoded

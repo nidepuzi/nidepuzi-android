@@ -10,8 +10,10 @@ import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.DrawCashBean;
 import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
+import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
+import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
@@ -27,6 +29,8 @@ import io.reactivex.Observer;
 
 public interface UserInteractor {
     void getUserInfo(ServiceResponse<UserInfoBean> response);
+
+    void setNickName(int id, NicknameBean nickname, ServiceResponse<UserBean> response);
 
     void customerLogout(ServiceResponse<LogoutBean> response);
 
@@ -50,6 +54,8 @@ public interface UserInteractor {
     void getCodeBean(String mobile, String action, ServiceResponse<CodeBean> response);
 
     void verifyCode(String mobile, String action, String code, ServiceResponse<CodeBean> response);
+
+    void verifyCode(String mobile, String action, String code, String nickname, ServiceResponse<CodeBean> response);
 
     void resetPassword(String mobile, String password1, String password2, String code,
                        ServiceResponse<CodeBean> response);

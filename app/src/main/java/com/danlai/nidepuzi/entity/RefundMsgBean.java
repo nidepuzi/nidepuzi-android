@@ -4,9 +4,9 @@ package com.danlai.nidepuzi.entity;
  * Created by wisdom on 16/6/15.
  */
 public class RefundMsgBean {
-    String apply_fee;
-    int code;
-    String info;
+    private String apply_fee;
+    private int code;
+    private String info;
 
     public String getApply_fee() {
         return apply_fee;

@@ -741,10 +741,72 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/layout_join_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <include layout="@layout/common_interval"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/layout_join"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_wait_pay"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="加入正式掌柜"
+                                android:textColor="@color/color_33"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <include layout="@layout/shop_line"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"/>
+
+                        <include layout="@layout/shop_line"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"/>
+
+                    </LinearLayout>
+
+                    <include layout="@layout/common_gap"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+                </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>
-
 
     </LinearLayout>
 

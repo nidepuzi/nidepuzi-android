@@ -10,8 +10,10 @@ import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.DrawCashBean;
 import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
+import com.danlai.nidepuzi.entity.NicknameBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
+import com.danlai.nidepuzi.entity.UserBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
@@ -40,6 +42,13 @@ public class UserInteractorImpl implements UserInteractor {
     @Override
     public void getUserInfo(ServiceResponse<UserInfoBean> response) {
         service.getUserInfo()
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
+    public void setNickName(int id, NicknameBean nickname, ServiceResponse<UserBean> response) {
+        service.setNickName(id, nickname)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -118,6 +127,13 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
+    public void verifyCode(String mobile, String action, String code, String nickname, ServiceResponse<CodeBean> response) {
+        service.verifyCode(mobile, action, code, "android", nickname)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
+    }
+
+    @Override
     public void resetPassword(String mobile, String password1, String password2, String code,
                               ServiceResponse<CodeBean> response) {
         service.resetPassword(mobile, password1, password2, code)
@@ -169,7 +185,7 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void getDrawCashList(int page,ServiceResponse<DrawCashListBean> response) {
+    public void getDrawCashList(int page, ServiceResponse<DrawCashListBean> response) {
         service.getDrawCashList(page)
             .compose(new DefaultTransform<>())
             .subscribe(response);

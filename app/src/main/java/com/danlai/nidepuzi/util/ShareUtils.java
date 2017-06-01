@@ -42,7 +42,7 @@ public class ShareUtils {
         TextView price = (TextView) view.findViewById(R.id.price);
         TextView desc = (TextView) view.findViewById(R.id.desc);
         String min = JUtils.formatDouble(shareModel.getProfit().getMin());
-        String priceStr = "赚" + min;
+        String priceStr = "赚 ¥" + min;
         price.setText(priceStr);
         String descStr = "只要你的好友通过你的链接购买此商品,你就能赚到至少" + min + "元的利润哦~";
         SpannableStringBuilder spannable = new SpannableStringBuilder(descStr);

@@ -203,19 +203,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                                             @Override
                                                             public void onNext(UserInfoBean userInfoBean) {
                                                                 hideIndeterminateProgressDialog();
-                                                                UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
-                                                                if (bean != null && "effect".equals(bean.getStatus())) {
-                                                                    if (TextUtils.isEmpty(userInfoBean.getMobile())){
-                                                                        JUtils.Toast("绑定手机后才可以登录!");
-                                                                        readyGo(LoginBindPhoneActivity.class);
-                                                                    }else {
-                                                                        LoginUtils.saveLoginSuccess(true, mBaseActivity);
-                                                                        EventBus.getDefault().post(new LoginEvent());
-                                                                        JUtils.Toast("登录成功!");
-                                                                        readyGoThenKill(TabActivity.class);
+                                                                if (userInfoBean.getCheck_xiaolumm() == 1) {
+                                                                    UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
+                                                                    if (bean != null && "effect".equals(bean.getStatus())) {
+                                                                        if (TextUtils.isEmpty(userInfoBean.getMobile())) {
+                                                                            JUtils.Toast("绑定手机后才可以登录!");
+                                                                            readyGo(LoginBindPhoneActivity.class);
+                                                                        } else {
+                                                                            LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                                                                            EventBus.getDefault().post(new LoginEvent());
+                                                                            JUtils.Toast("登录成功!");
+                                                                            readyGoThenKill(TabActivity.class);
+                                                                        }
+                                                                    } else {
+                                                                        JUtils.Toast("您不是会员暂时无法登录!");
                                                                     }
                                                                 } else {
-                                                                    JUtils.Toast("您不是会员暂时无法登录!");
+                                                                    LoginUtils.saveLoginSuccess(true, mBaseActivity);
+                                                                    EventBus.getDefault().post(new LoginEvent());
+                                                                    JUtils.Toast("登录成功!");
+                                                                    readyGoThenKill(TabActivity.class);
                                                                 }
                                                             }
 

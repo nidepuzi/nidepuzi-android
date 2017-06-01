@@ -207,12 +207,14 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="150px"
-                                    android:gravity="center">
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:paddingBottom="8dp"
+                                    android:paddingTop="8dp">
 
                                     <ImageView
-                                        android:layout_width="622px"
-                                        android:layout_height="102px"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:src="@drawable/img_product_desc"/>
                                 </RelativeLayout>
 
@@ -322,22 +324,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="140px"
-                    android:gravity="center_vertical"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <RelativeLayout
                         android:id="@+id/finish"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/product_icon_bg"
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="25px"
-                            android:layout_marginLeft="35px"
-                            android:layout_marginRight="35px"
-                            android:src="@drawable/icon_finish_detail"/>
+                            android:src="@drawable/icon_to_left_white"/>
                     </RelativeLayout>
 
                     <View
@@ -347,16 +349,16 @@
 
                     <RelativeLayout
                         android:id="@+id/share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/product_icon_bg"
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="25px"
-                            android:layout_marginLeft="35px"
-                            android:layout_marginRight="35px"
                             android:src="@drawable/icon_share_detail"/>
                     </RelativeLayout>
 
@@ -366,22 +368,20 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/color_DD"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="115px"
+                android:layout_height="45dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/rl_cart"
-                    android:layout_width="172px"
-                    android:layout_height="76px"
-                    android:layout_marginLeft="32px"
-                    android:background="@drawable/product_detail_cart_bg">
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -392,55 +392,52 @@
                     <TextView
                         android:id="@+id/tv_cart"
                         android:layout_width="wrap_content"
-                        android:layout_height="24px"
+                        android:layout_height="12dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="55px"
-                        android:layout_marginTop="15px"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/cart_num_bg"
                         android:gravity="center"
-                        android:minWidth="24px"
+                        android:minWidth="12dp"
                         android:text="1"
                         android:textColor="@color/white"
                         android:textSize="9dp"
                         android:visibility="gone"/>
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_DD"/>
 
-                    <TextView
-                        android:id="@+id/tv_add"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="32px"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_common_white"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="加入购物车"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="12dp"/>
+                <TextView
+                    android:id="@+id/tv_buy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="买"
+                    android:textColor="@color/color_33"
+                    android:textSize="16dp"/>
 
-                    <TextView
-                        android:id="@+id/tv_buy"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_common_default"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="直接购买"
-                        android:textColor="@color/white"
-                        android:textSize="12dp"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_sale"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="卖"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
 
             </LinearLayout>
+
         </LinearLayout>
 
     </FrameLayout>
+
 </layout>
 

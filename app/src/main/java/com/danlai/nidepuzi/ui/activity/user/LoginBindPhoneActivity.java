@@ -80,8 +80,9 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
             case R.id.next:
                 mobile = b.etPhone.getText().toString().trim();
                 String invalid_code = b.etCode.getText().toString().trim();
-                if (checkInput(mobile, invalid_code)) {
-                    bindMobilePhone(mobile, invalid_code);
+                String name = b.etName.getText().toString().trim();
+                if (checkInput(mobile, invalid_code, name)) {
+                    bindMobilePhone(mobile, invalid_code, name);
                 }
                 break;
             case R.id.tv_code:
@@ -132,20 +133,24 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
         return false;
     }
 
-    public boolean checkInput(String mobile, String code) {
+    public boolean checkInput(String mobile, String code, String name) {
         if (checkMobileInput(mobile)) {
             if (code == null || code.trim().equals("")) {
                 JUtils.Toast("验证码不能为空");
             } else {
-                return true;
+                if (name.length() < 2) {
+                    JUtils.Toast("请填写掌柜姓名");
+                } else {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    private void bindMobilePhone(String username, String valid_code) {
+    private void bindMobilePhone(String username, String valid_code, String name) {
         BaseApp.getUserInteractor(mBaseActivity)
-            .verifyCode(username, "bind", valid_code, new ServiceResponse<CodeBean>(mBaseActivity) {
+            .verifyCode(username, "bind", valid_code, name, new ServiceResponse<CodeBean>(mBaseActivity) {
                 @Override
                 public void onNext(CodeBean codeBean) {
                     if (0 == codeBean.getRcode()) {

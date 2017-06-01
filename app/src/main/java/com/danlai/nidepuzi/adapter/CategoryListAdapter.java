@@ -50,7 +50,8 @@ public class CategoryListAdapter extends BaseRecyclerViewAdapter<ItemCategoryPro
             holder.b.saleStatus.setVisibility(View.GONE);
             holder.b.saleLayout.setVisibility(View.VISIBLE);
         }
-        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.image, resultsBean.getHead_img());
+        ViewUtils.loadImgToImgViewWithWaterMark(mActivity, holder.b.image, resultsBean.getHead_img(),
+            resultsBean.getWatermark_op());
         holder.b.name.setText(resultsBean.getName());
         holder.b.saleNum.setText("在售人数" + resultsBean.getSelling_num());
         holder.b.stock.setText("库存" + resultsBean.getStock());

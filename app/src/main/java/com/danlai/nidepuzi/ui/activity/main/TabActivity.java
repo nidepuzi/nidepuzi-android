@@ -118,38 +118,42 @@ public class TabActivity extends BaseActivity {
                         "{\"key\":\"mobile_phone\", \"value\":\"" + userInfoBean.getMobile() + "\"}, " +
                         "{\"key\":\"avatar\", \"value\": \"" + userInfoBean.getThumbnail() + "\"}]";
                     mFragmentTabUtils.setUserInfo(data, userInfoBean.getUser_id());
-                    UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
-                    if (bean != null && "effect".equals(bean.getStatus())) {
-                        if (bean.getLast_renew_type() == 15) {
-                            String renewTime = bean.getRenew_time().replace("T", " ");
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            try {
-                                Date date = sdf.parse(renewTime);
-                                long time = date.getTime() - new Date().getTime();
-                                int day = (int) (time / 1000 / 60 / 60 / 24);
-                                if (time / 1000 / 60 / 60 / 24 > 0) {
-                                    day += 1;
+                    if (userInfoBean.getCheck_xiaolumm() == 1) {
+                        UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
+                        if (bean != null && "effect".equals(bean.getStatus())) {
+                            if (bean.getLast_renew_type() == 15) {
+                                String renewTime = bean.getRenew_time().replace("T", " ");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                try {
+                                    Date date = sdf.parse(renewTime);
+                                    long time = date.getTime() - new Date().getTime();
+                                    int day = (int) (time / 1000 / 60 / 60 / 24);
+                                    if (time / 1000 / 60 / 60 / 24 > 0) {
+                                        day += 1;
+                                    }
+                                    Dialog dialog = new Dialog(mBaseActivity, R.style.CustomDialog);
+                                    dialog.setContentView(R.layout.pop_vip_msg);
+                                    dialog.setCancelable(true);
+                                    ((TextView) dialog.findViewById(R.id.tv_day)).setText("" + day);
+                                    dialog.findViewById(R.id.tv_join).setOnClickListener(v -> {
+                                        dialog.dismiss();
+                                        JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
+                                            "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
+                                    });
+                                    dialog.findViewById(R.id.iv_cancel).setOnClickListener(v -> dialog.dismiss());
+                                    dialog.show();
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
                                 }
-                                Dialog dialog = new Dialog(mBaseActivity, R.style.CustomDialog);
-                                dialog.setContentView(R.layout.pop_vip_msg);
-                                dialog.setCancelable(true);
-                                ((TextView) dialog.findViewById(R.id.tv_day)).setText("" + day);
-                                dialog.findViewById(R.id.tv_join).setOnClickListener(v -> {
-                                    dialog.dismiss();
-                                    JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
-                                        "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
-                                });
-                                dialog.findViewById(R.id.iv_cancel).setOnClickListener(v -> dialog.dismiss());
-                                dialog.show();
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                            } else {
+                                ((BaseApp) getApplication()).setShow(true);
                             }
                         } else {
-                            ((BaseApp) getApplication()).setShow(true);
+                            LoginUtils.delLoginInfo(mBaseActivity);
+                            readyGoThenKill(LoginActivity.class);
                         }
                     } else {
-                        LoginUtils.delLoginInfo(mBaseActivity);
-                        readyGoThenKill(LoginActivity.class);
+                        ((BaseApp) getApplication()).setShow(true);
                     }
                 }
 

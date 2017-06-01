@@ -88,6 +88,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
         b.layoutIncome.setOnClickListener(this);
         b.layoutTodaySale.setOnClickListener(this);
         b.layoutTodaySaleOrder.setOnClickListener(this);
+        b.layoutJoin.setOnClickListener(this);
     }
 
     @Override
@@ -112,12 +113,19 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 public void onNext(UserInfoBean userInfoBean) {
                     b.userName.setText(userInfoBean.getNick());
                     if (userInfoBean.getXiaolumm() != null) {
-                        b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  " + userInfoBean.getXiaolumm().getId());
+                        b.shopName.setText("店铺序号:  " + userInfoBean.getXiaolumm().getId());
                         getVipData();
                         type = userInfoBean.getXiaolumm().getLast_renew_type();
                     } else {
-                        LoginUtils.delLoginInfo(mActivity);
-                        mActivity.readyGoThenKill(LoginActivity.class);
+                        if (userInfoBean.getCheck_xiaolumm() == 1) {
+                            LoginUtils.delLoginInfo(mActivity);
+                            mActivity.readyGoThenKill(LoginActivity.class);
+                        } else {
+                            b.shopName.setText("店铺名:  你的铺子");
+                        }
+                    }
+                    if (type != 365) {
+                        b.layoutJoinBottom.setVisibility(View.VISIBLE);
                     }
                     if (userInfoBean.getUser_budget() != null) {
                         b.tvWallet.setText(userInfoBean.getUser_budget().getBudget_cash() + "");
@@ -188,7 +196,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshLogout(LogoutEvent event) {
         b.userName.setText("铺子用户");
-        b.shopName.setText("店铺名:  你的铺子 / 店铺序号:  5201314");
+        b.shopName.setText("店铺序号:  5201314");
         Glide.with(mFragment).load(R.drawable.img_user_head).into(b.userHead);
     }
 
@@ -226,7 +234,7 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllCouponActivity.class);
                 break;
             case R.id.tv_draw_cash:
-                if (type == 0 || type == 15) {
+                if (type != 365) {
                     vipDialog.show();
                 } else {
                     readyGo(DrawCashActivity.class);
@@ -272,6 +280,10 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 break;
             case R.id.layout_today_sale_order:
                 readyGo(TodaySaleOrderActivity.class);
+                break;
+            case R.id.layout_join:
+                JumpUtils.jumpToWebViewWithCookies(mActivity,
+                    "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
                 break;
         }
 

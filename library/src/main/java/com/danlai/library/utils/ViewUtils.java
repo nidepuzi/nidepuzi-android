@@ -228,7 +228,23 @@ public final class ViewUtils {
             return;
         }
         Glide.with(context)
-            .load(picPath + "?imageMogr2/format/jpg/size-limit/30k/thumbnail/289/quality/80")
+            .load(picPath + "?imageMogr2/format/jpg/size-limit/20k/thumbnail/250/quality/80")
+            .diskCacheStrategy(DiskCacheStrategy.RESULT)
+            .centerCrop()
+            .placeholder(R.drawable.place_holder)
+            .into(img);
+    }
+
+    public static void loadImgToImgViewWithWaterMark(Context context, ImageView img, String picPath, String water) {
+        if (null == picPath || "".equals(picPath)) {
+            Glide.with(context)
+                .load(R.drawable.place_holder)
+                .centerCrop()
+                .into(img);
+            return;
+        }
+        Glide.with(context)
+            .load(picPath + "?imageMogr2/format/jpg/size-limit/20k/thumbnail/250/quality/80|" + water)
             .diskCacheStrategy(DiskCacheStrategy.RESULT)
             .centerCrop()
             .placeholder(R.drawable.place_holder)

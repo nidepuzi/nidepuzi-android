@@ -36,7 +36,7 @@ public class ProductListAdapter extends BaseRecyclerViewAdapter<ItemProductBindi
     @Override
     public void onBindViewHolder(BaseViewHolder<ItemProductBinding> holder, int position) {
         ResultsBean bean = data.get(position);
-        ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.img, bean.getHead_img());
+        ViewUtils.loadImgToImgViewWithWaterMark(mActivity, holder.b.img, bean.getHead_img(), bean.getWatermark_op());
         holder.b.name.setText(bean.getName());
         holder.b.price.setText("¥" + JUtils.formatDouble(bean.getLowest_agent_price()));
         holder.b.profit.setText("赚" + JUtils.formatDouble(bean.getProfit().getMin()));

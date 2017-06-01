@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.adapter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
@@ -47,12 +46,9 @@ public class CartListAdapter extends BaseRecyclerViewAdapter<ItemCartsBinding, C
         holder.b.count.setText(cartsInfoBean.getNum() + "");
         ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.cartImage, cartsInfoBean.getPic_path());
         holder.b.cartImage.setOnClickListener(v -> {
-            Intent intent = new Intent(mActivity, ProductDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt("model_id", cartsInfoBean.getModel_id());
-            intent.putExtras(bundle);
-            mActivity.startActivity(intent);
-
+            mActivity.readyGoThenKill(ProductDetailActivity.class, bundle);
         });
         holder.b.delete.setOnClickListener(v -> {
             if (cartsInfoBean.getNum() == 1) {

@@ -1,16 +1,13 @@
 package com.danlai.nidepuzi.ui.activity.main;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.danlai.library.rx.RxCountDown;
-import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.nidepuzi.R;
 import com.danlai.nidepuzi.base.BaseSubscriberContext;
@@ -47,28 +44,6 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
         }, throwable -> jumpToAds());
     }
 
-    private void checkPermissionAndJump() {
-        if (JUtils.isPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE")) {
-            RxCountDown.countdown(2).subscribe(integer -> {
-                if (integer == 0) {
-                    jumpToAds();
-                }
-            }, throwable -> jumpToAds());
-        } else {
-            new AlertDialog.Builder(this)
-                .setTitle("提示")
-                .setMessage("应用包含缓存节省流量功能,需要打开存储权限,应用才能正常使用。")
-                .setPositiveButton("确认", (dialog, which) -> {
-                    dialog.dismiss();
-                    getAppDetailSettingIntent();
-                })
-                .setNegativeButton("取消", (dialog, which) -> {
-                    dialog.dismiss();
-                    finish();
-                }).show();
-        }
-    }
-
     private void jumpToAds() {
         Glide.with(this).load(R.drawable.img_desc).into(imageView);
         mView.setVisibility(View.VISIBLE);
@@ -97,15 +72,6 @@ public class SplashActivity extends AppCompatActivity implements BaseSubscriberC
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.main_in, R.anim.main_out);
-    }
-
-    private void getAppDetailSettingIntent() {
-        Intent localIntent = new Intent();
-        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-        localIntent.setData(Uri.fromParts("package", getPackageName(), null));
-        startActivity(localIntent);
-        finish();
     }
 
     @Override

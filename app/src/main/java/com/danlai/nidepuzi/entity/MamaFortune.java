@@ -70,6 +70,10 @@ public class MamaFortune {
         private ExtraInfoBean extra_info;
         private int current_dp_turns_num;
         private ExtraFiguresBean extra_figures;
+        private double carry_self;
+        private double carry_share;
+        private double cash_self_display;
+        private double cash_share_display;
 
         public int getMama_id() {
             return mama_id;
@@ -253,6 +257,38 @@ public class MamaFortune {
 
         public void setExtra_figures(ExtraFiguresBean extra_figures) {
             this.extra_figures = extra_figures;
+        }
+
+        public double getCarry_self() {
+            return carry_self;
+        }
+
+        public void setCarry_self(double carry_self) {
+            this.carry_self = carry_self;
+        }
+
+        public double getCarry_share() {
+            return carry_share;
+        }
+
+        public void setCarry_share(double carry_share) {
+            this.carry_share = carry_share;
+        }
+
+        public double getCash_self_display() {
+            return cash_self_display;
+        }
+
+        public void setCash_self_display(double cash_self_display) {
+            this.cash_self_display = cash_self_display;
+        }
+
+        public double getCash_share_display() {
+            return cash_share_display;
+        }
+
+        public void setCash_share_display(double cash_share_display) {
+            this.cash_share_display = cash_share_display;
         }
 
         public static class ExtraInfoBean {

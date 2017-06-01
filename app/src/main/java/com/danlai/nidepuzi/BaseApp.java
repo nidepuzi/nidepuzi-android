@@ -42,6 +42,7 @@ public class BaseApp extends MultiDexApplication {
     private static Context mContext;
     private AppComponent component;
     private boolean isShow;
+    private YSFOptions options;
 
     public static Context getInstance() {
         return mContext;
@@ -56,7 +57,9 @@ public class BaseApp extends MultiDexApplication {
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
         JUtils.initialize(this);
-        Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(), new BaseUnicornImageLoader(getInstance()));
+        setOptions(new YSFOptions());
+        Unicorn.init(this, "6df3367932bd8e384f359611ea48e90b", options(getOptions()),
+            new BaseUnicornImageLoader(getInstance()));
         JUtils.setDebug(BuildConfig.DEBUG, "nidepuzi");
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
         //初始化push推送服务
@@ -71,13 +74,12 @@ public class BaseApp extends MultiDexApplication {
         MultiDex.install(this);
     }
 
-    private static YSFOptions options() {
-        YSFOptions options = new YSFOptions();
+    private static YSFOptions options(YSFOptions options) {
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
         options.statusBarNotificationConfig.notificationEntrance = TabActivity.class;
         options.savePowerConfig = new SavePowerConfig();
         options.onMessageItemClickListener = (context, url) ->
-            JumpUtils.jumpToWebViewWithCookies(getInstance(), url, -1, BaseWebViewActivity.class);
+            JumpUtils.jumpToWebViewWithCookies(context, url, -1, BaseWebViewActivity.class);
         return options;
     }
 
@@ -100,6 +102,14 @@ public class BaseApp extends MultiDexApplication {
 
     public void setShow(boolean show) {
         isShow = show;
+    }
+
+    public YSFOptions getOptions() {
+        return options;
+    }
+
+    public void setOptions(YSFOptions options) {
+        this.options = options;
     }
 
     //异常退出的时候,自动重启

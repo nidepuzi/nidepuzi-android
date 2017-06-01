@@ -114,15 +114,8 @@
                 <Button
                     android:id="@+id/btn_formal"
                     style="@style/CommonButton"
-                    android:layout_marginBottom="20dp"
-                    android:text="邀请方式一    365元正式掌柜"/>
-
-                <Button
-                    android:id="@+id/btn_tryout"
-                    style="@style/CommonButton"
                     android:layout_marginBottom="60dp"
-                    android:text="邀请方式二     30天试用掌柜"/>
-
+                    android:text="邀请好友成为掌柜"/>
 
             </LinearLayout>
 

@@ -51,6 +51,7 @@ public class MainTodayBean {
         private double price;
         private String pic;
         private String start_time;
+        private String watermark_op;
         private int selling_num;
         private int stock;
 
@@ -132,6 +133,14 @@ public class MainTodayBean {
 
         public void setStock(int stock) {
             this.stock = stock;
+        }
+
+        public String getWatermark_op() {
+            return watermark_op;
+        }
+
+        public void setWatermark_op(String watermark_op) {
+            this.watermark_op = watermark_op;
         }
 
         public static class ProfitBean {

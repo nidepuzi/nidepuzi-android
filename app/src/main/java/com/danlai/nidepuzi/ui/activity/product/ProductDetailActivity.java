@@ -66,17 +66,17 @@ import java.util.List;
  */
 public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetailBinding>
     implements View.OnClickListener {
-    private static final String POST_URL = "?imageMogr2/format/jpg/quality/70";
+    private static final String POST_URL = "?imageMogr2/format/jpg/thumbnail/640/quality/70";
     private ProductDetailBean productDetail;
     private int cart_num = 0;
-    private boolean isBoutique;
     private Dialog dialog;
     private ImageView img, plusIv, minusIv;
-    private TextView nameTv, skuTv, agentTv, saleTv, numTv, commitTv;
+    private TextView nameTv, skuTv, agentTv, saleTv, numTv, addCartTv, buyNowTv;
     private RecyclerView colorRv, sizeRv;
     private int model_id, sku_id, item_id, num;
     private SkuSizeAdapter skuSizeAdapter;
     private LinearLayout colorLayout, sizeLayout;
+    private ShareModelBean mShareModelBean;
 
     @Override
     public void getIntentUrl(Uri uri) {
@@ -164,7 +164,8 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         plusIv = ((ImageView) view.findViewById(R.id.plus));
         minusIv = ((ImageView) view.findViewById(R.id.minus));
         numTv = ((TextView) view.findViewById(R.id.num));
-        commitTv = ((TextView) view.findViewById(R.id.commit));
+        addCartTv = ((TextView) view.findViewById(R.id.tv_add_cart));
+        buyNowTv = ((TextView) view.findViewById(R.id.tv_buy_now));
         colorRv = ((RecyclerView) view.findViewById(R.id.rv_color));
         sizeRv = ((RecyclerView) view.findViewById(R.id.rv_size));
         colorLayout = ((LinearLayout) view.findViewById(R.id.ll_color));
@@ -176,20 +177,25 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         b.finish.setOnClickListener(this);
         b.share.setOnClickListener(this);
         b.rlCart.setOnClickListener(this);
-        b.tvAdd.setOnClickListener(this);
         b.tvBuy.setOnClickListener(this);
+        b.tvSale.setOnClickListener(this);
         b.textLayout.setOnClickListener(this);
         plusIv.setOnClickListener(this);
         minusIv.setOnClickListener(this);
-        commitTv.setOnClickListener(this);
+        addCartTv.setOnClickListener(this);
+        buyNowTv.setOnClickListener(this);
         b.layoutRefund.setOnClickListener(this);
         b.pullToLoad.setScrollListener(
             (scrollView, x, y, oldx, oldy) -> {
                 float v = ((float) y) / (b.banner.getHeight() - b.tvTitle.getHeight());
                 if (v >= 0.25) {
                     b.tvTitle.setAlpha(1);
+                    b.finish.getBackground().setAlpha(0);
+                    b.share.getBackground().setAlpha(0);
                 } else {
                     b.tvTitle.setAlpha(4 * v);
+                    b.finish.getBackground().setAlpha((int) ((1 - 4 * v) * 255));
+                    b.share.getBackground().setAlpha((int) ((1 - 4 * v) * 255));
                 }
             }
         );
@@ -246,20 +252,20 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         ProductDetailBean.DetailContentBean detailContent = productDetailBean.getDetail_content();
         List<ProductDetailBean.SkuInfoBean> skuInfo = productDetailBean.getSku_info();
         if ("will".equals(detailContent.getSale_state())) {
-            b.tvAdd.setClickable(false);
             b.tvBuy.setClickable(false);
-            b.tvAdd.setText("即将开售");
+            b.tvSale.setClickable(false);
             b.tvBuy.setText("即将开售");
+            b.tvSale.setText("即将开售");
         } else if ("off".equals(detailContent.getSale_state())) {
-            b.tvAdd.setClickable(false);
             b.tvBuy.setClickable(false);
-            b.tvAdd.setText("已下架");
+            b.tvSale.setClickable(false);
             b.tvBuy.setText("已下架");
+            b.tvSale.setText("已下架");
         } else if ("on".equals(detailContent.getSale_state()) && detailContent.isIs_sale_out()) {
-            b.tvAdd.setClickable(false);
             b.tvBuy.setClickable(false);
-            b.tvAdd.setText("已抢光");
+            b.tvSale.setClickable(false);
             b.tvBuy.setText("已抢光");
+            b.tvSale.setText("已抢光");
         } else {
             try {
                 if (skuInfo.size() > 0) {
@@ -304,9 +310,10 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         }
         initAttr(productDetailBean.getComparison().getAttributes());
         initHeadImg(detailContent);
-        if (detailContent.is_onsale()) {
-            b.tvAdd.setVisibility(View.GONE);
-        }
+        // TODO: 17/6/1  
+//        if (detailContent.is_onsale()) {
+//            b.tvBuy.setVisibility(View.GONE);
+//        }
     }
 
     private void setSkuId(List<ProductDetailBean.SkuInfoBean> sku_info) {
@@ -332,8 +339,9 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
 
     private void initHeadImg(ProductDetailBean.DetailContentBean detail_content) {
         List<String> head_imgs = detail_content.getHead_imgs();
+        String watermark_op = detail_content.getWatermark_op();
         for (int i = 0; i < head_imgs.size(); i++) {
-            String str = head_imgs.get(i) + POST_URL;
+            String str = head_imgs.get(i) + POST_URL + "|" + watermark_op;
             head_imgs.set(i, str);
         }
         b.banner.setImageLoader(new BaseImageLoader());
@@ -378,21 +386,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                     , -1, BaseWebViewActivity.class, "七天退换货规则");
                 break;
             case R.id.share:
-                showIndeterminateProgressDialog(false);
-                BaseApp.getProductInteractor(this)
-                    .getShareModel(model_id, new ServiceResponse<ShareModelBean>(mBaseActivity) {
-                        @Override
-                        public void onNext(ShareModelBean shareModel) {
-                            ShareUtils.shareWithModel(shareModel, ProductDetailActivity.this);
-                            hideIndeterminateProgressDialog();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            JUtils.Toast("分享失败,请点击重试!");
-                            hideIndeterminateProgressDialog();
-                        }
-                    });
+                shareProduct();
                 break;
             case R.id.text_layout:
                 if (!LoginUtils.checkLoginState(getApplicationContext())) {
@@ -417,21 +411,15 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                     }
                 }
                 break;
-            case R.id.tv_add:
-                if (!LoginUtils.checkLoginState(getApplicationContext())) {
-                    jumpToLogin();
-                } else {
-                    isBoutique = false;
-                    dialog.show();
-                }
-                break;
             case R.id.tv_buy:
                 if (!LoginUtils.checkLoginState(getApplicationContext())) {
                     jumpToLogin();
                 } else {
-                    isBoutique = true;
                     dialog.show();
                 }
+                break;
+            case R.id.tv_sale:
+                shareProduct();
                 break;
             case R.id.plus:
                 num++;
@@ -443,44 +431,66 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
                     numTv.setText(num + "");
                 }
                 break;
-            case R.id.commit:
-                if (isBoutique) {
-                    BaseApp.getCartsInteractor(this)
-                        .addToCart(item_id, sku_id, num, 0, new ServiceResponse<ResultEntity>(mBaseActivity) {
-                            @Override
-                            public void onNext(ResultEntity resultEntity) {
-                                if (resultEntity.getCode() == 0) {
-                                    BaseApp.getCartsInteractor(ProductDetailActivity.this)
-                                        .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
-                                            @Override
-                                            public void onNext(List<CartsInfoBean> cartsInfoBeen) {
-                                                if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
-                                                    String ids = cartsInfoBeen.get(0).getId() + "";
-                                                    Bundle bundle = new Bundle();
-                                                    bundle.putString("ids", ids);
-                                                    bundle.putBoolean("couponFlag", true);
-                                                    Intent intent = new Intent(ProductDetailActivity.this, PayInfoActivity.class);
-                                                    intent.putExtras(bundle);
-                                                    startActivity(intent);
-                                                    dialog.dismiss();
-                                                } else {
-                                                    JUtils.Toast("购买失败!");
-                                                }
+            case R.id.tv_add_cart:
+                addToCart(true);
+                break;
+            case R.id.tv_buy_now:
+                BaseApp.getCartsInteractor(this)
+                    .addToCart(item_id, sku_id, num, 0, new ServiceResponse<ResultEntity>(mBaseActivity) {
+                        @Override
+                        public void onNext(ResultEntity resultEntity) {
+                            if (resultEntity.getCode() == 0) {
+                                BaseApp.getCartsInteractor(ProductDetailActivity.this)
+                                    .getCartsList(0, new ServiceResponse<List<CartsInfoBean>>(mBaseActivity) {
+                                        @Override
+                                        public void onNext(List<CartsInfoBean> cartsInfoBeen) {
+                                            if (cartsInfoBeen != null && cartsInfoBeen.size() > 0) {
+                                                String ids = cartsInfoBeen.get(0).getId() + "";
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString("ids", ids);
+                                                bundle.putBoolean("couponFlag", true);
+                                                Intent intent = new Intent(ProductDetailActivity.this, PayInfoActivity.class);
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
+                                                dialog.dismiss();
+                                            } else {
+                                                JUtils.Toast("购买失败!");
                                             }
-                                        });
-                                } else {
-                                    JUtils.Toast(resultEntity.getInfo());
-                                }
+                                        }
+                                    });
+                            } else {
+                                JUtils.Toast(resultEntity.getInfo());
                             }
-                        });
-                } else {
-                    addToCart(true);
-                }
+                        }
+                    });
                 break;
             default:
                 break;
         }
 
+    }
+
+    private void shareProduct() {
+        if (mShareModelBean == null) {
+            showIndeterminateProgressDialog(false);
+            BaseApp.getProductInteractor(this)
+                .getShareModel(model_id, new ServiceResponse<ShareModelBean>(mBaseActivity) {
+                    @Override
+                    public void onNext(ShareModelBean shareModel) {
+                        mShareModelBean = shareModel;
+                        ShareUtils.shareWithModel(shareModel, ProductDetailActivity.this);
+                        hideIndeterminateProgressDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        JUtils.Toast("分享失败,请点击重试!");
+                        hideIndeterminateProgressDialog();
+                    }
+                });
+        } else {
+            ShareUtils.shareWithModel(mShareModelBean, ProductDetailActivity.this);
+        }
     }
 
     private void jumpToLogin() {

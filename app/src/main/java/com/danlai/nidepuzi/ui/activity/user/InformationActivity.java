@@ -1,6 +1,7 @@
 package com.danlai.nidepuzi.ui.activity.user;
 
 import android.app.DatePickerDialog;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -23,6 +24,8 @@ import java.util.Date;
 
 public class InformationActivity extends BaseMVVMActivity<ActivityInformationBinding>
     implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    private int userId;
+    private String nick;
 
     @Override
     public boolean isNeedShow() {
@@ -35,6 +38,8 @@ public class InformationActivity extends BaseMVVMActivity<ActivityInformationBin
             .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
                 @Override
                 public void onNext(UserInfoBean userInfoBean) {
+                    userId = userInfoBean.getId();
+                    nick = userInfoBean.getNick();
                     Glide.with(mBaseActivity).load(userInfoBean.getThumbnail()).into(b.headLayoutImg);
                     b.nickLayout.setSummary(userInfoBean.getNick());
                 }
@@ -50,6 +55,7 @@ public class InformationActivity extends BaseMVVMActivity<ActivityInformationBin
     @Override
     protected void setListener() {
         b.birthdayLayout.setOnClickListener(this);
+        b.nickLayout.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +78,12 @@ public class InformationActivity extends BaseMVVMActivity<ActivityInformationBin
                 datePicker.setMaxDate(date.getTime());
                 datePicker.setMinDate(calendar.getTimeInMillis());
                 pickerDialog.show();
+                break;
+            case R.id.nick_layout:
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", userId);
+                bundle.putString("nick", nick);
+                readyGoThenKill(SetNickNameActivity.class, bundle);
                 break;
         }
     }
