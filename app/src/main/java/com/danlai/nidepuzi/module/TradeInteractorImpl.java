@@ -43,7 +43,7 @@ public class TradeInteractorImpl implements TradeInteractor {
 
     @Override
     public void getAllOrderBean(int page, ServiceResponse<AllOrdersBean> response) {
-        service.getAllOrdersList(page)
+        service.getAllOrdersList(1, page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -52,11 +52,11 @@ public class TradeInteractorImpl implements TradeInteractor {
     public void shoppingCartCreateV2(String cart_ids, String addr_id, String channel,
                                      String payment, String post_fee, String discount_fee,
                                      String total_fee, String uuid, String pay_extras,
-                                      ServiceResponse<PayInfoBean> response) {
-            service.shoppingCartCreateV2(cart_ids, addr_id, channel, payment, post_fee,
-                discount_fee, total_fee, uuid, pay_extras)
-                .compose(new DefaultTransform<>())
-                .subscribe(response);
+                                     ServiceResponse<PayInfoBean> response) {
+        service.shoppingCartCreateV2(cart_ids, addr_id, channel, payment, post_fee,
+            discount_fee, total_fee, uuid, pay_extras)
+            .compose(new DefaultTransform<>())
+            .subscribe(response);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class TradeInteractorImpl implements TradeInteractor {
 
     @Override
     public void getOrderDetail(int order_id, ServiceResponse<OrderDetailBean> response) {
-        service.getOrderDetail(order_id, "app")
+        service.getOrderDetail(order_id, 1, "app")
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
@@ -82,14 +82,14 @@ public class TradeInteractorImpl implements TradeInteractor {
 
     @Override
     public void getWaitPayOrdersBean(int page, ServiceResponse<AllOrdersBean> response) {
-        service.getWaitPayOrdersBean(page)
+        service.getWaitPayOrdersBean(1, page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }
 
     @Override
     public void getWaitSendOrdersBean(int page, ServiceResponse<AllOrdersBean> response) {
-        service.getWaitSendOrdersBean(page)
+        service.getWaitSendOrdersBean(1, page)
             .compose(new DefaultTransform<>())
             .subscribe(response);
     }

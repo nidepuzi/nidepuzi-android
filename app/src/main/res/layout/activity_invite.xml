@@ -83,39 +83,44 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="好友立奖"
+                        android:text="邀请好友购买超值礼包"
                         android:textColor="@color/color_33"
                         android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="200"
+                        android:text="送“"
                         android:textColor="@color/colorAccent"
                         android:textSize="24sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="元购物券哦!"
+                        android:text="掌柜服务"
                         android:textColor="@color/color_33"
                         android:textSize="15sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="”"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="24sp"/>
 
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:text="友情提示:好友立奖活动截至日2017-8-30,赶快帮好友创业吧"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/btn_formal"
                     style="@style/CommonButton"
-                    android:layout_marginBottom="60dp"
-                    android:text="邀请好友成为掌柜"/>
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="40dp"
+                    android:text="邀请好友成为正式掌柜"/>
+
+                <Button
+                    android:id="@+id/btn_try"
+                    style="@style/CommonButton"
+                    android:layout_marginBottom="50dp"
+                    android:text="邀请好友成为试用掌柜"/>
 
             </LinearLayout>
 

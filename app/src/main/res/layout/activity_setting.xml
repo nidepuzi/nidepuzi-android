@@ -42,12 +42,6 @@
 
                 <include layout="@layout/preference_line"/>
 
-                <!--<com.danlai.library.widget.PreferenceView-->
-                <!--android:id="@+id/safe"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:preference_icon="@drawable/icon_set_safe"-->
-                <!--app:preference_title="账户与安全"/>-->
                 <com.danlai.library.widget.PreferenceView
                     android:id="@+id/bind_phone"
                     android:layout_width="match_parent"
@@ -66,50 +60,12 @@
 
                 <include layout="@layout/preference_line"/>
 
-                <!--<com.danlai.library.widget.PreferenceView-->
-                <!--android:id="@+id/stop"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:preference_icon="@drawable/icon_set_stop"-->
-                <!--app:preference_show_switch="true"-->
-                <!--app:preference_title="广告拦截模式"/>-->
-
-                <!--<include layout="@layout/preference_line"/>-->
-
-                <!--<com.danlai.library.widget.PreferenceView-->
-                <!--android:id="@+id/mode"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:preference_icon="@drawable/icon_set_mode"-->
-                <!--app:preference_show_switch="true"-->
-                <!--app:preference_title="兼容模式"/>-->
-
-                <!--<include layout="@layout/common_interval"/>-->
-
-                <!--<com.danlai.library.widget.PreferenceView-->
-                <!--android:id="@+id/service"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:preference_icon="@drawable/icon_set_service"-->
-                <!--app:preference_title="店主服务"/>-->
-
-                <!--<include layout="@layout/preference_line"/>-->
-
                 <com.danlai.library.widget.PreferenceView
                     android:id="@+id/about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:preference_icon="@drawable/icon_set_about"
                     app:preference_title="关于你的铺子"/>
-
-                <!--<include layout="@layout/preference_line"/>-->
-
-                <!--<com.danlai.library.widget.PreferenceView-->
-                <!--android:id="@+id/test"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:preference_icon="@drawable/icon_set_test"-->
-                <!--app:preference_title="在线测试"/>-->
 
                 <include layout="@layout/preference_line"/>
 

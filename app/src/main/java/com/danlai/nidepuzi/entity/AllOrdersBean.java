@@ -1,418 +1,415 @@
 package com.danlai.nidepuzi.entity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by 优尼世界 on 15/12/29.
- * <p>
- * Copyright 2015年 上海己美. All rights reserved.
+ * @author Wisdom-sun
+ * @date 2017年06月05日 下午3:11
  */
 public class AllOrdersBean {
 
-    @SerializedName("count")
-    private int mCount;
-    @SerializedName("next")
-    private String mNext;
-    @SerializedName("previous")
-    private Object mPrevious;
 
+    /**
+     * count : 56
+     * next : http://m.nidepuzi.com/rest/v2/trades?page=2
+     * previous : null
+     * results : [{"id":1000,"orders":[{"id":1029,"oid":"xo1705275928ebc610f6c","item_id":"164","title":"日本Astonish 速效厨房去污清洁剂750ml","sku_id":"178","num":1,"outer_id":"SP00157","total_fee":58,"payment":58,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1493963390308.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":106,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd1705275928ebbe336ef","buyer_nick":"伍磊","buyer_id":1,"channel":"wx","payment":58,"post_fee":0,"total_fee":58,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1493963390308.jpg","buyer_message":"","trade_type":0,"created":"2017-05-27T11:00:22.050625","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":998,"orders":[{"id":1027,"oid":"xo1705275928d9d14be2e","item_id":"676","title":"【鲜活预售】加拿大鲜活波斯顿龙虾 一只650-750g 拍下隔日发货","sku_id":"1318","num":1,"outer_id":"SP00664","total_fee":228,"payment":228,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495705141929.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":455,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd1705275928d9cf50ec9","buyer_nick":"伍磊","buyer_id":1,"channel":"alipay","payment":228,"post_fee":0,"total_fee":228,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1495705141929.jpg","buyer_message":"","trade_type":0,"created":"2017-05-27T09:43:45.293691","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":955,"orders":[{"id":984,"oid":"xo170526592785a9c2bf7","item_id":"672","title":"【鲜活发货】加拿大活鲜波斯顿龙虾一只450-550g","sku_id":"1314","num":1,"outer_id":"SP00660","total_fee":159,"payment":159,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495704794913.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":451,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170526592785a728286","buyer_nick":"伍磊","buyer_id":1,"channel":"alipay","payment":159,"post_fee":0,"total_fee":159,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1495704794913.jpg","buyer_message":"","trade_type":0,"created":"2017-05-26T09:32:25.780682","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":740,"orders":[{"id":755,"oid":"xo170519591ec0cc0e399","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":59,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591ec0c9c10ef","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T17:54:20.040826","pay_time":"2017-05-19T17:54:20.184651","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}},{"id":732,"orders":[{"id":747,"oid":"xo170519591eb8b249af2","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":56,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591eb8ac30c29","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T17:19:46.283912","pay_time":"2017-05-19T17:19:46.438267","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}},{"id":723,"orders":[{"id":738,"oid":"xo170519591eb1e594212","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":55,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591eb1e18d656","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T16:50:45.588270","pay_time":"2017-05-19T16:50:45.743519","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}},{"id":720,"orders":[{"id":735,"oid":"xo170519591eaca95abde","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":54,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591eaca775015","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T16:28:25.354990","pay_time":"2017-05-19T16:28:25.460830","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}},{"id":715,"orders":[{"id":730,"oid":"xo170519591e9513ee0e3","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":52,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591e94fbb6c47","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T14:47:47.956890","pay_time":"2017-05-19T14:47:48.106770","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}},{"id":713,"orders":[{"id":728,"oid":"xo170519591e9242937be","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e9240bece7","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T14:35:46.586812","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":712,"orders":[{"id":727,"oid":"xo170519591e91bd73fa8","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e91ab0b7a1","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T14:33:33.457950","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":708,"orders":[{"id":723,"oid":"xo170519591e8ceda6625","item_id":"67","title":"【唯有美食不可辜负】大福道新疆三彩葡萄干280g×3袋（独立小包装更方便）","sku_id":"1162","num":1,"outer_id":"SP00060A","total_fee":35,"payment":35,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1495084395363.png","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":37,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e8cdec2c22","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":35,"post_fee":0,"total_fee":35,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1495084395363.png","buyer_message":"","trade_type":0,"created":"2017-05-19T14:13:01.663796","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":703,"orders":[{"id":718,"oid":"xo170519591e894c64a9a","item_id":"140","title":"你的铺子-0元赠送开业大礼包","sku_id":"150","num":1,"outer_id":"SP00133","total_fee":0,"payment":0,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1494842681610.png","status":5,"status_display":"交易成功","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":94,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e894a461c9","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":0,"post_fee":0,"total_fee":0,"discount_fee":0,"status":5,"status_display":"交易成功","order_pic":"http://img.nidepuzi.com/img_1494842681610.png","buyer_message":"","trade_type":0,"created":"2017-05-19T13:57:32.393610","pay_time":"2017-05-19T13:57:32.516990","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"","receiver_state":"","receiver_city":"","red_packer_num":0,"receiver_district":"","receiver_address":"","receiver_mobile":"","receiver_phone":"","order_type":4,"extras":{"sale_type":0,"self_buy":true}},{"id":694,"orders":[{"id":709,"oid":"xo170519591e7c32c92dd","item_id":"546","title":"【靓丽嘎啦果，混血小萝莉】新西兰进口嘎啦果12个装 单果120g左右","sku_id":"671","num":2,"outer_id":"SP00535","total_fee":77.6,"payment":77.6,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1494488354777.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":278,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e7c2e46062","buyer_nick":"伍磊","buyer_id":1,"channel":"wx","payment":77.6,"post_fee":0,"total_fee":77.6,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1494488354777.jpg","buyer_message":"","trade_type":0,"created":"2017-05-19T13:01:38.797028","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":693,"orders":[{"id":708,"oid":"xo170519591e7bfa344da","item_id":"546","title":"【靓丽嘎啦果，混血小萝莉】新西兰进口嘎啦果12个装 单果120g左右","sku_id":"671","num":1,"outer_id":"SP00535","total_fee":38.8,"payment":38.8,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1494488354777.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":278,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}],"tid":"xd170519591e7bf1b6a52","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":38.8,"post_fee":0,"total_fee":38.8,"discount_fee":0,"status":7,"status_display":"交易关闭","order_pic":"http://img.nidepuzi.com/img_1494488354777.jpg","buyer_message":"","trade_type":0,"created":"2017-05-19T13:00:42.196759","pay_time":null,"consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":0,"self_buy":true}},{"id":690,"orders":[{"id":704,"oid":"xo170519591e69937f933","item_id":"546","title":"【靓丽嘎啦果，混血小萝莉】新西兰进口嘎啦果12个装 单果120g左右","sku_id":"671","num":1,"outer_id":"SP00535","total_fee":38.8,"payment":38.8,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1494488354777.jpg","status":6,"status_display":"退款关闭","refund_status":7,"refund_status_display":"退款成功","refund_id":49,"kill_title":false,"model_id":278,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":500}}],"tid":"xd170519591e69905b2fa","buyer_nick":"伍磊","buyer_id":1,"channel":"budget","payment":38.8,"post_fee":0,"total_fee":38.8,"discount_fee":0,"status":6,"status_display":"退款关闭","order_pic":"http://img.nidepuzi.com/img_1494488354777.jpg","buyer_message":"","trade_type":0,"created":"2017-05-19T11:42:11.505503","pay_time":"2017-05-19T11:42:11.613056","consign_time":null,"out_sid":"","logistics_company":null,"receiver_name":"伍磊","receiver_state":"上海","receiver_city":"杨浦区","red_packer_num":0,"receiver_district":"内环中环之间","receiver_address":"大连路宝地广场a座2206","receiver_mobile":"18676720901","receiver_phone":"","order_type":0,"extras":{"sale_type":1,"self_buy":true}}]
+     */
 
-    @SerializedName("results")
-    private List<ResultsEntity> mResults;
-
-    public void setCount(int count) {
-        this.mCount = count;
-    }
-
-    public void setNext(String next) {
-        this.mNext = next;
-    }
-
-    public void setPrevious(Object previous) {
-        this.mPrevious = previous;
-    }
-
-    public void setResults(List<ResultsEntity> results) {
-        this.mResults = results;
-    }
+    private int count;
+    private String next;
+    private String previous;
+    private List<ResultsBean> results;
 
     public int getCount() {
-        return mCount;
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getNext() {
-        return mNext;
+        return next;
     }
 
-    public Object getPrevious() {
-        return mPrevious;
+    public void setNext(String next) {
+        this.next = next;
     }
 
-    public List<ResultsEntity> getResults() {
-        return mResults;
+    public String getPrevious() {
+        return previous;
     }
 
-    public static class ResultsEntity {
+    public void setPrevious(String previous) {
+        this.previous = previous;
+    }
 
-        @Override
-        public String toString() {
-            return "ResultsEntity{" +
-                "mId=" + mId +
-                ", mUrl='" + mUrl + '\'' +
-                ", mTid='" + mTid + '\'' +
-                ", mBuyerNick='" + mBuyerNick + '\'' +
-                ", mBuyerId=" + mBuyerId +
-                ", mChannel='" + mChannel + '\'' +
-                ", mPayment=" + mPayment +
-                ", mPostFee=" + mPostFee +
-                ", mTotalFee=" + mTotalFee +
-                ", mDiscountFee=" + mDiscountFee +
-                ", mStatus=" + mStatus +
-                ", mStatusDisplay='" + mStatusDisplay + '\'' +
-                ", mOrderPic='" + mOrderPic + '\'' +
-                ", mBuyerMessage='" + mBuyerMessage + '\'' +
-                ", mTradeType=" + mTradeType +
-                ", mCreated='" + mCreated + '\'' +
-                ", mPayTime=" + mPayTime +
-                ", mConsignTime=" + mConsignTime +
-                ", mOutSid='" + mOutSid + '\'' +
-                ", mLogisticsCompany=" + mLogisticsCompany +
-                ", mReceiverName='" + mReceiverName + '\'' +
-                ", mReceiverState='" + mReceiverState + '\'' +
-                ", mReceiverCity='" + mReceiverCity + '\'' +
-                ", mReceiverDistrict='" + mReceiverDistrict + '\'' +
-                ", mReceiverAddress='" + mReceiverAddress + '\'' +
-                ", mReceiverMobile='" + mReceiverMobile + '\'' +
-                ", mReceiverPhone='" + mReceiverPhone + '\'' +
-                ", mOrders=" + mOrders +
-                '}';
-        }
+    public List<ResultsBean> getResults() {
+        return results;
+    }
 
-        @SerializedName("id")
-        private int mId;
-        @SerializedName("url")
-        private String mUrl;
-        @SerializedName("tid")
-        private String mTid;
-        @SerializedName("buyer_nick")
-        private String mBuyerNick;
-        @SerializedName("buyer_id")
-        private int mBuyerId;
-        @SerializedName("channel")
-        private String mChannel;
-        @SerializedName("payment")
-        private double mPayment;
-        @SerializedName("post_fee")
-        private double mPostFee;
-        @SerializedName("total_fee")
-        private double mTotalFee;
-        @SerializedName("discount_fee")
-        private double mDiscountFee;
-        @SerializedName("status")
-        private int mStatus;
-        @SerializedName("status_display")
-        private String mStatusDisplay;
-        @SerializedName("order_pic")
-        private String mOrderPic;
-        @SerializedName("buyer_message")
-        private String mBuyerMessage;
-        @SerializedName("trade_type")
-        private int mTradeType;
-        @SerializedName("created")
-        private String mCreated;
-        @SerializedName("pay_time")
-        private Object mPayTime;
-        @SerializedName("consign_time")
-        private Object mConsignTime;
-        @SerializedName("out_sid")
-        private String mOutSid;
-        @SerializedName("logistics_company")
-        private Object mLogisticsCompany;
-        @SerializedName("receiver_name")
-        private String mReceiverName;
-        @SerializedName("receiver_state")
-        private String mReceiverState;
-        @SerializedName("receiver_city")
-        private String mReceiverCity;
-        @SerializedName("receiver_district")
-        private String mReceiverDistrict;
-        @SerializedName("receiver_address")
-        private String mReceiverAddress;
-        @SerializedName("receiver_mobile")
-        private String mReceiverMobile;
-        @SerializedName("receiver_phone")
-        private String mReceiverPhone;
+    public void setResults(List<ResultsBean> results) {
+        this.results = results;
+    }
+
+    public static class ResultsBean {
         /**
-         * id : 302107
-         * oid : xo16011156933d7f55da7
-         * item_id : 30786
-         * title : 韩版百搭皮裙/黑色
-         * sku_id : 120694
-         * num : 1
-         * outer_id : 821277480051
-         * total_fee : 49.9
-         * payment : 49.9
+         * id : 1000
+         * orders : [{"id":1029,"oid":"xo1705275928ebc610f6c","item_id":"164","title":"日本Astonish 速效厨房去污清洁剂750ml","sku_id":"178","num":1,"outer_id":"SP00157","total_fee":58,"payment":58,"discount_fee":0,"sku_name":"统一规格|","pic_path":"http://img.nidepuzi.com/img_1493963390308.jpg","status":7,"status_display":"交易关闭","refund_status":0,"refund_status_display":"没有退款","refund_id":null,"kill_title":false,"model_id":106,"is_seckill":false,"package_order_id":"","can_refund":false,"is_bonded_goods":false,"extras":{"order_profit":0}}]
+         * tid : xd1705275928ebbe336ef
+         * buyer_nick : 伍磊
+         * buyer_id : 1
+         * channel : wx
+         * payment : 58
+         * post_fee : 0
+         * total_fee : 58
          * discount_fee : 0
-         * sku_name : XL
-         * pic_path : http://image.xiaolu.so/MG-1452155820775-韩版百搭皮裙3.png
          * status : 7
          * status_display : 交易关闭
-         * refund_status : 0
-         * refund_status_display : 没有退款
-         * refund_id : null
-         * kill_title : false
+         * order_pic : http://img.nidepuzi.com/img_1493963390308.jpg
+         * buyer_message :
+         * trade_type : 0
+         * created : 2017-05-27T11:00:22.050625
+         * pay_time : null
+         * consign_time : null
+         * out_sid :
+         * logistics_company : null
+         * receiver_name : 伍磊
+         * receiver_state : 上海
+         * receiver_city : 杨浦区
+         * red_packer_num : 0
+         * receiver_district : 内环中环之间
+         * receiver_address : 大连路宝地广场a座2206
+         * receiver_mobile : 18676720901
+         * receiver_phone :
+         * order_type : 0
+         * extras : {"sale_type":0,"self_buy":true}
          */
 
-        @SerializedName("orders")
-        private List<OrdersEntity> mOrders;
-
-        public void setId(int id) {
-            this.mId = id;
-        }
-
-        public void setUrl(String url) {
-            this.mUrl = url;
-        }
-
-        public void setTid(String tid) {
-            this.mTid = tid;
-        }
-
-        public void setBuyerNick(String buyerNick) {
-            this.mBuyerNick = buyerNick;
-        }
-
-        public void setBuyerId(int buyerId) {
-            this.mBuyerId = buyerId;
-        }
-
-        public void setChannel(String channel) {
-            this.mChannel = channel;
-        }
-
-        public void setPayment(double payment) {
-            this.mPayment = payment;
-        }
-
-
-        public void setTotalFee(double totalFee) {
-            this.mTotalFee = totalFee;
-        }
-
-
-        public void setStatus(int status) {
-            this.mStatus = status;
-        }
-
-        public void setStatusDisplay(String statusDisplay) {
-            this.mStatusDisplay = statusDisplay;
-        }
-
-        public void setOrderPic(String orderPic) {
-            this.mOrderPic = orderPic;
-        }
-
-        public void setBuyerMessage(String buyerMessage) {
-            this.mBuyerMessage = buyerMessage;
-        }
-
-        public void setTradeType(int tradeType) {
-            this.mTradeType = tradeType;
-        }
-
-        public void setCreated(String created) {
-            this.mCreated = created;
-        }
-
-        public void setPayTime(Object payTime) {
-            this.mPayTime = payTime;
-        }
-
-        public void setConsignTime(Object consignTime) {
-            this.mConsignTime = consignTime;
-        }
-
-        public void setOutSid(String outSid) {
-            this.mOutSid = outSid;
-        }
-
-        public void setLogisticsCompany(Object logisticsCompany) {
-            this.mLogisticsCompany = logisticsCompany;
-        }
-
-        public void setReceiverName(String receiverName) {
-            this.mReceiverName = receiverName;
-        }
-
-        public void setReceiverState(String receiverState) {
-            this.mReceiverState = receiverState;
-        }
-
-        public void setReceiverCity(String receiverCity) {
-            this.mReceiverCity = receiverCity;
-        }
-
-        public void setReceiverDistrict(String receiverDistrict) {
-            this.mReceiverDistrict = receiverDistrict;
-        }
-
-        public void setReceiverAddress(String receiverAddress) {
-            this.mReceiverAddress = receiverAddress;
-        }
-
-        public void setReceiverMobile(String receiverMobile) {
-            this.mReceiverMobile = receiverMobile;
-        }
-
-        public void setReceiverPhone(String receiverPhone) {
-            this.mReceiverPhone = receiverPhone;
-        }
-
-        public void setOrders(List<OrdersEntity> orders) {
-            this.mOrders = orders;
-        }
+        private int id;
+        private String tid;
+        private String buyer_nick;
+        private int buyer_id;
+        private String channel;
+        private double payment;
+        private double post_fee;
+        private double total_fee;
+        private double discount_fee;
+        private int status;
+        private String status_display;
+        private String order_pic;
+        private String buyer_message;
+        private int trade_type;
+        private String created;
+        private String pay_time;
+        private String consign_time;
+        private String out_sid;
+        private Object logistics_company;
+        private String receiver_name;
+        private String receiver_state;
+        private String receiver_city;
+        private int red_packer_num;
+        private String receiver_district;
+        private String receiver_address;
+        private String receiver_mobile;
+        private String receiver_phone;
+        private int order_type;
+        private ExtrasBean extras;
+        private List<OrdersBean> orders;
 
         public int getId() {
-            return mId;
+            return id;
         }
 
-        public String getUrl() {
-            return mUrl;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getTid() {
-            return mTid;
+            return tid;
         }
 
-        public String getBuyerNick() {
-            return mBuyerNick;
+        public void setTid(String tid) {
+            this.tid = tid;
         }
 
-        public int getBuyerId() {
-            return mBuyerId;
+        public String getBuyer_nick() {
+            return buyer_nick;
+        }
+
+        public void setBuyer_nick(String buyer_nick) {
+            this.buyer_nick = buyer_nick;
+        }
+
+        public int getBuyer_id() {
+            return buyer_id;
+        }
+
+        public void setBuyer_id(int buyer_id) {
+            this.buyer_id = buyer_id;
         }
 
         public String getChannel() {
-            return mChannel;
+            return channel;
+        }
+
+        public void setChannel(String channel) {
+            this.channel = channel;
         }
 
         public double getPayment() {
-            return mPayment;
+            return payment;
         }
 
-        public double getPostFee() {
-            return mPostFee;
+        public void setPayment(double payment) {
+            this.payment = payment;
         }
 
-        public double getTotalFee() {
-            return mTotalFee;
+        public double getPost_fee() {
+            return post_fee;
         }
 
-        public double getDiscountFee() {
-            return mDiscountFee;
+        public void setPost_fee(double post_fee) {
+            this.post_fee = post_fee;
+        }
+
+        public double getTotal_fee() {
+            return total_fee;
+        }
+
+        public void setTotal_fee(double total_fee) {
+            this.total_fee = total_fee;
+        }
+
+        public double getDiscount_fee() {
+            return discount_fee;
+        }
+
+        public void setDiscount_fee(double discount_fee) {
+            this.discount_fee = discount_fee;
         }
 
         public int getStatus() {
-            return mStatus;
+            return status;
         }
 
-        public String getStatusDisplay() {
-            return mStatusDisplay;
+        public void setStatus(int status) {
+            this.status = status;
         }
 
-        public String getOrderPic() {
-            return mOrderPic;
+        public String getStatus_display() {
+            return status_display;
         }
 
-        public String getBuyerMessage() {
-            return mBuyerMessage;
+        public void setStatus_display(String status_display) {
+            this.status_display = status_display;
         }
 
-        public int getTradeType() {
-            return mTradeType;
+        public String getOrder_pic() {
+            return order_pic;
+        }
+
+        public void setOrder_pic(String order_pic) {
+            this.order_pic = order_pic;
+        }
+
+        public String getBuyer_message() {
+            return buyer_message;
+        }
+
+        public void setBuyer_message(String buyer_message) {
+            this.buyer_message = buyer_message;
+        }
+
+        public int getTrade_type() {
+            return trade_type;
+        }
+
+        public void setTrade_type(int trade_type) {
+            this.trade_type = trade_type;
         }
 
         public String getCreated() {
-            return mCreated;
+            return created;
         }
 
-        public Object getPayTime() {
-            return mPayTime;
+        public void setCreated(String created) {
+            this.created = created;
         }
 
-        public Object getConsignTime() {
-            return mConsignTime;
+        public String getPay_time() {
+            return pay_time;
         }
 
-        public String getOutSid() {
-            return mOutSid;
+        public void setPay_time(String pay_time) {
+            this.pay_time = pay_time;
         }
 
-        public Object getLogisticsCompany() {
-            return mLogisticsCompany;
+        public String getConsign_time() {
+            return consign_time;
         }
 
-        public String getReceiverName() {
-            return mReceiverName;
+        public void setConsign_time(String consign_time) {
+            this.consign_time = consign_time;
         }
 
-        public String getReceiverState() {
-            return mReceiverState;
+        public String getOut_sid() {
+            return out_sid;
         }
 
-        public String getReceiverCity() {
-            return mReceiverCity;
+        public void setOut_sid(String out_sid) {
+            this.out_sid = out_sid;
         }
 
-        public String getReceiverDistrict() {
-            return mReceiverDistrict;
+        public Object getLogistics_company() {
+            return logistics_company;
         }
 
-        public String getReceiverAddress() {
-            return mReceiverAddress;
+        public void setLogistics_company(Object logistics_company) {
+            this.logistics_company = logistics_company;
         }
 
-        public String getReceiverMobile() {
-            return mReceiverMobile;
+        public String getReceiver_name() {
+            return receiver_name;
         }
 
-        public String getReceiverPhone() {
-            return mReceiverPhone;
+        public void setReceiver_name(String receiver_name) {
+            this.receiver_name = receiver_name;
         }
 
-        public List<OrdersEntity> getOrders() {
-            return mOrders;
+        public String getReceiver_state() {
+            return receiver_state;
         }
 
-        public static class OrdersEntity implements Serializable, Parcelable {
+        public void setReceiver_state(String receiver_state) {
+            this.receiver_state = receiver_state;
+        }
 
+        public String getReceiver_city() {
+            return receiver_city;
+        }
+
+        public void setReceiver_city(String receiver_city) {
+            this.receiver_city = receiver_city;
+        }
+
+        public int getRed_packer_num() {
+            return red_packer_num;
+        }
+
+        public void setRed_packer_num(int red_packer_num) {
+            this.red_packer_num = red_packer_num;
+        }
+
+        public String getReceiver_district() {
+            return receiver_district;
+        }
+
+        public void setReceiver_district(String receiver_district) {
+            this.receiver_district = receiver_district;
+        }
+
+        public String getReceiver_address() {
+            return receiver_address;
+        }
+
+        public void setReceiver_address(String receiver_address) {
+            this.receiver_address = receiver_address;
+        }
+
+        public String getReceiver_mobile() {
+            return receiver_mobile;
+        }
+
+        public void setReceiver_mobile(String receiver_mobile) {
+            this.receiver_mobile = receiver_mobile;
+        }
+
+        public String getReceiver_phone() {
+            return receiver_phone;
+        }
+
+        public void setReceiver_phone(String receiver_phone) {
+            this.receiver_phone = receiver_phone;
+        }
+
+        public int getOrder_type() {
+            return order_type;
+        }
+
+        public void setOrder_type(int order_type) {
+            this.order_type = order_type;
+        }
+
+        public ExtrasBean getExtras() {
+            return extras;
+        }
+
+        public void setExtras(ExtrasBean extras) {
+            this.extras = extras;
+        }
+
+        public List<OrdersBean> getOrders() {
+            return orders;
+        }
+
+        public void setOrders(List<OrdersBean> orders) {
+            this.orders = orders;
+        }
+
+        public static class ExtrasBean {
             /**
-             * id : 415382
-             * oid : xo1607025776989c3b986
-             * item_id : 43545
-             * title : 两条装夏季必备安全裤/白色
-             * sku_id : 176490
+             * sale_type : 0
+             * self_buy : true
+             */
+
+            private int sale_type;
+            private boolean self_buy;
+
+            public int getSale_type() {
+                return sale_type;
+            }
+
+            public void setSale_type(int sale_type) {
+                this.sale_type = sale_type;
+            }
+
+            public boolean isSelf_buy() {
+                return self_buy;
+            }
+
+            public void setSelf_buy(boolean self_buy) {
+                this.self_buy = self_buy;
+            }
+        }
+
+        public static class OrdersBean {
+            /**
+             * id : 1029
+             * oid : xo1705275928ebc610f6c
+             * item_id : 164
+             * title : 日本Astonish 速效厨房去污清洁剂750ml
+             * sku_id : 178
              * num : 1
-             * outer_id : 827291770021
-             * total_fee : 19.9
-             * payment : 19.9
+             * outer_id : SP00157
+             * total_fee : 58
+             * payment : 58
              * discount_fee : 0
-             * sku_name : L
-             * pic_path : http://image.xiaolu.so/MG_14644935870321.jpg
-             * status : 6
-             * status_display : 退款关闭
-             * refund_status : 7
-             * refund_status_display : 退款成功
-             * refund_id : 48517
+             * sku_name : 统一规格|
+             * pic_path : http://img.nidepuzi.com/img_1493963390308.jpg
+             * status : 7
+             * status_display : 交易关闭
+             * refund_status : 0
+             * refund_status_display : 没有退款
+             * refund_id : null
              * kill_title : false
+             * model_id : 106
              * is_seckill : false
-             * package_order_id : null
+             * package_order_id :
+             * can_refund : false
+             * is_bonded_goods : false
+             * extras : {"order_profit":0}
              */
 
             private int id;
@@ -420,7 +417,6 @@ public class AllOrdersBean {
             private String item_id;
             private String title;
             private String sku_id;
-            private int model_id;
             private int num;
             private String outer_id;
             private double total_fee;
@@ -434,9 +430,12 @@ public class AllOrdersBean {
             private String refund_status_display;
             private int refund_id;
             private boolean kill_title;
+            private int model_id;
             private boolean is_seckill;
             private String package_order_id;
+            private boolean can_refund;
             private boolean is_bonded_goods;
+            private ExtrasBeanX extras;
 
             public int getId() {
                 return id;
@@ -582,7 +581,15 @@ public class AllOrdersBean {
                 this.kill_title = kill_title;
             }
 
-            public boolean is_seckill() {
+            public int getModel_id() {
+                return model_id;
+            }
+
+            public void setModel_id(int model_id) {
+                this.model_id = model_id;
+            }
+
+            public boolean isIs_seckill() {
                 return is_seckill;
             }
 
@@ -598,87 +605,44 @@ public class AllOrdersBean {
                 this.package_order_id = package_order_id;
             }
 
-            @Override
-            public int describeContents() {
-                return 0;
+            public boolean isCan_refund() {
+                return can_refund;
             }
 
-            @Override
-            public void writeToParcel(Parcel dest, int flags) {
-                dest.writeInt(this.id);
-                dest.writeString(this.oid);
-                dest.writeString(this.item_id);
-                dest.writeString(this.title);
-                dest.writeString(this.sku_id);
-                dest.writeInt(this.num);
-                dest.writeString(this.outer_id);
-                dest.writeDouble(this.total_fee);
-                dest.writeDouble(this.payment);
-                dest.writeDouble(this.discount_fee);
-                dest.writeString(this.sku_name);
-                dest.writeString(this.pic_path);
-                dest.writeInt(this.status);
-                dest.writeString(this.status_display);
-                dest.writeInt(this.refund_status);
-                dest.writeString(this.refund_status_display);
-                dest.writeInt(this.refund_id);
-                dest.writeByte(this.kill_title ? (byte) 1 : (byte) 0);
-                dest.writeByte(this.is_seckill ? (byte) 1 : (byte) 0);
-                dest.writeString(this.package_order_id);
+            public void setCan_refund(boolean can_refund) {
+                this.can_refund = can_refund;
             }
 
-            public OrdersEntity() {
-            }
-
-            protected OrdersEntity(Parcel in) {
-                this.id = in.readInt();
-                this.oid = in.readString();
-                this.item_id = in.readString();
-                this.title = in.readString();
-                this.sku_id = in.readString();
-                this.num = in.readInt();
-                this.outer_id = in.readString();
-                this.total_fee = in.readDouble();
-                this.payment = in.readDouble();
-                this.discount_fee = in.readInt();
-                this.sku_name = in.readString();
-                this.pic_path = in.readString();
-                this.status = in.readInt();
-                this.status_display = in.readString();
-                this.refund_status = in.readInt();
-                this.refund_status_display = in.readString();
-                this.refund_id = in.readInt();
-                this.kill_title = in.readByte() != 0;
-                this.is_seckill = in.readByte() != 0;
-                this.package_order_id = in.readString();
-            }
-
-            public static final Creator<OrdersEntity> CREATOR = new Creator<OrdersEntity>() {
-                @Override
-                public OrdersEntity createFromParcel(Parcel source) {
-                    return new OrdersEntity(source);
-                }
-
-                @Override
-                public OrdersEntity[] newArray(int size) {
-                    return new OrdersEntity[size];
-                }
-            };
-
-            public int getModel_id() {
-                return model_id;
-            }
-
-            public void setModel_id(int model_id) {
-                this.model_id = model_id;
-            }
-
-            public boolean is_bonded_goods() {
+            public boolean isIs_bonded_goods() {
                 return is_bonded_goods;
             }
 
             public void setIs_bonded_goods(boolean is_bonded_goods) {
                 this.is_bonded_goods = is_bonded_goods;
+            }
+
+            public ExtrasBeanX getExtras() {
+                return extras;
+            }
+
+            public void setExtras(ExtrasBeanX extras) {
+                this.extras = extras;
+            }
+
+            public static class ExtrasBeanX {
+                /**
+                 * order_profit : 0
+                 */
+
+                private int order_profit;
+
+                public int getOrder_profit() {
+                    return order_profit;
+                }
+
+                public void setOrder_profit(int order_profit) {
+                    this.order_profit = order_profit;
+                }
             }
         }
     }

@@ -7,13 +7,13 @@ import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseRecyclerViewAdapter;
 import com.danlai.nidepuzi.base.BaseViewHolder;
 import com.danlai.nidepuzi.databinding.ItemOneOrderBinding;
-import com.danlai.nidepuzi.entity.AllOrdersBean.ResultsEntity.OrdersEntity;
+import com.danlai.nidepuzi.entity.AllOrdersBean.ResultsBean.OrdersBean;
 
 /**
  * @author wisdom
  * @date 2016年05月28日 下午3:18
  */
-public class GoodsListAdapter extends BaseRecyclerViewAdapter<ItemOneOrderBinding, OrdersEntity> {
+public class GoodsListAdapter extends BaseRecyclerViewAdapter<ItemOneOrderBinding, OrdersBean> {
 
     public GoodsListAdapter(BaseActivity mActivity) {
         super(mActivity);
@@ -27,7 +27,7 @@ public class GoodsListAdapter extends BaseRecyclerViewAdapter<ItemOneOrderBindin
 
     @Override
     public void onBindViewHolder(BaseViewHolder<ItemOneOrderBinding> holder, int position) {
-        OrdersEntity ordersEntity = data.get(position);
+        OrdersBean ordersEntity = data.get(position);
         ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.imgGood, ordersEntity.getPic_path());
         holder.b.txGoodName.setText(ordersEntity.getTitle());
         holder.b.txGoodPrice.setText("¥" + JUtils.formatDouble(ordersEntity.getTotal_fee()));

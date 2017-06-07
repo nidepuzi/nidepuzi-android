@@ -18,11 +18,11 @@
                 android:id="@+id/iv_good"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/place_holder"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/place_holder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,14 +38,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:textColor="@color/color_33"
                     android:textSize="14sp"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3"/>
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/tv_size"
@@ -72,7 +72,14 @@
                         android:id="@+id/tv_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="单价:"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
                         android:textColor="@color/color_99"
                         android:textSize="12sp"/>
 
@@ -81,19 +88,23 @@
                         android:layout_height="1dp"
                         android:layout_weight="1"/>
 
-                    <ImageView
-                        android:id="@+id/iv_save"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_save"
+                    <TextView
+                        android:id="@+id/tv_save_flag"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@color/colorAccent"
+                        android:gravity="center"
+                        android:text="赚"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
                         android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/tv_save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:textColor="@color/save_text"
+                        android:layout_marginLeft="4dp"
+                        android:textColor="@color/color_33"
                         android:textSize="12sp"
                         android:visibility="gone"/>
 

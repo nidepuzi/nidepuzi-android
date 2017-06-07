@@ -1,6 +1,5 @@
 package com.danlai.nidepuzi.ui.activity.main;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.danlai.library.utils.FileUtils;
 import com.danlai.library.utils.JUtils;
@@ -19,7 +17,6 @@ import com.danlai.nidepuzi.base.BaseActivity;
 import com.danlai.nidepuzi.base.BaseAppManager;
 import com.danlai.nidepuzi.base.BaseConst;
 import com.danlai.nidepuzi.base.BaseFragment;
-import com.danlai.nidepuzi.base.BaseWebViewActivity;
 import com.danlai.nidepuzi.databinding.ActivityTabBinding;
 import com.danlai.nidepuzi.entity.AddressDownloadResultBean;
 import com.danlai.nidepuzi.entity.UserInfoBean;
@@ -34,7 +31,6 @@ import com.danlai.nidepuzi.ui.fragment.main.MainTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ServiceTabFragment;
 import com.danlai.nidepuzi.ui.fragment.main.ShopTabFragment;
 import com.danlai.nidepuzi.util.FragmentTabUtils;
-import com.danlai.nidepuzi.util.JumpUtils;
 import com.danlai.nidepuzi.util.LoginUtils;
 import com.danlai.nidepuzi.util.VersionManager;
 import com.qiyukf.nimlib.sdk.NimIntent;
@@ -48,10 +44,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -121,31 +114,7 @@ public class TabActivity extends BaseActivity {
                     if (userInfoBean.getCheck_xiaolumm() == 1) {
                         UserInfoBean.XiaolummBean bean = userInfoBean.getXiaolumm();
                         if (bean != null && "effect".equals(bean.getStatus())) {
-                            if (bean.getLast_renew_type() == 15) {
-                                String renewTime = bean.getRenew_time().replace("T", " ");
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                try {
-                                    Date date = sdf.parse(renewTime);
-                                    long time = date.getTime() - new Date().getTime();
-                                    int day = (int) (time / 1000 / 60 / 60 / 24);
-                                    if (time / 1000 / 60 / 60 / 24 > 0) {
-                                        day += 1;
-                                    }
-                                    Dialog dialog = new Dialog(mBaseActivity, R.style.CustomDialog);
-                                    dialog.setContentView(R.layout.pop_vip_msg);
-                                    dialog.setCancelable(true);
-                                    ((TextView) dialog.findViewById(R.id.tv_day)).setText("" + day);
-                                    dialog.findViewById(R.id.tv_join).setOnClickListener(v -> {
-                                        dialog.dismiss();
-                                        JumpUtils.jumpToWebViewWithCookies(mBaseActivity,
-                                            "https://m.nidepuzi.com/mall/boutiqueinvite2", -1, BaseWebViewActivity.class);
-                                    });
-                                    dialog.findViewById(R.id.iv_cancel).setOnClickListener(v -> dialog.dismiss());
-                                    dialog.show();
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
+                            if (bean.getLast_renew_type() == 365) {
                                 ((BaseApp) getApplication()).setShow(true);
                             }
                         } else {

@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -29,7 +31,6 @@ import com.danlai.library.utils.DateUtils;
 import com.danlai.library.utils.JUtils;
 import com.danlai.library.utils.ViewUtils;
 import com.danlai.library.widget.AttrView;
-import com.danlai.library.widget.CountDownView;
 import com.danlai.library.widget.SpaceItemDecoration;
 import com.danlai.library.widget.TagTextView;
 import com.danlai.nidepuzi.BaseApp;
@@ -77,6 +78,7 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
     private SkuSizeAdapter skuSizeAdapter;
     private LinearLayout colorLayout, sizeLayout;
     private ShareModelBean mShareModelBean;
+    private CountDownTimer mCountDownTimer;
 
     @Override
     public void getIntentUrl(Uri uri) {
@@ -291,16 +293,36 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
             }
         }
         b.name.setText(detailContent.getName());
-        b.agentPrice.setText("¥" + detailContent.getLowest_agent_price());
-        b.salePrice.setText("" + detailContent.getLowest_std_sale_price());
-        b.salePrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        b.agentPrice.setText(JUtils.formatDouble(detailContent.getLowest_agent_price()));
+        b.tvProfit.setText("赚" + JUtils.formatDouble(productDetailBean.getProfit().getMin()));
+        b.timePrice.setText(JUtils.formatDouble(detailContent.getLowest_agent_price()));
+        b.timeProfit.setText("赚" + JUtils.formatDouble(productDetailBean.getProfit().getMin()));
+        b.tvSellNum.setText("在售人数" + productDetailBean.getSelling_num());
+        b.tvStock.setText("库存" + productDetailBean.getStock());
+        if (productDetailBean.is_flashsale()) {
+            b.timeLayout.setVisibility(View.VISIBLE);
+            b.priceLayout.setVisibility(View.GONE);
+        } else {
+            b.timeLayout.setVisibility(View.GONE);
+            b.priceLayout.setVisibility(View.VISIBLE);
+        }
         if (detailContent.getOffshelf_time() != null) {
             String offshelf_time = detailContent.getOffshelf_time().replace("T", " ");
             long left = DateUtils.calcLeftTime(offshelf_time);
-            b.countView.start(left, CountDownView.TYPE_ALL);
-        } else {
-            b.countView.setVisibility(View.GONE);
-            b.textNotSale.setVisibility(View.VISIBLE);
+            mCountDownTimer = new CountDownTimer(left, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    update(millisUntilFinished);
+                }
+
+                @Override
+                public void onFinish() {
+                    b.tvHour.setText("00");
+                    b.tvMinute.setText("00");
+                    b.tvSecond.setText("00");
+                }
+            };
+            mCountDownTimer.start();
         }
         List<String> item_marks = detailContent.getItem_marks();
         for (int i = 0; i < item_marks.size(); i++) {
@@ -310,10 +332,38 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         }
         initAttr(productDetailBean.getComparison().getAttributes());
         initHeadImg(detailContent);
-        // TODO: 17/6/1  
-//        if (detailContent.is_onsale()) {
-//            b.tvBuy.setVisibility(View.GONE);
-//        }
+        if (detailContent.is_onsale()) {
+            addCartTv.setVisibility(View.GONE);
+        }
+    }
+
+    private void update(long ms) {
+        int mHour = (int) ((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        if (mHour < 10) {
+            b.tvHour.setText("0" + mHour);
+        } else {
+            b.tvHour.setText("" + mHour);
+        }
+        int mMinute = (int) ((ms % (1000 * 60 * 60)) / (1000 * 60));
+        if (mMinute < 10) {
+            b.tvMinute.setText("0" + mMinute);
+        } else {
+            b.tvMinute.setText("" + mMinute);
+        }
+        int mSecond = (int) ((ms % (1000 * 60)) / 1000);
+        if (mSecond < 10) {
+            b.tvSecond.setText("0" + mSecond);
+        } else {
+            b.tvSecond.setText("" + mSecond);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+        super.onDestroy();
     }
 
     private void setSkuId(List<ProductDetailBean.SkuInfoBean> sku_info) {
@@ -341,7 +391,12 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         List<String> head_imgs = detail_content.getHead_imgs();
         String watermark_op = detail_content.getWatermark_op();
         for (int i = 0; i < head_imgs.size(); i++) {
-            String str = head_imgs.get(i) + POST_URL + "|" + watermark_op;
+            String str;
+            if (TextUtils.isEmpty(watermark_op)) {
+                str = head_imgs.get(i) + POST_URL;
+            } else {
+                str = head_imgs.get(i) + POST_URL + "|" + watermark_op;
+            }
             head_imgs.set(i, str);
         }
         b.banner.setImageLoader(new BaseImageLoader());
@@ -362,12 +417,6 @@ public class ProductDetailActivity extends BaseMVVMActivity<ActivityProductDetai
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        b.countView.cancel();
-        super.onDestroy();
     }
 
     @Override

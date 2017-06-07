@@ -33,6 +33,7 @@ public interface TradeService {
     //获取所有订单
     @GET("/rest/v2/trades")
     Observable<AllOrdersBean> getAllOrdersList(
+        @Query("show_sales") int show_sales,
         @Query("page") int page);
 
     @FormUrlEncoded
@@ -74,6 +75,7 @@ public interface TradeService {
     @GET("/rest/v2/trades/{pk}")
     Observable<OrderDetailBean> getOrderDetail(
         @Path("pk") int order_id,
+        @Query("show_sales") int show_sales,
         @Query("device") String device);
 
     //获取所有退货订单
@@ -84,11 +86,13 @@ public interface TradeService {
     //获取所有待支付订单
     @GET("/rest/v2/trades/waitpay")
     Observable<AllOrdersBean> getWaitPayOrdersBean(
+        @Query("show_sales") int show_sales,
         @Query("page") int page);
 
     //获取所有待发货订单
     @GET("/rest/v2/trades/waitsend")
     Observable<AllOrdersBean> getWaitSendOrdersBean(
+        @Query("show_sales") int show_sales,
         @Query("page") int page);
 
     //确认签收

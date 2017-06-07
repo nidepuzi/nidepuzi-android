@@ -57,7 +57,7 @@ public class OrderDetailBean implements Serializable {
     private int trade_type;
     private String created;
     private String pay_time;
-    private Object consign_time;
+    private String consign_time;
     private String out_sid;
     private int order_type;
     private boolean can_refund;
@@ -105,7 +105,7 @@ public class OrderDetailBean implements Serializable {
      * is_seckill : false
      */
 
-    private ArrayList<AllOrdersBean.ResultsEntity.OrdersEntity> orders;
+    private ArrayList<AllOrdersBean.ResultsBean.OrdersBean> orders;
     /**
      * id : 163316-111983-2-1
      * logistics_company : {"id":-2,"code":"YUNDA_QR","name":"韵达热敏"}
@@ -250,11 +250,11 @@ public class OrderDetailBean implements Serializable {
         this.pay_time = pay_time;
     }
 
-    public Object getConsign_time() {
+    public String getConsign_time() {
         return consign_time;
     }
 
-    public void setConsign_time(Object consign_time) {
+    public void setConsign_time(String consign_time) {
         this.consign_time = consign_time;
     }
 
@@ -290,11 +290,11 @@ public class OrderDetailBean implements Serializable {
         this.extras = extras;
     }
 
-    public ArrayList<AllOrdersBean.ResultsEntity.OrdersEntity> getOrders() {
+    public ArrayList<AllOrdersBean.ResultsBean.OrdersBean> getOrders() {
         return orders;
     }
 
-    public void setOrders(ArrayList<AllOrdersBean.ResultsEntity.OrdersEntity> orders) {
+    public void setOrders(ArrayList<AllOrdersBean.ResultsBean.OrdersBean> orders) {
         this.orders = orders;
     }
 

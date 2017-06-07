@@ -149,11 +149,7 @@ public class OrderDetailActivity extends BaseMVVMActivity<ActivityOrderDetailBin
         b.tvPostFee.setText("¥" + JUtils.formatDouble(orderDetailBean.getPost_fee()));
         b.tvOrderPayment.setText("¥" + JUtils.formatDouble(orderDetailBean.getPay_cash()));
         String format = JUtils.formatDouble(orderDetailBean.getPayment() - orderDetailBean.getPay_cash());
-        if (format.startsWith(".")) {
-            b.tvWalletPay.setText("¥0" + format);
-        } else {
-            b.tvWalletPay.setText("¥" + format);
-        }
+        b.tvWalletPay.setText("¥" + format);
         b.tvCreateTime.setText("下单时间:" + orderDetailBean.getCreated().replace("T", " ").substring(0, 19));
         String channel = orderDetailBean.getChannel();
         if (channel.contains("alipay")) {

@@ -69,6 +69,10 @@ public class ProductDetailBean {
     private String buy_coupon_url;
 
     private int source_type;
+    private int stock;
+    private int selling_num;
+    private ProfitBean profit;
+    private boolean is_flashsale;
 
     public int getId() {
         return id;
@@ -140,6 +144,38 @@ public class ProductDetailBean {
 
     public void setSource_type(int source_type) {
         this.source_type = source_type;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getSelling_num() {
+        return selling_num;
+    }
+
+    public void setSelling_num(int selling_num) {
+        this.selling_num = selling_num;
+    }
+
+    public ProfitBean getProfit() {
+        return profit;
+    }
+
+    public void setProfit(ProfitBean profit) {
+        this.profit = profit;
+    }
+
+    public boolean is_flashsale() {
+        return is_flashsale;
+    }
+
+    public void setIs_flashsale(boolean is_flashsale) {
+        this.is_flashsale = is_flashsale;
     }
 
     public static class DetailContentBean {
@@ -600,6 +636,27 @@ public class ProductDetailBean {
 
         public void setTeambuy_price(double teambuy_price) {
             this.teambuy_price = teambuy_price;
+        }
+    }
+
+    public static class ProfitBean {
+        private double max;
+        private double min;
+
+        public double getMin() {
+            return min;
+        }
+
+        public void setMin(double min) {
+            this.min = min;
+        }
+
+        public double getMax() {
+            return max;
+        }
+
+        public void setMax(double max) {
+            this.max = max;
         }
     }
 }

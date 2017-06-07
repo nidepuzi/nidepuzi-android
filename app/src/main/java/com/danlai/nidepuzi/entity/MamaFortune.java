@@ -430,7 +430,7 @@ public class MamaFortune {
             private int team_total_rank;
             private int personal_total_rank;
             private int task_percentage;
-            private int today_carry_record;
+            private double today_carry_record;
             private double week_duration_total;
             private double month_duration_total;
             private int week_duration_rank;
@@ -459,11 +459,11 @@ public class MamaFortune {
                 this.task_percentage = task_percentage;
             }
 
-            public int getToday_carry_record() {
+            public double getToday_carry_record() {
                 return today_carry_record;
             }
 
-            public void setToday_carry_record(int today_carry_record) {
+            public void setToday_carry_record(double today_carry_record) {
                 this.today_carry_record = today_carry_record;
             }
 

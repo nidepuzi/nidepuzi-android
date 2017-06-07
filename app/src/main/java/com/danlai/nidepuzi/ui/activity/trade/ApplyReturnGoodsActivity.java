@@ -35,7 +35,7 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
     String select_reason[] = new String[]{
         "七天无理由退换货", "发票问题", "与描述不符", "未收到货", "发错货/漏发", "开线/脱色/脱毛/有色差/有虫洞", "错拍", "其他原因"
     };
-    AllOrdersBean.ResultsEntity.OrdersEntity goods_info;
+    AllOrdersBean.ResultsBean.OrdersBean goods_info;
     String reason = "";
     int num = 0;
     double apply_fee = 0;
@@ -137,7 +137,7 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
         getQiniuToken();
     }
 
-    private void fillDataToView(AllOrdersBean.ResultsEntity.OrdersEntity goods) {
+    private void fillDataToView(AllOrdersBean.ResultsBean.OrdersBean goods) {
         if ((goods == null)) return;
 
         ViewUtils.loadImgToImgViewWithPlaceholder(this, b.imgGood, goods.getPic_path());

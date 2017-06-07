@@ -22,10 +22,10 @@ public class TodayFansActivity extends BaseMVVMActivity<ActivityTodayFansBinding
     @Override
     protected void initViews() {
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(TodayFansFragment.newInstance("正式粉丝", 2));
-        fragments.add(TodayFansFragment.newInstance("转正粉丝", 3));
-        fragments.add(TodayFansFragment.newInstance("试用粉丝", 1));
-        fragments.add(TodayFansFragment.newInstance("冻结粉丝", 4));
+        fragments.add(TodayFansFragment.newInstance("正式掌柜", 2));
+        fragments.add(TodayFansFragment.newInstance("转正掌柜", 3));
+        fragments.add(TodayFansFragment.newInstance("试用掌柜", 1));
+        fragments.add(TodayFansFragment.newInstance("冻结掌柜", 4));
         BaseTabAdapter mAdapter = new BaseTabAdapter(getSupportFragmentManager(), fragments);
         b.viewPager.setAdapter(mAdapter);
         b.viewPager.setOffscreenPageLimit(3);

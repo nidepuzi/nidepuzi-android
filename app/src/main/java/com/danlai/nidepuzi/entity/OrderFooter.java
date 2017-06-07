@@ -11,12 +11,14 @@ public class OrderFooter {
     private double payment;
     private double postFee;
     private int status;
+    private boolean self_buy;
 
-    public OrderFooter(int orderId, double payment, double postFee, int status) {
+    public OrderFooter(int orderId, double payment, double postFee, int status, boolean self_buy) {
         this.orderId = orderId;
         this.payment = payment;
         this.postFee = postFee;
         this.status = status;
+        this.self_buy = self_buy;
     }
 
     public int getOrderId() {
@@ -49,5 +51,13 @@ public class OrderFooter {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isSelf_buy() {
+        return self_buy;
+    }
+
+    public void setSelf_buy(boolean self_buy) {
+        this.self_buy = self_buy;
     }
 }

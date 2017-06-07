@@ -11,15 +11,19 @@ public class OrderContent {
     private String name;
     private String size;
     private double price;
+    private int profit;
     private int num;
+    private boolean self_buy;
 
-    public OrderContent(int orderId, String url, String name, String size, double price, int num) {
+    public OrderContent(int orderId, String url, String name, String size, double price, int profit, int num, boolean self_buy) {
         this.orderId = orderId;
         this.url = url;
         this.name = name;
         this.size = size;
         this.price = price;
+        this.profit = profit;
         this.num = num;
+        this.self_buy = self_buy;
     }
 
     public String getUrl() {
@@ -68,5 +72,21 @@ public class OrderContent {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public int getProfit() {
+        return profit;
+    }
+
+    public void setProfit(int profit) {
+        this.profit = profit;
+    }
+
+    public boolean isSelf_buy() {
+        return self_buy;
+    }
+
+    public void setSelf_buy(boolean self_buy) {
+        this.self_buy = self_buy;
     }
 }

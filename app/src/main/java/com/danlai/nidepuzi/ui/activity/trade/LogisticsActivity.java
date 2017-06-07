@@ -23,7 +23,7 @@ public class LogisticsActivity extends BaseMVVMActivity<ActivityLogisticsBinding
     private int id;
     private String orderPacketId;
     OrderDetailBean.PackageOrdersBean packageOrdersBean;
-    private List<AllOrdersBean.ResultsEntity.OrdersEntity> data;
+    private List<AllOrdersBean.ResultsBean.OrdersBean> data;
     private LogisticAdapter adapter;
     private GoodsListAdapter goodAdapter;
 
@@ -98,7 +98,7 @@ public class LogisticsActivity extends BaseMVVMActivity<ActivityLogisticsBinding
             .getOrderDetail(id, new ServiceResponse<OrderDetailBean>(mBaseActivity) {
                 @Override
                 public void onNext(OrderDetailBean orderDetailBean) {
-                    ArrayList<AllOrdersBean.ResultsEntity.OrdersEntity> orders = orderDetailBean.getOrders();
+                    ArrayList<AllOrdersBean.ResultsBean.OrdersBean> orders = orderDetailBean.getOrders();
                     for (int i = 0; i < orders.size(); i++) {
                         if (orders.get(i).getPackage_order_id().equals(packageOrdersBean.getId())) {
                             data.add(orders.get(i));

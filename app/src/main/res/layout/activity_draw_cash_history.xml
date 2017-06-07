@@ -10,7 +10,7 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="掌柜列表"/>
+            app:title="提现记录"/>
 
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv"

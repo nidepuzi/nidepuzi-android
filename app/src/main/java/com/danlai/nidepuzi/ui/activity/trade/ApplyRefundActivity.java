@@ -22,7 +22,7 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
     implements View.OnClickListener {
     String select_reason[] = new String[]{"七天无理由退换", "缺货", "错拍", "没有发货", "与描述不符", "其他"};
 
-    AllOrdersBean.ResultsEntity.OrdersEntity goods_info;
+    AllOrdersBean.ResultsBean.OrdersBean goods_info;
     String reason = "";
     int num = 0;
     double apply_fee = 0;
@@ -97,7 +97,7 @@ public class ApplyRefundActivity extends BaseMVVMActivity<ActivityApplyRefundBin
         }
     }
 
-    private void fillDataToView(AllOrdersBean.ResultsEntity.OrdersEntity goods) {
+    private void fillDataToView(AllOrdersBean.ResultsBean.OrdersBean goods) {
         ViewUtils.loadImgToImgViewWithPlaceholder(this, b.imgGood, goods.getPic_path());
 
         b.txGoodName.setText(goods.getTitle());

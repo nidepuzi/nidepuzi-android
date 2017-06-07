@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -243,12 +244,21 @@ public final class ViewUtils {
                 .into(img);
             return;
         }
-        Glide.with(context)
-            .load(picPath + "?imageMogr2/format/jpg/size-limit/20k/thumbnail/250/quality/80|" + water)
-            .diskCacheStrategy(DiskCacheStrategy.RESULT)
-            .centerCrop()
-            .placeholder(R.drawable.place_holder)
-            .into(img);
+        if (TextUtils.isEmpty(water)){
+            Glide.with(context)
+                .load(picPath + "?imageMogr2/format/jpg/size-limit/20k/thumbnail/250/quality/80")
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .centerCrop()
+                .placeholder(R.drawable.place_holder)
+                .into(img);
+        }else {
+            Glide.with(context)
+                .load(picPath + "?imageMogr2/format/jpg/size-limit/20k/thumbnail/250/quality/80|" + water)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .centerCrop()
+                .placeholder(R.drawable.place_holder)
+                .into(img);
+        }
     }
 
     public static LayoutParams getLayoutParams(Bitmap bitmap, int screenWidth) {

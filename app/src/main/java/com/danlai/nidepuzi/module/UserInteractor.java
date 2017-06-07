@@ -10,11 +10,9 @@ import com.danlai.nidepuzi.entity.CouponPagingBean;
 import com.danlai.nidepuzi.entity.DrawCashBean;
 import com.danlai.nidepuzi.entity.DrawCashListBean;
 import com.danlai.nidepuzi.entity.LogoutBean;
-import com.danlai.nidepuzi.entity.NicknameBean;
+import com.danlai.nidepuzi.entity.ResultBean;
 import com.danlai.nidepuzi.entity.ResultEntity;
 import com.danlai.nidepuzi.entity.UserAccountBean;
-import com.danlai.nidepuzi.entity.UserBean;
-import com.danlai.nidepuzi.entity.UserInfoBean;
 import com.danlai.nidepuzi.entity.UserWithDrawResult;
 import com.danlai.nidepuzi.entity.VersionBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
@@ -28,9 +26,8 @@ import io.reactivex.Observer;
  */
 
 public interface UserInteractor {
-    void getUserInfo(ServiceResponse<UserInfoBean> response);
-
-    void setNickName(int id, NicknameBean nickname, ServiceResponse<UserBean> response);
+    void updateProfile(int id, int sex, String nick, String birthday, String province, String city, String district,
+                       ServiceResponse<ResultBean> response);
 
     void customerLogout(ServiceResponse<LogoutBean> response);
 

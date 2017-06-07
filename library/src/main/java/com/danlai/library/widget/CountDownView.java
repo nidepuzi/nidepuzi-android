@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class CountDownView extends TextView {
     public static final int TYPE_ALL = 1;
     public static final int TYPE_MINUTE = 2;
-    private int mDay, mHour, mMinute, mSecond;
+    private int mHour, mMinute, mSecond;
     private CountDownTimer mCountDownTimer;
     private OnEndListener mOnEndListener;
 
@@ -31,7 +31,7 @@ public class CountDownView extends TextView {
     public void start(long millisecond, int type) {
         if (millisecond < 1000) {
             if (type == TYPE_ALL) {
-                setText("0 时 0 分 0 秒");
+                setText("00 : 00 : 00");
             } else if (type == TYPE_MINUTE) {
                 setText("00 : 00");
             }
@@ -49,7 +49,6 @@ public class CountDownView extends TextView {
 
             @Override
             public void onFinish() {
-                mDay = 0;
                 mHour = 0;
                 mMinute = 0;
                 mSecond = 0;
@@ -57,7 +56,7 @@ public class CountDownView extends TextView {
                     mOnEndListener.onEnd(CountDownView.this);
                 }
                 if (type == TYPE_ALL) {
-                    setText("0 时 0 分 0 秒");
+                    setText("00 : 00 : 00");
                 } else if (type == TYPE_MINUTE) {
                     setText("00 : 00");
                 }
@@ -68,30 +67,25 @@ public class CountDownView extends TextView {
     }
 
     private void update(long ms, int type) {
+        StringBuilder sb = new StringBuilder("");
         if (type == TYPE_ALL) {
-            mDay = (int) (ms / (1000 * 60 * 60 * 24));
             mHour = (int) ((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            mMinute = (int) ((ms % (1000 * 60 * 60)) / (1000 * 60));
-            mSecond = (int) ((ms % (1000 * 60)) / 1000);
-            if (mDay > 0) {
-                setText(mDay + " 天 " + mHour + " 时 " + mMinute + " 分 " + mSecond + " 秒 ");
-            } else {
-                setText(mHour + " 时 " + mMinute + " 分 " + mSecond + " 秒 ");
+            if (mHour < 10) {
+                sb.append("0");
             }
-        } else if (type == TYPE_MINUTE) {
-            mMinute = (int) ((ms % (1000 * 60 * 60)) / (1000 * 60));
-            mSecond = (int) ((ms % (1000 * 60)) / 1000);
-            if (mMinute < 10) {
-                setText("0" + mMinute + " : ");
-            } else {
-                setText(mMinute + " : ");
-            }
-            if (mSecond < 10) {
-                setText(getText() + "0" + mSecond);
-            } else {
-                setText(getText() + "" + mSecond);
-            }
+            sb.append(mHour).append(" : ");
         }
+        mMinute = (int) ((ms % (1000 * 60 * 60)) / (1000 * 60));
+        mSecond = (int) ((ms % (1000 * 60)) / 1000);
+        if (mMinute < 10) {
+            sb.append("0");
+        }
+        sb.append(mMinute).append(" : ");
+        if (mSecond < 10) {
+            sb.append("0");
+        }
+        sb.append(mSecond);
+        setText(sb.toString());
         invalidate();
     }
 

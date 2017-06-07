@@ -119,7 +119,7 @@ public class OrderListFragment extends BaseFragment<FragmentOrderListBinding> im
             .getOrderList(type, page, new ServiceResponse<AllOrdersBean>(mFragment) {
                 @Override
                 public void onNext(AllOrdersBean allOrdersBean) {
-                    List<AllOrdersBean.ResultsEntity> results = allOrdersBean.getResults();
+                    List<AllOrdersBean.ResultsBean> results = allOrdersBean.getResults();
                     if (results != null && results.size() > 0) {
                         List<Object> objects = OrderHelper.translateOrderBean(results);
                         if (clear) {

@@ -253,9 +253,6 @@
             android:name=".ui.activity.user.AddressSelectActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
-            android:name=".ui.activity.user.SafeActivity"
-            android:theme="@style/AppTheme.TransparentActivity"/>
-        <activity
             android:name=".ui.activity.user.InformationActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
@@ -288,6 +285,9 @@
                     android:scheme="com.danlai.ndpz"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.trade.SaleOrderDetailActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
             android:name=".ui.activity.trade.RefundDetailActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
@@ -338,6 +338,9 @@
             android:name=".ui.activity.user.DrawCashActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
+            android:name=".ui.activity.user.DrawCashHistoryActivity"
+            android:theme="@style/AppTheme.TransparentActivity"/>
+        <activity
             android:name=".ui.activity.user.DrawCashInfoActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
@@ -386,7 +389,7 @@
             android:name=".ui.activity.user.DrawCashDetailActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
         <activity
-            android:name=".ui.activity.user.SetNickNameActivity"
+            android:name=".ui.activity.user.SetInfoActivity"
             android:theme="@style/AppTheme.TransparentActivity"/>
 
         <service

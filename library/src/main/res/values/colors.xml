@@ -24,6 +24,9 @@
     <color name="bg_grey3">#33DADADA</color>
     <color name="limegreen">#009900</color>
     <color name="F3F3F4">#F3F3F4</color>
+    <color name="product_time">#FDD4C1</color>
+    <color name="product_time_start">#FD6F2E</color>
+    <color name="product_time_end">#FC3E03</color>
 
     <color name="color_11">#111111</color>
     <color name="color_22">#222222</color>

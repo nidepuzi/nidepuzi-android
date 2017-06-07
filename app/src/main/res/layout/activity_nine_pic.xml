@@ -10,7 +10,7 @@
         <com.danlai.library.widget.titleview.BaseTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="查看文案"/>
+            app:title="分享素材"/>
 
         <FrameLayout
             android:id="@+id/layout"

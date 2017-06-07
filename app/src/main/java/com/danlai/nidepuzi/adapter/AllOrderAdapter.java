@@ -21,6 +21,7 @@ import com.danlai.nidepuzi.entity.OrderContent;
 import com.danlai.nidepuzi.entity.OrderFooter;
 import com.danlai.nidepuzi.entity.OrderHead;
 import com.danlai.nidepuzi.ui.activity.trade.OrderDetailActivity;
+import com.danlai.nidepuzi.ui.activity.trade.SaleOrderDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,23 +85,27 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initContent(ContentHolder holder, OrderContent bean) {
-        // TODO: 17/5/11 暂时隐藏
-//        if (isShow) {
-//            holder.b.ivSave.setVisibility(View.VISIBLE);
-//            holder.b.tvSave.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.b.ivSave.setVisibility(View.GONE);
-//            holder.b.tvSave.setVisibility(View.GONE);
-//        }
-        holder.b.ivSave.setImageResource(R.drawable.icon_save);
+        if (isShow) {
+            holder.b.tvSaveFlag.setVisibility(View.VISIBLE);
+            holder.b.tvSave.setVisibility(View.VISIBLE);
+        } else {
+            holder.b.tvSaveFlag.setVisibility(View.GONE);
+            holder.b.tvSave.setVisibility(View.GONE);
+        }
+        holder.b.tvSave.setText(JUtils.formatDouble((double) bean.getProfit() / 100));
         holder.b.tvName.setText(bean.getName());
         holder.b.tvSize.setText("规格:" + bean.getSize());
-        holder.b.tvPrice.setText("单价:" + bean.getPrice() + "  x" + bean.getNum());
+        holder.b.tvPrice.setText("¥" + bean.getPrice());
+        holder.b.tvNum.setText("x" + bean.getNum());
         ViewUtils.loadImgToImgViewWithPlaceholder(mActivity, holder.b.ivGood, bean.getUrl());
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("order_id", bean.getOrderId());
-            mActivity.readyGo(OrderDetailActivity.class, bundle);
+            if (bean.isSelf_buy()) {
+                mActivity.readyGo(OrderDetailActivity.class, bundle);
+            } else {
+                mActivity.readyGo(SaleOrderDetailActivity.class, bundle);
+            }
         });
     }
 
@@ -111,10 +116,15 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.b.btnDetail.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putInt("order_id", bean.getOrderId());
-                mActivity.readyGo(OrderDetailActivity.class, bundle);
+                if (bean.isSelf_buy()) {
+                    mActivity.readyGo(OrderDetailActivity.class, bundle);
+                } else {
+                    mActivity.readyGo(SaleOrderDetailActivity.class, bundle);
+                }
             });
             switch (bean.getStatus()) {
                 case BaseConst.ORDER_STATE_WAITPAY:
+                    holder.b.btnDetail.setText("详情");
                     holder.b.btnDelete.setVisibility(View.VISIBLE);
                     holder.b.btnDelete.setText("去付款");
                     holder.b.btnDelete.setTextColor(Color.WHITE);
@@ -122,7 +132,11 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     holder.b.btnDelete.setOnClickListener(v -> {
                         Bundle bundle = new Bundle();
                         bundle.putInt("order_id", bean.getOrderId());
-                        mActivity.readyGo(OrderDetailActivity.class, bundle);
+                        if (bean.isSelf_buy()) {
+                            mActivity.readyGo(OrderDetailActivity.class, bundle);
+                        } else {
+                            mActivity.readyGo(SaleOrderDetailActivity.class, bundle);
+                        }
                     });
                     break;
                 case BaseConst.ORDER_STATE_SENDED:
@@ -130,7 +144,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     holder.b.btnDetail.setText("物流/详情");
                     break;
                 case BaseConst.ORDER_STATE_TRADE_CLOSE:
-                    // TODO: 17/5/11 暂时隐藏
+                    holder.b.btnDetail.setText("详情");
                     holder.b.btnDelete.setVisibility(View.GONE);
                     holder.b.btnDelete.setText("删除");
                     holder.b.btnDelete.setTextColor(mActivity.getResources().getColor(R.color.color_33));
@@ -138,6 +152,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     holder.b.btnDelete.setOnClickListener(v -> JUtils.Toast("暂不支持删除订单功能!"));
                     break;
                 default:
+                    holder.b.btnDetail.setText("详情");
                     holder.b.btnDelete.setVisibility(View.GONE);
                     break;
             }
@@ -151,6 +166,23 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void initHead(HeadHolder holder, OrderHead bean) {
+        switch (bean.getSale_type()) {
+            case 1:
+                holder.b.tvFlag.setText("买");
+                holder.b.tvFlag.setTextColor(mActivity.getResources().getColor(R.color.save_text));
+                holder.b.tvFlag.setBackgroundResource(R.drawable.order_buy_bg);
+                holder.b.tvFlag.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                holder.b.tvFlag.setText("卖");
+                holder.b.tvFlag.setTextColor(mActivity.getResources().getColor(R.color.colorAccent));
+                holder.b.tvFlag.setBackgroundResource(R.drawable.order_sale_bg);
+                holder.b.tvFlag.setVisibility(View.VISIBLE);
+                break;
+            default:
+                holder.b.tvFlag.setVisibility(View.GONE);
+                break;
+        }
         holder.b.tvTime.setText(bean.getTime().replaceAll("T", " ").substring(0, 19));
         holder.b.tvStatus.setText(bean.getStatus());
     }

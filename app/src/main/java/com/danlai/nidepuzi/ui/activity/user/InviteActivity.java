@@ -21,6 +21,7 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
     @Override
     protected void setListener() {
         b.btnFormal.setOnClickListener(this);
+        b.btnTry.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +46,23 @@ public class InviteActivity extends BaseMVVMActivity<ActivityInviteBinding> impl
                 showIndeterminateProgressDialog(false);
                 BaseApp.getActivityInteractor(mBaseActivity)
                     .getActivityBean("13", new ServiceResponse<ActivityBean>(mBaseActivity) {
+                        @Override
+                        public void onNext(ActivityBean activityBean) {
+                            hideIndeterminateProgressDialog();
+                            ShareUtils.shareShop(activityBean, mBaseActivity);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            JUtils.Toast("数据加载失败!");
+                            hideIndeterminateProgressDialog();
+                        }
+                    });
+                break;
+            case R.id.btn_try:
+                showIndeterminateProgressDialog(false);
+                BaseApp.getActivityInteractor(mBaseActivity)
+                    .getActivityBean("8", new ServiceResponse<ActivityBean>(mBaseActivity) {
                         @Override
                         public void onNext(ActivityBean activityBean) {
                             hideIndeterminateProgressDialog();

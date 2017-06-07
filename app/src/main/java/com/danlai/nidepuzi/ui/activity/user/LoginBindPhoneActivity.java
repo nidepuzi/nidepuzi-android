@@ -47,8 +47,8 @@ public class LoginBindPhoneActivity extends BaseMVVMActivity<ActivityLoginBindPh
 
     @Override
     protected void initData() {
-        BaseApp.getUserInteractor(this)
-            .getUserInfo(new ServiceResponse<UserInfoBean>(mBaseActivity) {
+        BaseApp.getMainInteractor(this)
+            .getProfile(new ServiceResponse<UserInfoBean>(mBaseActivity) {
                 @Override
                 public void onNext(UserInfoBean userInfoBean) {
                     if (userInfoBean != null) {

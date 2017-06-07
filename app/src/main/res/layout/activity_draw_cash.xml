@@ -13,18 +13,20 @@
             app:title="提现">
 
             <RelativeLayout
-                android:id="@+id/layout_problem"
+                android:id="@+id/layout_history"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/icon_draw_problem"/>
+                    android:text="提现记录"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"/>
             </RelativeLayout>
 
         </com.danlai.library.widget.titleview.BaseTitleView>
@@ -72,24 +74,63 @@
 
         </LinearLayout>
 
-        <include layout="@layout/common_interval"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="提现记录"
-            android:textColor="@color/color_33"
-            android:textSize="16sp"/>
-
-        <include layout="@layout/common_gap"/>
-
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
-            android:id="@+id/xrv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"/>
+            android:background="@color/bg_grey"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提现小知识"
+                android:textColor="@color/color_33"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="1.您可以随时提现（提现金额最低10元）"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="2.提现需要您个人信息与银行卡保持一致，并且银行卡信息完整无误"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="3.通常铺子审核日后3个工作日内到账（具体视银行结算）"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="4.审核日是每个月的9号和24号（9号审核时间范围：上月24号17:01至本月9号17:00）"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="5.如有其他疑问，请联系你的铺子服务号nidepuzi"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

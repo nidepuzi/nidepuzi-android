@@ -43,11 +43,12 @@ import java.util.List;
 
 public class OrderGoodsListAdapter extends BaseAdapter {
     private BaseActivity context;
-    private List<AllOrdersBean.ResultsEntity.OrdersEntity> data;
+    private List<AllOrdersBean.ResultsBean.OrdersBean> data;
 
     private OrderDetailBean orderDetailEntity;
     private int count;
     private boolean can_refund;
+    private boolean isSale;
 
     public OrderGoodsListAdapter(BaseActivity context, OrderDetailBean orderDetailEntity, boolean can_refund) {
         this.orderDetailEntity = orderDetailEntity;
@@ -55,6 +56,7 @@ public class OrderGoodsListAdapter extends BaseAdapter {
         data = new ArrayList<>();
         data.addAll(orderDetailEntity.getOrders());
         count = 0;
+        isSale = false;
         this.context = context;
     }
 
@@ -84,9 +86,9 @@ public class OrderGoodsListAdapter extends BaseAdapter {
         int state = data.get(position).getStatus();
         int refund_state = data.get(position).getRefund_status();
         convertView = LayoutInflater.from(context).inflate(R.layout.item_order_detail_include_proc, null);
-        if ((state == BaseConst.ORDER_STATE_PAYED) ||
+        if (((state == BaseConst.ORDER_STATE_PAYED) ||
             (state == BaseConst.ORDER_STATE_SENDED) ||
-            (state == BaseConst.ORDER_STATE_CONFIRM_RECEIVE)) {
+            (state == BaseConst.ORDER_STATE_CONFIRM_RECEIVE)) && !isSale) {
             setBtnInfo(convertView, state, refund_state,
                 data.get(position).isKill_title(), data.get(position));
             setBtnListener(convertView, state, refund_state, data.get(position).getId(), position);
@@ -158,12 +160,12 @@ public class OrderGoodsListAdapter extends BaseAdapter {
     }
 
     private void setBtnInfo(View convertView, int state, int refund_state, boolean kill_title
-        , AllOrdersBean.ResultsEntity.OrdersEntity entity) {
+        , AllOrdersBean.ResultsBean.OrdersBean entity) {
         Button btn = (Button) convertView.findViewById(R.id.btn_order_proc);
         Button tv_order_state = (Button) convertView.findViewById(R.id.tv_order_state);
         switch (state) {
             case BaseConst.ORDER_STATE_PAYED:
-            case BaseConst.ORDER_STATE_CONFIRM_RECEIVE: {
+            case BaseConst.ORDER_STATE_CONFIRM_RECEIVE:
                 if (kill_title) {
                     convertView.findViewById(R.id.rl_info).setVisibility(View.GONE);
                 } else {
@@ -203,7 +205,6 @@ public class OrderGoodsListAdapter extends BaseAdapter {
                     }
                 }
                 break;
-            }
             case BaseConst.ORDER_STATE_SENDED: {
                 btn.setText("确认收货");
                 tv_order_state.setVisibility(View.INVISIBLE);
@@ -318,5 +319,8 @@ public class OrderGoodsListAdapter extends BaseAdapter {
             });
     }
 
+    public void setSale(boolean sale) {
+        isSale = sale;
+    }
 }
 
