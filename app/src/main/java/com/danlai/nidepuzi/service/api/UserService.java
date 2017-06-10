@@ -61,9 +61,9 @@ public interface UserService {
     @FormUrlEncoded
     @POST("/rest/v2/weixinapplogin")
     Observable<CodeBean> wxappLogin(
-        @Field("noncestr") String noncestr,
-        @Field("timestamp") String timestamp,
-        @Field("sign") String sign,
+        @Query("noncestr") String noncestr,
+        @Query("timestamp") String timestamp,
+        @Query("sign") String sign,
         @Field("headimgurl") String headimgurl,
         @Field("nickname") String nickname,
         @Field("openid") String openid,

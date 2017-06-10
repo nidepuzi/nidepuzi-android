@@ -47,7 +47,7 @@ android {
         applicationId "com.danlai.nidepuzi"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20170607
+        versionCode 20170608
         versionName "1.0.4"
 
         multiDexEnabled = true
@@ -146,7 +146,7 @@ android {
 //        Fir {
 //            manifestPlaceholders = [CHANNEL_NAME: "Fir"]
 //        }
-//
+
         xiaomi {
             manifestPlaceholders = [CHANNEL_NAME: "xiaomi"]
         }

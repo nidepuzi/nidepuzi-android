@@ -42,85 +42,57 @@
                 android:gravity="center|bottom"
                 android:orientation="vertical">
 
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="成功帮助好友创业,即得"
-                        android:textColor="@color/color_33"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="100"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="24sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="元现金"
-                        android:textColor="@color/color_33"
-                        android:textSize="15sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="邀请好友购买超值礼包"
-                        android:textColor="@color/color_33"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="送“"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="24sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="掌柜服务"
-                        android:textColor="@color/color_33"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="”"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="24sp"/>
-
-                </LinearLayout>
-
                 <Button
                     android:id="@+id/btn_formal"
                     style="@style/CommonButton"
-                    android:layout_marginBottom="18dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="15dp"
                     android:text="邀请好友成为正式掌柜"/>
 
                 <Button
                     android:id="@+id/btn_try"
                     style="@style/CommonButton"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="24dp"
                     android:text="邀请好友成为试用掌柜"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:text="1、邀请好友购买365元套装商品“成为正式掌柜”"
+                    android:textColor="@color/color_66"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="4dp"
+                    android:text="(1)获得365元正品超值礼包 (2)自购或分享获得返佣(5%-25%) (3)推广一个正式掌柜即得100元现金 (4)全国包邮(海外、港澳台除外)"
+                    android:textColor="@color/color_66"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="6dp"
+                    android:text="2、通过试用邀请“成为试用掌柜”"
+                    android:textColor="@color/color_66"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="4dp"
+                    android:text="(1)全国包邮(海外、港澳台除外) (2)1000件全球精选正品，随心购 (3)随时升级成为正式掌柜，享受返佣"
+                    android:textColor="@color/color_66"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 

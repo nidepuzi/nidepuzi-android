@@ -33,31 +33,24 @@ public class MyScrollView extends ScrollView {
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_MOVE:
-
                 if (mScrollListener != null) {
                     int contentHeight = getChildAt(0).getHeight();
                     int scrollHeight = getHeight();
-
                     int scrollY = getScrollY();
                     mScrollListener.onScroll(scrollY);
-
                     if (scrollY + scrollHeight >= contentHeight || contentHeight <= scrollHeight) {
                         mScrollListener.onScrollToBottom();
                     } else {
                         mScrollListener.notBottom();
                     }
-
                     if (scrollY == 0) {
                         mScrollListener.onScrollToTop();
                     }
-
                 }
-
                 break;
         }
         boolean result = super.onTouchEvent(ev);
         requestDisallowInterceptTouchEvent(false);
-
         return result;
     }
 
