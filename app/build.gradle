@@ -139,41 +139,41 @@ android {
     }
 
     productFlavors {
-        ndpz {
-            manifestPlaceholders = [CHANNEL_NAME: "ndpz"]
-        }
-
+//        ndpz {
+//            manifestPlaceholders = [CHANNEL_NAME: "ndpz"]
+//        }
+//
 //        Fir {
 //            manifestPlaceholders = [CHANNEL_NAME: "Fir"]
 //        }
-
-        xiaomi {
-            manifestPlaceholders = [CHANNEL_NAME: "xiaomi"]
-        }
-
-//        huawei {
-//            manifestPlaceholders = [CHANNEL_NAME: "huawei"]
+//
+//        xiaomi {
+//            manifestPlaceholders = [CHANNEL_NAME: "xiaomi"]
 //        }
-
-        qihu360 {
-            manifestPlaceholders = [CHANNEL_NAME: "qihu360"]
+//
+        huawei {
+            manifestPlaceholders = [CHANNEL_NAME: "huawei"]
         }
-
-        tencent {
-            manifestPlaceholders = [CHANNEL_NAME: "tencent"]
-        }
-
-        assistant91 {
-            manifestPlaceholders = [CHANNEL_NAME: "assistant91"]
-        }
-
-        lenovo {
-            manifestPlaceholders = [CHANNEL_NAME: "lenovo"]
-        }
-
-        baidu {
-            manifestPlaceholders = [CHANNEL_NAME: "baidu"]
-        }
+//
+//        qihu360 {
+//            manifestPlaceholders = [CHANNEL_NAME: "qihu360"]
+//        }
+//
+//        tencent {
+//            manifestPlaceholders = [CHANNEL_NAME: "tencent"]
+//        }
+//
+//        assistant91 {
+//            manifestPlaceholders = [CHANNEL_NAME: "assistant91"]
+//        }
+//
+//        lenovo {
+//            manifestPlaceholders = [CHANNEL_NAME: "lenovo"]
+//        }
+//
+//        baidu {
+//            manifestPlaceholders = [CHANNEL_NAME: "baidu"]
+//        }
 
         vivo {
             manifestPlaceholders = [CHANNEL_NAME: "vivo"]

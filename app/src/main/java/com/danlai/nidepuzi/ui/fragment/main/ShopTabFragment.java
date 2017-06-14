@@ -259,27 +259,51 @@ public class ShopTabFragment extends BaseFragment<FragmentShopTabBinding> implem
                 readyGo(AllOrderActivity.class, bundle);
                 break;
             case R.id.layout_fans:
-                readyGo(TodayFansActivity.class);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    readyGo(TodayFansActivity.class);
+                }
                 break;
             case R.id.layout_achievement:
-                readyGo(AchievementActivity.class);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    readyGo(AchievementActivity.class);
+                }
                 break;
             case R.id.layout_wallet:
                 readyGo(AccountDetailActivity.class);
                 break;
             case R.id.layout_today_visit:
-                bundle.putBoolean("isToday", true);
-                readyGo(VisitActivity.class, bundle);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    bundle.putBoolean("isToday", true);
+                    readyGo(VisitActivity.class, bundle);
+                }
                 break;
             case R.id.layout_income:
-                readyGo(AllIncomeActivity.class);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    readyGo(AllIncomeActivity.class);
+                }
                 break;
             case R.id.layout_today_sale:
-                bundle.putString("carryValue", todayCarryValue);
-                readyGo(TodayIncomeActivity.class, bundle);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    bundle.putString("carryValue", todayCarryValue);
+                    readyGo(TodayIncomeActivity.class, bundle);
+                }
                 break;
             case R.id.layout_today_sale_order:
-                readyGo(TodaySaleOrderActivity.class);
+                if (type != 365 && type != 15) {
+                    vipDialog.show();
+                } else {
+                    readyGo(TodaySaleOrderActivity.class);
+                }
                 break;
             case R.id.layout_join:
                 JumpUtils.jumpToWebViewWithCookies(mActivity,
