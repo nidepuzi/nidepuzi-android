@@ -24,8 +24,6 @@ import com.danlai.nidepuzi.entity.OrderDetailBean;
 import com.danlai.nidepuzi.entity.QiniuTokenBean;
 import com.danlai.nidepuzi.entity.RefundMsgBean;
 import com.danlai.nidepuzi.service.ServiceResponse;
-import com.qiniu.android.storage.UploadManager;
-import com.qiniu.android.storage.UploadOptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -45,7 +43,6 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
     File tmpPic[] = new File[3];
     String uploadPic[] = new String[3];
     int picNum = 0;
-    UploadManager uploadManager = new UploadManager();
     private int id;
     private int position;
 
@@ -278,9 +275,6 @@ public class ApplyReturnGoodsActivity extends BaseMVVMActivity<ActivityApplyRetu
         }
         String key = file.getName();
         String token = upToken;
-        uploadManager.put(file_byte, key, token, (key1, info, res) -> {
-        }, new UploadOptions(null, null, false, (key12, percent) -> {
-        }, null));
     }
 
     public byte[] compressImage(Bitmap image) {

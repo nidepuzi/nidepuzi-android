@@ -43,10 +43,10 @@ public class ClearEditText extends EditText {
     private void init(Context context, AttributeSet attrs) {
         // 获取自定义属性
         TypedArray typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.ClearEditText);
+                context.obtainStyledAttributes(attrs, R.styleable.ClearEditText);
         // 获取清除按钮图标资源
         int iconClear =
-            typedArray.getResourceId(R.styleable.ClearEditText_iconClear, ICON_CLEAR_DEFAULT);
+                typedArray.getResourceId(R.styleable.ClearEditText_iconClear, ICON_CLEAR_DEFAULT);
         drawableClear = getResources().getDrawable(iconClear);
         updateIconClear();
         typedArray.recycle();
@@ -98,13 +98,13 @@ public class ClearEditText extends EditText {
     public void updateIconClear() {
         // 获取设置好的drawableLeft、drawableTop、drawableRight、drawableBottom
         Drawable[] drawables = getCompoundDrawables();
-        if (length() > 0 && this.isFocused()) //输入框有输入内容才显示删除按钮
-        {
+        //输入框有输入内容才显示删除按钮
+        if (length() > 0 && this.isFocused()) {
             setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawableClear,
-                drawables[3]);
+                    drawables[3]);
         } else {
             setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], null,
-                drawables[3]);
+                    drawables[3]);
         }
     }
 
